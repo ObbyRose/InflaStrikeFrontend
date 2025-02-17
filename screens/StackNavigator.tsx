@@ -12,20 +12,20 @@ import TransactionsScreen from './TransactionsScreen';
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-    return (
+  return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen}/>
-            <Stack.Screen name="Investment" component={InvestmentsScreen} />
-            <Stack.Screen name="Notification" component={NotificationsScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen}  />
-            <Stack.Screen name="Savings" component={SavingsScreen}  />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="Token" component={TokenScreen} />
-            <Stack.Screen name="Transactions" component={TransactionsScreen} />
-        </Stack.Navigator>
+      <Stack.Navigator initialRouteName="Token">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Investment" component={InvestmentsScreen} />
+        <Stack.Screen name="Notification" component={NotificationsScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Savings" component={SavingsScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Token" component={TokenScreen} />
+        <Stack.Screen name="Transactions" component={TransactionsScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
-    );
+  );
 };
 
 export default StackNavigator;
