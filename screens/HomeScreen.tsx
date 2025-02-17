@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import { Text, StyleSheet, Alert, ActivityIndicator, View } from 'react-native';
-import { fetchBitcoinPrice } from '@/utils/api/BinanceAPI';
+import React, { useState, useEffect } from 'react';
+import { Text, Alert, ActivityIndicator, FlatList } from 'react-native';
+import { fetchBitcoinPrice, fetchBitcoinHistory } from '../utils/api/BinanceAPI';
 import { Props } from 'types/NavigationTypes';
 import { Box } from '@/components/ui/box';
-//UI Imports
-// import { Box } from '@/components/ui/box';
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const [bitcoinPrice, setBitcoinPrice] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [historyData, setHistoryData] = useState<{ time: string; price: number }[]>([]);
 
-    function getBitcoinPrice() {
+    const getBitcoinPrice = () => {
         setLoading(true);
-            fetchBitcoinPrice()
+        fetchBitcoinPrice()
             .then((response) => {
-                setBitcoinPrice(response.price);
+                if (response) setBitcoinPrice(response.price);
             })
             .catch((error) => {
                 console.error('Error fetching Bitcoin price', error);
@@ -23,41 +22,41 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             .finally(() => {
                 setLoading(false);
             });
-    }
+    };
+
+    useEffect(() => {
+        fetchBitcoinHistory().then(setHistoryData);
+        getBitcoinPrice();
+    }, []);
 
     return (
-        <Box className='bg-blue-500 h-full'>
-            <Text style={styles.header}>Bitcoin Live Price</Text>
+        <Box className="flex-1 justify-center items-center p-4 bg-gray-900">
+            <Text className="text-2xl font-bold text-white">Bitcoin Live Price</Text>
+            
             {loading ? (
-                <ActivityIndicator style= {styles.loader} size="large" color="#0000ff" />
+                <ActivityIndicator size="large" color="#FFD700" className="my-4" />
             ) : (
                 bitcoinPrice && Number(bitcoinPrice) !== 0 && (
-                    <Text style={styles.price}>{"$" + Number(bitcoinPrice).toLocaleString()}</Text>
+                    <Text className="text-3xl font-semibold text-green-400 my-2">
+                        {"$" + Number(bitcoinPrice).toLocaleString()}
+                    </Text>
                 )
             )}
+
+            <Text className="text-lg font-bold text-gray-400 mt-4">Price History</Text>
+
+            <FlatList
+                data={historyData}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                    <Box className="flex-row justify-between w-full px-4 py-2 border-b border-gray-700">
+                        <Text className="text-white">{item.time}</Text>
+                        <Text className="text-yellow-400">${item.price.toLocaleString()}</Text>
+                    </Box>
+                )}
+            />
         </Box>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    header: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    price: {
-        fontSize: 32,
-        marginVertical: 20,
-    },
-    loader:{
-        marginBottom: 20,
-        marginTop: 20,
-    }
-});
 
 export default HomeScreen;
