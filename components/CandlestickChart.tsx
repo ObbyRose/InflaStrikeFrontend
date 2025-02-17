@@ -12,9 +12,9 @@ interface CandlestickChartProps {
 const screenWidth = Dimensions.get("window").width;
 
 const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData, title }) => {
-    const chartWidth = screenWidth * 0.9;
-    const chartHeight = 250;
-    const candleWidth = 15;
+    const chartWidth = screenWidth * 0.75;
+    const chartHeight = 120;
+    const candleWidth = 8;
 
     if (!candlestickData || candlestickData.length === 0) {
         return (
