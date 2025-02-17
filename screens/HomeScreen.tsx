@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Alert } from "react-native";
+import { ScrollView } from "react-native";
 import { fetchBitcoinPrice, fetchBitcoinHistory } from "../utils/api/BinanceAPI";
 import { Props } from "types/NavigationTypes";
 import { Box } from "@/components/ui/box";
 import InvestmentPieChart from "@/components/InvestmentPieChart";
 import BitcoinPrice from "@/components/BitcoinPrice";
 import CandlestickChart from "@/components/CandlestickChart";
+import { Divider } from '@/components/ui/divider';
+import { Text } from "react-native-svg";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const [bitcoinPrice, setBitcoinPrice] = useState<string | null>(null);
@@ -32,11 +34,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     };
 
     return (
-        <Box className="flex-1 justify-center items-center p-4 bg-gray-900">
-            <InvestmentPieChart />
-            <BitcoinPrice bitcoinPrice={bitcoinPrice} loading={loading} />
-            <CandlestickChart candlestickData={candlestickData} />
-        </Box>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <Box className="flex-1 justify-center items-center p-4 bg-gray-900">
+                <InvestmentPieChart />
+                <Divider className='h-[1.5px] bg-gray-800 w-[95%] mx-auto'/>
+                <CandlestickChart candlestickData={candlestickData} />
+            </Box>
+        </ScrollView>
     );
 };
 

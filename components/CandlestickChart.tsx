@@ -2,6 +2,8 @@ import React from "react";
 import { Text, ActivityIndicator, View, Dimensions } from "react-native";
 import Svg, { Line, Rect } from "react-native-svg";
 import { scaleLinear } from "d3-scale";
+import Foundation from '@expo/vector-icons/Foundation';
+import { Box } from "./ui/box";
 
 interface CandlestickChartProps {
     candlestickData: any[];
@@ -25,8 +27,10 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData }) 
     const yScale = scaleLinear().domain([minPrice, maxPrice]).range([chartHeight, 0]);
 
     return (
-        <View className="mt-6">
-            <Text className="text-xl font-bold text-white">Bitcoin Candlestick Chart</Text>
+        <Box>
+            <Box className="mt-6">
+                <Text className="text-xl font-bold text-white">Market Data</Text>
+            </Box>
             <Svg width={chartWidth} height={chartHeight} style={{ marginTop: 20 }}>
                 {candlestickData.map((d, index) => {
                     const x = xScale(index);
@@ -37,7 +41,6 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData }) 
 
                     return (
                         <React.Fragment key={index}>
-                            {/* Wick Line (High to Low) */}
                             <Line
                                 x1={x}
                                 y1={highY}
@@ -58,7 +61,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData }) 
                     );
                 })}
             </Svg>
-        </View>
+        </Box>
     );
 };
 

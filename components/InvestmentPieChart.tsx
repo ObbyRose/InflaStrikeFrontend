@@ -4,7 +4,6 @@ import { PieChart } from "react-native-chart-kit";
 import { Box } from "@/components/ui/box";
 
 const screenWidth = Dimensions.get("window").width;
-
 const investmentData = [
     { name: "Stocks", percentage: 40, color: "#FF6384", legendFontColor: "#FFF", legendFontSize: 14 },
     { name: "Crypto", percentage: 25, color: "#36A2EB", legendFontColor: "#FFF", legendFontSize: 14 },
@@ -15,8 +14,9 @@ const investmentData = [
 
 const InvestmentPieChart = () => {
     return (
-        <Box className="flex justify-center items-center mt-14">
-            <Text className="text-xl font-bold text-white">Investment Portfolio</Text>
+        <Box>
+            <Text className="text-xl font-bold text-white">My Dashboard</Text>
+
             <PieChart
                 data={investmentData}
                 width={screenWidth * 0.9}
@@ -29,7 +29,6 @@ const InvestmentPieChart = () => {
                 accessor={"percentage"}
                 backgroundColor="transparent"
                 paddingLeft="15"
-                absolute
             />
         </Box>
     );
