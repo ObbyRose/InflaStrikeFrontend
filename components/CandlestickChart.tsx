@@ -2,22 +2,27 @@ import React from "react";
 import { Text, ActivityIndicator, View, Dimensions } from "react-native";
 import Svg, { Line, Rect } from "react-native-svg";
 import { scaleLinear } from "d3-scale";
-import Foundation from '@expo/vector-icons/Foundation';
 import { Box } from "./ui/box";
 
 interface CandlestickChartProps {
     candlestickData: any[];
+    title: string;
 }
 
 const screenWidth = Dimensions.get("window").width;
 
-const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData }) => {
+const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData, title }) => {
     const chartWidth = screenWidth * 0.9;
     const chartHeight = 250;
     const candleWidth = 15;
 
-    if (candlestickData.length === 0) {
-        return <ActivityIndicator size="large" color="#FFD700" className="my-4" />;
+    if (!candlestickData || candlestickData.length === 0) {
+        return (
+            <View className="my-6">
+                <Text className="text-white text-lg">{title} data not available</Text>
+                <ActivityIndicator size="large" color="#FFD700" className="my-4" />
+            </View>
+        );
     }
 
     const minPrice = Math.min(...candlestickData.map((d) => d.low));
@@ -27,9 +32,9 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData }) 
     const yScale = scaleLinear().domain([minPrice, maxPrice]).range([chartHeight, 0]);
 
     return (
-        <Box>
+        <Box className="flex flex-row between items-center gap-8">
             <Box className="mt-6">
-                <Text className="text-xl font-bold text-white">Market Data</Text>
+                <Text className="text-sm font-bold text-white">{title}</Text>
             </Box>
             <Svg width={chartWidth} height={chartHeight} style={{ marginTop: 20 }}>
                 {candlestickData.map((d, index) => {
@@ -41,6 +46,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData }) 
 
                     return (
                         <React.Fragment key={index}>
+                            {/* Wick Line (High to Low) */}
                             <Line
                                 x1={x}
                                 y1={highY}

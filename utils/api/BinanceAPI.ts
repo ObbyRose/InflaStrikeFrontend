@@ -1,35 +1,26 @@
-import axios from "axios";
-
-// Fetching Bitcoin price from Binance API
-export const fetchBitcoinPrice = async () => {
-    try {
-        const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
-            params: { symbol: 'BTCUSDT' },
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching Bitcoin price', error);
-    } finally {
-    }
-};
-
-export const fetchBitcoinHistory = async () => {
+export const fetchCandlestickData = async (symbol: string) => {
     try {
         const response = await fetch(
-            "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=10"
+            `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=11`
         );
         const data = await response.json();
 
+        if (!data || data.length === 0) return [];
+
         return data.map((item: any) => ({
-            time: new Date(item[0]).toLocaleTimeString(), // Timestamp
-            open: parseFloat(item[1]), // Open price
-            high: parseFloat(item[2]), // High price
-            low: parseFloat(item[3]), // Low price
-            close: parseFloat(item[4]), // Close price
+            time: new Date(item[0]).toLocaleTimeString(),
+            open: parseFloat(item[1]),
+            high: parseFloat(item[2]),
+            low: parseFloat(item[3]),
+            close: parseFloat(item[4]),
         }));
     } catch (error) {
-        console.error("Error fetching Bitcoin history:", error);
+        console.error(`Error fetching ${symbol} data:`, error);
         return [];
     }
 };
 
+// Fetch BTC, ETH, and XRP data
+export const fetchBitcoinHistory = async () => fetchCandlestickData("BTCUSDT");
+export const fetchEthereumHistory = async () => fetchCandlestickData("ETHUSDT");
+export const fetchXRPHistory = async () => fetchCandlestickData("XRPUSDT");
