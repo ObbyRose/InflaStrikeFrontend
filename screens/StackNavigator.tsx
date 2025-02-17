@@ -16,7 +16,7 @@ const StackNavigator = () => {
     return (
     <NavigationContainer>
         <Layout>
-            <Stack.Navigator initialRouteName="Transactions">
+            <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false}}/>
                 <Stack.Screen name="Investment" component={InvestmentsScreen} options={{ headerShown: false}}/>
                 <Stack.Screen name="Notification" component={NotificationsScreen} />
