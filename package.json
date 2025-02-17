@@ -50,7 +50,8 @@
     "react-native-screens": "^4.6.0",
     "react-native-svg": "^15.2.0",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "^13.13.2"
+    "react-native-webview": "^13.13.2",
+    "@expo/vector-icons": "^14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -8,22 +8,25 @@ import SavingsScreen from './SavingsScreen';
 import SettingsScreen from './SettingsScreen';
 import TokenScreen from './TokenScreen';
 import TransactionsScreen from './TransactionsScreen';
+import Layout from './Layout';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
     return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen}/>
-            <Stack.Screen name="Investment" component={InvestmentsScreen} />
-            <Stack.Screen name="Notification" component={NotificationsScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen}  />
-            <Stack.Screen name="Savings" component={SavingsScreen}  />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="Token" component={TokenScreen} />
-            <Stack.Screen name="Transactions" component={TransactionsScreen} />
-        </Stack.Navigator>
+        <Layout>
+            <Stack.Navigator initialRouteName="Transactions">
+                <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false}}/>
+                <Stack.Screen name="Investment" component={InvestmentsScreen} options={{ headerShown: false}}/>
+                <Stack.Screen name="Notification" component={NotificationsScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen}  />
+                <Stack.Screen name="Savings" component={SavingsScreen}  />
+                <Stack.Screen name="Settings" component={SettingsScreen} />
+                <Stack.Screen name="Token" component={TokenScreen} />
+                <Stack.Screen name="Transactions" component={TransactionsScreen} options={{ headerShown: false}}/>
+            </Stack.Navigator>
+        </Layout>
     </NavigationContainer>
     );
 };
