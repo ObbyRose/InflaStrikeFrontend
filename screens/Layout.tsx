@@ -20,7 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
             {/* Top Section */}
             <Box 
                 style={{ paddingTop: insets.top }} 
-                className="flex flex-row justify-between items-center h-[75px] bg-white px-4"
+                className="flex flex-row justify-between items-center h-[60px] bg-white px-4"
             >
                 <Box className='flex flex-row items-center gap-3'>
                     <Image 
@@ -32,11 +32,11 @@ const Layout = ({ children }: LayoutProps) => {
                     <Text className="text-lg font-bold">NLV: $234,654</Text>
                 </Box>
 
-                <Box className='flex flex-row  items-center'>
-                    <MaterialCommunityIcons name="chat-outline" size={30} />
-                    <Ionicons name="notifications-outline" size={30} />
-                    <MaterialCommunityIcons name="account" size={40} />
-                    <Ionicons name="settings-outline" size={30} />
+                <Box className='flex flex-row gap-1 items-end'>
+                    <MaterialCommunityIcons name="chat-outline" size={24} />
+                    <Ionicons name="notifications-outline" size={24} />
+                    <MaterialCommunityIcons name="account" size={24} />
+                    <Ionicons name="settings-outline" size={24} />
                 </Box>
             </Box>
             <Divider className='h-[1.5px] bg-black w-[95%] mx-auto'/>
@@ -46,12 +46,12 @@ const Layout = ({ children }: LayoutProps) => {
 
             {/* Bottom Section */}
             <Divider className='h-[1.5px] bg-black w-[95%] mx-auto'/>
-            <Box className="flex flex-row justify-evenly h-[75px] bg-white p-4">
-                <MaterialCommunityIcons name="sign-direction" size={35}/>
-                <MaterialCommunityIcons name="finance" size={35}/>
-                <AntDesign name="home" size={35}/>
-                <Octicons name="graph" size={35} color="black" />
-                <MaterialIcons name="compare-arrows" size={35} color="black" />
+            <Box className="flex flex-row justify-evenly h-[60px] bg-white p-4">
+                <MaterialCommunityIcons name="sign-direction" size={30}/>
+                <MaterialCommunityIcons name="finance" size={30}/>
+                <AntDesign name="home" size={30}/>
+                <Octicons name="graph" size={30} color="black" />
+                <MaterialIcons name="compare-arrows" size={30} color="black" />
             </Box>
         </View>
     );
