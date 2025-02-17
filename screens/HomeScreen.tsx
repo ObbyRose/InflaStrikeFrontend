@@ -18,18 +18,18 @@ import { Props } from "types/NavigationTypes";
 import { Box } from "@/components/ui/box";
 import InvestmentPieChart from "@/components/InvestmentPieChart";
 import CandlestickChart from "@/components/CandlestickChart";
+import LineChartComponent from "@/components/LineChart";
 import { Divider } from "@/components/ui/divider";
 import { Button, ButtonText } from "@/components/ui/button";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import LineChartComponent from "@/components/LineChart";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
-    const [bitcoinData, setBitcoinData] = useState<string[]>([]);
-    const [ethereumData, setEthereumData] = useState<string[]>([]);
-    const [xrpData, setXRPData] = useState<string[]>([]);
-    const [bitcoinLineData, setBitcoinLineData] = useState<string[] | number[] >([]);
-    const [ethereumLineData, setEthereumLineData] = useState<string[] | number[]>([]);
-    const [xrpLineData, setXRPLineData] = useState<string[] | number[]>([]);
+    const [bitcoinData, setBitcoinData] = useState<any[]>([]);
+    const [ethereumData, setEthereumData] = useState<any[]>([]);
+    const [xrpData, setXRPData] = useState<any[]>([]);
+    const [bitcoinLineData, setBitcoinLineData] = useState<{ time: string; price: number; }[]>([]);
+    const [ethereumLineData, setEthereumLineData] = useState<{ time: string; price: number; }[]>([]);
+    const [xrpLineData, setXRPLineData] = useState<{ time: string; price: number; }[]>([]);
     const [bitcoinPrice, setBitcoinPrice] = useState<number | null>(null);
     const [ethereumPrice, setEthereumPrice] = useState<number | null>(null);
     const [xrpPrice, setXRPPrice] = useState<number | null>(null);
@@ -38,13 +38,22 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const [xrpChange, setXRPChange] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    // State to toggle between Candlestick Chart and Line Chart
+    const [showCandlestick, setShowCandlestick] = useState<boolean>(true);
+
     useEffect(() => {
         async function fetchData() {
             try {
                 setLoading(true);
-                fetchBitcoinLineData().then((data) => setBitcoinLineData(data || []));
-                fetchEthereumLineData().then((data) => setEthereumLineData(data || []));
-                fetchXRPLineData().then((data) => setXRPLineData(data || []));
+                
+                const [btcLine, ethLine, xrpLine] = await Promise.all([
+                    fetchBitcoinLineData(),
+                    fetchEthereumLineData(),
+                    fetchXRPLineData(),
+                ]);
+                setBitcoinLineData(btcLine || []);
+                setEthereumLineData(ethLine || []);
+                setXRPLineData(xrpLine || []);
 
                 const [btcData, ethData, xrpData] = await Promise.all([
                     fetchBitcoinHistory(),
@@ -85,23 +94,37 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Box className="p-4 bg-gray-900">
+                {/* Investment Portfolio Chart */}
                 <InvestmentPieChart />
+
                 <Divider className="h-[1.5px] bg-gray-800 w-[95%] mx-auto" />
+
+                {/* Market Data Section */}
                 <Box className="mt-4">
                     <Box className="flex flex-row items-center gap-4 mt-4">
                         <Text className="text-xl font-bold text-white">Market Data</Text>
-                        <Button className="bg-white">
+                        
+                        {/* Toggle Buttons */}
+                        <Button 
+                            className="bg-white"
+                            onPress={() => setShowCandlestick(true)}
+                        >
                             <ButtonText>
-                                <MaterialIcons name="show-chart" size={24} color="black" />
+                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "green" : "black"} />
                             </ButtonText>
                         </Button>
-                        <Button className="bg-white">
+                        <Button 
+                            className="bg-white"
+                            onPress={() => setShowCandlestick(false)}
+                        >
                             <ButtonText>
-                                <MaterialIcons name="candlestick-chart" size={24} color="black" />
+                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "green" : "black"} />
                             </ButtonText>
                         </Button>
                     </Box>
                 </Box>
+
+                {/* Bitcoin Market Data */}
                 <Box className="mt-5">
                     <Text className="text-lg text-white">
                         BTC Live Price:{" "}
@@ -116,11 +139,16 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             ? `${bitcoinChange.toFixed(2)}%`
                             : ""}
                     </Text>
-                    <CandlestickChart title="" candlestickData={bitcoinData} />
-                    <LineChartComponent title="Bitcoin (BTC)" lineData={bitcoinLineData} />
-
+                    {showCandlestick ? (
+                        <CandlestickChart title="" candlestickData={bitcoinData} />
+                    ) : (
+                        <LineChartComponent title="" lineData={bitcoinLineData} />
+                    )}
                 </Box>
+
                 <Divider className="h-[1.5px] bg-gray-800 w-[95%] mx-auto" />
+
+                {/* Ethereum Market Data */}
                 <Box className="mt-5">
                     <Text className="text-lg text-white">
                         ETH Live Price:{" "}
@@ -135,9 +163,16 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             ? `${ethereumChange.toFixed(2)}%`
                             : ""}
                     </Text>
-                    <CandlestickChart title="" candlestickData={ethereumData} />
+                    {showCandlestick ? (
+                        <CandlestickChart title="" candlestickData={ethereumData} />
+                    ) : (
+                        <LineChartComponent title="" lineData={ethereumLineData} />
+                    )}
                 </Box>
+
                 <Divider className="h-[1.5px] bg-gray-800 w-[95%] mx-auto" />
+
+                {/* XRP Market Data */}
                 <Box className="mt-5">
                     <Text className="text-lg text-white">
                         XRP Live Price:{" "}
@@ -152,7 +187,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             ? `${xrpChange.toFixed(2)}%`
                             : ""}
                     </Text>
-                    <CandlestickChart title="" candlestickData={xrpData} />
+                    {showCandlestick ? (
+                        <CandlestickChart title="" candlestickData={xrpData} />
+                    ) : (
+                        <LineChartComponent title="" lineData={xrpLineData} />
+                    )}
                 </Box>
             </Box>
         </ScrollView>
@@ -160,7 +199,3 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 export default HomeScreen;
-function fetchBitcoinLineChart() {
-    throw new Error("Function not implemented.");
-}
-

@@ -15,29 +15,32 @@ const LineChartComponent: React.FC<LineChartProps> = ({ lineData, title }) => {
         return <Text className="text-white text-lg my-4">{title} data not available</Text>;
     }
 
-    // Extracting time and price data
-    const labels = lineData.map((item) => item.time);
     const prices = lineData.map((item) => item.price);
+    const isUp = prices[prices.length - 1] > prices[0];
+    const lineColor = isUp ? "rgba(0, 255, 0, 1)" : "rgba(255, 0, 0, 1)";
 
     return (
         <Box>
-            <Text className="text-xl font-bold text-white">{title} Price Trend</Text>
             <LineChart
                 data={{
-                    labels: labels,
-                    datasets: [{ data: prices }],
+                    labels: [],
+                    datasets: [{ data: prices, color: () => lineColor }],
                 }}
                 width={screenWidth * 0.9}
-                height={220}
-                yAxisLabel="$"
+                height={120}
                 chartConfig={{
-                    backgroundGradientFrom: "#1E1E1E",
-                    backgroundGradientTo: "#1E1E1E",
                     decimalPlaces: 2,
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    propsForDots: { r: "4", strokeWidth: "1", stroke: "#ffa726" },
+                    color: () => "transparent",
+                    labelColor: () => "transparent",
+                    propsForDots: { r: "0" },
+                    backgroundColor: "#111827",
+                    backgroundGradientFrom: "#111827",
+                    backgroundGradientTo: "#111827",
                 }}
+                withHorizontalLabels={false}
+                withVerticalLabels={false}
+                withInnerLines={false}
+                withOuterLines={false}
                 bezier
                 style={{ marginVertical: 10, borderRadius: 8 }}
             />
