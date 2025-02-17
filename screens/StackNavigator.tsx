@@ -16,7 +16,7 @@ const StackNavigator = () => {
     return (
     <NavigationContainer>
         <Layout>
-            <Stack.Navigator initialRouteName="Investment">
+            <Stack.Navigator initialRouteName="Transactions">
                 <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false}}/>
                 <Stack.Screen name="Investment" component={InvestmentsScreen} options={{ headerShown: false}}/>
                 <Stack.Screen name="Notification" component={NotificationsScreen} />
@@ -24,7 +24,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="Savings" component={SavingsScreen}  />
                 <Stack.Screen name="Settings" component={SettingsScreen} />
                 <Stack.Screen name="Token" component={TokenScreen} />
-                <Stack.Screen name="Transactions" component={TransactionsScreen} />
+                <Stack.Screen name="Transactions" component={TransactionsScreen} options={{ headerShown: false}}/>
             </Stack.Navigator>
         </Layout>
     </NavigationContainer>
