@@ -16,15 +16,20 @@ export const fetchBitcoinPrice = async () => {
 export const fetchBitcoinHistory = async () => {
     try {
         const response = await fetch(
-            'https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=10'
+            "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=10"
         );
         const data = await response.json();
-        return data.map((item: string) => ({
-            time: new Date(item[0]).toLocaleTimeString(),
-            price: parseFloat(item[4]),
+
+        return data.map((item: any) => ({
+            time: new Date(item[0]).toLocaleTimeString(), // Timestamp
+            open: parseFloat(item[1]), // Open price
+            high: parseFloat(item[2]), // High price
+            low: parseFloat(item[3]), // Low price
+            close: parseFloat(item[4]), // Close price
         }));
     } catch (error) {
-        console.error('Error fetching Bitcoin history:', error);
+        console.error("Error fetching Bitcoin history:", error);
         return [];
     }
 };
+
