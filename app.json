@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "Client",
+    "slug": "Client",
     "version": "1.0.0",
+    "newArchEnabled": true,
 
     "web": {
       "favicon": "./assets/favicon.png"

@@ -1,9 +1,11 @@
-// App.tsx
-import React from 'react';
-import Navigation from './Navigation';  // Import navigation
+import './global.css';
+import 'react-native-gesture-handler';
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 
-const App: React.FC = () => {
-  return <Navigation />;
-};
+import StackNavigator from 'screens/StackNavigator';
 
-export default App;
+
+
+export default function App() {
+  return <GluestackUIProvider mode="light"><StackNavigator /></GluestackUIProvider>;
+}

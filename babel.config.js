@@ -1,10 +1,20 @@
+
 module.exports = function (api) {
   api.cache(true);
-  const plugins = [];
 
   return {
-    presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel'],
+    presets: [
+      ['babel-preset-expo', { jsxImportSource: 'nativewind' }],
+      'nativewind/babel',
+    ],
+    plugins: [
+    'module:react-native-dotenv', ["module-resolver", {
+      root: ["./"],
 
-    plugins: ['react-native-reanimated/plugin'],
+      alias: {
+        "@": "./",
+        "tailwind.config": "./tailwind.config.js"
+      }
+    }]],
   };
 };
