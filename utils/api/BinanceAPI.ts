@@ -20,7 +20,6 @@ export const fetchCandlestickData = async (symbol: string) => {
     }
 };
 
-// Fetch BTC, ETH, and XRP data
 export const fetchBitcoinHistory = async () => fetchCandlestickData("BTCUSDT");
 export const fetchEthereumHistory = async () => fetchCandlestickData("ETHUSDT");
 export const fetchXRPHistory = async () => fetchCandlestickData("XRPUSDT");
