@@ -42,13 +42,13 @@ const Layout = ({ children }: LayoutProps) => {
                 </Box>
 
                 <Box className='flex flex-row gap-1 items-end'>
-                    <TouchableOpacity onPress={() => navigateToScreen('Notification')}>
+                    <TouchableOpacity onPress={() => navigateToScreen('Notifications')}>
                         <MaterialCommunityIcons name="chat-outline" size={24} 
-                        color={currentScreen === "Notification" ? "blue": ""}/>
+                        color={currentScreen === "Notifications" ? "blue": ""}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigateToScreen('Notification')}>
+                    <TouchableOpacity onPress={() => navigateToScreen('Notifications')}>
                         <Ionicons name="notifications-outline" size={24} 
-                        color={currentScreen === "Notification" ? "blue": ""}/>
+                        color={currentScreen === "Notifications" ? "blue": ""}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
                         <MaterialCommunityIcons name="account" size={24} 
