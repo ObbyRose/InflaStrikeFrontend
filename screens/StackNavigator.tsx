@@ -7,7 +7,7 @@ import ProfileScreen from './ProfileScreen';
 import SavingsScreen from './SavingsScreen';
 import SettingsScreen from './SettingsScreen';
 import TokenScreen from './TokenScreen';
-import TransactionsScreen from './TransactionsScreen';
+import TransactionsScreen from './transactions/TransactionsScreen';
 import Layout from './Layout';
 
 const Stack = createStackNavigator();

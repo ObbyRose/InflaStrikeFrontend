@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity, FlatList, RefreshControl } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import { View, Text, TouchableOpacity, FlatList, RefreshControl, BackHandler } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Props } from 'types/NavigationTypes'
 import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { Divider } from '@/components/ui/divider'
+import NewDepositScreen from './NewDepositScreen'
 
 const dummyData = [
   {
@@ -75,6 +76,19 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
   const [activeButton, setActiveButton] = useState('fiat');
   const [data, setData] = useState(dummyData);
   const [refreshing, setRefreshing] = useState(false);
+  const [isNewDeposit, setIsNewDeposit] = useState(false);
+
+  useEffect(() => {
+    const backAction = () => {
+      if(isNewDeposit)
+        setIsNewDeposit(false);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    return () => backHandler.remove();
+  }, [isNewDeposit]);
 
   const handlePress = (button: string) => {
     setActiveButton(button);
@@ -97,7 +111,11 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
     }, 1000);
   }, []);
 
+  // New Deposit Screen
+  if(isNewDeposit)
+    return <NewDepositScreen setIsNewDeposit={setIsNewDeposit}/>
 
+  // Transaction Screen
   return (
     <Box className='bg-white h-full p-5'>
       {/* Top Buttons */}
@@ -121,7 +139,7 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
 
       {/* Deposit Withdrawal Buttons */}
       <Box className='flex flex-row justify-between'>
-        <Button variant='rounded' className='bg-[#009d21]'>
+        <Button variant='rounded' className='bg-[#009d21]' onPress={() => setIsNewDeposit(true)}>
           <Text className='text-white'>+ Deposit</Text>
         </Button>
         <Button variant='rounded' className='bg-[#c92f2d]'>
