@@ -31,11 +31,13 @@ const SavingsScreen: React.FC<Props> = ({ navigation }) => {
     <Box className='bg-white h-full p-5 gap-7'>
 
       {/* Top Buttons */}
-      <ButtonsTrain  
-        buttons={['New', 'onGoing', 'Closed', 'Canceled']} 
-        activeButton={activeButton}
-        handlePress={handlePress}
-      />
+      <Box>
+        <ButtonsTrain  
+          buttons={['New', 'onGoing', 'Closed', 'Canceled']} 
+          activeButton={activeButton}
+          handlePress={handlePress}
+        />
+      </Box>
 
       {/* Date Inputs */}
       <Box className='flex flex-row justify-between'>
@@ -60,7 +62,6 @@ const SavingsScreen: React.FC<Props> = ({ navigation }) => {
           </Box>
         </Box>
       </Box>
-
 
       {/* Slider */}
       <Box>
