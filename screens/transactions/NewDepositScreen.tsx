@@ -6,6 +6,7 @@ import { Input, InputField } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
 import { Feather } from '@expo/vector-icons'
 import { KeyboardAvoidingView, Platform, ScrollView, TextInput } from 'react-native'
+import OutlinedCard from '@/components/OutlinedCard'
 
 const dummyData = {
     currency: "USD",
@@ -69,17 +70,15 @@ function NewDepositScreen({ setIsNewDeposit }: NewDepositScreenProps) {
                 </Box>
 
                 {/* Information */}
-                <Card variant='outline' size="lg" className='border-2 gap-4'>
-                    <Text className='absolute -top-5 left-2 bg-white p-1'>Information</Text>
+                <OutlinedCard title='Information' className='gap-4'>
                     <Text>Bank: {data.bank}</Text>
                     <Text>Account number: {data.accountNumber}</Text>
                     <Text>Branch: {data.branch}</Text>
                     <Text>IBAN: {data.IBAN}</Text>
-                </Card>
+                </OutlinedCard>
 
                 {/* Confirmation */}
-                <Card variant='outline' size="lg" className='border-2 gap-4'>
-                    <Text className='absolute -top-5 left-2 bg-white p-1'>Confirmation</Text>
+                <OutlinedCard title='Confirmation' className='gap-4'>
                     <Input className="border-gray-500 rounded-lg">
                         <InputField
                             value={idText}
@@ -93,7 +92,7 @@ function NewDepositScreen({ setIsNewDeposit }: NewDepositScreenProps) {
                         onPress={handleSubmit}>
                         <Text className='text-white font-semibold'>Submit</Text>
                     </Button>
-                </Card>
+                </OutlinedCard>
             </Box>
         </ScrollView>
     </KeyboardAvoidingView>
