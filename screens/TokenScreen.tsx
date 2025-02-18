@@ -1,13 +1,26 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Props } from 'types/NavigationTypes'
+import { View, Text } from 'react-native';
+import React from 'react';
+import { Props } from 'types/NavigationTypes';
+
+import SliderWithPlusMinus from '@/components/SliderWithPlusMinus';
+import HammerSignWithPercentages from '@/components/token-page/HammerSignWithPercentages';
 
 const TokenScreen: React.FC<Props> = ({ navigation }) => {
-  return (
-    <View>
-      <Text>TokenScreen</Text>
-    </View>
-  )
-}
+  const [sliderValue, setSliderValue] = React.useState(50);
 
-export default TokenScreen
+  const maxValue = 100;
+
+  return (
+    <View className="m-8">
+      <HammerSignWithPercentages percentages={12.8} />
+      <SliderWithPlusMinus
+        maxValue={100}
+        setSliderValue={setSliderValue}
+        sliderValue={sliderValue}
+        buttonText="BUY"
+      />
+    </View>
+  );
+};
+
+export default TokenScreen;
