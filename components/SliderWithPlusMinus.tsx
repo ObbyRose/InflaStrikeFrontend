@@ -10,6 +10,7 @@ interface SliderWithPlusMinusProps {
   setSliderValue: React.Dispatch<React.SetStateAction<number>>;
   sliderValue: number;
   buttonText: string;
+  backgroundColor: string;
 }
 
 export default function SliderWithPlusMinus({
@@ -17,6 +18,7 @@ export default function SliderWithPlusMinus({
   setSliderValue,
   sliderValue,
   buttonText,
+  backgroundColor,
 }: SliderWithPlusMinusProps) {
   return (
     <Box className="flex flex-col items-center">
@@ -67,7 +69,7 @@ export default function SliderWithPlusMinus({
         />
       </View>
       <View className="flex w-full items-center">
-        <Button className="bg-green-700">
+        <Button className={`bg-${backgroundColor}`}>
           <Text className="text-white">{buttonText}</Text>
         </Button>
       </View>
