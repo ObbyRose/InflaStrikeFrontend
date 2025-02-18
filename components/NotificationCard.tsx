@@ -17,7 +17,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
     timeAgo,
 }) => {
     return (
-        <Box className="p-4 bg-white rounded-lg shadow-md flex-row items-start space-x-3">
+        <Box className="p-4 bg-white rounded-lg shadow-md gap-2 flex-row items-start space-x-3">
             <Icon as={Clock} size="lg" color="black" className="mt-1" />
             <Box className="flex-1">
                 <Text className="text-base font-semibold">{title}</Text>
