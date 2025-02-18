@@ -5,6 +5,7 @@ import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { Divider } from '@/components/ui/divider'
 import NewDepositScreen from './NewDepositScreen'
+import ButtonsTrain from '@/components/ButtonsTrain'
 
 const dummyData = [
   {
@@ -73,7 +74,7 @@ const dummyData = [
 ];
 
 const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
-  const [activeButton, setActiveButton] = useState('fiat');
+  const [activeButton, setActiveButton] = useState('FIAT');
   const [data, setData] = useState(dummyData);
   const [refreshing, setRefreshing] = useState(false);
   const [isNewDeposit, setIsNewDeposit] = useState(false);
@@ -119,30 +120,18 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
   return (
     <Box className='bg-white h-full p-5'>
       {/* Top Buttons */}
-      <Box className='flex flex-row items-center justify-center h-[100px]'>
-        { ['fiat', 'crypto'].map(category =>
-          <TouchableOpacity
-          className={`px-4 py-2 border-black 
-            ${activeButton === category ? 'bg-[#94baf0] text-white' : 'bg-white text-gray-700'} 
-            ${category === "fiat" ? "rounded-l-lg border-[1.5px]" : "rounded-r-lg border-r-[1.5px] border-b-[1.5px] border-t-[1.5px]"}
-            items-center justify-center`}
-          onPress={() => handlePress(category)}
-          activeOpacity={0.75}
-        >
-          <Text className={`font-medium ${activeButton ===  category ? 'text-white' : 'text-gray-700'}`}>
-            {category.toUpperCase()}
-          </Text>
-        </TouchableOpacity>
-        )
-        }
-      </Box>
+      <ButtonsTrain
+        buttons={['FIAT', 'CRYPTO']} 
+        activeButton={activeButton}
+        handlePress={handlePress}
+      />
 
       {/* Deposit Withdrawal Buttons */}
       <Box className='flex flex-row justify-between'>
-        <Button variant='rounded' className='bg-[#009d21]' onPress={() => setIsNewDeposit(true)}>
+        <Button variant='rounded' action='positive' onPress={() => setIsNewDeposit(true)}>
           <Text className='text-white'>+ Deposit</Text>
         </Button>
-        <Button variant='rounded' className='bg-[#c92f2d]'>
+        <Button variant='rounded' action='negative'>
           <Text className='text-white'>- Withdrawal</Text>
         </Button>
       </Box>
