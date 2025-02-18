@@ -1,19 +1,23 @@
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from '@/components/ui/slider';
 interface SliderProps {
-  maxValue?: number;
+  maxValue: number;
+  setSliderValue: React.Dispatch<React.SetStateAction<number>>;
+  sliderValue: number;
 }
 
-const SliderWithArrow: React.FC<SliderProps> = ({ maxValue = 32324 }) => {
+const SliderWithArrow: React.FC<SliderProps> = ({ maxValue, setSliderValue, sliderValue }) => {
   return (
     <Slider
-      // defaultValue={178}
+      className="w-full bg-red-400"
+      defaultValue={sliderValue}
       minValue={1}
       maxValue={maxValue}
       step={1}
       size="md"
       orientation="horizontal"
       isDisabled={false}
-      isReversed={false}>
+      isReversed={false}
+      onChange={(value) => setSliderValue(value)}>
       <SliderTrack>
         <SliderFilledTrack />
       </SliderTrack>

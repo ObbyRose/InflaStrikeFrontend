@@ -41,8 +41,6 @@ const sliderStyle = tva({
 
 const sliderThumbStyle = tva({
   base: 'absolute data-[focus=true]:bg-primary-600 data-[disabled=true]:bg-primary-500 web:cursor-pointer shadow-hard-1',
-  // base: 'bg-primary-500 absolute rounded-full data-[focus=true]:bg-primary-600 data-[active=true]:bg-primary-600 data-[hover=true]:bg-primary-600 data-[disabled=true]:bg-primary-500 web:cursor-pointer web:data-[active=true]:outline web:data-[active=true]:outline-4 web:data-[active=true]:outline-primary-400 shadow-hard-1',
-  // triangle: 'border-[20px] border-transparent border-t-primary-500 absolute data-[focus=true]:bg-primary-600 data-[hover=true]:bg-primary-600 data-[disabled=true]:bg-primary-500 web:cursor-pointer shadow-hard-1 top-0',
   parentVariants: {
     size: {
       sm: 'h-4 w-4',
@@ -56,8 +54,6 @@ const sliderThumbStyle = tva({
         'border-[20px] border-transparent border-t-primary-500 data-[hover=true]:bg-primary-600 top-0',
       circle:
         'bg-primary-500 rounded-full data-[active=true]:bg-primary-600 data-[hover=true]:bg-primary-600 web:data-[active=true]:outline web:data-[active=true]:outline-4 web:data-[active=true]:outline-primary-400',
-      // triangle: 'border-[20px] border-transparent border-t-primary-500 absolute data-[focus=true]:bg-primary-600 data-[hover=true]:bg-primary-600 data-[disabled=true]:bg-primary-500 web:cursor-pointer shadow-hard-1 top-0',
-      // circle: 'bg-priamry-500 rounded-full',
     },
   },
 });
