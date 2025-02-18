@@ -5,17 +5,17 @@ import { Box } from "@/components/ui/box";
 
 const screenWidth = Dimensions.get("window").width;
 const investmentData = [
-    { name: "Stocks", percentage: 40, color: "#FF6384", legendFontColor: "#FFF", legendFontSize: 14 },
-    { name: "Crypto", percentage: 25, color: "#36A2EB", legendFontColor: "#FFF", legendFontSize: 14 },
-    { name: "Real Estate", percentage: 20, color: "#FFCE56", legendFontColor: "#FFF", legendFontSize: 14 },
-    { name: "Bonds", percentage: 10, color: "#4BC0C0", legendFontColor: "#FFF", legendFontSize: 14 },
-    { name: "Others", percentage: 5, color: "#9966FF", legendFontColor: "#FFF", legendFontSize: 14 },
+    { name: "Stocks", percentage: 40, color: "#FF6384", legendFontColor: "black", legendFontSize: 14 },
+    { name: "Crypto", percentage: 25, color: "#36A2EB", legendFontColor: "black", legendFontSize: 14 },
+    { name: "Real Estate", percentage: 20, color: "#FFCE56", legendFontColor: "black", legendFontSize: 14 },
+    { name: "Bonds", percentage: 10, color: "#4BC0C0", legendFontColor: "black", legendFontSize: 14 },
+    { name: "Others", percentage: 5, color: "#9966FF", legendFontColor: "black", legendFontSize: 14 },
 ];
 
 const InvestmentPieChart = () => {
     return (
         <Box>
-            <Text className="text-xl font-bold text-white">My Dashboard</Text>
+            <Text className="text-xl font-bold text-black">My Dashboard</Text>
 
             <PieChart
                 data={investmentData}

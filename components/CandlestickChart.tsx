@@ -19,7 +19,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData, ti
     if (!candlestickData || candlestickData.length === 0) {
         return (
             <View className="my-6">
-                <Text className="text-white text-lg">{title} data not available</Text>
+                <Text className="text-black text-lg">{title} data not available</Text>
                 <ActivityIndicator size="large" color="#FFD700" className="my-4" />
             </View>
         );
@@ -34,7 +34,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData, ti
     return (
         <Box className="flex flex-row between items-center gap-8">
             <Box className="mt-6">
-                <Text className="text-sm font-bold text-white">{title}</Text>
+                <Text className="text-sm font-bold text-black">{title}</Text>
             </Box>
             <Svg width={chartWidth} height={chartHeight} style={{ marginTop: 20 }}>
                 {candlestickData.map((d, index) => {
@@ -52,7 +52,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ candlestickData, ti
                                 y1={highY}
                                 x2={x}
                                 y2={lowY}
-                                stroke="white"
+                                stroke="darkgray"
                                 strokeWidth={2}
                             />
                             {/* Candle Body */}

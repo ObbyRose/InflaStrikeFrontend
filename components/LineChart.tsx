@@ -30,12 +30,12 @@ const LineChartComponent: React.FC<LineChartProps> = ({ lineData, title }) => {
                 height={120}
                 chartConfig={{
                     decimalPlaces: 2,
-                    color: () => "transparent",
-                    labelColor: () => "transparent",
+                    color: () => "white",
+                    labelColor: () => "white",
                     propsForDots: { r: "0" },
-                    backgroundColor: "#111827",
-                    backgroundGradientFrom: "#111827",
-                    backgroundGradientTo: "#111827",
+                    backgroundColor: "#ffff",
+                    backgroundGradientFrom: "#ffff",
+                    backgroundGradientTo: "#ffff",
                 }}
                 withHorizontalLabels={false}
                 withVerticalLabels={false}

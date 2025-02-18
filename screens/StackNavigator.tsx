@@ -9,6 +9,7 @@ import SettingsScreen from './SettingsScreen';
 import TokenScreen from './TokenScreen';
 import TransactionsScreen from './transactions/TransactionsScreen';
 import Layout from './Layout';
+import ChatScreen from './ChatScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const StackNavigator = () => {
                     <Stack.Screen name="Profile" component={ProfileScreen} />
                     <Stack.Screen name="Savings" component={SavingsScreen} options={{ headerShown: false }}/>
                     <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="Chat" component={ChatScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="Token" component={TokenScreen} />
                     <Stack.Screen
                         name="Transactions"

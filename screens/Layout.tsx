@@ -6,6 +6,8 @@ import { Divider } from '@/components/ui/divider';
 import { Image } from '@/components/ui/image';
 import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
+import { Icon } from '@/components/ui/icon';
+import { BellRing, MessageSquareText, Settings, UserRoundPen } from 'lucide-react-native';
 
 interface LayoutProps {
     children: any
@@ -29,64 +31,58 @@ const Layout = ({ children }: LayoutProps) => {
             {/* Top Section */}
             <Box 
                 style={{ paddingTop: insets.top }} 
-                className="flex flex-row justify-between items-center h-[60px] bg-white px-4"
+                className="flex flex-row justify-between items-center h-[60px] bg-blue-900 px-4"
             >
                 <Box className='flex flex-row items-center gap-3'>
-                    <Image 
-                        source={require('./../assets/images/inflaStrikeIcon.jpg')}
-                        className='h-14 w-14'
-                        resizeMode="contain"
-                        alt='logo'
-                    />
-                    <Text className="text-lg font-bold">NLV: $234,654</Text>
+                    <Text className="text-lg font-bold text-gray-100">NLV: $234,654</Text>
                 </Box>
 
-                <Box className='flex flex-row gap-1 items-end'>
-                    <TouchableOpacity onPress={() => navigateToScreen('Notifications')}>
-                        <MaterialCommunityIcons name="chat-outline" size={24} 
-                        color={currentScreen === "Notifications" ? "blue": ""}/>
+                <Box className='flex flex-row gap-3 items-end'>
+                    <TouchableOpacity onPress={() => navigateToScreen('Chat')}>
+                        <Icon as={MessageSquareText} size={"xl"} 
+                        color={currentScreen === "Chat" ? "lightblue": "white"}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Notifications')}>
-                        <Ionicons name="notifications-outline" size={24} 
-                        color={currentScreen === "Notifications" ? "blue": ""}/>
+                        <Icon as={BellRing} size={'xl'} 
+                        color={currentScreen === "Notifications" ? "lightblue": "white"}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
-                        <MaterialCommunityIcons name="account" size={24} 
-                        color={currentScreen === "Profile" ? "blue": ""}/>
+                        <Icon as={UserRoundPen}size={'xl'} 
+                        color={currentScreen === "Profile" ? "lightblue": "white"}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Settings')}>
-                        <Ionicons name="settings-outline" size={24} 
-                        color={currentScreen === "Settings" ? "blue": ""}/>
+                        <Icon as={Settings} size={'xl'} 
+                        color={currentScreen === "Settings" ? "lightblue": "white"}/>
                     </TouchableOpacity>
                 </Box>
             </Box>
-            <Divider className='h-[1.5px] bg-black w-[95%] mx-auto'/>
+            <Divider className='h-[1.5px] bg-white w-[100%] mx-auto'/>
 
             {/* Main Rendered Screens */}
             <View className="flex-1">{children}</View>
 
             {/* Bottom Navigation */}
-            <Divider className='h-[1.5px] bg-black w-[95%] mx-auto'/>
-            <Box className="flex flex-row justify-evenly h-[60px] bg-white p-4">
+            <Divider className='h-[1.5px] bg-white w-[100%] mx-auto'/>
+            <Box className="flex flex-row justify-evenly h-[60px] bg-blue-900 p-4">
                 <TouchableOpacity onPress={() => navigateToScreen('Savings')}>
-                    <MaterialCommunityIcons name="sign-direction" size={30}
-                    color={currentScreen === "Savings" ? "blue": ""}/>
+                    <MaterialCommunityIcons name="wallet" size={30}
+                    color={currentScreen === "Savings" ? "lightblue": "white"}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Transactions')}>
                     <MaterialCommunityIcons name="finance" size={30}
-                    color={currentScreen === "Transactions" ? "blue": ""}/>
+                    color={currentScreen === "Transactions" ? "lightblue": "white"}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Home')}>
                     <AntDesign name="home" size={30}
-                    color={currentScreen === "Home" ? "blue": ""}/>
+                    color={currentScreen === "Home" ? "lightblue": "white"}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Investment')}>
                     <Octicons name="graph" size={30}
-                    color={currentScreen === "Investment" ? "blue": ""}/>
+                    color={currentScreen === "Investment" ? "lightblue": "white"}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Token')}>
                     <MaterialIcons name="compare-arrows" size={30}
-                    color={currentScreen === "Token" ? "blue": ""}/>
+                    color={currentScreen === "Token" ? "lightblue": "white"}/>
                 </TouchableOpacity>
             </Box>
         </View>

@@ -93,32 +93,32 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Box className="p-4 bg-gray-900">
+            <Box className="p-4 bg-white text-black">
                 {/* Investment Portfolio Chart */}
                 <InvestmentPieChart />
 
-                <Divider className="h-[1.5px] bg-gray-800 w-[95%] mx-auto" />
+                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
 
                 {/* Market Data Section */}
                 <Box className="mt-4">
                     <Box className="flex flex-row items-center gap-4 mt-4">
-                        <Text className="text-xl font-bold text-white">Market Data</Text>
+                        <Text className="text-xl font-bold text-black">Market Data</Text>
                         
                         {/* Toggle Buttons */}
                         <Button 
-                            className="bg-white"
+                            className="bg-blue-900"
                             onPress={() => setShowCandlestick(true)}
                         >
                             <ButtonText>
-                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "green" : "black"} />
+                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "lightblue" : "white"} />
                             </ButtonText>
                         </Button>
                         <Button 
-                            className="bg-white"
+                            className="bg-blue-900"
                             onPress={() => setShowCandlestick(false)}
                         >
                             <ButtonText>
-                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "green" : "black"} />
+                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "lightblue" : "white"} />
                             </ButtonText>
                         </Button>
                     </Box>
@@ -126,7 +126,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Bitcoin Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-white">
+                    <Text className="text-lg text-black">
                         BTC Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
@@ -146,11 +146,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     )}
                 </Box>
 
-                <Divider className="h-[1.5px] bg-gray-800 w-[95%] mx-auto" />
+                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
 
                 {/* Ethereum Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-white">
+                    <Text className="text-lg text-black">
                         ETH Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
@@ -170,11 +170,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     )}
                 </Box>
 
-                <Divider className="h-[1.5px] bg-gray-800 w-[95%] mx-auto" />
+                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
 
                 {/* XRP Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-white">
+                    <Text className="text-lg text-black">
                         XRP Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
