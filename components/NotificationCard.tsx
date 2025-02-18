@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { HStack } from "@/components/ui/hstack";
 import { Icon } from "@/components/ui/icon";
-import { Clock, AlertCircle } from "lucide-react-native";
+import { AlertCircle, BellRing } from "lucide-react-native";
 import { Box } from "@/components/ui/box";
 
 interface NotificationCardProps {
@@ -18,7 +18,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
 }) => {
     return (
         <Box className="p-4 bg-white rounded-lg shadow-md gap-2 flex-row items-start space-x-3">
-            <Icon as={Clock} size="lg" color="black" className="mt-1" />
+            <Icon as={BellRing} size="lg" color="black" className="mt-1" />
             <Box className="flex-1">
                 <Text className="text-base font-semibold">{title}</Text>
                 <Text className="text-sm text-gray-600">{message}</Text>
