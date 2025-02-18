@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Input, InputField } from '@/components/ui/input'
+import { Input, InputField, InputIcon, InputSlot } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
 import { Feather } from '@expo/vector-icons'
 import { KeyboardAvoidingView, Platform, ScrollView, TextInput } from 'react-native'
 import OutlinedCard from '@/components/OutlinedCard'
+import { SearchIcon } from "@/components/ui/icon"
 
 const dummyData = {
     currency: "USD",
@@ -56,8 +56,9 @@ function NewDepositScreen({ setIsNewDeposit }: NewDepositScreenProps) {
                 {/* Search */}
                 <Box>
                     <Input className="border rounded-3xl relative w-5/6 mx-auto">
-                    <Feather name="search" size={24} className='absolute left-2 z-50' 
-                        onPress={handleSearch} />
+                        <InputSlot className='absolute left-2 z-50' onPress={handleSearch}>
+                            <InputIcon as={SearchIcon} color='black'/>
+                        </InputSlot>
                         <InputField
                             value={searchText}
                             onChangeText={setSearchText}
