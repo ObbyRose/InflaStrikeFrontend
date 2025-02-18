@@ -1,20 +1,22 @@
 import { View } from 'react-native';
-import { Box } from '../ui/box';
-import { Text } from '../ui/text';
+import { Box } from './ui/box';
+import { Text } from './ui/text';
 import { AntDesign } from '@expo/vector-icons';
-import SliderWithArrow from '../SliderWithArrow';
-import { Button } from '../ui/button';
+import SliderWithArrow from './SliderWithArrow';
+import { Button } from './ui/button';
 
 interface SliderWithPlusMinusProps {
   maxValue: number;
   setSliderValue: React.Dispatch<React.SetStateAction<number>>;
   sliderValue: number;
+  buttonText: string;
 }
 
 export default function SliderWithPlusMinus({
   maxValue,
   setSliderValue,
   sliderValue,
+  buttonText,
 }: SliderWithPlusMinusProps) {
   return (
     <Box className="flex flex-col items-center">
@@ -66,7 +68,7 @@ export default function SliderWithPlusMinus({
       </View>
       <View className="flex w-full items-center">
         <Button className="bg-green-700">
-          <Text className="text-white">BUY</Text>
+          <Text className="text-white">{buttonText}</Text>
         </Button>
       </View>
     </Box>

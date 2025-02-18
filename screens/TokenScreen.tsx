@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { Props } from 'types/NavigationTypes';
 
-import SliderWithPlusMinus from '@/components/token-page/SliderWithPlusMinus';
+import SliderWithPlusMinus from '@/components/SliderWithPlusMinus';
 import HammerSignWithPercentages from '@/components/token-page/HammerSignWithPercentages';
 
 const TokenScreen: React.FC<Props> = ({ navigation }) => {
@@ -17,6 +17,7 @@ const TokenScreen: React.FC<Props> = ({ navigation }) => {
         maxValue={100}
         setSliderValue={setSliderValue}
         sliderValue={sliderValue}
+        buttonText="BUY"
       />
     </View>
   );
