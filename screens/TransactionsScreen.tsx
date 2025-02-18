@@ -1,9 +1,8 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, FlatList, RefreshControl } from 'react-native'
+import React, { useCallback, useState } from 'react'
 import { Props } from 'types/NavigationTypes'
 import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
-import { ScrollView } from 'react-native-gesture-handler'
 import { Divider } from '@/components/ui/divider'
 
 const dummyData = [
@@ -72,10 +71,10 @@ const dummyData = [
   }
 ];
 
-
 const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
   const [activeButton, setActiveButton] = useState('fiat');
-  const [data, setData] = useState(dummyData); 
+  const [data, setData] = useState(dummyData);
+  const [refreshing, setRefreshing] = useState(false);
 
   const handlePress = (button: string) => {
     setActiveButton(button);
@@ -87,6 +86,17 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
     else if(status === "received") return "text-[#30a976]"
     return "text-[#cc353a]"
   }
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    
+    setTimeout(() => {
+      // random sort for dummy refreshing
+      setData(prevData => [...prevData].sort(() => Math.random() - 0.5));
+      setRefreshing(false);
+    }, 1000);
+  }, []);
+
 
   return (
     <Box className='bg-white h-full p-5'>
@@ -119,20 +129,35 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
         </Button>
       </Box>
 
+      <Divider className='mt-4'/>
       {/* Transactions */}
-      <ScrollView className='mt-4'>
-        {data.map((trans) => (
-          <Box key={trans.id}>
-            <Divider />
-            <Box className='flex flex-row justify-between items-center my-4'>
-              <Text className='text-gray-500 text-left w-1/4 text-sm'>{trans.date}</Text>
-              <Text className={getColorByStatus(trans.status) + " font-semibold text-left w-[30%] text-sm"}>{trans.status}</Text>
-              <Text className='text-left w-[20%] text-sm'>{trans.amount}</Text>
-              <Text className='text-left w-1/4 text-sm'>{trans.account}</Text>
+      <FlatList
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          colors={['#94baf0']} // Android
+          tintColor="#94baf0" // iOS
+        />
+      }
+      renderItem={
+        ({ item }) =>
+          <Box className="border-b border-gray-300 py-4 px-2">
+            <Box className="flex flex-row justify-between items-center">
+              <Text className="text-gray-500 text-left w-1/4 text-sm">{item.date}</Text>
+              <Text className={`${getColorByStatus(item.status)} font-semibold text-left w-[30%] text-sm`}>
+                {item.status}
+              </Text>
+              <Text className="text-left w-[20%] text-sm">{item.amount}</Text>
+              <Text className="text-left w-1/4 text-sm">{item.account}</Text>
             </Box>
           </Box>
-        ))}
-      </ScrollView>
+      }
+      
+      showsVerticalScrollIndicator={false}
+    />
 
     </Box>
   )
