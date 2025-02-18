@@ -24,7 +24,7 @@ const StackNavigator = () => {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Profile" component={ProfileScreen} />
+                    <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
                     <Stack.Screen name="Savings" component={SavingsScreen} options={{ headerShown: false }}/>
                     <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="Token" component={TokenScreen} />
