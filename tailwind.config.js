@@ -15,28 +15,32 @@ module.exports = {
       pattern:
         /(bg|border|text|stroke|fill)-(primary|secondary|tertiary|error|success|warning|info|typography|outline|background|indicator)-(0|50|100|200|300|400|500|600|700|800|900|950|white|gray|black|error|warning|muted|success|info|light|dark|primary)/,
     },
-    'background-light',
-    'background-dark',
-    'text-light',
-    'text-dark',
-    'button-light',
-    'button-dark',
+    'bg-background-light',
+    'bg-background-dark',
+    'text-text-light',
+    'text-text-dark',
+    'bg-button-light',
+    'bg-button-dark',
 
   ],
   theme: {
     extend: {
       colors: {
           background: {
-            light: '#ffffff',
-            dark: '#111827',
+            light: '#F9FAFB',
+            dark: '#1F2937',
           },
           button: {
-            light: '#f3f4f6',
-            dark: '#1f2937',
+            light: '#4900f5',
+            dark: '#4900f5',
           },
           text: {
-            light: '#374151',
-            dark: '#f9fafb',
+            light: '#1F2937',
+            dark: '#F9FAFB',
+          },
+          divider: {
+            light: '#1F2937',
+            dark: '#374151',
           },
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',

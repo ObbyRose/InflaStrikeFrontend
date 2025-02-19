@@ -97,20 +97,20 @@ console.log(appliedTheme);
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Box className={`p-4 background-${appliedTheme}`}>
+            <Box className={`p-4 bg-background-${appliedTheme}`}>
                 {/* Investment Portfolio Chart */}
                 <InvestmentPieChart />
 
-                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
+                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`} />
 
                 {/* Market Data Section */}
                 <Box className="mt-4">
                     <Box className="flex flex-row items-center gap-4 mt-4">
-                        <Text className="text-xl font-bold text-black">Market Data</Text>
+                        <Text className={`text-xl font-bold text-text-${appliedTheme}`}>Market Data</Text>
                         
                         {/* Toggle Buttons */}
                         <Button 
-                            className="bg-blue-900"
+                            className="bg-button-light"
                             onPress={() => setShowCandlestick(true)}
                         >
                             <ButtonText>
@@ -118,7 +118,7 @@ console.log(appliedTheme);
                             </ButtonText>
                         </Button>
                         <Button 
-                            className="bg-blue-900"
+                            className="bg-button-light"
                             onPress={() => setShowCandlestick(false)}
                         >
                             <ButtonText>
@@ -130,7 +130,7 @@ console.log(appliedTheme);
 
                 {/* Bitcoin Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-black">
+                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
                         BTC Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
@@ -150,11 +150,11 @@ console.log(appliedTheme);
                     )}
                 </Box>
 
-                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
+                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`}/>
 
                 {/* Ethereum Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-black">
+                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
                         ETH Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
@@ -174,11 +174,11 @@ console.log(appliedTheme);
                     )}
                 </Box>
 
-                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
+                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`}/>
 
                 {/* XRP Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-black">
+                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
                         XRP Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
