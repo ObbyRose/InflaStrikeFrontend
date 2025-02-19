@@ -12,7 +12,11 @@ import {
 import { CircleIcon } from "@/components/ui/icon";
 import { HStack } from "@/components/ui/hstack";
 import { Icon } from "@/components/ui/icon";
-import { ThemeSelectorProps } from "./interfaces";
+
+interface ThemeSelectorProps {
+    theme: "light" | "dark" | "system";
+    setTheme: (theme: "light" | "dark" | "system") => void;
+}
 
 const ThemeSelector: React.FC<ThemeSelectorProps> = ({ theme, setTheme }) => {
     return (
@@ -23,19 +27,19 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({ theme, setTheme }) => {
             </Box>
             <RadioGroup value={theme} onChange={setTheme}>
                 <HStack space="sm">
-                    <Radio value="Light">
+                    <Radio value="light">
                         <RadioIndicator>
                             <RadioIcon as={CircleIcon} />
                         </RadioIndicator>
                         <RadioLabel>Light</RadioLabel>
                     </Radio>
-                    <Radio value="Dark">
+                    <Radio value="dark">
                         <RadioIndicator>
                             <RadioIcon as={CircleIcon} />
                         </RadioIndicator>
                         <RadioLabel>Dark</RadioLabel>
                     </Radio>
-                    <Radio value="System">
+                    <Radio value="system">
                         <RadioIndicator>
                             <RadioIcon as={CircleIcon} />
                         </RadioIndicator>

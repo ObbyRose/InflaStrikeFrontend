@@ -22,8 +22,10 @@ import LineChartComponent from "@/components/LineChart";
 import { Divider } from "@/components/ui/divider";
 import { Button, ButtonText } from "@/components/ui/button";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
+    const { appliedTheme } = useTheme();
     const [bitcoinData, setBitcoinData] = useState<any[]>([]);
     const [ethereumData, setEthereumData] = useState<any[]>([]);
     const [xrpData, setXRPData] = useState<any[]>([]);
@@ -38,7 +40,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const [xrpChange, setXRPChange] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // State to toggle between Candlestick Chart and Line Chart
     const [showCandlestick, setShowCandlestick] = useState<boolean>(true);
 
     useEffect(() => {
@@ -91,9 +92,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         fetchData();
     }, []);
 
+console.log(appliedTheme);
+
+
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Box className="p-4 bg-white text-black">
+            <Box className={`p-4 background-${appliedTheme}`}>
                 {/* Investment Portfolio Chart */}
                 <InvestmentPieChart />
 
