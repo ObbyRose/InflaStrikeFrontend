@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Divider } from '@/components/ui/divider'
 import NewDepositScreen from './NewDepositScreen'
 import ButtonsTrain from '@/components/ButtonsTrain'
+import OutlinedCard from '@/components/OutlinedCard'
 
 const dummyData = [
   {
@@ -118,7 +119,7 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
 
   // Transaction Screen
   return (
-    <Box className='bg-white h-full p-5'>
+    <Box className='h-full p-5'>
       {/* Top Buttons */}
       <ButtonsTrain
         buttons={['FIAT', 'CRYPTO']} 
@@ -151,7 +152,7 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
       }
       renderItem={
         ({ item }) =>
-          <Box className="border-b border-gray-300 py-4 px-2">
+          <OutlinedCard className='my-1'>
             <Box className="flex flex-row justify-between items-center">
               <Text className="text-gray-500 text-left w-1/4 text-sm">{item.date}</Text>
               <Text className={`${getColorByStatus(item.status)} font-semibold text-left w-[30%] text-sm`}>
@@ -160,7 +161,18 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
               <Text className="text-left w-[20%] text-sm">{item.amount}</Text>
               <Text className="text-left w-1/4 text-sm">{item.account}</Text>
             </Box>
-          </Box>
+          </OutlinedCard>
+
+          // <Box className="border-b border-gray-300 py-4 px-2">
+          // <Box className="flex flex-row justify-between items-center">
+          //   <Text className="text-gray-500 text-left w-1/4 text-sm">{item.date}</Text>
+          //   <Text className={`${getColorByStatus(item.status)} font-semibold text-left w-[30%] text-sm`}>
+          //     {item.status}
+          //   </Text>
+          //   <Text className="text-left w-[20%] text-sm">{item.amount}</Text>
+          //   <Text className="text-left w-1/4 text-sm">{item.account}</Text>
+          // </Box>
+          // </Box>
       }
       
       showsVerticalScrollIndicator={false}
