@@ -29,8 +29,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            <View className={theme}>
-                {children}
+            <View style={{height: "100%"}} className={theme}>
+                    {children}
             </View>
         </ThemeContext.Provider>
     );
