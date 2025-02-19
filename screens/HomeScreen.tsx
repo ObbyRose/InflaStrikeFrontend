@@ -110,19 +110,19 @@ console.log(appliedTheme);
                         
                         {/* Toggle Buttons */}
                         <Button 
-                            className="bg-button-light"
+                            className={`bg-button-${appliedTheme}`}
                             onPress={() => setShowCandlestick(true)}
                         >
                             <ButtonText>
-                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "lightblue" : "white"} />
+                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "#608afc" : "white"} />
                             </ButtonText>
                         </Button>
                         <Button 
-                            className="bg-button-light"
+                            className={`bg-button-${appliedTheme}`}
                             onPress={() => setShowCandlestick(false)}
                         >
                             <ButtonText>
-                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "lightblue" : "white"} />
+                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "#608afc" : "white"} />
                             </ButtonText>
                         </Button>
                     </Box>
