@@ -4,12 +4,14 @@ import { Text } from './ui/text';
 import { AntDesign } from '@expo/vector-icons';
 import SliderWithArrow from './SliderWithArrow';
 import { Button } from './ui/button';
+import { cn } from './ui/cn';
 
 interface SliderWithPlusMinusProps {
   maxValue: number;
   setSliderValue: React.Dispatch<React.SetStateAction<number>>;
   sliderValue: number;
   buttonText: string;
+  classNameBtn?: string;
 }
 
 export default function SliderWithPlusMinus({
@@ -17,6 +19,7 @@ export default function SliderWithPlusMinus({
   setSliderValue,
   sliderValue,
   buttonText,
+  classNameBtn
 }: SliderWithPlusMinusProps) {
   return (
     <Box className="flex flex-col items-center">
@@ -67,7 +70,7 @@ export default function SliderWithPlusMinus({
         />
       </View>
       <View className="flex w-full items-center">
-        <Button className="bg-green-700">
+        <Button className={cn("bg-green-700",classNameBtn)}>
           <Text className="text-white">{buttonText}</Text>
         </Button>
       </View>

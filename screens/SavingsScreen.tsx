@@ -69,7 +69,8 @@ const SavingsScreen: React.FC<Props> = ({ navigation }) => {
           maxValue={100}
           setSliderValue={setSliderValue}
           sliderValue={sliderValue}
-          buttonText="BUY"
+          buttonText="Get Data"
+          classNameBtn='bg-blue-500'
         />
       </Box>
       

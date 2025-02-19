@@ -119,7 +119,6 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
   if(isNewDeposit)
     return <NewDepositScreen setIsNewDeposit={setIsNewDeposit}/>
 
-  console.log("appliedTheme", appliedTheme);
   // Transaction Screen
   return (
     <Box className={`h-full p-5 bg-background-${appliedTheme}`}>
