@@ -28,7 +28,7 @@ const SavingsScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <Box className='bg-white h-full p-5 gap-7'>
+    <Box className='h-full p-5 gap-7'>
 
       {/* Top Buttons */}
       <Box>

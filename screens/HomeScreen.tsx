@@ -22,8 +22,10 @@ import LineChartComponent from "@/components/LineChart";
 import { Divider } from "@/components/ui/divider";
 import { Button, ButtonText } from "@/components/ui/button";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
+    const { appliedTheme } = useTheme();
     const [bitcoinData, setBitcoinData] = useState<any[]>([]);
     const [ethereumData, setEthereumData] = useState<any[]>([]);
     const [xrpData, setXRPData] = useState<any[]>([]);
@@ -38,7 +40,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const [xrpChange, setXRPChange] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // State to toggle between Candlestick Chart and Line Chart
     const [showCandlestick, setShowCandlestick] = useState<boolean>(true);
 
     useEffect(() => {
@@ -91,34 +92,37 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         fetchData();
     }, []);
 
+console.log(appliedTheme);
+
+
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Box className="p-4 bg-white text-black">
+            <Box className={`p-4 bg-background-${appliedTheme}`}>
                 {/* Investment Portfolio Chart */}
                 <InvestmentPieChart />
 
-                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
+                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`} />
 
                 {/* Market Data Section */}
                 <Box className="mt-4">
                     <Box className="flex flex-row items-center gap-4 mt-4">
-                        <Text className="text-xl font-bold text-black">Market Data</Text>
+                        <Text className={`text-xl font-bold text-text-${appliedTheme}`}>Market Data</Text>
                         
                         {/* Toggle Buttons */}
                         <Button 
-                            className="bg-blue-900"
+                            className={`bg-button-${appliedTheme}`}
                             onPress={() => setShowCandlestick(true)}
                         >
                             <ButtonText>
-                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "lightblue" : "white"} />
+                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "#608afc" : "white"} />
                             </ButtonText>
                         </Button>
                         <Button 
-                            className="bg-blue-900"
+                            className={`bg-button-${appliedTheme}`}
                             onPress={() => setShowCandlestick(false)}
                         >
                             <ButtonText>
-                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "lightblue" : "white"} />
+                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "#608afc" : "white"} />
                             </ButtonText>
                         </Button>
                     </Box>
@@ -126,7 +130,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Bitcoin Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-black">
+                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
                         BTC Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
@@ -146,11 +150,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     )}
                 </Box>
 
-                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
+                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`}/>
 
                 {/* Ethereum Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-black">
+                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
                         ETH Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />
@@ -170,11 +174,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     )}
                 </Box>
 
-                <Divider className="h-[1.5px] bg-gray-200 w-[95%] mx-auto" />
+                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`}/>
 
                 {/* XRP Market Data */}
                 <Box className="mt-5">
-                    <Text className="text-lg text-black">
+                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
                         XRP Live Price:{" "}
                         {loading ? (
                             <ActivityIndicator size="small" color="#FFD700" />

@@ -8,12 +8,13 @@ import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/
 import { useState } from 'react';
 import { Icon } from '@/components/ui/icon';
 import { BellRing, MessageSquareText, Settings, UserRoundPen } from 'lucide-react-native';
-
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 interface LayoutProps {
     children: any
 }
 
 const Layout = ({ children }: LayoutProps) => {
+    const { appliedTheme } = useTheme();
     const insets = useSafeAreaInsets();
     const navigation = useNavigation<NavigationProp<ParamListBase>>();
     const [currentScreen, setCurrentScreen ] = useState("Home");
@@ -31,58 +32,55 @@ const Layout = ({ children }: LayoutProps) => {
             {/* Top Section */}
             <Box 
                 style={{ paddingTop: insets.top }} 
-                className="flex flex-row justify-between items-center h-[60px] bg-blue-900 px-4"
+                className={`flex flex-row justify-between items-center h-[60px] bg-layoutTop-${appliedTheme} px-4`}
             >
                 <Box className='flex flex-row items-center gap-3'>
-                    <Text className="text-lg font-bold text-gray-100">NLV: $234,654</Text>
+                    <Text className={`text-lg font-bold ${appliedTheme === 'light' ? 'text-white' : 'text-white'}`}>NLV: $234,654</Text>
                 </Box>
 
                 <Box className='flex flex-row gap-3 items-end'>
                     <TouchableOpacity onPress={() => navigateToScreen('Chat')}>
                         <Icon as={MessageSquareText} size={"xl"} 
-                        color={currentScreen === "Chat" ? "lightblue": "white"}/>
+                        className={currentScreen === "Chat" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Notifications')}>
                         <Icon as={BellRing} size={'xl'} 
-                        color={currentScreen === "Notifications" ? "lightblue": "white"}/>
+                        className={currentScreen === "Notifications" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
                         <Icon as={UserRoundPen}size={'xl'} 
-                        color={currentScreen === "Profile" ? "lightblue": "white"}/>
+                        className={currentScreen === "Profile" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('Settings')}>
                         <Icon as={Settings} size={'xl'} 
-                        color={currentScreen === "Settings" ? "lightblue": "white"}/>
+                        className={currentScreen === "Settings" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
                     </TouchableOpacity>
                 </Box>
             </Box>
-            <Divider className='h-[1.5px] bg-white w-[100%] mx-auto'/>
 
             {/* Main Rendered Screens */}
             <View className="flex-1">{children}</View>
 
-            {/* Bottom Navigation */}
-            <Divider className='h-[1.5px] bg-white w-[100%] mx-auto'/>
-            <Box className="flex flex-row justify-evenly h-[60px] bg-blue-900 p-4">
+            <Box className={`flex flex-row justify-evenly h-[60px] bg-layoutBottom-${appliedTheme} p-4`}>
                 <TouchableOpacity onPress={() => navigateToScreen('Savings')}>
                     <MaterialCommunityIcons name="wallet" size={30}
-                    color={currentScreen === "Savings" ? "lightblue": "white"}/>
+                    color={currentScreen === "Savings" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Transactions')}>
                     <MaterialCommunityIcons name="finance" size={30}
-                    color={currentScreen === "Transactions" ? "lightblue": "white"}/>
+                    color={currentScreen === "Transactions" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Home')}>
                     <AntDesign name="home" size={30}
-                    color={currentScreen === "Home" ? "lightblue": "white"}/>
+                    color={currentScreen === "Home" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Investment')}>
                     <Octicons name="graph" size={30}
-                    color={currentScreen === "Investment" ? "lightblue": "white"}/>
+                    color={currentScreen === "Investment" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateToScreen('Token')}>
                     <MaterialIcons name="compare-arrows" size={30}
-                    color={currentScreen === "Token" ? "lightblue": "white"}/>
+                    color={currentScreen === "Token" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
             </Box>
         </View>

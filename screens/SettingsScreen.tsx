@@ -3,10 +3,11 @@ import OutlinedCard from '@/components/OutlinedCard';
 import LanguageSelector from '@/components/settings/LanguageSelector';
 import CurrencySelector from '@/components/settings/CurrencySelector';
 import ThemeSelector from '@/components/settings/ThemeSelector';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 const SettingsScreen = () => {
   const [currency, setCurrency] = useState("Usd");
-  const [theme, setTheme] = useState("System");
+  const { theme, setTheme } = useTheme();
 
   return (
     <OutlinedCard title='Settings' className='gap-6 m-auto w-[90%]'>
@@ -18,3 +19,4 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
+

@@ -5,14 +5,14 @@ import { cn } from './ui/cn';
 
 interface OutlinedCardProps {
     children: any;
-    title: string;
+    title?: string;
     className?: string;
 }
 
 function OutlinedCard({ children, title, className }: OutlinedCardProps) {
     return (
-        <Card variant='outline' size="lg" className={cn('border-2', className)}>
-            <Text className='absolute -top-5 left-2 bg-white p-1'>{title}</Text>
+        <Card variant='filled' size="lg" className={cn('shadow-sm', className)}>
+            {title && <Text className='absolute -top-4 left-2 p-1 text-[13px] font-semibold'>{title}</Text>}
             {children}
         </Card>
     )

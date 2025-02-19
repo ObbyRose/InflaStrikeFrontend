@@ -15,10 +15,74 @@ module.exports = {
       pattern:
         /(bg|border|text|stroke|fill)-(primary|secondary|tertiary|error|success|warning|info|typography|outline|background|indicator)-(0|50|100|200|300|400|500|600|700|800|900|950|white|gray|black|error|warning|muted|success|info|light|dark|primary)/,
     },
+    'bg-background-light',
+    'bg-background-dark',
+    'text-text-light',
+    'text-text-dark',
+    'bg-button-light',
+    'bg-button-dark',
+    'bg-divider-light',
+    'bg-divider-dark',
+    'bg-layoutBottom-light',
+    'bg-layoutBottom-dark',
+    'bg-layoutTop-light',
+    'bg-layoutTop-dark',
+    'iconBottom-light',
+    'text-iconBottom-dark',
+    'text-iconTop-light',
+    'text-iconTop-dark',
+    'text-iconTopActive-light',
+    'text-iconTopActive-dark',
+    'text-iconBottomActive-light',
+    'text-iconBottomActive-dark',
+    'text-iconGeneral-light',
+    'text-iconGeneral-dark',
+
+
   ],
   theme: {
     extend: {
       colors: {
+          button: {
+            light: '#4837b3',
+            dark: '#363636',
+          },
+          text: {
+            light: '#1F2937',
+            dark: '#ffff',
+          },
+          divider: {
+            light: '#1F2937',
+            dark: '#545454',
+          },
+          layoutBottom:{
+            light: '#d9dadb',
+            dark: '#383838',
+          },
+          layoutTop:{
+            light: '#1E3A8A',
+            dark: 'black',
+          },
+          iconBottom:{
+            light: '#474747',
+            dark: '#d9d9d9',
+          },
+          iconTop:{
+            light: '#d9d9d9',
+            dark: '#a8a8a8',
+          },
+          iconTopActive:{
+            light: '#ffff',
+            dark: '#ffff',
+          },
+          iconBottomActive:{
+            light: '#18097a',
+            dark: '#608afc',
+          },
+          iconGeneral: {
+            light: '#1F2937',
+            dark: '#608afc',
+          },
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
           50: 'rgb(var(--color-primary-50)/<alpha-value>)',
@@ -165,8 +229,8 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#FBFBFB',
-          dark: '#181719',
+          light: '#f2f2f2',
+          dark: '#2b2b2b',
         },
         indicator: {
           primary: 'rgb(var(--color-indicator-primary)/<alpha-value>)',
