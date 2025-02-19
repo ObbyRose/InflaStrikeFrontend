@@ -7,6 +7,7 @@ import { Divider } from '@/components/ui/divider'
 import NewDepositScreen from './NewDepositScreen'
 import ButtonsTrain from '@/components/ButtonsTrain'
 import OutlinedCard from '@/components/OutlinedCard'
+import { useTheme } from '@/utils/Themes/ThemeProvider'
 
 const dummyData = [
   {
@@ -79,6 +80,7 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
   const [data, setData] = useState(dummyData);
   const [refreshing, setRefreshing] = useState(false);
   const [isNewDeposit, setIsNewDeposit] = useState(false);
+  const { appliedTheme } = useTheme();
 
   useEffect(() => {
     const backAction = () => {
@@ -117,9 +119,10 @@ const TransactionsScreen: React.FC<Props> = ({ navigation })=> {
   if(isNewDeposit)
     return <NewDepositScreen setIsNewDeposit={setIsNewDeposit}/>
 
+  console.log("appliedTheme", appliedTheme);
   // Transaction Screen
   return (
-    <Box className='h-full p-5'>
+    <Box className={`h-full p-5 bg-background-${appliedTheme}`}>
       {/* Top Buttons */}
       <ButtonsTrain
         buttons={['FIAT', 'CRYPTO']} 

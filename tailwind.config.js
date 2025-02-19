@@ -21,15 +21,23 @@ module.exports = {
     'text-dark',
     'button-light',
     'button-dark',
+
   ],
   theme: {
     extend: {
       colors: {
-          'background-light': '#F9FAFB',
-          'background-dark': '#111827',
-          'text-light': '#111827',
-          'text-dark': '#F9FAFB',
-          'button-color': '#4900f5',
+          background: {
+            light: '#ffffff',
+            dark: '#111827',
+          },
+          button: {
+            light: '#f3f4f6',
+            dark: '#1f2937',
+          },
+          text: {
+            light: '#374151',
+            dark: '#f9fafb',
+          },
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
           50: 'rgb(var(--color-primary-50)/<alpha-value>)',
