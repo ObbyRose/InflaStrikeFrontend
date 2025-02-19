@@ -12,7 +12,7 @@ interface OutlinedCardProps {
 function OutlinedCard({ children, title, className }: OutlinedCardProps) {
     return (
         <Card variant='filled' size="lg" className={cn('shadow-sm', className)}>
-            {title && <Text className='absolute -top-4 left-2 p-1 text-[13px] font-semibold'>{title}</Text>}
+            {title && <Text className='absolute -top-4 left-0 bg-white rounded-r-lg rounded-tl-lg py-1 px-2 text-[13px] font-semibold'>{title}</Text>}
             {children}
         </Card>
     )
