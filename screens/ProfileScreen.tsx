@@ -25,7 +25,7 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <Box className='bg-white h-full justify-evenly p-5 gap-7'>
+    <Box className='h-full justify-evenly p-5 gap-7'>
       {/* Profile */}
       <OutlinedCard title="Profile" className='gap-4'>
         {/* Full Name */}

@@ -44,7 +44,7 @@ function NewDepositScreen({ setIsNewDeposit }: NewDepositScreenProps) {
             contentContainerStyle={{ flexGrow: 1 }} 
             keyboardShouldPersistTaps="handled"
         >
-            <Box className='bg-white h-full p-5 gap-7'>
+            <Box className='h-full p-5 gap-7'>
                 {/* Top Title & Back */}
                 <Box className='flex flex-row items-end justify-center h-[70px] relative'>
                     <Button className="px-4 py-2 absolute top-1 left-1" onPress={() => setIsNewDeposit(false)}>
@@ -55,7 +55,7 @@ function NewDepositScreen({ setIsNewDeposit }: NewDepositScreenProps) {
 
                 {/* Search */}
                 <Box>
-                    <Input className="border rounded-3xl relative w-5/6 mx-auto">
+                    <Input className="border rounded-3xl relative w-5/6 mx-auto bg-white">
                         <InputSlot className='absolute left-2 z-50' onPress={handleSearch}>
                             <InputIcon as={SearchIcon} color='black'/>
                         </InputSlot>
