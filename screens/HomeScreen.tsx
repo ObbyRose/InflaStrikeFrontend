@@ -92,8 +92,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         fetchData();
     }, []);
 
-console.log(appliedTheme);
-
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
