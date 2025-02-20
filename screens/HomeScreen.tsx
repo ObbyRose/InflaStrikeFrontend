@@ -26,6 +26,7 @@ import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarGroup, AvatarImage } from "@/components/ui/avatar";
 import { Icon } from "@/components/ui/icon";
 import { User } from "lucide-react-native";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp } from "@/utils/constants/Icons";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -131,11 +132,22 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     </Box>
                 </Box>
 
+                {/* Crypto Market Section */}
                 <Box>
                     <Box className="flex-row items-center justify-between">
                         <Text className="text-[22px] font-semibold">Markets</Text>
                         <Text className="text-[14px] text-[#0A6CFF]">See All</Text>
                     </Box>
+                </Box>
+
+                {/* Crypto Market Cards */}
+                <Box className="p-4 flex flex-row items-center gap-2">
+                        <Box className="bg-[hsl(7_91%_60%/0.1)] max-w-[4rem] p-4 rounded-2xl">
+                            <IC_Bitcoin className="w-8 h-8" />
+                        </Box>
+                            <Box className="flex flex-col">
+                                <Text className="text-[12px]">BTC</Text>
+                            </Box>
                 </Box>
             </Box>
         </ScrollView>
