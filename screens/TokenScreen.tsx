@@ -14,7 +14,7 @@ const TokenScreen: React.FC<Props> = ({ navigation }) => {
     <View className="m-8">
       <HammerSignWithPercentages percentages={12.8} />
       <SliderWithPlusMinus
-        backgroundColor="#469c30"
+        classNameBtn="bg-[#469c30]"
         maxValue={100}
         setSliderValue={setSliderValue}
         sliderValue={sliderValue}

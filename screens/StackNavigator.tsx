@@ -10,6 +10,8 @@ import TokenScreen from './TokenScreen';
 import TransactionsScreen from './transactions/TransactionsScreen';
 import Layout from './Layout';
 import ChatScreen from './ChatScreen';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +19,9 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Layout>
-        <Stack.Navigator initialRouteName="Notifications">
+        <Stack.Navigator initialRouteName="Signup">
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
           <Stack.Screen
             name="Investment"
