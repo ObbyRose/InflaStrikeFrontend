@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import InvestmentsScreen from './InvestmentsScreen';
 import NotificationsScreen from './NotificationsScreen';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from './Profile/ProfileScreen';
 import SavingsScreen from './SavingsScreen';
 import SettingsScreen from './SettingsScreen';
 import TokenScreen from './TokenScreen';
@@ -19,9 +19,9 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Layout>
-        <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+        <Stack.Navigator initialRouteName="Profile">
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
           <Stack.Screen
             name="Investment"
