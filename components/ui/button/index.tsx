@@ -10,6 +10,7 @@ import { cssInterop } from 'nativewind';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import type { VariantProps } from '@gluestack-ui/nativewind-utils';
 import { PrimitiveIcon, UIIcon } from '@gluestack-ui/icon';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 const SCOPE = 'BUTTON';
 
@@ -57,6 +58,8 @@ const buttonStyle = tva({
         'bg-transparent border data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
       solid: '',
       rounded: 'rounded-lg border-[1.5px] border-black',
+      "rounded-solid-light": "rounded-3xl bg-button-light",
+      "rounded-solid-dark": "rounded-3xl bg-button-dark border-[1.5px] border-black",
     },
 
     size: {

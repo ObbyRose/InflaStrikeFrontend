@@ -37,7 +37,8 @@ module.exports = {
     'text-iconBottomActive-dark',
     'text-iconGeneral-light',
     'text-iconGeneral-dark',
-
+    'text-buttonText-dark',
+    'text-buttonText-light',
 
   ],
   theme: {
@@ -82,6 +83,10 @@ module.exports = {
           iconGeneral: {
             light: '#1F2937',
             dark: '#608afc',
+          },
+          buttonText: {
+            light: "#ffffff",
+            dark: "#ffffff",
           },
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
