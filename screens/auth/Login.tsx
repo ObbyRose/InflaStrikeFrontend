@@ -1,11 +1,16 @@
+import { Box } from '@/components/ui/box'
+import { Text } from '@/components/ui/text'
 import { Props } from '@/types/NavigationTypes'
 import React from 'react'
 
 
 const Login: React.FC<Props> = ({ navigation }) => {
-    
+
+
     return (
-        <div>Login</div>
+    <Box>
+        <Text>Login</Text>
+    </Box>
     )
 }
 
