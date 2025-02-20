@@ -23,6 +23,9 @@ import { Divider } from "@/components/ui/divider";
 import { Button, ButtonText } from "@/components/ui/button";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
+import { Avatar, AvatarBadge, AvatarFallbackText, AvatarGroup, AvatarImage } from "@/components/ui/avatar";
+import { Icon } from "@/components/ui/icon";
+import { User } from "lucide-react-native";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -95,8 +98,45 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Box className={`p-4 bg-background-${appliedTheme}`}>
-                
+
+            {/* Header Section */}
+            <Box className={`p-4 bg-background-${appliedTheme} flex gap-2`}>
+                <Box className="flex-row justify-between items-center">
+                    <Avatar className="bg-indigo-600" size="lg">
+                        <Icon as={User} size="xl" className="stroke-white" />
+                    </Avatar>
+                    <Box className="flex-row items-center gap-2">
+                        <Text className={`text-sm text-black`}>Icon Search</Text>
+                        <Text className={`text-sm text-black`}>Icon Scan</Text>
+                    </Box>
+                </Box>
+
+                {/* Greetings Section */}
+                <Box className="mb-4">
+                    <Text className="text-[36px] mt-2 text-black font-bold">
+                        Hello,
+                    </Text>
+                    <Text className="text-[36px] text-black font-bold">
+                        Baba Cattington 👋
+                    </Text>
+                </Box>
+                {/* NLV Section */}
+                <Box className={ `bg-layoutTop-${appliedTheme} p-2 h-[100px] w-full rounded-3xl flex` }>
+                    <Box className="p-2">
+                        <Text className="text-white text-[18px]">Total Balance:</Text>
+                            <Box>
+                                <Text className="text-white text-[20px] self-end">$ 415,312</Text>
+                            </Box>
+                            <Text className="text-[12px] text-white top-0">Cash Available</Text>
+                    </Box>
+                </Box>
+
+                <Box>
+                    <Box className="flex-row items-center justify-between">
+                        <Text className="text-[22px] font-semibold">Markets</Text>
+                        <Text className="text-[14px] text-[#0A6CFF]">See All</Text>
+                    </Box>
+                </Box>
             </Box>
         </ScrollView>
     );
