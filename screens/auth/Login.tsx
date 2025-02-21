@@ -2,6 +2,7 @@ import InputAuth from '@/components/auth/InputAuth'
 import { Box } from '@/components/ui/box'
 import { Button, ButtonSpinner, ButtonText } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
+import { useFormInput } from '@/hooks/useFormInput'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React, { useState } from 'react'
@@ -9,10 +10,13 @@ import React, { useState } from 'react'
 
 const Login: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme(); 
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [errors, setErrors] = useState({ email: "", pass: "", api: "" });
+    const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
+        email: '',
+        pass: '',
+        api: ''
+    });
+    const { email, pass } = values;
 
     function handleSubmitLogin() {
         let valid = true;
@@ -43,23 +47,6 @@ const Login: React.FC<Props> = ({ navigation }) => {
             console.log({ email, password: pass });
             setTimeout(() => setIsLoading(false), 1000);
         }
-    }
-
-    const handleInputChange = (field: "email" | "pass", val: string) => {
-        if (field === "email") {
-            setEmail(val);
-        } else {
-            setPass(val);
-        }
-    
-        setErrorByFields({ [field]: "" });
-    };
-
-    function setErrorByFields(errors: { [key: string]: string }) {
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            ...errors
-        }));
     }
 
     return (
