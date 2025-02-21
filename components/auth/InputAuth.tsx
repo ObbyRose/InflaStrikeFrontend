@@ -7,17 +7,17 @@ import { Pressable } from 'react-native';
 interface InputAuthProps {
     icon: string,
     placeholder?: string,
-    isPassword?: boolean;
+    isPass?: boolean;
     value: string;
     onChangeText: (text: string) => void;
 }
 
-function InputAuth({ icon, placeholder, isPassword, value, onChangeText } : InputAuthProps) {
-    const [showPassword, setShowPassword] = useState(false);
+function InputAuth({ icon, placeholder, isPass: isPass, value, onChangeText } : InputAuthProps) {
+    const [showPass, setShowPass] = useState(false);
     const IconComponent = getIconByString(icon);
 
     const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
+        setShowPass(!showPass);
     };
 
     return (
@@ -28,16 +28,16 @@ function InputAuth({ icon, placeholder, isPassword, value, onChangeText } : Inpu
         <InputField
             className='pl-12 pr-12'
             placeholder={placeholder}
-            secureTextEntry={isPassword && !showPassword}
+            secureTextEntry={isPass && !showPass}
             value={value}
             onChangeText={onChangeText}
         />
-        {isPassword && (
+        {isPass && (
             <Pressable 
                 onPress={togglePasswordVisibility}
-                className='absolute right-2'
+                className='absolute right-3'
             >
-                {showPassword ? 
+                {showPass ? 
                     <IC_Eye className='w-7 h-7' /> :
                     <IC_EyeOff className='w-7 h-7' />
                 }
