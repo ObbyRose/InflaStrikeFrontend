@@ -57,7 +57,12 @@ module.exports = {
     'text-iconBottomActive-dark',
     'text-iconGeneral-light',
     'text-iconGeneral-dark',
-
+    'text-buttonText-dark',
+    'text-buttonText-light',
+    'text-link-light',
+    'text-link-dark',
+    'text-gray-light',
+    'text-gray-dark',
 
   ],
   theme: {
@@ -103,6 +108,20 @@ module.exports = {
             light: '#1F2937',
             dark: '#608afc',
           },
+          buttonText: {
+            light: "#ffffff",
+            dark: "#ffffff",
+          },
+          link : {
+            light: "#6666FF",
+            dark: "#6666FF",
+          },
+          gray : {
+            light: "#828A99",
+            dark: "#828A99",
+          },
+          light: "#ffffff",
+          dark: "#000000",
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
           50: 'rgb(var(--color-primary-50)/<alpha-value>)',
