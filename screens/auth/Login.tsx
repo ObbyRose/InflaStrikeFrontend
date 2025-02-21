@@ -1,6 +1,6 @@
 import InputAuth from '@/components/auth/InputAuth'
 import { Box } from '@/components/ui/box'
-import { Button, ButtonText } from '@/components/ui/button'
+import { Button, ButtonSpinner, ButtonText } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
@@ -10,40 +10,98 @@ import React, { useState } from 'react'
 const Login: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme(); 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [pass, setPass] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState({ email: "", pass: "", api: "" });
+
+    function handleSubmitLogin() {
+        let valid = true;
+        let newErrors = { email: "", pass: "" };
+
+        // Validate email format
+        if (!email.trim()) {
+            newErrors.email = "Email is required.";
+            valid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newErrors.email = "Invalid email format.";
+            valid = false;
+        }
+
+        // Validate password
+        if (!pass.trim()) {
+            newErrors.pass = "Password is required.";
+            valid = false;
+        } else if (pass.length < 6) {
+            newErrors.pass = "Password must be at least 6 characters.";
+            valid = false;
+        }
+
+        setErrorByFields(newErrors)
+
+        if (valid) {
+            setIsLoading(true);
+            console.log({ email, password: pass });
+            setTimeout(() => setIsLoading(false), 1000);
+        }
+    }
+
+    const handleInputChange = (field: "email" | "pass", val: string) => {
+        if (field === "email") {
+            setEmail(val);
+        } else {
+            setPass(val);
+        }
+    
+        setErrorByFields({ [field]: "" });
+    };
+
+    function setErrorByFields(errors: { [key: string]: string }) {
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            ...errors
+        }));
+    }
 
     return (
-    <Box className={`h-[85%] my-auto p-10 justify-between bg-background-${appliedTheme}`}>
+    <Box className={`h-[90%] mt-auto p-10 justify-between bg-background-${appliedTheme}`}>
         <Box>
             {/* Title */}
             <Box className='my-10 gap-2'>
                 <Text className='text-4xl text-black font-bold'>Welcome</Text>
                 <Text className='text-xl text-gray-500'>Sign in to your account</Text>
             </Box>
+            {/* Main Login */}
             <Box className='gap-2'>
                 {/* Inputs */}
                 <InputAuth 
                     icon="IC_Email" 
                     placeholder='Email'
                     value={email}
-                    onChangeText={setEmail}
+                    onChangeText={(val) => handleInputChange("email", val)}
+                    error={errors.email}
                 />
                 <InputAuth 
                     icon="IC_Lock" 
                     placeholder='Password' 
                     isPass={true}
-                    value={password}
-                    onChangeText={setPassword}
+                    value={pass}
+                    onChangeText={(val) => handleInputChange("pass", val)}
+                    error={errors.pass}
                 />
+
+                { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
                 {/* Login Button & Forgot Pass */}
-                <Button variant={`rounded-solid-${appliedTheme}`} className="h-fit p-3">
-                    <ButtonText className="text-white">Sign In</ButtonText>
+                <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit p-3"
+                onPress={handleSubmitLogin}
+                >
+                    <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign In"}</ButtonText>
                 </Button>
                 
-                <Text className={`text-link-${appliedTheme} mx-auto font-bold tracking-wide`}>Forgot password ?</Text>
+                <Text className={`text-link-${appliedTheme} my-3 mx-auto font-bold tracking-wide`}>Forgot password ?</Text>
             </Box>
         </Box>
-        {/* Sign Up */}
+
+        {/* Sign Up Link*/}
         <Box className='mx-auto flex-row'>
             <Text className={`text-gray-${appliedTheme}`}>
                 Don't have an account?

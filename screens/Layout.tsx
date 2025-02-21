@@ -1,6 +1,6 @@
 import { Box } from '@/components/ui/box';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ const Layout = ({ children, navigation }: LayoutProps) => {
     }
 
     return (
-        <View className="flex-1 bg-white">
+        <SafeAreaView className="flex-1 bg-white">
             {/* Set Status Bar */}
             <StatusBar barStyle="light-content" backgroundColor="gray" />
 
@@ -82,7 +82,7 @@ const Layout = ({ children, navigation }: LayoutProps) => {
                     color={currentScreen === "Token" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
             </Box>
-        </View>
+        </SafeAreaView>
     );
 };
 

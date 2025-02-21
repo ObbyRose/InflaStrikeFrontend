@@ -295,9 +295,44 @@ export const IC_Person = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_ArrowLeft = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+      <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={24}
+        height={24}
+      >
+        <Path fill="#fff" d="M0 0H24V24H0z" />
+      </Mask>
+      <G
+        mask="url(#a)"
+        stroke="#000"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <Path d="M5 12h14M5 12l4 4M5 12l4-4" />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
 export const IconsMap = {
     IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search,
-    IC_EyeOff, IC_Eye, IC_Lock, IC_Person,
+    IC_EyeOff, IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft,
 };
 
 export function getIconByString(icon: string) {
