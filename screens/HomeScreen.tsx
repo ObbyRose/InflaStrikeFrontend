@@ -135,12 +135,16 @@ const HomeScreen: React.FC = () => {
                 </Box>
 
                 {/* Crypto Market Cards */}
-                {cryptoData.map((crypto, index) => (
-                    <React.Fragment key={crypto.symbol}>
-                        <CryptoMarketCard {...crypto} />
-                        {index < cryptoData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
-                    </React.Fragment>
-                ))}
+                {loading ? (
+                    <Text>Loading...</Text>
+                ) : (
+                    cryptoData.map((crypto, index) => (
+                        <React.Fragment key={crypto.symbol}>
+                            <CryptoMarketCard {...crypto} />
+                            {index < cryptoData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
+                        </React.Fragment>
+                    ))
+                )}
             </Box>
         </ScrollView>
     );
