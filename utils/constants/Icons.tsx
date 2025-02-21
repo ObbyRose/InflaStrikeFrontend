@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Box } from "@/components/ui/box";
 import { cn } from "@/components/ui/cn";
+import { Circle } from "lucide-react-native";
 import Svg, { Path, G, Mask, Rect, Defs, ClipPath } from "react-native-svg";
 
 interface IconsProps {
@@ -93,6 +94,46 @@ export const IC_Ethereum = ({ className }: IconsProps) => {
     );
 };
 
+export const IC_Search = ({ className }: IconsProps) => {
+    return (
+        <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14.914 16c.547 0 .934-.42.934-.96a.914.914 0 00-.269-.673l-3.964-3.973a6.446 6.446 0 001.33-3.922C12.945 2.912 10.033 0 6.472 0 2.921 0 0 2.904 0 6.472c0 3.56 2.912 6.473 6.472 6.473a6.451 6.451 0 003.763-1.212l3.99 3.99a.96.96 0 00.69.277zm-8.442-4.452c-2.777 0-5.075-2.298-5.075-5.076 0-2.777 2.298-5.075 5.075-5.075 2.778 0 5.076 2.298 5.076 5.075 0 2.778-2.298 5.076-5.076 5.076z"
+        fill="#969AA0"
+      />
+    </Svg>
+        </Box>
+    );
+};
+
+export const IC_PieGraph = ({ className }: IconsProps) => {
+    return (
+        <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 21 21"
+      fill="none"
+    >
+      <Path
+        d="M16 11.499c1.105 0 2.022.906 1.779 1.983a8.999 8.999 0 01-17.606-.227A9 9 0 017.016 2.72C8.094 2.477 9 3.394 9 4.5v2a5 5 0 005 5h2z"
+        fill="#969AA0"
+      />
+      <Path
+        d="M12 3.033c0-1.952 1.64-3.596 3.444-2.85a9.001 9.001 0 014.87 4.872c.748 1.803-.896 3.444-2.848 3.444H16.5a4.5 4.5 0 01-4.5-4.5v-.966z"
+        fill="#969AA0"
+      />
+    </Svg>
+        </Box>
+    );
+};
+
 export const IC_Xrp = ({ className }: IconsProps) => {
     return (
         <Box className={cn(className)}>
@@ -124,7 +165,7 @@ export const IC_Xrp = ({ className }: IconsProps) => {
 
 
 export const IconsMap = {
-    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp
+    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search
 };
 
 export function getIconByString(icon: string) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, ScrollView, ActivityIndicator } from "react-native";
+import { Text, ScrollView } from "react-native";
 import { 
     fetchBitcoinHistory, 
     fetchEthereumHistory, 
@@ -16,17 +16,13 @@ import {
 } from "../utils/api/BinanceAPI";
 import { Props } from "types/NavigationTypes";
 import { Box } from "@/components/ui/box";
-import InvestmentPieChart from "@/components/InvestmentPieChart";
-import CandlestickChart from "@/components/CandlestickChart";
 import LineChartComponent from "@/components/LineChart";
 import { Divider } from "@/components/ui/divider";
-import { Button, ButtonText } from "@/components/ui/button";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
-import { Avatar, AvatarBadge, AvatarFallbackText, AvatarGroup, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { Icon } from "@/components/ui/icon";
 import { User } from "lucide-react-native";
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_PieGraph, IC_Search, IC_Xrp } from "@/utils/constants/Icons";
 
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
@@ -108,8 +104,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         <Icon as={User} size="xl" className="stroke-white" />
                     </Avatar>
                     <Box className="flex-row items-center gap-2">
-                        <Text className={`text-sm text-black`}>Icon Search</Text>
-                        <Text className={`text-sm text-black`}>Icon Scan</Text>
+                        <Box className="flex-col items-center gap-1">
+                            <IC_PieGraph className="h-7 w-7" />
+                            <Text className="text-2xs font-semibold text-[#969AA0]">My Portfolio</Text>
+                        </Box>
+                        <Box className="flex-col items-center gap-1">
+                            <IC_Search className="h-7 w-7" />
+                            <Text className="ml-2 text-2xs font-semibold text-[#969AA0]">Search</Text>
+                        </Box>
                     </Box>
                 </Box>
 
