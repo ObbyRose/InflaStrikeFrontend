@@ -100,7 +100,6 @@ export const IC_Xrp = ({ className }: IconsProps) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 23 22"
       fill="none"
-      {...props}
     >
       <G clipPath="url(#clip0_838_7306)">
         <Path
