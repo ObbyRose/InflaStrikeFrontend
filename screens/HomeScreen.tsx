@@ -151,7 +151,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     <Box className="flex flex-col justify-center z-10">
                         <Text className="text-[16px] font-bold">BTC</Text>
                         <Text className="text-[13px] text-[#969AA0]">
-                            {bitcoinChange !== null ? `${bitcoinChange.toFixed(2)}%` : "Loading..."}
+                            {bitcoinChange !== null ? `${bitcoinChange > 0 ? '+' : ''}${bitcoinChange.toFixed(2)}%` : "Loading..."}
                         </Text>
                     </Box>
                     <Box className="flex-1 flex-row">
@@ -174,7 +174,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     <Box className="flex flex-col justify-center z-10">
                         <Text className="text-[16px] font-bold">ETH</Text>
                         <Text className="text-[13px] text-[#969AA0]">
-                            {ethereumChange !== null ? `${ethereumChange.toFixed(2)}%` : "Loading..."}
+                        {ethereumChange !== null ? `${ethereumChange > 0 ? '+' : ''}${ethereumChange.toFixed(2)}%` : "Loading..."}
                         </Text>
                     </Box>
                     <Box className="flex-1 flex-row">
@@ -197,7 +197,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     <Box className="flex flex-col justify-center z-10">
                         <Text className="text-[16px] font-bold">XRP</Text>
                         <Text className="text-[13px] text-[#969AA0]">
-                            {xrpChange !== null ? `${xrpChange.toFixed(2)}%` : "Loading..."}
+                        {xrpChange !== null ? `${xrpChange > 0 ? '+' : ''}${xrpChange.toFixed(2)}%` : "Loading..."}
                         </Text>
                     </Box>
                     <Box className="flex-1 flex-row">
