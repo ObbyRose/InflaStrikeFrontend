@@ -147,6 +147,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         </Box>
                             <Box className="flex flex-col">
                                 <Text className="text-[12px]">BTC</Text>
+                                <Text>{bitcoinChange !== null ? `${bitcoinChange.toFixed(2)}%` : "N/A"}</Text>
                             </Box>
                 </Box>
             </Box>
