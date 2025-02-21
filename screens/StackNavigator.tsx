@@ -12,6 +12,7 @@ import Layout from './Layout';
 import ChatScreen from './ChatScreen';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
+import PortfolioScreen from './PortfolioScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,10 +20,11 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Layout>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Portfolio">
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Portfolio" component={PortfolioScreen} options={{ headerShown: false }} />
           <Stack.Screen
             name="Investment"
             component={InvestmentsScreen}
