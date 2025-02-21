@@ -6,14 +6,10 @@ import { Button, ButtonSpinner, ButtonText } from '../ui/button'
 import { useFormInput } from '@/hooks/useFormInput'
 import { Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel } from '../ui/checkbox'
 import { CheckIcon } from '../ui/icon'
+import { SignUpScreensProps } from '@/types/NavigationTypes'
 
-interface SignupMainProps {
-    appliedTheme: "light" | "dark";
-}
-
-function SignupMain({ appliedTheme }: SignupMainProps) {
+function SignupMain({ appliedTheme, setScreenStep }: SignUpScreensProps) {
     const [isLoading, setIsLoading] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
     const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
         email: '',
         pass: '',
@@ -66,7 +62,10 @@ function SignupMain({ appliedTheme }: SignupMainProps) {
         if (valid) {
             setIsLoading(true);
             console.log({ fName, lName, email, pass });
-            setTimeout(() => setIsLoading(false), 1000);
+            setTimeout(() => { 
+                setIsLoading(false);
+                setScreenStep(prev => prev+1);
+            }, 1000);
         }
     }
 
