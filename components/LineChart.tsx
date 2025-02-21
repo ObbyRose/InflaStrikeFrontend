@@ -25,22 +25,22 @@ const LineChartComponent: React.FC<LineChartProps> = ({ lineData, title }) => {
     return (
         <Box>
             <LineChart
-            data={{
-                labels: times, // Ensure labels follow data
-                datasets: [{ data: prices, color: () => lineColor, strokeWidth: 3 }],
-            }}
-            width={screenWidth * 0.6}
-            height={screenWidth * 0.18}
-            chartConfig={{
-                decimalPlaces: 2,
-                color: () => (isUp ? "rgba(0, 255, 0, 0.6)" : "rgba(255, 0, 0, 1)"),
-                labelColor: () => (isUp ? "rgba(0, 255, 0, 0.6)" : "rgba(255, 0, 0, 1)"),
-                propsForDots: { r: "3" },
-                backgroundColor: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
-                backgroundGradientFrom: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
-                backgroundGradientTo: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
-                strokeWidth: 3,
-                fillShadowGradientOpacity: 0,
+                data={{
+                    labels: times,
+                    datasets: [{ data: prices, color: () => lineColor, strokeWidth: 3 }],
+                }}
+                width={screenWidth * 0.6}
+                height={screenWidth * 0.18}
+                chartConfig={{
+                    decimalPlaces: 2,
+                    color: () => (isUp ? "rgba(0, 255, 0, 0.6)" : "rgba(255, 0, 0, 1)"),
+                    labelColor: () => (isUp ? "rgba(0, 255, 0, 0.6)" : "rgba(255, 0, 0, 1)"),
+                    propsForDots: { r: "0" }, // ✅ Removes dots
+                    backgroundColor: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
+                    backgroundGradientFrom: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
+                    backgroundGradientTo: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
+                    strokeWidth: 3,
+                    fillShadowGradientOpacity: 0,
                     propsForBackgroundLines: { strokeWidth: 0 },
                 }}
                 withHorizontalLabels={false}
