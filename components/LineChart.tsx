@@ -29,7 +29,7 @@ const LineChartComponent: React.FC<LineChartProps> = ({ lineData, title }) => {
                     labels: times,
                     datasets: [{ data: prices, color: () => lineColor, strokeWidth: 3 }],
                 }}
-                width={screenWidth * 0.6}
+                width={screenWidth * 0.56}
                 height={screenWidth * 0.18}
                 chartConfig={{
                     decimalPlaces: 2,
