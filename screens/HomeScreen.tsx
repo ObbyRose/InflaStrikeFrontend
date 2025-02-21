@@ -163,7 +163,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     </Box>
                 </Box>
 
-                <Divider className={`bg-divier-${appliedTheme}`}/>
+                <Divider className={`bg-divider-${appliedTheme}`}/>
 
                 <Box className="p-2 flex flex-row gap-2 items-center">
                     <Box className="bg-[hsl(169_44%_58%/0.1)] max-w-[4rem] p-4 rounded-2xl z-10">
@@ -186,7 +186,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     </Box>
                 </Box>
 
-                <Divider className={`bg-divier-${appliedTheme}`}/>
+                <Divider className={`bg-divider-${appliedTheme}`}/>
 
                 <Box className="p-2 flex flex-row gap-2 items-center">
                     <Box className="bg-[hsl(223_99%_69%/0.1)] max-w-[4rem] p-4 rounded-2xl z-10">

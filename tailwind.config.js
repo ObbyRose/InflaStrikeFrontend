@@ -37,6 +37,8 @@ module.exports = {
     'bg-iconBottomActive-dark',
     'bg-iconGeneral-light',
     'bg-iconGeneral-dark',
+    'bg-divider-light',
+    'bg-divider-dark',
     'text-button-light',
     'text-button-dark',
     'text-divider-light',
@@ -70,7 +72,7 @@ module.exports = {
             dark: '#ffff',
           },
           divider: {
-            light: '#1F2937',
+            light: '#dedede',
             dark: '#545454',
           },
           layoutBottom:{
