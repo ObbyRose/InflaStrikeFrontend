@@ -35,7 +35,7 @@ const LineChartComponent: React.FC<LineChartProps> = ({ lineData, title }) => {
                     decimalPlaces: 2,
                     color: () => (isUp ? "rgba(0, 255, 0, 0.6)" : "rgba(255, 0, 0, 1)"),
                     labelColor: () => (isUp ? "rgba(0, 255, 0, 0.6)" : "rgba(255, 0, 0, 1)"),
-                    propsForDots: { r: "0" }, // ✅ Removes dots
+                    propsForDots: { r: "0" },
                     backgroundColor: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
                     backgroundGradientFrom: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
                     backgroundGradientTo: appliedTheme === "light" ? "#F3F4F6" : "#2b2b2b",
