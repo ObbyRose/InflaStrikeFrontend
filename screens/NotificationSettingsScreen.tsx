@@ -8,7 +8,6 @@ import { TouchableOpacity } from "react-native";
 import { Icon } from "@/components/ui/icon";
 import { ChevronRight, Check } from "lucide-react-native";
 
-// Import Gluestack Actionsheet Components
 import {
     Actionsheet,
     ActionsheetContent,
