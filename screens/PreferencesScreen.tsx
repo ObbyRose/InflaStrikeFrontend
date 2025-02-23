@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native";
 import { Icon } from "@/components/ui/icon";
 import { ChevronRight, TrendingUp, TrendingDown, Check } from "lucide-react-native";
 
-// Import Gluestack Actionsheet Components
+
 import {
   Actionsheet,
   ActionsheetContent,
@@ -21,8 +21,6 @@ const PreferencesScreen: React.FC = () => {
     const { appliedTheme } = useTheme();
     const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
     const [selectedCurrency, setSelectedCurrency] = useState("USD");
-
-    // Currency options
     const currencyOptions = ["USD", "EUR", "ILS"];
 
     return (
@@ -82,7 +80,7 @@ const PreferencesScreen: React.FC = () => {
                 </Box>
             </TouchableOpacity>
 
-            {/* Gluestack Actionsheet for Currency Selection */}
+            {/* Currency Selection Actionsheet */}
             <Actionsheet isOpen={isCurrencyOpen} onClose={() => setIsCurrencyOpen(false)}>
                 <ActionsheetBackdrop />
                 <ActionsheetContent>
