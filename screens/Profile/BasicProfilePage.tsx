@@ -1,10 +1,10 @@
 import PasswordVisibilityChangeButton from '@/components/PasswordVisibilityChangeButton';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import { Button } from '@/components/ui/button';
+import passwordConvertor from '@/utils/functions/passwordConvertor';
 import { Entypo } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
-import passwordConvertor from '../../utils/functions/passwordconvertor';
 
 interface BasicProfilePageProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,10 +15,11 @@ interface BasicProfilePageProps {
     image: string;
     email: string;
     password: string;
-    phoneNumber: {
-      prefix: string;
-      number: string;
-    };
+    phoneNumber: string;
+    // phoneNumber: {
+    //   prefix: string;
+    //   number: string;
+    // };
   };
 }
 
@@ -69,8 +70,9 @@ export default function BasicProfilePage({ setIsEditing, user }: BasicProfilePag
         <View className="flex w-full gap-2 border-b border-gray-200 p-2">
           <Text className="text-gray-500">Phone number</Text>
           <View className="flex flex-row gap-2">
-            <Text className="text-[24px] font-bold">{user.phoneNumber.prefix}</Text>
-            <Text className="text-[24px] font-bold">{user.phoneNumber.number}</Text>
+            {/* <Text className="text-[24px] font-bold">{user.phoneNumber.prefix}</Text> */}
+            {/* <Text className="text-[24px] font-bold">{user.phoneNumber.number}</Text> */}
+            <Text className="text-[24px] font-bold">{user.phoneNumber}</Text>
           </View>
         </View>
       </View>

@@ -20,18 +20,31 @@ const dummyUser = {
     'https://static.wikia.nocookie.net/cartooncharacters/images/2/2e/Ima.jpeg/revision/latest/thumbnail/width/360/height/360?cb=20101125044842',
   email: 'coinspace@mail.com',
   password: 'baba',
-  phoneNumber: {
-    prefix: '+91',
-    number: '1234567890',
-  },
+  phoneNumber: '1234567890',
+  // phoneNumber: {
+  //   prefix: '+91',
+  //   number: '1234567890',
+  // },
 };
 
 const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState(dummyUser);
 
+  function updateUser(updates: Partial<typeof user>) {
+    setUser((prevUser) => ({ ...prevUser, ...updates }));
+    setIsEditing(false);
+  }
+
   if (isEditing) {
-    return <EditProfilePage user={user} setUser={setUser} />;
+    return (
+      <EditProfilePage
+        user={user}
+        setUser={setUser}
+        setIsEditing={setIsEditing}
+        updateUser={updateUser}
+      />
+    );
   }
   return (
     <>
