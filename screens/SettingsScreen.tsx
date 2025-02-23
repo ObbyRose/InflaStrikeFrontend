@@ -25,6 +25,8 @@ import {
   ActionsheetItem,
   ActionsheetItemText,
 } from "@/components/ui/actionsheet"
+import { Check } from "lucide-react-native";
+import { Icon } from "@/components/ui/icon";
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme, setTheme } = useTheme();
@@ -87,18 +89,17 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                     <ActionsheetScrollView className="mt-2">
                         {countryLanguages.map((country, index) => (
                             <ActionsheetItem
-                                key={index}
-                                onPress={() => {
-                                    setSelectedLanguage(country.language);
-                                    closeLanguageSelection();
-                                }}
-                                className={`p-4 ${
-                                    selectedLanguage === country.language ? `bg-button-${appliedTheme} text-white rounded-lg` : ""
-                                }`}
+                              key={index}
+                              onPress={() => {
+                                setSelectedLanguage(country.language);
+                                closeLanguageSelection();
+                              }}
+                              className="p-4 flex-row justify-between items-center"
                             >
-                                <ActionsheetItemText className={`font-bold text-[14px] text-black ${
-                                    selectedLanguage === country.language ? "text-white" : ""
-                                }`}>{country.label} {country.language}</ActionsheetItemText>
+                              <ActionsheetItemText className="font-bold text-[14px] text-black">
+                                {country.label} {country.language}
+                              </ActionsheetItemText>
+                              {selectedLanguage === country.language && <Icon as={Check} className="text-indigo-600" />}
                             </ActionsheetItem>
                         ))}
                     </ActionsheetScrollView>
@@ -114,29 +115,23 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                     </ActionsheetDragIndicatorWrapper>
                     <ActionsheetScrollView className="mt-2">
                         <ActionsheetItem
-                            onPress={() => toggleTheme("light")}
-                            className={`p-4 ${
-                                appliedTheme === "light" ? "bg-button-light text-white rounded-lg" : ""
-                            }`}
+                          onPress={() => toggleTheme("light")}
+                          className="p-4 flex-row justify-between items-center"
                         >
-                            <ActionsheetItemText className={`font-bold text-[14px] ${
-                                appliedTheme === "light" ? "text-white" : "text-black"
-                            }`}>
-                                ☀️ Light Mode
-                            </ActionsheetItemText>
+                          <ActionsheetItemText className={`font-bold text-[14px]`}>
+                            ☀️ Light Mode
+                          </ActionsheetItemText>
+                          {appliedTheme === "light" && <Icon as={Check} className="text-indigo-600" />}
                         </ActionsheetItem>
 
                         <ActionsheetItem
-                            onPress={() => toggleTheme("dark")}
-                            className={`p-4 ${
-                                appliedTheme === "dark" ? "bg-button-dark text-white rounded-lg" : ""
-                            }`}
+                          onPress={() => toggleTheme("dark")}
+                          className="p-4 flex-row justify-between items-center"
                         >
-                            <ActionsheetItemText className={`font-bold text-[14px] ${
-                                appliedTheme === "dark" ? "text-white" : "text-black"
-                            }`}>
-                                🌙 Dark Mode
-                            </ActionsheetItemText>
+                          <ActionsheetItemText className={`font-bold text-[14px]`}>
+                            🌙 Dark Mode
+                          </ActionsheetItemText>
+                          {appliedTheme === "dark" && <Icon as={Check} className="text-indigo-600" />}
                         </ActionsheetItem>
                     </ActionsheetScrollView>
                 </ActionsheetContent>
