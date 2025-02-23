@@ -23,8 +23,7 @@ const NotificationSettings: React.FC = () => {
     const [isPushEnabled, setIsPushEnabled] = useState(true);
     const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState<string | null>(null);
-    
-    // Notification Categories
+
     const [notificationSettings, setNotificationSettings] = useState<{ [key: string]: string[] }>({
         "Security alerts": ["Push", "Email", "SMS", "In-app"],
         "Account activity": ["Push", "Email", "In-app"],
