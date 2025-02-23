@@ -1,31 +1,30 @@
 import { Box } from '@/components/ui/box';
-import { View, Text, StatusBar, requireNativeComponent, TouchableOpacity } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
-import { Divider } from '@/components/ui/divider';
-import { Image } from '@/components/ui/image';
-import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
 import { Icon } from '@/components/ui/icon';
 import { BellRing, MessageSquareText, Settings, UserRoundPen } from 'lucide-react-native';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
+
 interface LayoutProps {
-    children: any
+    children: React.ReactNode;
+    navigation: NavigationProp<ParamListBase>;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, navigation }: LayoutProps) => {
     const { appliedTheme } = useTheme();
     const insets = useSafeAreaInsets();
-    const navigation = useNavigation<NavigationProp<ParamListBase>>();
     const [currentScreen, setCurrentScreen ] = useState("Home");
 
     function navigateToScreen(screen: string) {
         setCurrentScreen(screen);
-        navigation.navigate(screen)
+        navigation.navigate("MainApp", { screen });
     }
 
     return (
-        <View className="flex-1 bg-white">
+        <SafeAreaView className="flex-1 bg-white">
             {/* Set Status Bar */}
             <StatusBar barStyle="light-content" backgroundColor="gray" />
 
@@ -83,7 +82,7 @@ const Layout = ({ children }: LayoutProps) => {
                     color={currentScreen === "Token" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
                 </TouchableOpacity>
             </Box>
-        </View>
+        </SafeAreaView>
     );
 };
 
