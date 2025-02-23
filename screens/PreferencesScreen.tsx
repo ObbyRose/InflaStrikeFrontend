@@ -31,7 +31,7 @@ const PreferencesScreen: React.FC = () => {
             <TouchableOpacity activeOpacity={0.7} onPress={() => setIsCurrencyOpen(true)} className="border border-gray-200 rounded-lg p-4 flex-row justify-between items-center bg-white mb-3">
                 <Text className="text-black font-semibold text-md">Currency</Text>
                 <Box className="flex-row items-center">
-                    <Text className="text-gray-300 font-medium text-md">{selectedCurrency}</Text>
+                    <Text className="text-gray-500 text-md">{selectedCurrency}</Text>
                     <Icon as={ChevronRight} className="ml-2" />
                 </Box>
             </TouchableOpacity>
