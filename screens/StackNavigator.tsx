@@ -12,7 +12,9 @@ import Layout from './Layout';
 import ChatScreen from './ChatScreen';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
-import PortfolioScreen from './PortfolioScreen';
+import PreferencesScreen from './PreferencesScreen';
+import SupportScreen from './SupportScreen';
+import NotificationSettingsScreen from './NotificationSettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,9 @@ const StackNavigator = () => {
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Savings" component={SavingsScreen} />
                 <Stack.Screen name="Settings" component={SettingsScreen} />
+                <Stack.Screen name="Preferences" component={PreferencesScreen} />
+                <Stack.Screen name="Support" component={SupportScreen} />
+                <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />

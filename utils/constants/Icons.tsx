@@ -463,6 +463,51 @@ export const IC_NotificationSettings = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_Envelope = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      data-name="Flat Line"
+      className="icon flat-line"
+    >
+      <Rect
+        x={3}
+        y={5}
+        width={18}
+        height={14}
+        rx={1}
+        fill="none"
+        stroke="#4f46e5"
+        strokeWidth={2}
+      />
+      <Path
+        d="M7 9l4.38 3.49a1 1 0 001.24 0L17 9"
+        fill="none"
+        stroke="#4f46e5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      />
+      <Rect
+        data-name="primary"
+        x={3}
+        y={5}
+        width={18}
+        height={14}
+        rx={1}
+        fill="none"
+        stroke="#4f46e5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      />
+    </Svg>
+      </Box>
+  );
+};
+
 
 
 export const IconsMap = {

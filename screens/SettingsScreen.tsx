@@ -5,6 +5,7 @@ import { useTheme } from "@/utils/Themes/ThemeProvider";
 import SettingItem from "../components/SettingItems";
 import {
     IC_DisplaySetting,
+    IC_Envelope,
     IC_LanguageSetting,
     IC_NotificationSettings,
     IC_ThemeSettings,
@@ -56,7 +57,6 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
-            {/* Night Mode Settings */}
             <TouchableOpacity onPress={openThemeSelection} activeOpacity={0.7}>
                 <SettingItem title="Themes" IconComponent={IC_ThemeSettings} />
             </TouchableOpacity>
@@ -67,8 +67,13 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
-            <TouchableOpacity onPress={() => navigation.navigate("UserPreferences")} activeOpacity={0.7}>
-                <SettingItem title="Preferences" IconComponent={IC_UserPreferencesSettings} />
+            <TouchableOpacity onPress={() => navigation.navigate("Preferences")} activeOpacity={0.7}>
+                <SettingItem title="User Preferences" IconComponent={IC_UserPreferencesSettings} />
+            </TouchableOpacity>
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            <TouchableOpacity onPress={() => navigation.navigate("Support")} activeOpacity={0.7}>
+                <SettingItem title="Contact Support" IconComponent={IC_Envelope} />
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
