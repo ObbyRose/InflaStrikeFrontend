@@ -188,3 +188,10 @@ export const countryCodes = [
     { code: "+260", label: "🇿🇲 Zambia" },
     { code: "+263", label: "🇿🇼 Zimbabwe" }
 ];
+
+export const countryLanguages = [
+    { label: "🇺🇸", language: "English"},
+    { label: "🇮🇱", language: "Hebrew"},
+    { label: "🇫🇷", language: "French"},
+    { label: "🇪🇸", language: "Spanish"},
+]

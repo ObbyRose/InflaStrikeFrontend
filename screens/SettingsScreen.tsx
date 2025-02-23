@@ -1,87 +1,99 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Box } from '@/components/ui/box'
-import { Divider } from '@/components/ui/divider'
-import { IC_DisplaySetting, IC_LanguageSetting, IC_NotificationSettings, IC_ThemeSettings, IC_UserPreferencesSettings } from '@/utils/constants/Icons'
-import { ChevronRight } from 'lucide-react-native'
-import { Icon } from '@/components/ui/icon'
-import { useTheme } from '@/utils/Themes/ThemeProvider'
+import React, { useState } from "react";
+import { Box } from "@/components/ui/box";
+import { Divider } from "@/components/ui/divider";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
+import SettingItem from "../components/SettingItems";
+import {
+    IC_DisplaySetting,
+    IC_LanguageSetting,
+    IC_NotificationSettings,
+    IC_ThemeSettings,
+    IC_UserPreferencesSettings
+} from "@/utils/constants/Icons";
+import { Props } from "@/types/NavigationTypes";
+import { TouchableOpacity } from "react-native";
+import { countryLanguages } from "../utils/constants/countries"; // Importing language list
 
-const SettingsScreen = () => {
-  const { appliedTheme } = useTheme()
-  return (
-  <Box className={ `p-4 h-full bg-background-${appliedTheme}`}>
-    <Box className='flex flex-row justify-between items-center'>
-      <Box className='flex-row items-center just gap-4'>
-        <Box className='bg-[#F2F2F7] rounded-full p-2'>
-          <IC_DisplaySetting className='w-8 h-8'  />
+// Import Gluestack Actionsheet Components
+import {
+  Actionsheet,
+  ActionsheetContent,
+  ActionsheetDragIndicator,
+  ActionsheetDragIndicatorWrapper,
+  ActionsheetBackdrop,
+  ActionsheetScrollView,
+  ActionsheetItem,
+  ActionsheetItemText,
+} from "@/components/ui/actionsheet"
+import { Text } from "@/components/ui/text";
+import { Icon } from "@/components/ui/icon";
+
+const SettingsScreen: React.FC<Props> = ({ navigation }) => {
+    const { appliedTheme } = useTheme();
+    const [selectedLanguage, setSelectedLanguage] = useState("English"); // Default language
+    const [isOpen, setIsOpen] = useState(false);
+
+    // Function to open and close ActionSheet
+    const openLanguageSelection = () => setIsOpen(true);
+    const closeLanguageSelection = () => setIsOpen(false);
+
+    return (
+        <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
+            <TouchableOpacity onPress={() => navigation.navigate("DisplaySettings")}>
+                <SettingItem title="Display" IconComponent={IC_DisplaySetting} />
+            </TouchableOpacity>
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            {/* Gluestack ActionSheet on Language Setting */}
+            <TouchableOpacity onPress={openLanguageSelection}>
+                <SettingItem title={`Language (${selectedLanguage})`} IconComponent={IC_LanguageSetting} />
+            </TouchableOpacity>
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            <SettingItem title="Night Mode" IconComponent={IC_ThemeSettings} />
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            <TouchableOpacity onPress={() => navigation.navigate("NotificationSettings")}>
+                <SettingItem title="Notification Settings" IconComponent={IC_NotificationSettings} />
+            </TouchableOpacity>
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            <TouchableOpacity onPress={() => navigation.navigate("UserPreferences")}>
+                <SettingItem title="Preferences" IconComponent={IC_UserPreferencesSettings} />
+            </TouchableOpacity>
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            {/* Gluestack Actionsheet Component */}
+            <Actionsheet isOpen={isOpen} onClose={closeLanguageSelection}>
+                <ActionsheetBackdrop />
+                <ActionsheetContent>
+                    <ActionsheetDragIndicatorWrapper>
+                        <ActionsheetDragIndicator />
+                    </ActionsheetDragIndicatorWrapper>
+
+                    {/* Language Selection List */}
+                    <ActionsheetScrollView className="mt-2">
+                        {countryLanguages.map((country, index) => (
+                            <ActionsheetItem
+                                key={index}
+                                onPress={() => {
+                                    setSelectedLanguage(country.language);
+                                    closeLanguageSelection();
+                                }}
+                                className={`p-4 ${
+                                    selectedLanguage === country.language ? `bg-button-${appliedTheme} text-white rounded-lg` : ""
+                                }`}
+                            >
+                                <ActionsheetItemText className={`font-bold text-[14px] text-black ${
+                                    selectedLanguage === country.language ? "text-white" : ""
+                                }`}>{country.label} {country.language}</ActionsheetItemText>
+                            </ActionsheetItem>
+                        ))}
+                    </ActionsheetScrollView>
+                </ActionsheetContent>
+            </Actionsheet>
         </Box>
-        <Text className='font-extrabold text-[14px]'>Display</Text>
-      </Box>
-      <Box>
-        <Icon as={ChevronRight}></Icon>
-      </Box>
-    </Box>
+    );
+};
 
-    <Divider className='rounded-lg mb-4 mt-4' />
-
-    <Box className='flex flex-row justify-between items-center'>
-      <Box className='flex-row items-center gap-3'>
-        <Box className='bg-[#F2F2F7] rounded-full p-2'>
-          <IC_LanguageSetting className='w-8 h-8'  />
-        </Box>
-        <Text className='font-extrabold text-[14px]'>Language</Text>
-      </Box>
-      <Box>
-        <Icon as={ChevronRight}></Icon>
-      </Box>
-    </Box>
-
-    <Divider className='rounded-lg mb-4 mt-4' />
-
-    <Box className='flex flex-row justify-between items-center'>
-      <Box className='flex-row items-center gap-3'>
-        <Box className='bg-[#F2F2F7] rounded-full p-2'>
-          <IC_ThemeSettings className='w-8 h-8'  />
-        </Box>
-        <Text className='font-extrabold text-[14px]'>Night mode</Text>
-      </Box>
-      <Box>
-        <Icon as={ChevronRight}></Icon>
-      </Box>
-    </Box>
-
-    <Divider className='rounded-lg mb-4 mt-4' />
-    <Box className='flex flex-row justify-between items-center'>
-      <Box className='flex-row items-center gap-3'>
-        <Box className='bg-[#F2F2F7] rounded-full p-2'>
-          <IC_NotificationSettings className='w-8 h-8'  />
-        </Box>
-        <Text className='font-extrabold text-[14px]'>Notification Settings</Text>
-      </Box>
-      <Box>
-        <Icon as={ChevronRight}></Icon>
-      </Box>
-    </Box>
-
-    <Divider className='rounded-lg mb-4 mt-4' />
-
-
-    <Box className='flex flex-row justify-between items-center'>
-      <Box className='flex-row items-center gap-3'>
-        <Box className='bg-[#F2F2F7] rounded-full p-2'>
-          <IC_UserPreferencesSettings className='w-8 h-8'  />
-        </Box>
-        <Text className='font-extrabold text-[14px]'>Preferences</Text>
-      </Box>
-      <Box>
-        <Icon as={ChevronRight}></Icon>
-      </Box>
-    </Box>
-
-    <Divider className='rounded-lg mb-4 mt-4' />
-  </Box>
-  )
-}
-
-export default SettingsScreen
+export default SettingsScreen;
