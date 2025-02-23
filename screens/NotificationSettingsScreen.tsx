@@ -55,8 +55,8 @@ const NotificationSettings: React.FC = () => {
         return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
             {/* Push Notifications Section */}
-            <Text className="text-gray-500 font-bold text-[16px] mb-2">Push Notifications</Text>
-            <Box className="flex-row justify-between items-center mb-4">
+            <Text className="text-gray-500 font-bold text-[16px]">Push Notifications</Text>
+            <Box className="flex-row justify-between items-center">
                 <Text className="text-black font-semibold text-md">Turn On / Off</Text>
                 <Switch 
                     value={isPushEnabled} 
@@ -68,7 +68,7 @@ const NotificationSettings: React.FC = () => {
             <Divider className="rounded-lg mb-4" />
 
             {/* Customize Notifications Section */}
-            <Text className="text-gray-500 font-bold text-[16px] mb-2">Customize Notifications</Text>
+            <Text className="text-gray-500 font-bold text-[16px]">Customize Notifications</Text>
             {Object.keys(notificationSettings).map((category, index) => (
                 <React.Fragment key={index}>
                     <TouchableOpacity className="flex-row justify-between items-center py-3"
