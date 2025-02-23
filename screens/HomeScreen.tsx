@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, TouchableOpacity } from "react-native";
 import { Box } from "@/components/ui/box";
 import { Avatar } from "@/components/ui/avatar";
 import { Icon } from "@/components/ui/icon";
 import { User } from "lucide-react-native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_Settings } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinHistory,
@@ -22,8 +22,9 @@ import {
     fetchEthereumLineData,
     fetchXRPLineData
 } from "../utils/api/BinanceAPI";
+import { Props } from "@/types/NavigationTypes";
 
-const HomeScreen: React.FC = () => {
+const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
     const [cryptoData, setCryptoData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -102,13 +103,15 @@ const HomeScreen: React.FC = () => {
                             <IC_PieGraph className="h-7 w-7" />
                             <Text className="text-2xs font-semibold text-[#969AA0]">My Portfolio</Text>
                         </Box>
-                        <Box className="flex-col items-center gap-1">
-                            <IC_Search className="h-7 w-7" />
-                            <Text className="ml-2 text-2xs font-semibold text-[#969AA0]">Search</Text>
-                        </Box>
+
+                        <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Settings" })}>
+                            <Box className="flex-col items-center gap-1">
+                                <IC_Settings className="h-7 w-7" />
+                                <Text className="ml-2 text-2xs font-semibold text-[#969AA0]">Settings</Text>
+                            </Box>
+                        </TouchableOpacity>
                     </Box>
                 </Box>
-
                 {/* Greetings Section */}
                 <Box className="mb-4">
                     <Text className="text-[36px] mt-2 text-black font-bold">Hello,</Text>

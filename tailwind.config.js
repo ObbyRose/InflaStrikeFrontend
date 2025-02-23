@@ -77,7 +77,7 @@ module.exports = {
             dark: '#ffff',
           },
           divider: {
-            light: '#dedede',
+            light: '#979797',
             dark: '#545454',
           },
           layoutBottom:{
@@ -268,7 +268,7 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#f2f2f2',
+          light: '#ffffff',
           dark: '#2b2b2b',
         },
         indicator: {
