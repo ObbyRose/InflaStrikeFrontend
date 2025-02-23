@@ -3,6 +3,6 @@ export type Props = {
 }
 
 export type SignUpScreensProps = {
-    appliedTheme: "light" | "dark";
-    setScreenStep: React.Dispatch<React.SetStateAction<number>>;
+    handleScreenChange: (newScreenStep: number) => void
 }
+export type TTheme = "light" | "dark";

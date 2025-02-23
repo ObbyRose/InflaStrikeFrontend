@@ -1,8 +1,7 @@
 // @ts-nocheck
 import { Box } from "@/components/ui/box";
 import { cn } from "@/components/ui/cn";
-import { Circle } from "lucide-react-native";
-import Svg, { Path, G, Mask, Rect, Defs, ClipPath } from "react-native-svg";
+import Svg, { Path, G, Mask, Rect, Defs, ClipPath, Circle, LinearGradient, Stop} from "react-native-svg";
 
 interface IconsProps {
     className?: string;
@@ -325,6 +324,86 @@ export const IC_ArrowLeft = ({ className }: IconsProps) => {
       >
         <Path d="M5 12h14M5 12l4 4M5 12l4-4" />
       </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_GreenVi = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm6.04 5.96a1 1 0 00-1.414 0l-5.96 5.959-2.625-2.626-.095-.083a1 1 0 00-1.32 1.497L7.96 14.04l.094.084a1 1 0 001.32-.084l6.667-6.666.083-.094a1 1 0 00-.083-1.32z"
+          fill="#5ACC6D"
+        />
+        </Svg>
+      </Box>
+  );
+};
+
+export const IC_Mail = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+      <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 81 87"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={81}
+        height={87}
+      >
+        <Path
+          d="M0 .972h47.7c18.225 0 33 14.775 33 33v52.8H0V.972z"
+          fill="#fff"
+        />
+      </Mask>
+      <G mask="url(#a)">
+        <Path
+          transform="rotate(7 8.22 9.23)"
+          fill="#4A3EF6"
+          d="M8.22046 9.23022H89.22046V61.23022H8.22046z"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M2.876 60.965l44.423-30.816 35.059 39.927"
+          fill="#3F35D1"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M41.757 45.21a4.4 4.4 0 005.615.69l41.245-26.798L8.22 9.23l33.537 35.98z"
+          fill="url(#paint0_linear_2101_4989)"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_2101_4989"
+          x1={38.7435}
+          y1={-5.29239}
+          x2={49.3891}
+          y2={38.8514}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#9D9DFF" />
+          <Stop offset={1} stopColor="#6363FF" />
+        </LinearGradient>
+      </Defs>
     </Svg>
       </Box>
   );

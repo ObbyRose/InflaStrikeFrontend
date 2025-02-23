@@ -9,7 +9,7 @@ import { showNewToast } from '@/utils/constants/Toasts';
 import { Linking } from 'react-native';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 
-function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
+function VerifyPhone({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     const toast = useToast();
     const [isLoadingEmail, setIsLoadingEmail] = useState(false);
@@ -51,7 +51,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
 
         // Reset Timer
         setIsResendDisabled(true);
-        setTimer(1);
+        setTimer(60);
 
         setTimeout(() => {
             setIsLoadingEmail(false);
@@ -60,7 +60,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     }
 
     const handleToast = () => {
-        const toastId = "unique-toast-email-verification";
+        const toastId = "unique-toast";
         if (!toast.isActive(toastId)) {
             showNewToast(toast, toastId, appliedTheme);
         }
@@ -104,4 +104,4 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     )
 }
 
-export default VerifyEmail
+export default VerifyPhone
