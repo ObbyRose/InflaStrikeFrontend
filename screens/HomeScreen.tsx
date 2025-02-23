@@ -133,7 +133,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 <Box>
                     <Box className="flex-row items-center justify-between">
                         <Text className="text-[22px] font-semibold">Markets</Text>
-                        <Text className="text-[14px] text-[#0A6CFF]">See All</Text>
+                        <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>See All</Text>
                     </Box>
                 </Box>
 

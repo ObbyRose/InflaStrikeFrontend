@@ -15,6 +15,7 @@ import Signup from './auth/Signup';
 import PreferencesScreen from './PreferencesScreen';
 import SupportScreen from './SupportScreen';
 import NotificationSettingsScreen from './NotificationSettingsScreen';
+import MarketsScreen from './MarketsScreen';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="Settings" component={SettingsScreen} />
                 <Stack.Screen name="Preferences" component={PreferencesScreen} />
                 <Stack.Screen name="Support" component={SupportScreen} />
+                <Stack.Screen name="Markets" component={MarketsScreen} />
                 <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Token" component={TokenScreen} />
