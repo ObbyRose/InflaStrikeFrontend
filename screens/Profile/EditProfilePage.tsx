@@ -1,6 +1,6 @@
 import PasswordVisibilityChangeButton from '@/components/PasswordVisibilityChangeButton';
 import CountryPhoneInput from '@/components/profile/CountryPhoneInput';
-import { Button } from '@/components/ui/button';
+import { Button, ButtonText } from '@/components/ui/button';
 import { Image } from '@/components/ui/image';
 import { Input, InputField } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
@@ -87,7 +87,7 @@ export default function EditProfilePage({ user, setUser }: EditProfilePageProps)
         </Input>
       </View>
       {/* Password field */}
-      <View className="flex w-full gap-2 border-b border-gray-200 p-2">
+      {/* <View className="flex w-full gap-2 border-b border-gray-200 p-2">
         <Text className="text-gray-500">Your password</Text>
         <Input className=" flex w-full justify-between rounded-lg border-gray-500">
           <InputField
@@ -102,13 +102,17 @@ export default function EditProfilePage({ user, setUser }: EditProfilePageProps)
             setIsPasswordVisible={setIsPasswordVisible}
           />
         </Input>
-      </View>
+      </View> */}
 
       {/* Phone field */}
       <View className="flex w-full gap-2 border-b border-gray-200 p-2">
         <Text className="text-gray-500">Phone number</Text>
         <CountryPhoneInput phoneNumber={user.phoneNumber.number} updateField={updateField} />
       </View>
+
+      <Button className="w-[95%] rounded-2xl bg-[#0066FF]">
+        <ButtonText>Save</ButtonText>
+      </Button>
     </View>
   );
 }

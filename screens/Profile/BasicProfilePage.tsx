@@ -1,10 +1,10 @@
 import PasswordVisibilityChangeButton from '@/components/PasswordVisibilityChangeButton';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import { Button } from '@/components/ui/button';
-import passwordConvertor from '@/utils/functions/passwordconvertor';
 import { Entypo } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
+import passwordConvertor from '../../utils/functions/passwordconvertor';
 
 interface BasicProfilePageProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
