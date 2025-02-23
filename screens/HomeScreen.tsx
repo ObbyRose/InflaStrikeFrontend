@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Text, ScrollView, ActivityIndicator } from "react-native";
-import { 
-    fetchBitcoinHistory, 
-    fetchEthereumHistory, 
+import { Text, ScrollView } from "react-native";
+import { Box } from "@/components/ui/box";
+import { Avatar } from "@/components/ui/avatar";
+import { Icon } from "@/components/ui/icon";
+import { User } from "lucide-react-native";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
+import { Divider } from "@/components/ui/divider";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search } from "@/utils/constants/Icons";
+import CryptoMarketCard from "@/components/CryptoMarketCard";
+import {
+    fetchBitcoinHistory,
+    fetchEthereumHistory,
     fetchXRPHistory,
     fetchBitcoinLivePrice,
     fetchEthereumLivePrice,
@@ -14,74 +22,63 @@ import {
     fetchEthereumLineData,
     fetchXRPLineData
 } from "../utils/api/BinanceAPI";
-import { Props } from "types/NavigationTypes";
-import { Box } from "@/components/ui/box";
-import InvestmentPieChart from "@/components/InvestmentPieChart";
-import CandlestickChart from "@/components/CandlestickChart";
-import LineChartComponent from "@/components/LineChart";
-import { Divider } from "@/components/ui/divider";
-import { Button, ButtonText } from "@/components/ui/button";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useTheme } from "@/utils/Themes/ThemeProvider";
 
-const HomeScreen: React.FC<Props> = ({ navigation }) => {
+const HomeScreen: React.FC = () => {
     const { appliedTheme } = useTheme();
-    const [bitcoinData, setBitcoinData] = useState<any[]>([]);
-    const [ethereumData, setEthereumData] = useState<any[]>([]);
-    const [xrpData, setXRPData] = useState<any[]>([]);
-    const [bitcoinLineData, setBitcoinLineData] = useState<{ time: string; price: number; }[]>([]);
-    const [ethereumLineData, setEthereumLineData] = useState<{ time: string; price: number; }[]>([]);
-    const [xrpLineData, setXRPLineData] = useState<{ time: string; price: number; }[]>([]);
-    const [bitcoinPrice, setBitcoinPrice] = useState<number | null>(null);
-    const [ethereumPrice, setEthereumPrice] = useState<number | null>(null);
-    const [xrpPrice, setXRPPrice] = useState<number | null>(null);
-    const [bitcoinChange, setBitcoinChange] = useState<number | null>(null);
-    const [ethereumChange, setEthereumChange] = useState<number | null>(null);
-    const [xrpChange, setXRPChange] = useState<number | null>(null);
+    const [cryptoData, setCryptoData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-
-    const [showCandlestick, setShowCandlestick] = useState<boolean>(true);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 setLoading(true);
-                
                 const [btcLine, ethLine, xrpLine] = await Promise.all([
                     fetchBitcoinLineData(),
                     fetchEthereumLineData(),
                     fetchXRPLineData(),
                 ]);
-                setBitcoinLineData(btcLine || []);
-                setEthereumLineData(ethLine || []);
-                setXRPLineData(xrpLine || []);
-
-                const [btcData, ethData, xrpData] = await Promise.all([
-                    fetchBitcoinHistory(),
-                    fetchEthereumHistory(),
-                    fetchXRPHistory(),
-                ]);
-                setBitcoinData(btcData || []);
-                setEthereumData(ethData || []);
-                setXRPData(xrpData || []);
 
                 const [btcPrice, ethPrice, xrpPrice] = await Promise.all([
                     fetchBitcoinLivePrice(),
                     fetchEthereumLivePrice(),
                     fetchXRPLivePrice(),
                 ]);
-                setBitcoinPrice(btcPrice);
-                setEthereumPrice(ethPrice);
-                setXRPPrice(xrpPrice);
 
                 const [btcChange, ethChange, xrpChange] = await Promise.all([
                     fetchBitcoinPercentageGain(),
                     fetchEthereumPercentageGain(),
                     fetchXRPPercentageGain(),
                 ]);
-                setBitcoinChange(btcChange);
-                setEthereumChange(ethChange);
-                setXRPChange(xrpChange);
+
+                setCryptoData([
+                    { 
+                        name: "Bitcoin", 
+                        symbol: "BTC", 
+                        icon: IC_Bitcoin, 
+                        price: btcPrice, 
+                        change: btcChange, 
+                        lineData: btcLine, 
+                        bgColor: "bg-[hsl(7_91%_60%/0.1)]" 
+                    },
+                    { 
+                        name: "Ethereum", 
+                        symbol: "ETH", 
+                        icon: IC_Ethereum, 
+                        price: ethPrice, 
+                        change: ethChange, 
+                        lineData: ethLine, 
+                        bgColor: "bg-[hsl(169_44%_58%/0.1)]"
+                    },
+                    { 
+                        name: "XRP", 
+                        symbol: "XRP", 
+                        icon: IC_Xrp, 
+                        price: xrpPrice, 
+                        change: xrpChange, 
+                        lineData: xrpLine, 
+                        bgColor: "bg-[hsl(223_99%_69%/0.1)]"
+                    },
+                ]);
             } catch (error) {
                 console.error("Error fetching market data:", error);
             } finally {
@@ -92,109 +89,62 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         fetchData();
     }, []);
 
-
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Box className={`p-4 bg-background-${appliedTheme}`}>
-                {/* Investment Portfolio Chart */}
-                <InvestmentPieChart />
-
-                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`} />
-
-                {/* Market Data Section */}
-                <Box className="mt-4">
-                    <Box className="flex flex-row items-center gap-4 mt-4">
-                        <Text className={`text-xl font-bold text-text-${appliedTheme}`}>Market Data</Text>
-                        
-                        {/* Toggle Buttons */}
-                        <Button 
-                            className={`bg-button-${appliedTheme}`}
-                            onPress={() => setShowCandlestick(true)}
-                        >
-                            <ButtonText>
-                                <MaterialIcons name="candlestick-chart" size={24} color={showCandlestick ? "#608afc" : "white"} />
-                            </ButtonText>
-                        </Button>
-                        <Button 
-                            className={`bg-button-${appliedTheme}`}
-                            onPress={() => setShowCandlestick(false)}
-                        >
-                            <ButtonText>
-                                <MaterialIcons name="show-chart" size={24} color={!showCandlestick ? "#608afc" : "white"} />
-                            </ButtonText>
-                        </Button>
+            {/* Header Section */}
+            <Box className={`p-4 bg-background-${appliedTheme} flex gap-2`}>
+                <Box className="flex-row justify-between items-center">
+                    <Avatar className="bg-indigo-600" size="lg">
+                        <Icon as={User} size="xl" className="stroke-white" />
+                    </Avatar>
+                    <Box className="flex-row items-center gap-2 mt-3">
+                        <Box className="flex-col items-center gap-1">
+                            <IC_PieGraph className="h-7 w-7" />
+                            <Text className="text-2xs font-semibold text-[#969AA0]">My Portfolio</Text>
+                        </Box>
+                        <Box className="flex-col items-center gap-1">
+                            <IC_Search className="h-7 w-7" />
+                            <Text className="ml-2 text-2xs font-semibold text-[#969AA0]">Search</Text>
+                        </Box>
                     </Box>
                 </Box>
 
-                {/* Bitcoin Market Data */}
-                <Box className="mt-5">
-                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
-                        BTC Live Price:{" "}
-                        {loading ? (
-                            <ActivityIndicator size="small" color="#FFD700" />
-                        ) : (
-                            bitcoinPrice ? `$${bitcoinPrice.toFixed(2)}` : "N/A"
-                        )}
-                    </Text>
-                    <Text className={`text-md ${bitcoinChange! >= 0 ? "text-green-400" : "text-red-400"}`}>
-                        {bitcoinChange !== null
-                            ? `${bitcoinChange.toFixed(2)}%`
-                            : ""}
-                    </Text>
-                    {showCandlestick ? (
-                        <CandlestickChart title="" candlestickData={bitcoinData} />
-                    ) : (
-                        <LineChartComponent title="" lineData={bitcoinLineData} />
-                    )}
+                {/* Greetings Section */}
+                <Box className="mb-4">
+                    <Text className="text-[36px] mt-2 text-black font-bold">Hello,</Text>
+                    <Text className="text-[36px] text-black font-bold">Baba Cattington 👋</Text>
                 </Box>
 
-                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`}/>
-
-                {/* Ethereum Market Data */}
-                <Box className="mt-5">
-                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
-                        ETH Live Price:{" "}
-                        {loading ? (
-                            <ActivityIndicator size="small" color="#FFD700" />
-                        ) : (
-                            ethereumPrice ? `$${ethereumPrice.toFixed(2)}` : "N/A"
-                        )}
-                    </Text>
-                    <Text className={`text-md ${ethereumChange! >= 0 ? "text-green-400" : "text-red-400"}`}>
-                        {ethereumChange !== null
-                            ? `${ethereumChange.toFixed(2)}%`
-                            : ""}
-                    </Text>
-                    {showCandlestick ? (
-                        <CandlestickChart title="" candlestickData={ethereumData} />
-                    ) : (
-                        <LineChartComponent title="" lineData={ethereumLineData} />
-                    )}
+                {/* Net Liquid Value Section */}
+                <Box className={`bg-indigo-600 p-2 h-[100px] w-full rounded-3xl flex`}>
+                    <Box className="p-2">
+                        <Text className="text-white text-[18px]">Total Balance:</Text>
+                        <Box>
+                            <Text className="text-white text-[20px] self-end">$ 415,312</Text>
+                        </Box>
+                        <Text className="text-[12px] text-white top-0">Cash Available</Text>
+                    </Box>
                 </Box>
 
-                <Divider className={`h-[1.5px] bg-divider-${appliedTheme} w-[95%] mx-auto`}/>
-
-                {/* XRP Market Data */}
-                <Box className="mt-5">
-                    <Text className={`text-lg font-bold text-text-${appliedTheme}`}>
-                        XRP Live Price:{" "}
-                        {loading ? (
-                            <ActivityIndicator size="small" color="#FFD700" />
-                        ) : (
-                            xrpPrice ? `$${xrpPrice.toFixed(2)}` : "N/A"
-                        )}
-                    </Text>
-                    <Text className={`text-md ${xrpChange! >= 0 ? "text-green-400" : "text-red-400"}`}>
-                        {xrpChange !== null
-                            ? `${xrpChange.toFixed(2)}%`
-                            : ""}
-                    </Text>
-                    {showCandlestick ? (
-                        <CandlestickChart title="" candlestickData={xrpData} />
-                    ) : (
-                        <LineChartComponent title="" lineData={xrpLineData} />
-                    )}
+                {/* Crypto Market Section */}
+                <Box>
+                    <Box className="flex-row items-center justify-between">
+                        <Text className="text-[22px] font-semibold">Markets</Text>
+                        <Text className="text-[14px] text-[#0A6CFF]">See All</Text>
+                    </Box>
                 </Box>
+
+                {/* Crypto Market Cards */}
+                {loading ? (
+                    <Text>Loading...</Text>
+                ) : (
+                    cryptoData.map((crypto, index) => (
+                        <React.Fragment key={crypto.symbol}>
+                            <CryptoMarketCard {...crypto} />
+                            {index < cryptoData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
+                        </React.Fragment>
+                    ))
+                )}
             </Box>
         </ScrollView>
     );
