@@ -16,6 +16,7 @@ import PreferencesScreen from './PreferencesScreen';
 import SupportScreen from './SupportScreen';
 import NotificationSettingsScreen from './NotificationSettingsScreen';
 import MarketsScreen from './MarketsScreen';
+import PortfolioScreen from './PortfolioScreen';
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />
+                <Stack.Screen name="Portfolio" component={PortfolioScreen} />
               </Stack.Navigator>
             </Layout>
           )}
