@@ -8,6 +8,7 @@ import {
     IC_Envelope,
     IC_LanguageSetting,
     IC_NotificationSettings,
+    IC_ProfileSettings,
     IC_ThemeSettings,
     IC_UserPreferencesSettings
 } from "@/utils/constants/Icons";
@@ -48,8 +49,8 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
-            <TouchableOpacity onPress={() => navigation.navigate("DisplaySettings")} activeOpacity={0.7}>
-                <SettingItem title="Display" IconComponent={IC_DisplaySetting} />
+            <TouchableOpacity onPress={() => navigation.navigate("ProfileSettings")} activeOpacity={0.7}>
+                <SettingItem title="Profile Settings" IconComponent={IC_ProfileSettings} />
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 

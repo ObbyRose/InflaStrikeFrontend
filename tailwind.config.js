@@ -71,7 +71,7 @@ module.exports = {
     extend: {
       colors: {
           button: {
-            light: '#4837b3',
+            light: '#4A3EF6',
             dark: '#363636',
           },
           text: {
