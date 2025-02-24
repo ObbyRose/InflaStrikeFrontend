@@ -58,8 +58,10 @@ const buttonStyle = tva({
         'bg-transparent border data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent',
       solid: '',
       rounded: 'rounded-lg border-[1.5px] border-black',
-      "rounded-solid-light": "rounded-3xl bg-button-light",
-      "rounded-solid-dark": "rounded-3xl bg-button-light",
+      "rounded-solid-light": "rounded-3xl bg-button-light p-3.5",
+      "rounded-solid-dark": "rounded-3xl bg-button-light p-3.5",
+      "rounded-outline-light": "rounded-3xl bg-default-light border border-gray-light p-3.5",
+      "rounded-outline-dark": "rounded-3xl bg-default-light p-3.5",
     },
 
     size: {

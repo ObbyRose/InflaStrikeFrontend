@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import InvestmentsScreen from './InvestmentsScreen';
 import NotificationsScreen from './NotificationsScreen';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from './Profile/ProfileScreen';
 import SavingsScreen from './SavingsScreen';
 import SettingsScreen from './SettingsScreen';
 import TokenScreen from './TokenScreen';
@@ -26,10 +26,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
 
-        <Stack.Screen
-          name="MainApp"
-          options={{ headerShown: false }}
-        >
+        <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
               <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>

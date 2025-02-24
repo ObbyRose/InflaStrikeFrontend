@@ -63,6 +63,8 @@ module.exports = {
     'text-link-dark',
     'text-gray-light',
     'text-gray-dark',
+    'bg-default-light',
+    'bg-default-dark',
 
   ],
   theme: {
@@ -120,8 +122,10 @@ module.exports = {
             light: "#828A99",
             dark: "#828A99",
           },
-          light: "#ffffff",
-          dark: "#000000",
+          default : {
+            light: "#ffffff",
+            dark: "#000000",
+          },
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
           50: 'rgb(var(--color-primary-50)/<alpha-value>)',
@@ -299,6 +303,9 @@ module.exports = {
         'soft-2': '0px 0px 20px rgba(38, 38, 38, 0.2)',
         'soft-3': '0px 0px 30px rgba(38, 38, 38, 0.1)',
         'soft-4': '0px 0px 40px rgba(38, 38, 38, 0.1)',
+      },
+      spacing: {
+        '3.5': '0.875rem',
       },
     },
   },

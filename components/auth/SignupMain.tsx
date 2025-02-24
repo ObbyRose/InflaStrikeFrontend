@@ -6,14 +6,12 @@ import { Button, ButtonSpinner, ButtonText } from '../ui/button'
 import { useFormInput } from '@/hooks/useFormInput'
 import { Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel } from '../ui/checkbox'
 import { CheckIcon } from '../ui/icon'
+import { SignUpScreensProps } from '@/types/NavigationTypes'
+import { useTheme } from '@/utils/Themes/ThemeProvider'
 
-interface SignupMainProps {
-    appliedTheme: "light" | "dark";
-}
-
-function SignupMain({ appliedTheme }: SignupMainProps) {
+function SignupMain({ handleScreenChange }: SignUpScreensProps) {
+    const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
     const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
         email: '',
         pass: '',
@@ -66,7 +64,10 @@ function SignupMain({ appliedTheme }: SignupMainProps) {
         if (valid) {
             setIsLoading(true);
             console.log({ fName, lName, email, pass });
-            setTimeout(() => setIsLoading(false), 1000);
+            setTimeout(() => { 
+                setIsLoading(false);
+                handleScreenChange(1);
+            }, 1000);
         }
     }
 
@@ -154,7 +155,7 @@ function SignupMain({ appliedTheme }: SignupMainProps) {
 
             { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
             {/* Login Button & Forgot Pass */}
-            <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit p-3"
+            <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
             onPress={handleSubmitSignup}
             >
                 <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign Up"}</ButtonText>
