@@ -27,7 +27,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
     function handleSubmit() {
         let valid = true;
         let newErrors = { birthday: "", address: "", apartmentNumber: "", city: "", postal: ""};
-        let birthdayDate;
+        let birthdayDate = null;
 
         if(!birthday.trim()) {
             newErrors.birthday = "birthday is required.";
@@ -35,7 +35,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
         } else {
             birthdayDate = validateAndConvertBirthday(birthday);
             if (!birthdayDate) {
-                newErrors.address = "birthday format is invalid.";
+                newErrors.birthday = "birthday format is invalid.";
                 valid = false;
             }
         }
@@ -61,10 +61,11 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
 
         if (valid) {
             setIsLoading(true);
-            console.log({ birthday: birthdayDate?.toLocaleDateString("en-US"), address, apartmentNumber, city, postal });
             setTimeout(() => { 
                 setIsLoading(false);
-                handleScreenChange(7);
+                handleScreenChange('next', { 
+                    birthday: birthdayDate?.toLocaleDateString("en-US"), 
+                    address, apartmentNumber, city, postal });
             }, 1000);
         }
     }
@@ -89,6 +90,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
             />
             <InputAuth 
                 placeholder='Apartment number'
+                maxLength={10}
                 value={apartmentNumber}
                 onChangeText={(val) => handleInputChange("apartmentNumber", val)}
                 error={errors.apartmentNumber}
@@ -102,6 +104,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
             <InputAuth 
                 placeholder='Postal code' 
                 keyboardType='numeric'
+                maxLength={10}
                 value={postal}
                 onChangeText={(val) => handleInputChange("postal", val)}
                 error={errors.postal}
