@@ -672,11 +672,72 @@ export const IC_Phone = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_AddCard = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={50}
+      height={50}
+      viewBox="0 0 40 40"
+      fill="none"
+    >
+      <Rect width={40} height={40} rx={20} fill="#fff" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Rect width={40} height={40} rx={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect x={10} y={12.5} width={20} height={15} rx={4} fill="#4A3EF6" />
+        <Rect
+          x={12.5}
+          y={20.8333}
+          width={4.16667}
+          height={4.16667}
+          rx={1.33333}
+          fill="#fff"
+        />
+        <Path
+          fill="#fff"
+          fillOpacity={0.596185}
+          d="M10 15.8333H30V19.166629999999998H10z"
+        />
+        <Rect
+          x={23.3333}
+          y={21.6667}
+          width={4.16667}
+          height={0.833332}
+          rx={0.416666}
+          fill="#fff"
+        />
+        <Rect
+          x={25}
+          y={23.3333}
+          width={2.5}
+          height={0.833334}
+          rx={0.416667}
+          fill="#fff"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
 
 
 export const IconsMap = {
     IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail
-    ,IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings
+    ,IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings, IC_AddCard,
 };
 
 export function getIconByString(icon: string) {

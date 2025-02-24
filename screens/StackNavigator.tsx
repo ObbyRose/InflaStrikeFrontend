@@ -18,6 +18,9 @@ import NotificationSettingsScreen from './NotificationSettingsScreen';
 import MarketsScreen from './MarketsScreen';
 import PortfolioScreen from './PortfolioScreen';
 import ProfileSettingsScreen from './ProfileSettingsScreen';
+import PaymentMethodScreen from './paymentMethods/PaymentMethodScreen';
+import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
+import PaymentMethodAddedScreen from './paymentMethods/PaymentMethodAddedScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,12 +40,20 @@ const StackNavigator = () => {
                 <Stack.Screen name="Notifications" component={NotificationsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Savings" component={SavingsScreen} />
+
+                 {/*Settings Section */}
                 <Stack.Screen name="Settings" component={SettingsScreen} />
-                <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
                 <Stack.Screen name="Preferences" component={PreferencesScreen} />
                 <Stack.Screen name="Support" component={SupportScreen} />
-                <Stack.Screen name="Markets" component={MarketsScreen} />
                 <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
+                <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
+
+                {/*Settings-Profile Settings-Payment Methods Section */}
+                <Stack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
+                <Stack.Screen name="LinkYourCard" component={LinkYourCardScreen} />
+                <Stack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />
+
+                <Stack.Screen name="Markets" component={MarketsScreen} />
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />

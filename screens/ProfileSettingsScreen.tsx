@@ -23,17 +23,17 @@ const ProfileSettingsScreen: React.FC<Props> = ({ navigation }) => {
                     </Button>
                 </Box>
             </Box>
-            <TouchableOpacity onPress={() => navigation.navigate("Payment")} activeOpacity={0.7}>
+            <TouchableOpacity onPress={() => navigation.navigate("PaymentMethod")} activeOpacity={0.7}>
                 <SettingItem title="Payment methods" IconComponent={IC_CreditCard} />
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
             
-            <TouchableOpacity onPress={() => navigation.navigate("PaymentMethod")} activeOpacity={0.7}>
+            <TouchableOpacity onPress={() => navigation.navigate("PhoneView")} activeOpacity={0.7}>
                 <SettingItem title="Phone number" IconComponent={IC_Phone} />
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
-            <TouchableOpacity onPress={() => navigation.navigate("PhoneView")} activeOpacity={0.7}>
+            <TouchableOpacity onPress={() => navigation.navigate("EmailView")} activeOpacity={0.7}>
                 <SettingItem title="Email" IconComponent={IC_Envelope} />
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
