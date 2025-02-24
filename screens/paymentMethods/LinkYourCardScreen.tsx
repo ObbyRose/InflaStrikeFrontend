@@ -4,87 +4,107 @@ import { Box } from '@/components/ui/box'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { useFormInput } from '@/hooks/useFormInput'
 import InputAuth from '@/components/auth/InputAuth'
+import { Button } from '@/components/ui/button'
 
 const LinkYourCardScreen = () => {
-    const { appliedTheme }= useTheme()
+    const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
-        const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
-            cName: '',
-            cNumber: '',
-            cDate: '',
-            CVC: '',
-            postalCode: '',
-            api: ''
-        });
-    
-        const { cName, cNumber, cDate, CVC, postalCode } = values;
-    
-        function handleSubmitSignup() {
-            let valid = true;
-            let newErrors = { cName: "", cNumber: "", cDate: "", CVC: "", postalCode: ""};
-    
-            // Validate email format
-            if (!cName.trim()) {
-                newErrors.cName = "Name is required.";
-                valid = false;
-            }
-    
-            // Validate password
-            if (!cNumber.trim()) {
-                newErrors.cNumber = "Card number is required.";
-                valid = false;
-            } else if (!/^\d{16}$/.test(cNumber)) {
-                newErrors.cNumber = "Card number must be exactly 16 digits.";
-                valid = false;
-            } else if (!/^4\d{15}$/.test(cNumber) && !/^(5[1-5]\d{14}|2[2-7]\d{14})$/.test(cNumber)) {
-                newErrors.cNumber = "Invalid card number. Only Visa and Mastercard are accepted.";
-                valid = false;
-            }
-            
-            if (!postalCode.trim()) {
-                newErrors.postalCode = "Please enter a postal code.";
-                valid = false;
-            } else if (!/^[A-Za-z0-9\s-]{3,10}$/.test(postalCode)) {
-                newErrors.postalCode = "Invalid postal code format.";
-                valid = false;
-            }
 
-            // Validate Expiry Date (MM/YY)
-            if (!cDate.trim()) {
-                newErrors.cDate = "Expiry date is required.";
-                valid = false;
-            } else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(cDate)) {
-                newErrors.cDate = "Invalid expiry date format (MM/YY).";
-                valid = false;
-            }
+    const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
+        cName: '',
+        cNumber: '',
+        cDate: '',
+        CVC: '',
+        postalCode: '',
+    });
 
-            // Validate CVC
-            if (!CVC.trim()) {
-                newErrors.CVC = "CVC is required.";
-                valid = false;
-            } else if (!/^\d{3}$/.test(CVC)) {
-                newErrors.CVC = "Invalid CVC. Must be exactly 3 digits.";
-                valid = false;
-            }
+    const { cName, cNumber, cDate, CVC, postalCode } = values;
 
-            setErrorByFields(newErrors)
-    
-            if (valid) {
-                setIsLoading(true);
-                setTimeout(() => { 
-                    setIsLoading(false);
-                }, 1000);
-            }
+    function handleSubmitAddCard() {
+        let valid = true;
+        let newErrors = { cName: "", cNumber: "", cDate: "", CVC: "", postalCode: "" };
+
+        if (!cName.trim()) {
+            newErrors.cName = "Name is required.";
+            valid = false;
         }
-    return (
-        <Box className={`bg-background-${appliedTheme} h-full`}>
-            <Box>
-                <Text>Link your card</Text>
 
-                <InputAuth placeholder='Name on card' value={cName} error={errors.cName} onChangeText={(val) => handleInputChange("cName", val) } />
+        if (!cNumber.trim()) {
+            newErrors.cNumber = "Card number is required.";
+            valid = false;
+        } else if (!/^\d{16}$/.test(cNumber)) {
+            newErrors.cNumber = "Card number must be exactly 16 digits.";
+            valid = false;
+        } else if (!/^4\d{15}$/.test(cNumber) && !/^(5[1-5]\d{14}|2[2-7]\d{14})$/.test(cNumber)) {
+            newErrors.cNumber = "Invalid card number. Only Visa and Mastercard are accepted.";
+            valid = false;
+        }
+
+        if (!postalCode.trim()) {
+            newErrors.postalCode = "Please enter a postal code.";
+            valid = false;
+        } else if (!/^[A-Za-z0-9\s-]{3,10}$/.test(postalCode)) {
+            newErrors.postalCode = "Invalid postal code format.";
+            valid = false;
+        }
+
+        if (!cDate.trim()) {
+            newErrors.cDate = "Expiry date is required.";
+            valid = false;
+        } else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(cDate)) {
+            newErrors.cDate = "Invalid expiry date format (MM/YY).";
+            valid = false;
+        }
+
+        if (!CVC.trim()) {
+            newErrors.CVC = "CVC is required.";
+            valid = false;
+        } else if (!/^\d{3}$/.test(CVC)) {
+            newErrors.CVC = "Invalid CVC. Must be exactly 3 digits.";
+            valid = false;
+        }
+
+        setErrorByFields(newErrors);
+
+        if (valid) {
+            setIsLoading(true);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 1000);
+        }
+    }
+
+    return (
+        <Box className={`bg-background-${appliedTheme} h-full flex-1`}>
+            <Box className="p-4 flex-1">
+                <Text className="text-black text-[24px] font-extrabold mb-2">Link your card</Text>
+                <Text className="text-[#828A99] text-[16px]">By adding a new card, you agree to the</Text>
+                <Text className="text-[#6666FF] text-[16px] underline mb-4">credit/debit card terms.</Text>
+
+                <Box>
+                    <InputAuth placeholder="Name on card" value={cName} error={errors.cName} onChangeText={(val) => handleInputChange("cName", val)} />
+                    <InputAuth placeholder="Card number" value={cNumber} error={errors.cNumber} maxLength={16} keyboardType="numeric" onChangeText={(val) => handleInputChange("cNumber", val)} />
+                </Box>
+
+                <Box className="flex flex-row gap-2 justify-center">
+                    <Box className="w-[50%]">
+                        <InputAuth placeholder="MM/YY" value={cDate} error={errors.cDate} isBirthday={true} maxLength={5} keyboardType="numeric" onChangeText={(val) => handleInputChange("cDate", val)} />
+                    </Box>
+                    <Box className="w-[50%]">
+                        <InputAuth placeholder="CVC" value={CVC} error={errors.CVC} keyboardType="numeric" maxLength={3} onChangeText={(val) => handleInputChange("CVC", val)} />
+                    </Box>
+                </Box>
+
+                <InputAuth placeholder="Postal Code" value={postalCode} error={errors.postalCode} maxLength={10} onChangeText={(val) => handleInputChange("postalCode", val)} />
+            </Box>
+
+            <Box className="absolute bottom-4 left-4 right-4">
+                <Button onPress={handleSubmitAddCard} className={`bg-button-${appliedTheme} rounded-full`}>
+                    <Text className="text-white text-[16px] font-extrabold">{isLoading ? "Processing..." : "Add Card"}</Text>
+                </Button>
             </Box>
         </Box>
-    )
+    );
 }
 
-export default LinkYourCardScreen
+export default LinkYourCardScreen;
