@@ -34,7 +34,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, s
                     <Text className="text-[16px] font-semibold">
                         {price !== null ? `$${price.toFixed(2)}` : ""}
                     </Text>
-                    <Text className="text-[#969AA0]">0.00 {symbol}</Text>
+                    <Text className="text-[#969AA0]">{symbol}</Text>
                 </Box>
             </Box>
         </>
