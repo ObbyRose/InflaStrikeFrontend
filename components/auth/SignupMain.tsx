@@ -110,7 +110,7 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
                 error={errors.lName}
             />
             <InputAuth 
-                icon="IC_Email" 
+                icon="IC_Email"
                 placeholder='Email'
                 value={email}
                 onChangeText={(val) => handleInputChange("email", val)}
@@ -119,7 +119,7 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
             <InputAuth 
                 icon="IC_Lock" 
                 placeholder='Password' 
-                isPass={true}
+                type='pass'
                 value={pass}
                 onChangeText={(val) => handleInputChange("pass", val)}
                 error={errors.pass}

@@ -65,6 +65,8 @@ module.exports = {
     'text-gray-dark',
     'bg-default-light',
     'bg-default-dark',
+    'bg-lightGray-light',
+    'bg-lightGray-dark',
 
   ],
   theme: {
@@ -121,6 +123,10 @@ module.exports = {
           gray : {
             light: "#828A99",
             dark: "#828A99",
+          },
+          lightGray : {
+            light: "#F2F2F7",
+            dark: "#F2F2F7",
           },
           default : {
             light: "#ffffff",

@@ -73,7 +73,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
                 <InputAuth 
                     icon="IC_Lock" 
                     placeholder='Password' 
-                    isPass={true}
+                    type='pass'
                     value={pass}
                     onChangeText={(val) => handleInputChange("pass", val)}
                     error={errors.pass}

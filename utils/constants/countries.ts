@@ -135,7 +135,6 @@ export const countryCodes = [
     { code: "+968", label: "Oman", flag: "🇴🇲" },
     { code: "+92", label: "Pakistan", flag: "🇵🇰" },
     { code: "+680", label: "Palau", flag: "🇵🇼" },
-    { code: "+970", label: "Palestine", flag: "🇵🇼🇸" },
     { code: "+507", label: "Panama", flag: "🇵🇦" },
     { code: "+675", label: "Papua New Guinea", flag: "🇵🇬" },
     { code: "+595", label: "Paraguay", flag: "🇵🇾" },
