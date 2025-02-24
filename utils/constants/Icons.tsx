@@ -588,12 +588,108 @@ export const IC_Envelope = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_ChevronRight = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 6 10"
+      fill="none"
+    >
+      <Path
+        d="M1 9l4-4-4-4"
+        stroke="#000"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_IDCard = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={20}
+        height={20}
+      >
+        <Path fill="#fff" d="M0 0H20V20H0z" />
+      </Mask>
+      <G mask="url(#a)" stroke="#fff" strokeWidth={1.5}>
+        <Path d="M9.5 9.5h5" strokeLinecap="square" />
+        <Rect x={2} y={4} width={16} height={12} rx={2} />
+        <Path d="M9.5 12.5h5" strokeLinecap="square" />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Passport = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={20}
+        height={20}
+      >
+        <Path fill="#fff" d="M0 0H20V20H0z" />
+      </Mask>
+      <G mask="url(#a)" stroke="#fff">
+        <Rect x={3} y={1} width={14} height={18} rx={2} strokeWidth={1.5} />
+        <Path
+          clipRule="evenodd"
+          d="M10 14a4 4 0 110-8 4 4 0 010 8z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M8.685 6.4h.4a11.37 11.37 0 000 7.2h-.4M11 6.4a11.37 11.37 0 010 7.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M6.4 11.4V11c2.336.78 4.864.78 7.2 0v.4M6.4 9.085a11.37 11.37 0 017.2 0"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
 
 
 export const IconsMap = {
     IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,
-    IC_EyeOff, IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings
-};
+    IC_EyeOff, IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings, 
+    IC_ChevronRight, IC_IDCard, IC_Passport
+  };
 
 export function getIconByString(icon: string) {
     return icon && icon in IconsMap ? IconsMap[icon as keyof typeof IconsMap] : null;

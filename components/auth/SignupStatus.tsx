@@ -59,7 +59,7 @@ function SignupStatus({ handleScreenChange, currentStep } : SignupStatusProps) {
             {/* Buttons */}
             <Box className='gap-3'>
                 <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
-                onPress={() => handleScreenChange(currentStep+1)}
+                onPress={() => handleScreenChange('next')}
                 >
                     <ButtonText className="text-white">
                         Next

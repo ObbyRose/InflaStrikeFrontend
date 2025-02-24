@@ -42,7 +42,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
         }).catch(err => console.error("Failed to open Gmail:", err));
     
         setTimeout(() => {
-            handleScreenChange(2);
+            handleScreenChange('next');
         }, 1000);
     }
 

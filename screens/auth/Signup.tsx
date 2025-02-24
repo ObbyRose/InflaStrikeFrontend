@@ -1,9 +1,11 @@
 import BackAuth from '@/components/auth/BackAuth'
+import SignupCaptureID from '@/components/auth/SignupCaptureID'
 import SignupIDType from '@/components/auth/SignupIDType'
 import SignupMain from '@/components/auth/SignupMain'
 import SignupPersonalInformation from '@/components/auth/SignupPersonalInformation'
 import SignupPhoneNumber from '@/components/auth/SignupPhoneNumber'
 import SignupStatus from '@/components/auth/SignupStatus'
+import SignupVerified from '@/components/auth/SignupVerified'
 import VerifyEmail from '@/components/auth/VerifyEmail'
 import VerifyPhone from '@/components/auth/VerifyPhone'
 import { Box } from '@/components/ui/box'
@@ -17,13 +19,26 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState(7);
+    const [screenStep , setScreenStep ] = useState(0);
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
+    const [finalData, setFinalData] = useState({});
 
-    const handleScreenChange = (newScreenStep: number) => {
-        const direction = newScreenStep < screenStep ? 1 : -1;
+    useEffect(() => {
+        console.log("FINAL DATA: ", finalData);
+    }, [finalData]);
+
+    const handleScreenChange = (newScreenStep: number | 'next', data?: any) => {
+        const direction = newScreenStep === 'next' || newScreenStep > screenStep ? -1 : 1;
         setIsGoingBack(direction === 1);
+
+        // Update finalData
+        if (data) {
+            setFinalData(prevData => ({
+            ...prevData,
+            ...data
+            }));
+        }
 
         // Trigger the animation when changing the screenStep
         Animated.timing(slideAnim, {
@@ -34,7 +49,10 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         }).start(() => {
 
         // After slide-out animation ends, change the screen step
-        setScreenStep(newScreenStep);
+        if(newScreenStep === "next")
+            setScreenStep(prev => prev+1);
+        else
+            setScreenStep(newScreenStep);
     
         // Then, trigger the slide-in animation
         slideAnim.setValue(-direction);
@@ -93,15 +111,17 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                             }),
                         }}
                     >
-                    { screenStep === 0 && <SignupMain handleScreenChange={handleScreenChange} />}
-                    { screenStep === 1 && <VerifyEmail handleScreenChange={handleScreenChange} />}
-                    { screenStep === 2 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
-                    { screenStep === 3 && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
-                    { screenStep === 4 && <VerifyPhone handleScreenChange={handleScreenChange}/>}
-                    { screenStep === 5 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
-                    { screenStep === 6 && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
-                    { screenStep === 7 && <SignupIDType handleScreenChange={handleScreenChange} />}
-                </Animated.View>
+                        { screenStep === 0 && <SignupMain handleScreenChange={handleScreenChange} />}
+                        { screenStep === 1 && <VerifyEmail handleScreenChange={handleScreenChange} />}
+                        { screenStep === 2 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
+                        { screenStep === 3 && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
+                        { screenStep === 4 && <VerifyPhone handleScreenChange={handleScreenChange}/>}
+                        { screenStep === 5 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
+                        { screenStep === 6 && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
+                        { screenStep === 7 && <SignupIDType handleScreenChange={handleScreenChange} />}
+                        { screenStep === 8 && <SignupCaptureID handleScreenChange={handleScreenChange} />}
+                        { screenStep === 9 && <SignupVerified handleScreenChange={handleScreenChange} />}
+                    </Animated.View>
             </Box>
         </Box>
     </ScrollView>

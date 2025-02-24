@@ -10,6 +10,17 @@ import { useTheme } from '@/utils/Themes/ThemeProvider';
 function SignupPhoneNumber({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [prefix, setPrefix] = useState("");
+    const [error, setError] = useState("");
+
+    const handlePhoneSubmit = () => {
+        if(!phoneNumber.trim())
+            setError("Phone number is required")
+        else if(phoneNumber.length < 9)
+            setError("Phone number is too short")
+        else
+            handleScreenChange('next', { phoneNumber: prefix + phoneNumber })
+    }
 
     return (
     <Box className='flex-1 py-5'>
@@ -24,13 +35,13 @@ function SignupPhoneNumber({ handleScreenChange } : SignUpScreensProps) {
                     </Text>
                 </Box>
             
-            <CountryPhoneInput phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber}/>
-
+            <CountryPhoneInput error={error} setError={setError} setPrefix={setPrefix} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber}/>
+            
             </Box>
             {/* Buttons */}
             <Box className='gap-3'>
                 <Button variant={`rounded-solid-${appliedTheme}`}  className='h-fit'
-                onPress={() => handleScreenChange(4)}
+                onPress={() => handlePhoneSubmit()}
                 >
                     <ButtonText className="text-white">
                         Continue

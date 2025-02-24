@@ -54,7 +54,7 @@ function VerifyPhone({ handleScreenChange } : SignUpScreensProps) {
 
         setTimeout(() => {
             setIsLoadingCode(false);
-            handleScreenChange(5);
+            handleScreenChange('next');
         }, 1000);
     }
 
