@@ -22,6 +22,7 @@ import PaymentMethodScreen from './paymentMethods/PaymentMethodScreen';
 import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
 import PaymentMethodAddedScreen from './paymentMethods/PaymentMethodAddedScreen';
 
+
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -34,7 +35,7 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="PaymentMethodAdded" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="Notifications" component={NotificationsScreen} />

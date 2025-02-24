@@ -75,8 +75,8 @@ if (!formattedDate) {
             setIsLoading(true);
             setTimeout(() => {
                 setIsLoading(false);
+                navigation.navigate("PaymentMethodAdded");
             }, 1000);
-            navigation.Navigate("MainApp", { screen: "PaymentMethodAdded" });
         }
     }
 
@@ -105,7 +105,7 @@ if (!formattedDate) {
             </Box>
 
             <Box className="absolute bottom-4 left-4 right-4">
-                <Button onPress={handleSubmitAddCard} className={`bg-button-${appliedTheme} rounded-full`}>
+                <Button onPress={handleSubmitAddCard} className={`bg-button-${appliedTheme} rounded-full h-[4rem]`}>
                     <Text className="text-white text-[16px] font-extrabold">{isLoading ? "Processing..." : "Add Card"}</Text>
                 </Button>
             </Box>

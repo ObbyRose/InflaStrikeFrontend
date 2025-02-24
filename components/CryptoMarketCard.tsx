@@ -5,7 +5,7 @@ import LineChartComponent from "@/components/LineChart";
 import { LucideIcon } from "lucide-react-native";
 
 interface CryptoMarketCardProps {
-    icon: LucideIcon;
+    icon: LucideIcon | React.ElementType;
     name: string;
     symbol: string;
     price: number | null;
