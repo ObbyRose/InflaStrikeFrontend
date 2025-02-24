@@ -12,11 +12,11 @@ function SignupPhoneNumber({ handleScreenChange } : SignUpScreensProps) {
     const [phoneNumber, setPhoneNumber] = useState("");
 
     return (
-    <Box className='flex-1'>
+    <Box className='flex-1 py-5'>
         <Box className='flex-1 justify-between'>
             <Box>
                 {/* Titles */}
-                <Box className='mb-4 gap-2'>
+                <Box className='mb-7 gap-2'>
                     <Text className='text-3xl text-black font-bold'>Phone Number</Text>
                     <Text className={`text-gray-${appliedTheme} text-lg`}>
                         Enter your phone number so we can text

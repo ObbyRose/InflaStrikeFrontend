@@ -62,7 +62,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     const handleToast = () => {
         const toastId = "unique-toast-email-verification";
         if (!toast.isActive(toastId)) {
-            showNewToast(toast, toastId, appliedTheme);
+            showNewToast(toast, toastId, "Success", "Email has been sent to your inbox");
         }
     };
 
