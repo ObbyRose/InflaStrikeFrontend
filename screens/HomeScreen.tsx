@@ -6,12 +6,9 @@ import { Icon } from "@/components/ui/icon";
 import { User } from "lucide-react-native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_Settings } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Settings } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
-    fetchBitcoinHistory,
-    fetchEthereumHistory,
-    fetchXRPHistory,
     fetchBitcoinLivePrice,
     fetchEthereumLivePrice,
     fetchXRPLivePrice,
