@@ -59,10 +59,9 @@ if (!formattedDate) {
     newErrors.cDate = "Invalid expiry date format (MM/YY).";
     valid = false;
 } else {
-    // Ensure expiry date is not in the past
     const [month, year] = formattedDate.split('/').map(num => parseInt(num, 10));
-    const currentYear = new Date().getFullYear() % 100; // Last 2 digits of current year
-    const currentMonth = new Date().getMonth() + 1; // Month is 0-based
+    const currentYear = new Date().getFullYear() % 100;
+    const currentMonth = new Date().getMonth() + 1;
 
     if (year < currentYear || (year === currentYear && month < currentMonth)) {
         newErrors.cDate = "Card is expired.";
