@@ -76,8 +76,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
             <Text className='text-4xl text-black font-bold mb-5'>Personal information</Text>
             {/* Inputs */}
             <InputAuth 
-                placeholder='Birthday: MM / DD / YYYY'
-                isBirthday={true}
+                type='birthday'
                 value={birthday}
                 onChangeText={(val) => handleInputChange("birthday", val)}
                 error={errors.birthday}
