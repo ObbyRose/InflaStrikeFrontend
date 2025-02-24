@@ -65,13 +65,15 @@ module.exports = {
     'text-gray-dark',
     'bg-default-light',
     'bg-default-dark',
+    'bg-lightGray-light',
+    'bg-lightGray-dark',
 
   ],
   theme: {
     extend: {
       colors: {
           button: {
-            light: '#4837b3',
+            light: '#4A3EF6',
             dark: '#363636',
           },
           text: {
@@ -121,6 +123,10 @@ module.exports = {
           gray : {
             light: "#828A99",
             dark: "#828A99",
+          },
+          lightGray : {
+            light: "#F2F2F7",
+            dark: "#F2F2F7",
           },
           default : {
             light: "#ffffff",
@@ -272,7 +278,7 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#ffffff',
+          light: '#ffffff', // #f2f2f2
           dark: '#2b2b2b',
         },
         indicator: {

@@ -110,7 +110,7 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
                 error={errors.lName}
             />
             <InputAuth 
-                icon="IC_Email" 
+                icon="IC_Email"
                 placeholder='Email'
                 value={email}
                 onChangeText={(val) => handleInputChange("email", val)}
@@ -119,7 +119,7 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
             <InputAuth 
                 icon="IC_Lock" 
                 placeholder='Password' 
-                isPass={true}
+                type='pass'
                 value={pass}
                 onChangeText={(val) => handleInputChange("pass", val)}
                 error={errors.pass}
@@ -155,10 +155,10 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
 
             { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
             {/* Login Button & Forgot Pass */}
-            <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
+            <Button variant={`rounded-solid-${appliedTheme}`} className="h-fit"
             onPress={handleSubmitSignup}
             >
-                <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign Up"}</ButtonText>
+                <ButtonText className="text-white">{isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Sign Up"}</ButtonText>
             </Button>
         </Box>
     </Box>

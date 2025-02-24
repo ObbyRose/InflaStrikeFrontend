@@ -588,11 +588,266 @@ export const IC_Envelope = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_ProfileSettings = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+      >
+        <Path fill="#fff" d="M0 0H24V24H0z" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M7 7a5 5 0 1010 0A5 5 0 007 7zM4 19.333V22h16v-2.667A5.333 5.333 0 0014.667 14H9.333A5.333 5.333 0 004 19.333z"
+          fill="#66F"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_CreditCard = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+      >
+        <Path fill="#fff" d="M0 0H24V24H0z" />
+      </Mask>
+      <G mask="url(#a)" stroke="#2DD4BF" strokeWidth={1.5}>
+        <Path
+          clipRule="evenodd"
+          d="M19 5a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h14z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path d="M3.5 9.5h17" strokeLinecap="square" />
+        <Path d="M14.5 13.5h3M16.5 15.5h1" strokeLinecap="round" />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Phone = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <Path
+        d="M19.519 15.578L17.542 13.6a1.634 1.634 0 00-1.163-.481c-.439 0-.852.17-1.163.481l-.69.69c-.38.38-.977.518-1.683.389-.786-.144-1.588-.593-2.259-1.264-.671-.67-1.12-1.473-1.263-2.259-.13-.706.009-1.303.389-1.683l.689-.69c.31-.31.482-.723.482-1.163 0-.44-.171-.852-.482-1.163L8.422 4.482A1.634 1.634 0 007.26 4c-.439 0-.852.171-1.163.482l-.69.69c-.64.64-1.07 1.463-1.273 2.443-.189.906-.176 1.905.037 2.968.423 2.108 1.625 4.276 3.298 5.95 1.673 1.672 3.841 2.875 5.95 3.297a8.32 8.32 0 001.633.17c.463 0 .91-.044 1.335-.133.98-.204 1.802-.633 2.444-1.274l.689-.689a1.647 1.647 0 000-2.326z"
+        stroke="#38BDF8"
+        strokeWidth={1.5}
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_AddCard = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={50}
+      height={50}
+      viewBox="0 0 40 40"
+      fill="none"
+    >
+      <Rect width={40} height={40} rx={20} fill="#fff" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Rect width={40} height={40} rx={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect x={10} y={12.5} width={20} height={15} rx={4} fill="#4A3EF6" />
+        <Rect
+          x={12.5}
+          y={20.8333}
+          width={4.16667}
+          height={4.16667}
+          rx={1.33333}
+          fill="#fff"
+        />
+        <Path
+          fill="#fff"
+          fillOpacity={0.596185}
+          d="M10 15.8333H30V19.166629999999998H10z"
+        />
+        <Rect
+          x={23.3333}
+          y={21.6667}
+          width={4.16667}
+          height={0.833332}
+          rx={0.416666}
+          fill="#fff"
+        />
+        <Rect
+          x={25}
+          y={23.3333}
+          width={2.5}
+          height={0.833334}
+          rx={0.416667}
+          fill="#fff"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_CardAdded = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={208}
+      height={200}
+      viewBox="0 0 208 200"
+      fill="none"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M172.778 67c0-6.627-5.372-12-12-12H52.948c-6.628 0-12 5.373-12 12v46.247a234.392 234.392 0 0010.254-5.047s19.472-18.275 26.487-12.466c7.015 5.808 4.585 15.51-12.523 28.713-3.946 3.433-5.985 5.859-8.104 8.38-1.89 2.249-3.844 4.573-7.27 7.754 1.005.273 2.063.419 3.156.419h107.83c6.628 0 12-5.373 12-12V67z"
+        fill="#4A3EF6"
+      />
+      <Path
+        fill="#D8D8D8"
+        fillOpacity={0.801344}
+        d="M40.9478 71H172.7778V87H40.9478z"
+      />
+      <Rect
+        x={75.9028}
+        y={106}
+        width={63.9178}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Rect
+        x={75.9028}
+        y={114}
+        width={63.9178}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Rect
+        x={75.9028}
+        y={122}
+        width={31.9589}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Path
+        d="M41.301 100l-10.82 2.86c-4.614 1.399-4.384 7.934-3.668 12.304.366 2.234 2.663 3.408 4.758 2.554 4.056-1.654 11.109-4.767 20.202-9.718 0 0 19.15-18.613 26.266-12.928 7.115 5.686 4.855 15.428-12.02 28.928-8.877 8-7.899 10.574-20.502 21.254-12.603 10.68-24.932 5.642-28.132 3.668"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Path
+        clipRule="evenodd"
+        d="M76.037 99.233c4.501 4.054-1.118 10.766-3.522 8.313l-4.333-3.929s-2.372-1.803-1.381-2.842c.99-1.04 5.394-5.003 9.236-1.542z"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M51.933 34.5v4M53.93 36.5h-3.994M163.79 158.5v4M165.787 160.5h-3.995"
+        stroke="#4A3EF6"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+      <Path
+        d="M187.448 89.628a1.937 1.937 0 01-1.935-1.939c0-1.072.867-1.939 1.935-1.939s1.936.867 1.936 1.939a1.94 1.94 0 01-1.936 1.94z"
+        stroke="#69DB7C"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M23.97 73.5v4M25.967 75.5h-3.995"
+        stroke="#DB7F69"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M182.864 131.047c-1.135 3.06-2.851 5.72-5.102 7.906-2.562 2.489-5.916 4.466-9.97 5.877a3.167 3.167 0 01-.412.112 3.171 3.171 0 01-.557.058h-.037a3.138 3.138 0 01-1.003-.169c-4.059-1.408-7.418-3.385-9.982-5.873-2.252-2.187-3.968-4.845-5.101-7.905-2.06-5.563-1.943-11.691-1.849-16.615l.002-.076c.019-.406.031-.833.038-1.305.034-2.316 1.885-4.232 4.213-4.361 4.855-.269 8.61-1.844 11.819-4.955l.028-.026a2.71 2.71 0 013.671 0l.028.026c3.209 3.111 6.964 4.686 11.818 4.955 2.329.129 4.18 2.045 4.214 4.361.007.475.019.901.038 1.305l.001.032c.094 4.934.211 11.074-1.857 16.653z"
+        fill="#69DB7C"
+      />
+      <Path
+        d="M159.992 124.4l4.9 5.2 10.5-11.2"
+        stroke="#fff"
+        strokeWidth={2.8}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M173.278 38.5l.998-3M176.908 42.024l2.825-1.414"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+      <Path
+        d="M44.778 85.162S37.208 82.58 10.82 93"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M168.198 38.828L166.786 36"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
 
 
 export const IconsMap = {
-    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,
-    IC_EyeOff, IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings
+    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail
+    ,IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings, IC_AddCard, IC_CardAdded
 };
 
 export function getIconByString(icon: string) {

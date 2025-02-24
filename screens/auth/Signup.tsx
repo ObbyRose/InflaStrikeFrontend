@@ -1,5 +1,7 @@
 import BackAuth from '@/components/auth/BackAuth'
+import SignupIDType from '@/components/auth/SignupIDType'
 import SignupMain from '@/components/auth/SignupMain'
+import SignupPersonalInformation from '@/components/auth/SignupPersonalInformation'
 import SignupPhoneNumber from '@/components/auth/SignupPhoneNumber'
 import SignupStatus from '@/components/auth/SignupStatus'
 import VerifyEmail from '@/components/auth/VerifyEmail'
@@ -15,7 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState(0);
+    const [screenStep , setScreenStep ] = useState(7);
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
 
@@ -97,6 +99,8 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                     { screenStep === 3 && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
                     { screenStep === 4 && <VerifyPhone handleScreenChange={handleScreenChange}/>}
                     { screenStep === 5 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
+                    { screenStep === 6 && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
+                    { screenStep === 7 && <SignupIDType handleScreenChange={handleScreenChange} />}
                 </Animated.View>
             </Box>
         </Box>
