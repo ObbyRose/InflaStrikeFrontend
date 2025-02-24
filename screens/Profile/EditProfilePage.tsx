@@ -84,7 +84,7 @@ export default function EditProfilePage({
           {IconComponent && <IconComponent />}
         </Button>
       </View>
-      <View>
+      <View className="w-full">
         <View className="self-center">
           <Image source={{ uri: user.image }} className="h-[150px] w-[150px] rounded-full" />
           <Entypo
@@ -143,7 +143,9 @@ export default function EditProfilePage({
           <CountryPhoneInput phoneNumber={phoneNumber} updateField={setPhoneNumber} />
         </View>
         <Button className="w-[95%] rounded-2xl bg-[#0066FF]">
-          <ButtonText onPress={handleSubmitNewUser}>Save</ButtonText>
+          <ButtonText onPress={handleSubmitNewUser} className="self-center">
+            Save
+          </ButtonText>
         </Button>
       </View>
     </View>
