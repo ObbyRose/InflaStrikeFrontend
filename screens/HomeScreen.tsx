@@ -98,11 +98,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     <Avatar className="bg-indigo-600" size="lg">
                         <Icon as={User} size="xl" className="stroke-white" />
                     </Avatar>
+
                     <Box className="flex-row items-center gap-2 mt-3">
+                    <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Portfolio" })}>
                         <Box className="flex-col items-center gap-1">
                             <IC_PieGraph className="h-7 w-7" />
                             <Text className="text-2xs font-semibold text-[#969AA0]">My Portfolio</Text>
                         </Box>
+                    </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Settings" })}>
                             <Box className="flex-col items-center gap-1">

@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
@@ -39,7 +40,9 @@ const PortfolioScreen = () => {
   }));
 
   return (
-    <View style={styles.container} className="h-full w-full">
+    
+    <Box style={styles.container}>
+      <Svg>
       {/* <Text style={styles.title}>Your Portfolio</Text> */}
       <PieChart
         style={{ height: widthAndHeight }}
@@ -53,10 +56,11 @@ const PortfolioScreen = () => {
         }))}
         innerRadius={50}
         outerRadius={100}
-      />
+        />
+      </Svg>
 
       {/* {selectedSlice && <Text style={styles.selectedSliceText}>Selected: {selectedSlice}</Text>} */}
-    </View>
+    </Box>
   );
 };
 
