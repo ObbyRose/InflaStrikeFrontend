@@ -45,7 +45,10 @@ const Login: React.FC<Props> = ({ navigation }) => {
         if (valid) {
             setIsLoading(true);
             console.log({ email, password: pass });
-            setTimeout(() => setIsLoading(false), 1000);
+            setTimeout(() =>  {
+                setIsLoading(false)
+                navigation.navigate("MainApp", { screen: "Home" });
+            }, 1000);
         }
     }
 
@@ -78,7 +81,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 
                 { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
                 {/* Login Button & Forgot Pass */}
-                <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit p-3"
+                <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
                 onPress={handleSubmitLogin}
                 >
                     <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign In"}</ButtonText>

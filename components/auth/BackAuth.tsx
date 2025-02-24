@@ -4,25 +4,26 @@ import { Box } from "../ui/box";
 import { IC_ArrowLeft } from "@/utils/constants/Icons";
 import { TouchableOpacity } from "react-native";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import { SignUpScreensProps } from "@/types/NavigationTypes";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
 
-interface BackAuthProps {
+interface BackAuthProps extends SignUpScreensProps {
     screenStep: number;
-    setScreenStep: React.Dispatch<React.SetStateAction<number>>;
     navigation: NavigationProp<ParamListBase>;
 }
 
-function BackAuth({ screenStep, setScreenStep, navigation }: BackAuthProps) {
-
+function BackAuth({ screenStep, handleScreenChange, navigation }: BackAuthProps) {
+    const { appliedTheme } = useTheme();
     function handleBackPress() {
         if(screenStep === 0)
             navigation.navigate("Login");
         else 
-            setScreenStep(prev => prev - 1)
+            handleScreenChange(screenStep - 1);
     }
 
     return (
         <SafeAreaView>
-            <Box className="p-4">
+            <Box className={`p-4 bg-background-${appliedTheme}`}>
                 <TouchableOpacity
                     className="self-start p-2"
                     onPress={() => handleBackPress()}
