@@ -25,7 +25,7 @@ function SignupStatus({ handleScreenChange, currentStep } : SignupStatusProps) {
             time: 1
         },
         {
-            idx: 4,
+            idx: 5,
             text: "Step3. Verify your identity",
             time: 5
         }

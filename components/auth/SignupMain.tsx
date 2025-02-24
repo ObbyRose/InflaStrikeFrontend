@@ -155,10 +155,10 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
 
             { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
             {/* Login Button & Forgot Pass */}
-            <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
+            <Button variant={`rounded-solid-${appliedTheme}`} className="h-fit"
             onPress={handleSubmitSignup}
             >
-                <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign Up"}</ButtonText>
+                <ButtonText className="text-white">{isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Sign Up"}</ButtonText>
             </Button>
         </Box>
     </Box>

@@ -272,7 +272,7 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#ffffff',
+          light: '#ffffff', // #f2f2f2
           dark: '#2b2b2b',
         },
         indicator: {
