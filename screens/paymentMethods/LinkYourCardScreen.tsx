@@ -69,8 +69,6 @@ if (!formattedDate) {
     }
 }
 
-
-
         setErrorByFields(newErrors);
 
         if (valid) {
