@@ -5,8 +5,9 @@ import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { useFormInput } from '@/hooks/useFormInput'
 import InputAuth from '@/components/auth/InputAuth'
 import { Button } from '@/components/ui/button'
+import { Props } from '@/types/NavigationTypes'
 
-const LinkYourCardScreen = () => {
+const LinkYourCardScreen:React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -71,6 +72,7 @@ const LinkYourCardScreen = () => {
             setTimeout(() => {
                 setIsLoading(false);
             }, 1000);
+            navigation.Navigate("MainApp", { screen: "PaymentMethodAdded" });
         }
     }
 
