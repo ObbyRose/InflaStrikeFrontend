@@ -53,7 +53,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
     }
 
     return (
-    <Box className={`h-[90%] mt-auto p-10 justify-between bg-background-${appliedTheme}`}>
+    <Box className={`h-full p-10 pt-36 justify-between bg-background-${appliedTheme}`}>
         <Box>
             {/* Title */}
             <Box className='my-10 gap-2'>
