@@ -6,13 +6,13 @@ import { IM_Mailbox } from '@/utils/constants/Images';
 import { Button, ButtonSpinner, ButtonText } from '../ui/button';
 import { useToast } from '../ui/toast';
 import { showNewToast } from '@/utils/constants/Toasts';
-import { Linking } from 'react-native';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
+import { Input, InputField } from '../ui/input';
 
 function VerifyPhone({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     const toast = useToast();
-    const [isLoadingEmail, setIsLoadingEmail] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [timer, setTimer] = useState(60);
     const [isResendDisabled, setIsResendDisabled] = useState(false);
 
@@ -31,36 +31,29 @@ function VerifyPhone({ handleScreenChange } : SignUpScreensProps) {
         }
     }, [timer, isResendDisabled]);
 
-    function handleCheckInbox() {    
-        // Open Gmail app
-        Linking.canOpenURL('googlegmail://').then((supported) => {
-            if (supported) {
-                Linking.openURL('googlegmail://');
-            } else {
-                Linking.openURL('https://mail.google.com');
-            }
-        }).catch(err => console.error("Failed to open Gmail:", err));
-    
+    function handleSubmit() {    
+        
+        
         setTimeout(() => {
-            handleScreenChange(2);
+            handleScreenChange(5);
         }, 1000);
     }
 
-    function handleResendEmail() {
-        setIsLoadingEmail(true);
+    function handleResendPhone() {
+        setIsLoading(true);
 
         // Reset Timer
         setIsResendDisabled(true);
         setTimer(60);
 
         setTimeout(() => {
-            setIsLoadingEmail(false);
+            setIsLoading(false);
             handleToast();
         }, 1000);
     }
 
     const handleToast = () => {
-        const toastId = "unique-toast";
+        const toastId = "unique-toast-phone-verification";
         if (!toast.isActive(toastId)) {
             showNewToast(toast, toastId, appliedTheme);
         }
@@ -74,27 +67,29 @@ function VerifyPhone({ handleScreenChange } : SignUpScreensProps) {
         <Box className='flex-1 justify-between'>
             {/* Titles */}
             <Box className='gap-2'>
-                <Text className='text-3xl text-black font-bold text-center'>Verify your email</Text>
+                <Text className='text-3xl text-black font-bold text-center'>Enter authentication code</Text>
                 <Text className={`text-gray-${appliedTheme} text-lg text-center`}>
-                    We sent a verification email to. Please tap
-                    the link inside that email to continue.
+                    Enter the 7-digit code we just texted to your phone number
                 </Text>
             </Box>
+            <Input>
+                <InputField />
+            </Input>
             {/* Buttons */}
             <Box className='gap-3'>
                 <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
-                onPress={handleCheckInbox}
+                onPress={handleSubmit}
                 >
                     <ButtonText className="text-white">
-                        Check my inbox
+                        Continue
                     </ButtonText>
                 </Button>
                 <Button variant={`rounded-outline-${appliedTheme}`} className="h-fit"
-                    onPress={handleResendEmail}
+                    onPress={handleResendPhone}
                     disabled={isResendDisabled}
                     >
                         <ButtonText className="text-[#828A99]">
-                            {isLoadingEmail ? <ButtonSpinner color={"black"} className='h-6'/> : 
+                            {isLoading ? <ButtonSpinner color={"black"} className='h-6'/> : 
                             isResendDisabled ? `Resend in ${timer}s` : "Resend email"}
                         </ButtonText>
                     </Button>

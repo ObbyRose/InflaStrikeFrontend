@@ -12,7 +12,7 @@ import { useTheme } from '@/utils/Themes/ThemeProvider';
 function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     const toast = useToast();
-    const [isLoadingEmail, setIsLoadingEmail] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [timer, setTimer] = useState(60);
     const [isResendDisabled, setIsResendDisabled] = useState(false);
 
@@ -47,14 +47,14 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     }
 
     function handleResendEmail() {
-        setIsLoadingEmail(true);
+        setIsLoading(true);
 
         // Reset Timer
         setIsResendDisabled(true);
-        setTimer(1);
+        setTimer(60);
 
         setTimeout(() => {
-            setIsLoadingEmail(false);
+            setIsLoading(false);
             handleToast();
         }, 1000);
     }
@@ -94,7 +94,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
                     disabled={isResendDisabled}
                     >
                         <ButtonText className="text-[#828A99]">
-                            {isLoadingEmail ? <ButtonSpinner color={"black"} className='h-6'/> : 
+                            {isLoading ? <ButtonSpinner color={"black"} className='h-6'/> : 
                             isResendDisabled ? `Resend in ${timer}s` : "Resend email"}
                         </ButtonText>
                     </Button>
