@@ -30,16 +30,18 @@ const LinkYourCardScreen:React.FC<Props> = ({ navigation }) => {
             valid = false;
         }
 
-        if (!cNumber.trim()) {
-            newErrors.cNumber = "Card number is required.";
-            valid = false;
-        } else if (!/^\d{16}$/.test(cNumber)) {
-            newErrors.cNumber = "Card number must be exactly 16 digits.";
-            valid = false;
-        } else if (!/^4\d{15}$/.test(cNumber) && !/^(5[1-5]\d{14}|2[2-7]\d{14})$/.test(cNumber)) {
-            newErrors.cNumber = "Invalid card number. Only Visa and Mastercard are accepted.";
-            valid = false;
-        }
+const formattedCardNumber = cNumber.replace(/\s/g, '');
+if (!formattedCardNumber) {
+    newErrors.cNumber = "Card number is required.";
+    valid = false;
+} else if (!/^\d{16}$/.test(formattedCardNumber)) {
+    newErrors.cNumber = "Card number must be exactly 16 digits.";
+    valid = false;
+} else if (!/^4\d{15}$/.test(formattedCardNumber) && !/^(5[1-5]\d{14}|2[2-7]\d{14})$/.test(formattedCardNumber)) {
+    newErrors.cNumber = "Invalid card number. Only Visa and Mastercard are accepted.";
+    valid = false;
+}
+
 
         if (!postalCode.trim()) {
             newErrors.postalCode = "Please enter a postal code.";
@@ -49,21 +51,26 @@ const LinkYourCardScreen:React.FC<Props> = ({ navigation }) => {
             valid = false;
         }
 
-        if (!cDate.trim()) {
-            newErrors.cDate = "Expiry date is required.";
-            valid = false;
-        } else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(cDate)) {
-            newErrors.cDate = "Invalid expiry date format (MM/YY).";
-            valid = false;
-        }
+const formattedDate = cDate.replace(/\s/g, '');
+if (!formattedDate) {
+    newErrors.cDate = "Expiry date is required.";
+    valid = false;
+} else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(formattedDate)) {
+    newErrors.cDate = "Invalid expiry date format (MM/YY).";
+    valid = false;
+} else {
+    // Ensure expiry date is not in the past
+    const [month, year] = formattedDate.split('/').map(num => parseInt(num, 10));
+    const currentYear = new Date().getFullYear() % 100; // Last 2 digits of current year
+    const currentMonth = new Date().getMonth() + 1; // Month is 0-based
 
-        if (!CVC.trim()) {
-            newErrors.CVC = "CVC is required.";
-            valid = false;
-        } else if (!/^\d{3}$/.test(CVC)) {
-            newErrors.CVC = "Invalid CVC. Must be exactly 3 digits.";
-            valid = false;
-        }
+    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+        newErrors.cDate = "Card is expired.";
+        valid = false;
+    }
+}
+
+
 
         setErrorByFields(newErrors);
 
@@ -85,12 +92,12 @@ const LinkYourCardScreen:React.FC<Props> = ({ navigation }) => {
 
                 <Box>
                     <InputAuth placeholder="Name on card" value={cName} error={errors.cName} onChangeText={(val) => handleInputChange("cName", val)} />
-                    <InputAuth placeholder="Card number" value={cNumber} error={errors.cNumber} maxLength={16} keyboardType="numeric" onChangeText={(val) => handleInputChange("cNumber", val)} />
+                    <InputAuth placeholder="Card number" value={cNumber} error={errors.cNumber} type='card number' maxLength={19} keyboardType="numeric" onChangeText={(val) => handleInputChange("cNumber", val)} />
                 </Box>
 
                 <Box className="flex flex-row gap-2 justify-center">
                     <Box className="w-[50%]">
-                        <InputAuth placeholder="MM/YY" value={cDate} error={errors.cDate} isBirthday={true} maxLength={5} keyboardType="numeric" onChangeText={(val) => handleInputChange("cDate", val)} />
+                        <InputAuth placeholder="MM/YY" value={cDate} error={errors.cDate} type='card date' maxLength={5} keyboardType="numeric" onChangeText={(val) => handleInputChange("cDate", val)} />
                     </Box>
                     <Box className="w-[50%]">
                         <InputAuth placeholder="CVC" value={CVC} error={errors.CVC} keyboardType="numeric" maxLength={3} onChangeText={(val) => handleInputChange("CVC", val)} />
