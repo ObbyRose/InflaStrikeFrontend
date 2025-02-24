@@ -94,10 +94,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
             <Box className={`p-4 bg-background-${appliedTheme} flex gap-2`}>
+
                 <Box className="flex-row justify-between items-center">
-                    <Avatar className="bg-indigo-600" size="lg">
-                        <Icon as={User} size="xl" className="stroke-white" />
-                    </Avatar>
+                    <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Profile" })} activeOpacity={0.7}>
+                        <Avatar className="bg-indigo-600" size="lg">
+                            <Icon as={User} size="xl" className="stroke-white" />
+                        </Avatar>
+                    </TouchableOpacity>
 
                     <Box className="flex-row items-center gap-2 mt-3">
                     <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Portfolio" })}>
