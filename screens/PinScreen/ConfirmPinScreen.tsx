@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import { IC_FaceID, IC_Fingerprint } from '@/utils/constants/Icons';
+import BackHeader from '@/components/BackHeader';
 
 const { height } = Dimensions.get('window');
 
@@ -49,7 +50,7 @@ const ConfirmPinScreen: React.FC<Props> = ({ navigation, route }) => {
         const isEnrolled = await LocalAuthentication.isEnrolledAsync();
 
         if (!hasHardware || !isEnrolled) {
-            setMessage('⚠️ Fingerprint authentication not available.');
+            setMessage('Fingerprint authentication not available.');
             return;
         }
 
@@ -71,6 +72,7 @@ const ConfirmPinScreen: React.FC<Props> = ({ navigation, route }) => {
 
     return (
         <VStack className="flex-1 bg-white px-6" style={{ height }}>
+            <BackHeader title="Confirm PIN" />
             {/* Top Section - Title */}
             <VStack className="items-center mt-20">
                 <Text className="text-3xl font-bold text-gray-900">

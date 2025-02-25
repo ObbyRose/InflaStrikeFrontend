@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import { IC_FaceID, IC_Fingerprint } from '@/utils/constants/Icons';
+import BackHeader from '@/components/BackHeader';
 
 const { height } = Dimensions.get('window');
 
@@ -28,9 +29,12 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
         if (pin.length === 4) {
             setMessage('PIN Successfully Changed!');
             setTimeout(() => {
-                navigation.navigate('MainApp',{screen: 'Home'});
                 clearPin();
-            }, 500);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'MainApp', params: { screen: 'Home' } }]
+                });
+            }, 300);
         } else {
             setMessage('Please enter a 4-digit PIN.');
             Vibration.vibrate();
@@ -50,8 +54,11 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
             if (result.success) {
                 setMessage('Fingerprint Confirmed!');
                 setTimeout(() => {
-                    navigation.navigate('MainApp',{screen: 'Home'});
-                }, 500);
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'MainApp', params: { screen: 'Home' } }],
+                    });
+                }, 300);
             } else {
                 setMessage('Fingerprint Authentication Failed.');
                 Vibration.vibrate();
@@ -64,6 +71,8 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <VStack className="flex-1 bg-white px-6" style={{ height }}>
+            <BackHeader title="Confirm PIN Change" />
+            
             {/* Top Section - Title */}
             <VStack className="items-center mt-20">
                 <Text className="text-3xl font-bold text-gray-900">Set New PIN</Text>
@@ -114,6 +123,7 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
                 ))}
             </VStack>
 
+            {/* Status Message (Fixed at Bottom) */}
             <VStack className="items-center pb-6">
                 {message && (
                     <Text className={message.includes('Successfully') ? 'text-green-500' : 'text-red-500'}>

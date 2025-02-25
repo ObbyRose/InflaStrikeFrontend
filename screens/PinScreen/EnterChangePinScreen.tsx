@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Dimensions, Vibration } from 'react-native';
 import usePinStore from '../../context/pinStore';
 import * as LocalAuthentication from 'expo-local-authentication';
@@ -10,31 +10,31 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { IC_FaceID, IC_Fingerprint } from '@/utils/constants/Icons';
 import { Props } from '@/types/NavigationTypes';
+import BackHeader from '@/components/BackHeader';
 
 const { height } = Dimensions.get('window');
 
 const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
-    const { pin, setPin, clearPin } = usePinStore();
+    const { pin, setPin, clearPin, deleteLastDigit } = usePinStore();
     const [message, setMessage] = useState<string>('');
     const { appliedTheme } = useTheme();
-    const storedPin = '1234'; // Replace with stored PIN from secure storage
+    const storedPin = '1234'; // Replace with actual stored PIN from secure storage
 
-    useEffect(() => {
-        if (pin.length === 4) {
-            handlePinVerification();
-        }
-    }, [pin]);
-
-    const handlePinVerification = () => {
-        if (pin === storedPin) {
-            navigation.navigate('ChangePin');
-            clearPin();
+    const handlePinVerification = (updatedPin: string) => {
+        console.log('Checking PIN:', updatedPin); // Debugging to verify the correct PIN is being checked
+        if (updatedPin === storedPin) {
+            setMessage('PIN Verified!');
+            setTimeout(() => {
+                clearPin();
+                navigation.navigate('ChangePin');
+            }, 300);
         } else {
             setMessage('Incorrect PIN. Try again.');
             Vibration.vibrate();
-            clearPin();
+            setTimeout(clearPin, 500);
         }
     };
+    
 
     const handleFingerprintVerification = async () => {
         const hasHardware = await LocalAuthentication.hasHardwareAsync();
@@ -47,19 +47,22 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
             });
 
             if (result.success) {
-                navigation.navigate('ChangePin');
+                setMessage('Fingerprint Verified!');
+                setTimeout(() => navigation.navigate('ChangePin'), 300);
             } else {
-                setMessage('Fingerprint authentication failed.');
+                setMessage('Fingerprint Authentication Failed.');
                 Vibration.vibrate();
             }
         } else {
-            setMessage('Fingerprint authentication not available.');
+            setMessage('Fingerprint Authentication Not Available.');
             Vibration.vibrate();
         }
     };
 
     return (
         <VStack className="flex-1 bg-white px-6" style={{ height }}>
+            <BackHeader title="Change PIN" />
+
             {/* Top Section - Title */}
             <VStack className="items-center mt-20">
                 <Text className="text-3xl font-bold text-gray-900">Enter Current PIN</Text>
@@ -84,7 +87,7 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9],
-                    ['face', 0, 'fingerprint'],
+                    ['del', 0, 'fingerprint'],
                 ].map((row, rowIndex) => (
                     <HStack key={rowIndex} className="justify-center gap-6">
                         {row.map((num, index) => (
@@ -92,18 +95,18 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
                                 key={index}
                                 className="w-20 h-20 border bg-white border-black rounded-full items-center justify-center"
                                 onPress={() => {
-                                    if (typeof num === 'number') setPin(num.toString());
-                                    if (num === 'face') console.log('Face ID Triggered');
+                                    if (typeof num === 'number') {
+                                        setPin(num.toString(), handlePinVerification);
+                                    }
+                                    if (num === 'del') deleteLastDigit();
                                     if (num === 'fingerprint') handleFingerprintVerification();
                                 }}
                             >
                                 {num === 'fingerprint' ? (
                                     <IC_Fingerprint className="text-2xl text-button-light" />
-                                ) : num === 'face' ? (
-                                    <IC_FaceID className="text-2xl text-button-light" />
                                 ) : (
                                     <Text className="text-2xl font-bold text-button-light">
-                                        {typeof num === 'number' ? num : ''}
+                                        {num === 'del' ? '⌫' : num}
                                     </Text>
                                 )}
                             </Button>
@@ -112,9 +115,12 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
                 ))}
             </VStack>
 
+            {/* Status Message */}
             <VStack className="items-center pb-6">
                 {message && (
-                    <Text className="text-red-500">{message}</Text>
+                    <Text className={message.includes('Verified') ? 'text-green-500' : 'text-red-500'}>
+                        {message}
+                    </Text>
                 )}
             </VStack>
         </VStack>
