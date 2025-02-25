@@ -23,43 +23,43 @@ import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
 import PaymentMethodAddedScreen from './paymentMethods/PaymentMethodAddedScreen';
 import CoinScreen from './market/CoinScreen';
 
-
 const Stack = createStackNavigator();
+const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
+
+// 🎯 New Stack for Settings Screens (Not Wrapped by Layout)
+const SettingsNavigator = () => (
+  <SettingsStack.Navigator screenOptions={{ headerShown: false }}>
+    <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+    <SettingsStack.Screen name="Preferences" component={PreferencesScreen} />
+    <SettingsStack.Screen name="Support" component={SupportScreen} />
+    <SettingsStack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
+    <SettingsStack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
+    <SettingsStack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
+    <SettingsStack.Screen name="LinkYourCard" component={LinkYourCardScreen} />
+    <SettingsStack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />
+  </SettingsStack.Navigator>
+);
 
 const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainApp">
+        {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
 
+        {/* Main App with Layout */}
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Markets" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="Notifications" component={NotificationsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Savings" component={SavingsScreen} />
-
-                 {/*Settings Section */}
-                <Stack.Screen name="Settings" component={SettingsScreen} />
-                <Stack.Screen name="Preferences" component={PreferencesScreen} />
-                <Stack.Screen name="Support" component={SupportScreen} />
-                <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
-                <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
-
-                {/*Settings-Profile Settings-Payment Methods Section */}
-                <Stack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
-                <Stack.Screen name="LinkYourCard" component={LinkYourCardScreen} />
-                <Stack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />
-
-                {/* Market */}
                 <Stack.Screen name="Markets" component={MarketsScreen} />
                 <Stack.Screen name="Coin" component={CoinScreen} />
-
-
                 <Stack.Screen name="Chat" component={ChatScreen} />
                 <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />
@@ -68,6 +68,9 @@ const StackNavigator = () => {
             </Layout>
           )}
         </Stack.Screen>
+
+        {/* Separate Settings Stack (Not Wrapped by Layout) */}
+        <Stack.Screen name="SettingsStack" component={SettingsNavigator} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

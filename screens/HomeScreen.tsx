@@ -107,7 +107,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         </Box>
                     </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Settings" })}>
+                        <TouchableOpacity onPress={() => navigation.navigate("SettingsStack", { screen: "Settings" })}>
                             <Box className="flex-col items-center gap-1">
                                 <IC_Settings className="h-7 w-7" />
                                 <Text className="ml-2 text-2xs font-semibold text-[#969AA0]">Settings</Text>
