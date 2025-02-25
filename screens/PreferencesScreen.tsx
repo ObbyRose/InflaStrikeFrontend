@@ -16,6 +16,7 @@ import {
   ActionsheetItem,
   ActionsheetItemText,
 } from "@/components/ui/actionsheet";
+import BackHeader from "@/components/BackHeader";
 
 const PreferencesScreen: React.FC = () => {
     const { appliedTheme } = useTheme();
@@ -25,6 +26,7 @@ const PreferencesScreen: React.FC = () => {
 
     return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
+            <BackHeader title="Preferences" />
             {/* Currency Selection */}
             <TouchableOpacity activeOpacity={0.7} onPress={() => setIsCurrencyOpen(true)} className="border border-gray-200 rounded-lg p-4 flex-row justify-between items-center bg-white mb-3">
                 <Text className="text-black font-semibold text-md">Currency</Text>

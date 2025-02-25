@@ -20,6 +20,7 @@ import {
     fetchXRPLineData
 } from "../utils/api/BinanceAPI";
 import { Props } from "@/types/NavigationTypes";
+import BackHeader from "@/components/BackHeader";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -91,7 +92,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
             <Box className={`p-4 bg-background-${appliedTheme} h-full flex gap-2`}>
-
                 <Box className="flex-row justify-between items-center mt-4">
                     <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Profile" })} activeOpacity={0.7}>
                         <Avatar className="bg-indigo-600" size="lg">

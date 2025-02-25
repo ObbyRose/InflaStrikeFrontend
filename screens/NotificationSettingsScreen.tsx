@@ -17,6 +17,7 @@ import {
     ActionsheetItem,
     ActionsheetItemText,
 } from "@/components/ui/actionsheet";
+import BackHeader from "@/components/BackHeader";
 
 const NotificationSettings: React.FC = () => {
     const { appliedTheme } = useTheme();
@@ -51,6 +52,7 @@ const NotificationSettings: React.FC = () => {
 
         return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
+            <BackHeader title="Notification Settings" />
             {/* Push Notifications Section */}
             <Text className="text-gray-500 font-bold text-[16px]">Push Notifications</Text>
             <Box className="flex-row justify-between items-center">
@@ -58,7 +60,7 @@ const NotificationSettings: React.FC = () => {
                 <Switch 
                     value={isPushEnabled} 
                     onValueChange={setIsPushEnabled} 
-                    trackColor={{ false: 'gray', true: `#4A3EF6` }} 
+                    trackColor={{ false: 'gray', true: `#4A3EF6` }}
                     thumbColor={`white`}
                 />
             </Box>
