@@ -1,12 +1,13 @@
 import { Box } from '@/components/ui/box';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
-import { Icon } from '@/components/ui/icon';
-import { BellRing, MessageSquareText, Settings, UserRoundPen } from 'lucide-react-native';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
+import Svg, { Defs, FeGaussianBlur, FeMerge, FeMergeNode, FeOffset, Filter, Path } from 'react-native-svg';
+import { Icon } from '@/components/ui/icon';
+import { IC_Home, IC_Invest, IC_Market, IC_PieGraph, IC_Portfolio, IC_Profile } from '@/utils/constants/Icons';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -16,71 +17,113 @@ interface LayoutProps {
 const Layout = ({ children, navigation }: LayoutProps) => {
     const { appliedTheme } = useTheme();
     const insets = useSafeAreaInsets();
-    const [currentScreen, setCurrentScreen ] = useState("Home");
+    const [currentScreen, setCurrentScreen] = useState("Home");
 
     function navigateToScreen(screen: string) {
         setCurrentScreen(screen);
         navigation.navigate("MainApp", { screen });
     }
 
+    const shadowStyle = {
+        shadowColor: 'rgba(0,0,0,1)', // Fully black shadow
+        shadowOffset: { width: 0, height: -15 }, // Moves shadow upwards
+        shadowOpacity: 1, // Full opacity (100%)
+        shadowRadius: 23, // Blur effect
+        elevation: 10, // Equivalent for Android
+    };
+    
+    
+
     return (
         <SafeAreaView className="flex-1 bg-white">
-            {/* Set Status Bar */}
-            <StatusBar barStyle="light-content" backgroundColor="gray" />
-
-            {/* Top Section */}
-            <Box 
-                style={{ paddingTop: insets.top }} 
-                className={`flex flex-row justify-between items-center h-[60px] bg-layoutTop-${appliedTheme} px-4`}
-            >
-                <Box className='flex flex-row items-center gap-3'>
-                    <Text className={`text-lg font-bold ${appliedTheme === 'light' ? 'text-white' : 'text-white'}`}>NLV: $234,654</Text>
-                </Box>
-
-                <Box className='flex flex-row gap-3 items-end'>
-                    <TouchableOpacity onPress={() => navigateToScreen('Chat')}>
-                        <Icon as={MessageSquareText} size={"xl"} 
-                        className={currentScreen === "Chat" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigateToScreen('Notifications')}>
-                        <Icon as={BellRing} size={'xl'} 
-                        className={currentScreen === "Notifications" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
-                        <Icon as={UserRoundPen}size={'xl'} 
-                        className={currentScreen === "Profile" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigateToScreen('Settings')}>
-                        <Icon as={Settings} size={'xl'} 
-                        className={currentScreen === "Settings" ? `text-iconTopActive-${appliedTheme}`: `text-iconTop-${appliedTheme}`}/>
-                    </TouchableOpacity>
-                </Box>
-            </Box>
+            {/* Status Bar */}
+            <StatusBar barStyle="light-content" backgroundColor="#4A3EF6" />
 
             {/* Main Rendered Screens */}
             <View className="flex-1">{children}</View>
+            <Box className={`relative`}>
+            <Svg
+                width={100}
+                height={60}
+                viewBox="0 0 100 60"
+                style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: -60,
+                    marginLeft: -50,
+                }}
+            >
+                {/* Define Shadow Filter */}
+                <Defs>
+                    <Filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <FeGaussianBlur stdDeviation={6} result="blur" />  {/* Adjust blur intensity */}
+                        <FeOffset dx="0" dy="-1" result="offset" /> {/* Adjust shadow position */}
+                        <FeMerge>
+                            <FeMergeNode in="offset" />
+                            <FeMergeNode in="SourceGraphic" />
+                        </FeMerge>
+                    </Filter>
+                </Defs>
 
-            <Box className={`flex flex-row justify-evenly h-[60px] bg-layoutBottom-${appliedTheme} p-4`}>
-                <TouchableOpacity onPress={() => navigateToScreen('Savings')}>
-                    <MaterialCommunityIcons name="wallet" size={30}
-                    color={currentScreen === "Savings" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigateToScreen('Transactions')}>
-                    <MaterialCommunityIcons name="finance" size={30}
-                    color={currentScreen === "Transactions" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigateToScreen('Home')}>
-                    <AntDesign name="home" size={30}
-                    color={currentScreen === "Home" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigateToScreen('Investment')}>
-                    <Octicons name="graph" size={30}
-                    color={currentScreen === "Investment" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigateToScreen('Token')}>
-                    <MaterialIcons name="compare-arrows" size={30}
-                    color={currentScreen === "Token" ? (appliedTheme === "light" ? "#002ba1" : "#608afc") : (appliedTheme === "light" ? "#474747" : "#d9d9d9")}/>
-                </TouchableOpacity>
+                {/* Shadow Effect */}
+                <Path
+                    d="M2 60 C40 25, 60 25, 98 60 V80 H2 Z"
+                    fill="black"
+                    opacity={0.2}
+                    filter="url(#shadow)" // Apply the shadow filter
+                />
+
+                {/* Main SVG Path */}
+                <Path
+                    d="M2 60 C40 25, 60 25, 98 60 V80 H2 Z"
+                    fill="white"
+                />
+            </Svg>
+
+
+                <Box className={`flex flex-row items-center h-[62px] bg-layoutBottom-${appliedTheme} p-4`} style={shadowStyle}>
+                    {/* Left Icons Container */}
+                    <Box className="flex-1 flex flex-row justify-evenly">
+                        <TouchableOpacity onPress={() => navigateToScreen('Home')}>
+                        <Box className='flex-col items-center text-center'>
+                                <IC_Home className='w-7 h-7 mb-1' color={currentScreen === 'Home' ? `#4A3EF6` : '#B0B9C1'} />
+                                <Text className={`text-sm ${currentScreen === 'Home' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Home</Text>
+                        </Box>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigateToScreen('Portfolio')}>
+                            <Box className='flex-col items-center text-center'> 
+                                <IC_Portfolio className='w-7 h-7 mb-1' color={currentScreen === 'Portfolio' ? `#4A3EF6` : '#B0B9C1'} />
+                                <Text className={`text-sm ${currentScreen === 'Portfolio' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Portfolio</Text>
+                            </Box>
+                        </TouchableOpacity>
+                    </Box>
+
+                    {/* Middle Button - Centered and Independent */}
+                    <Box className="w-20 relative">
+                        <TouchableOpacity onPress={() => navigateToScreen('Markets')}>
+                            <Box className={`bg-button-${appliedTheme} bottom-[18px] rounded-full w-16 h-16 items-center self-center justify-center`}>
+                                <IC_Market color={`white`} />
+                            </Box>
+                            <Text className={`text-sm bottom-4 justify-center text-center ${currentScreen === 'Markets' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}> Markets </Text>
+                        </TouchableOpacity>
+                    </Box>
+
+                    {/* Right Icons Container */}
+                    <Box className="flex-1 flex flex-row justify-evenly">
+                        <TouchableOpacity onPress={() => navigateToScreen('Investment')}>
+                            <Box className='flex-col items-center text-center'>
+                                <IC_Invest className='w-8 h-8' color={currentScreen === 'Investment' ? `#4A3EF6` : '#B0B9C1'} />
+                                <Text className={`text-sm ${currentScreen === 'Investment' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Investment</Text>
+                            </Box>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
+                        <Box className='flex-col items-center text-center'>
+                                <IC_Profile className='w-8 h-8' color={currentScreen === 'Profile' ? `#4A3EF6` : '#B0B9C1'} />
+                                <Text className={`text-sm ${currentScreen === 'Profile' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Profile</Text>
+                            </Box>
+                        </TouchableOpacity>
+                    </Box>
+                </Box>
             </Box>
         </SafeAreaView>
     );

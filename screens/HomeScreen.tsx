@@ -90,7 +90,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
-            <Box className={`p-4 bg-background-${appliedTheme} flex gap-2`}>
+            <Box className={`p-4 bg-background-${appliedTheme} h-full flex gap-2`}>
 
                 <Box className="flex-row justify-between items-center">
                     <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Profile" })} activeOpacity={0.7}>

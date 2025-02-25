@@ -5,6 +5,7 @@ import Svg, { Path, G, Mask, Rect, Defs, ClipPath, Circle, LinearGradient, Stop}
 
 interface IconsProps {
     className?: string;
+    color?: string;
 }
 
 export const IC_Email = ({ className }: IconsProps) => {
@@ -127,6 +128,27 @@ export const IC_PieGraph = ({ className }: IconsProps) => {
       <Path
         d="M12 3.033c0-1.952 1.64-3.596 3.444-2.85a9.001 9.001 0 014.87 4.872c.748 1.803-.896 3.444-2.848 3.444H16.5a4.5 4.5 0 01-4.5-4.5v-.966z"
         fill="#969AA0"
+      />
+    </Svg>
+        </Box>
+    );
+};
+
+export const IC_Portfolio = ({ className, color='#B0B9C1' }: IconsProps) => {
+    return (
+        <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 21 21"
+      fill="none"
+    >
+      <Path
+        d="M16 11.499c1.105 0 2.022.906 1.779 1.983a8.999 8.999 0 01-17.606-.227A9 9 0 017.016 2.72C8.094 2.477 9 3.394 9 4.5v2a5 5 0 005 5h2z"
+        fill={color}
+      />
+      <Path
+        d="M12 3.033c0-1.952 1.64-3.596 3.444-2.85a9.001 9.001 0 014.87 4.872c.748 1.803-.896 3.444-2.848 3.444H16.5a4.5 4.5 0 01-4.5-4.5v-.966z"
+        fill={color}
       />
     </Svg>
         </Box>
@@ -843,11 +865,129 @@ export const IC_CardAdded = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_Market = ({ className, color='#ffffff' }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={21}
+      height={26}
+      viewBox="0 0 21 26"
+      fill="none"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0 13.828s2.67-2.952 5.29-4.186 6.316-1.013 6.316-1.013v2.433l6.605-4.717a1 1 0 000-1.628L11.606 0v2.766s-4.93 0-8.114 2.765C.306 8.297 0 13.828 0 13.828zM21 12.168s-2.67 2.953-5.29 4.187c-2.62 1.234-6.316 1.013-6.316 1.013v-2.434l-6.605 4.717a1 1 0 000 1.628l6.605 4.717v-2.765s4.93 0 8.114-2.766C20.694 17.7 21 12.17 21 12.17z"
+        fill={color}
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Home = ({ className, color='#B0B9C1' }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 23 23"
+      fill="none"
+    >
+      <Path
+        d="M16.187.5h3.894C21.413.5 22.5 1.59 22.5 2.944v3.927a2.431 2.431 0 01-2.42 2.444h-3.893a2.431 2.431 0 01-2.42-2.444V2.944A2.431 2.431 0 0116.188.5z"
+        stroke={color}
+      />
+      <Path
+        d="M6.813 13.185c1.613 0 2.92 1.318 2.92 2.944v3.927c0 1.625-1.307 2.944-2.92 2.944H2.92C1.307 23 0 21.681 0 20.056v-3.927c0-1.626 1.307-2.944 2.92-2.944h3.893zm13.268 0c1.612 0 2.919 1.318 2.919 2.944v3.927C23 21.681 21.693 23 20.08 23h-3.893c-1.613 0-2.92-1.319-2.92-2.944v-3.927c0-1.626 1.307-2.944 2.92-2.944h3.894zM6.813 0c1.613 0 2.92 1.318 2.92 2.944v3.927c0 1.626-1.307 2.944-2.92 2.944H2.92C1.307 9.815 0 8.497 0 6.87V2.944C0 1.318 1.307 0 2.92 0h3.893z"
+        fill={color}
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Invest = ({ className, color='#B0B9C1' }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 29 28"
+      fill="none"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14.5 20.993c4.32 0 6.752 1.56 7.971 2.732.54.52.135 1.275-.615 1.275H7.144c-.75 0-1.155-.755-.615-1.275 1.219-1.173 3.651-2.732 7.971-2.732z"
+        fill={color}
+        stroke={color}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M15.5 10.984s0-9.019 9-7.997c0 0-.023 4.558-2.613 6.61-2.59 2.052-6.387 1.387-6.387 1.387zM13.815 15.402s-.901-6.413-8.71-4.558c0 0 .343 3.447 2.688 4.585 2.346 1.138 6.022-.027 6.022-.027z"
+        stroke={color}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="B0B9C1"
+        clipRule="B0B9C1"
+        d="M14.5 20.993s-.27-4.885 0-7.183 1.16-2.663 1.16-2.663"
+        fill={color}
+      />
+      <Path
+        d="M14.5 20.993s-.27-4.885 0-7.183 1.16-2.663 1.16-2.663"
+        stroke={color}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Profile = ({ className, color='#B0B9C1' }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 29 28"
+      fill="none"
+    >
+      <Circle
+        cx={14.5}
+        cy={8}
+        r={5}
+        stroke={color}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4.5 22.143c0-1.363.588-2.67 1.799-3.296C7.935 18.001 10.679 17 14.5 17c3.822 0 6.565 1.002 8.201 1.847 1.21.626 1.799 1.933 1.799 3.296A2.857 2.857 0 0121.643 25H7.357A2.857 2.857 0 014.5 22.143z"
+        fill={color}
+        stroke={color}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
 
 
 export const IconsMap = {
-    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail
-    ,IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings, IC_AddCard, IC_CardAdded
+    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio
+    ,IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings, IC_AddCard, IC_CardAdded, IC_Home, IC_Profile
 };
 
 export function getIconByString(icon: string) {
