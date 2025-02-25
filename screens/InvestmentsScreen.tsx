@@ -9,6 +9,9 @@ import { Button } from '@/components/ui/button';
 import OngoingCards from '@/components/investments-page/OngoingCards';
 import AvailableCards from '@/components/investments-page/AvailableCards';
 import ExpiredCards from '@/components/investments-page/ExpiredCards';
+import { Box } from '@/components/ui/box';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
+import BackHeader from '@/components/BackHeader';
 
 const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
   const [currentCategory, setCurrentCategory] = React.useState<string>('Available');
@@ -86,10 +89,11 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
   ];
 
   const currentInvestment = available.find((investment) => investment.id === currentInvestmentID);
-
+  const { appliedTheme } = useTheme();
   return (
     <>
-      <View>
+      <Box className={`bg-background-${appliedTheme} h-full flex-1 p-4`}>
+        <BackHeader title="Investments" />
         <ButtonsTrain
           buttons={['Available', 'Ongoing', 'Expired']}
           activeButton={currentCategory}
@@ -122,7 +126,7 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
             ))}
           </ScrollView>
         )}
-      </View>
+      </Box>
       <FullInvestmentsInfo
         currentInvestment={currentInvestment}
         handleBackPress={() => setCurrentInvestmentID(0)}
