@@ -5,23 +5,25 @@ import InvestmentsScreen from './InvestmentsScreen';
 import NotificationsScreen from './NotificationsScreen';
 import ProfileScreen from './Profile/ProfileScreen';
 import SavingsScreen from './SavingsScreen';
-import SettingsScreen from './SettingsScreen';
+import SettingsScreen from './settings/SettingsScreen';
 import TokenScreen from './TokenScreen';
 import TransactionsScreen from './transactions/TransactionsScreen';
 import Layout from './Layout';
 import ChatScreen from './ChatScreen';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
-import PreferencesScreen from './PreferencesScreen';
+import PreferencesScreen from './settings/PreferencesScreen';
 import SupportScreen from './SupportScreen';
-import NotificationSettingsScreen from './NotificationSettingsScreen';
+import NotificationSettingsScreen from './settings/NotificationSettingsScreen';
 import MarketsScreen from './market/MarketsScreen';
 import PortfolioScreen from './PortfolioScreen';
-import ProfileSettingsScreen from './ProfileSettingsScreen';
+import ProfileSettingsScreen from './settings/ProfileSettingsScreen';
 import PaymentMethodScreen from './paymentMethods/PaymentMethodScreen';
 import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
 import PaymentMethodAddedScreen from './paymentMethods/PaymentMethodAddedScreen';
 import CoinScreen from './market/CoinScreen';
+import SecuritySettingsScreen from './settings/SecuritySettingsScreen';
+import PinSettingsScreen from './settings/PinSettingsScreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -37,6 +39,8 @@ const SettingsNavigator = () => (
     <SettingsStack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
     <SettingsStack.Screen name="LinkYourCard" component={LinkYourCardScreen} />
     <SettingsStack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />
+    <SettingsStack.Screen name="SecuritySettings" component={SecuritySettingsScreen} />
+    <SettingsStack.Screen name="PinSettings" component={PinSettingsScreen} />
   </SettingsStack.Navigator>
 );
 

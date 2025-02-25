@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react-native";
 
 interface SettingItemProps {
     title: string;
-    IconComponent: React.ElementType;
+    IconComponent?: React.ElementType;
 }
 
 const SettingItem: React.FC<SettingItemProps> = ({ title, IconComponent }) => {
@@ -14,7 +14,7 @@ const SettingItem: React.FC<SettingItemProps> = ({ title, IconComponent }) => {
         <Box className="flex flex-row justify-between items-center">
             <Box className="flex-row items-center gap-3">
                 <Box className="bg-[#F2F2F7] rounded-full p-2">
-                    <IconComponent className="w-8 h-8" />
+                    {IconComponent && <IconComponent className="w-8 h-8" />}
                 </Box>
                 <Text className="font-extrabold text-[14px]">{title}</Text>
             </Box>

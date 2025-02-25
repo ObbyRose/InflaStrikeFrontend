@@ -1079,11 +1079,68 @@ export const IC_Passport = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_Security = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M4 5.133S8.748 4 11.933 4c3.186 0 7.934 1.133 7.934 1.133v7.934C17.509 17.782 11.933 21 11.933 21S6.358 17.782 4 13.067V5.133z"
+        stroke="#2DD4BF"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M8.987 11.058l2.513 3.145 4.487-5.207"
+        stroke="#2DD4BF"
+        strokeWidth={1.5}
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_NotificationsInactive = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+      >
+        <Path fill="#fff" d="M0 0H24V24H0z" />
+      </Mask>
+      <G
+        mask="url(#a)"
+        stroke="#969AA0"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <Path d="M10.586 3.586A2 2 0 0114 5a7 7 0 014 6v3a4 4 0 002 3H4a4 4 0 002-3v-3a7 7 0 014-6 2 2 0 01.586-1.414zM9 17v1a3 3 0 006 0v-1" />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
   export const IconsMap = {
     IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,
     IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio, IC_Eye, IC_Lock, IC_Person,
     IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
-    IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile
+    IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile, IC_NotificationsInactive
 };
 
 export function getIconByString(icon: string) {

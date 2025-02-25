@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { Box } from "@/components/ui/box";
 import { Divider } from "@/components/ui/divider";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
-import SettingItem from "../components/SettingItems";
+import SettingItem from "../../components/SettingItems";
 import {
     IC_DisplaySetting,
     IC_Envelope,
     IC_LanguageSetting,
     IC_NotificationSettings,
     IC_ProfileSettings,
+    IC_Security,
     IC_ThemeSettings,
     IC_UserPreferencesSettings
 } from "@/utils/constants/Icons";
 import { Props } from "@/types/NavigationTypes";
 import { TouchableOpacity } from "react-native";
-import { countryLanguages } from "../utils/constants/countries";
+import { countryLanguages } from "../../utils/constants/countries";
 
 import {
   Actionsheet,
@@ -74,6 +75,11 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
 
             <TouchableOpacity onPress={() => navigation.navigate("Preferences")} activeOpacity={0.7}>
                 <SettingItem title="User Preferences" IconComponent={IC_UserPreferencesSettings} />
+            </TouchableOpacity>
+            <Divider className="rounded-lg mb-4 mt-4" />
+
+            <TouchableOpacity onPress={() => navigation.navigate("SecuritySettings")} activeOpacity={0.7}>
+                <SettingItem title="Security" IconComponent={IC_Security} />
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 

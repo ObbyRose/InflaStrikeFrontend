@@ -6,7 +6,7 @@ import { Icon } from "@/components/ui/icon";
 import { User } from "lucide-react-native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Settings } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Settings, IC_NotificationsInactive } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -99,10 +99,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <Box className="flex-row items-center gap-2 mt-3">
-                    <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Portfolio" })}>
+                    <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Notifications" })}>
                         <Box className="flex-col items-center gap-1">
-                            <IC_PieGraph className="h-7 w-7" />
-                            <Text className="text-2xs font-semibold text-[#969AA0]">My Portfolio</Text>
+                            <IC_NotificationsInactive className="h-7 w-7" />
+                            <Text className="text-2xs font-semibold text-[#969AA0]">Notifications</Text>
                         </Box>
                     </TouchableOpacity>
 
