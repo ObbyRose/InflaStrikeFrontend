@@ -16,7 +16,6 @@ interface BackHeaderProps {
 function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
-    const screenWidth = Dimensions.get("window").width; // Get full screen width
 
     return (
         <SafeAreaView>
