@@ -21,10 +21,12 @@ const PinSettingsScreen:React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
             
-            <Box className='flex justify-between flex-row items-center'>
-                <Text className='font-extrabold text-lg text-black'>Change PIN / Face ID</Text>
-                <Icon as={ChevronRight} />
-            </Box>
+            <TouchableOpacity onPress={() => navigation.navigate('EnterChangePin')} activeOpacity={0.7}>
+                <Box className='flex justify-between flex-row items-center'>
+                    <Text className='font-extrabold text-lg text-black'>Change PIN / Face ID</Text>
+                    <Icon as={ChevronRight} />
+                </Box>
+            </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
         </Box>

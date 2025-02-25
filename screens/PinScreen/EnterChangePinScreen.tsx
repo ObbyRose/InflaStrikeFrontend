@@ -27,10 +27,10 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
 
     const handlePinVerification = () => {
         if (pin === storedPin) {
-            navigation.navigate('ChangePinScreen'); // Proceed to setting a new PIN
+            navigation.navigate('ChangePin');
             clearPin();
         } else {
-            setMessage('❌ Incorrect PIN. Try again.');
+            setMessage('Incorrect PIN. Try again.');
             Vibration.vibrate();
             clearPin();
         }
@@ -47,13 +47,13 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
             });
 
             if (result.success) {
-                navigation.navigate('ChangePinScreen'); // Proceed if fingerprint is authenticated
+                navigation.navigate('ChangePin');
             } else {
-                setMessage('❌ Fingerprint authentication failed.');
+                setMessage('Fingerprint authentication failed.');
                 Vibration.vibrate();
             }
         } else {
-            setMessage('⚠️ Fingerprint authentication not available.');
+            setMessage('Fingerprint authentication not available.');
             Vibration.vibrate();
         }
     };
@@ -112,7 +112,6 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
                 ))}
             </VStack>
 
-            {/* Status Message (Fixed at Bottom) */}
             <VStack className="items-center pb-6">
                 {message && (
                     <Text className="text-red-500">{message}</Text>

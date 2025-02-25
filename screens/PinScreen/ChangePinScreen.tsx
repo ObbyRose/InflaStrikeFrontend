@@ -48,7 +48,7 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
             });
 
             if (result.success) {
-                setMessage('✅ Fingerprint Confirmed!');
+                setMessage('Fingerprint Confirmed!');
                 setTimeout(() => {
                     navigation.navigate('MainApp',{screen: 'Home'});
                 }, 500);
@@ -113,7 +113,7 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
                     </HStack>
                 ))}
             </VStack>
-            
+
             <VStack className="items-center pb-6">
                 {message && (
                     <Text className={message.includes('Successfully') ? 'text-green-500' : 'text-red-500'}>
