@@ -22,8 +22,13 @@ import PaymentMethodScreen from './paymentMethods/PaymentMethodScreen';
 import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
 import PaymentMethodAddedScreen from './paymentMethods/PaymentMethodAddedScreen';
 import CoinScreen from './market/CoinScreen';
-import SecuritySettingsScreen from './settings/SecuritySettingsScreen';
-import PinSettingsScreen from './settings/PinSettingsScreen';
+import SecuritySettingsScreen from './settings/securitySettings/SecuritySettingsScreen';
+import PinSettingsScreen from './settings/securitySettings/PinSettingsScreen';
+import PasswordSettings from './settings/securitySettings/PasswordSettingsScreen';
+import PinScreen from './ChangePinScreen';
+import ChangePinScreen from './ChangePinScreen';
+import CreatePinScreen from './CreatePinScreen';
+import ConfirmPinScreen from './ConfirmPinScreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -41,6 +46,9 @@ const SettingsNavigator = () => (
     <SettingsStack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />
     <SettingsStack.Screen name="SecuritySettings" component={SecuritySettingsScreen} />
     <SettingsStack.Screen name="PinSettings" component={PinSettingsScreen} />
+    <SettingsStack.Screen name="PasswordSettings" component={PasswordSettings} />
+  <SettingsStack.Screen name="CreatePin" component={CreatePinScreen} />
+  <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
   </SettingsStack.Navigator>
 );
 

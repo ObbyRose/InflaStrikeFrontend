@@ -1,5 +1,6 @@
 export type Props = {
     navigation: any;
+    route?: any;
 }
 
 export type SignUpScreensProps = {

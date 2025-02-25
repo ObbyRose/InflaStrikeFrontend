@@ -30,22 +30,20 @@ const SecuritySettingsScreen:React.FC<Props> = ({ navigation }) => {
                 </Box>
             <Divider className="rounded-lg mb-4 mt-4" />
 
-                <Box className='flex justify-between flex-row items-center'>
-                    <Text className='font-extrabold text-lg text-black'>PIN / Face ID Settings</Text>
-                    <Icon as={ChevronRight} />
-                </Box>
+                <TouchableOpacity onPress={() => navigation.navigate('PinSettings')}>
+                    <Box className='flex justify-between flex-row items-center'>
+                        <Text className='font-extrabold text-lg text-black'>PIN / Face ID Settings</Text>
+                        <Icon as={ChevronRight} />
+                    </Box>
+                </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
-                <Box className='flex justify-between flex-row items-center'>
-                    <Text className='font-extrabold text-lg text-black'>Password Settings</Text>
-                    <Icon as={ChevronRight} />
-                </Box>
-            <Divider className="rounded-lg mb-4 mt-4" />
-
-                <Box className='flex justify-between flex-row items-center'>
-                    <Text className='font-extrabold text-lg text-black'>Change Password</Text>
-                    <Icon as={ChevronRight} />
-                </Box>
+                <TouchableOpacity onPress={() => navigation.navigate('PasswordSettings')}>
+                    <Box className='flex justify-between flex-row items-center'>
+                        <Text className='font-extrabold text-lg text-black'>Password Settings</Text>
+                        <Icon as={ChevronRight} />
+                    </Box>
+                </TouchableOpacity>
             <Divider className="rounded-lg mb-4 mt-4" />
 
         </Box>
