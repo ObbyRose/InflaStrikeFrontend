@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
 import { Box } from "@/components/ui/box";
 import LineChartComponent from "@/components/LineChart";
 import { LucideIcon } from "lucide-react-native";
@@ -12,11 +12,12 @@ interface CryptoMarketCardProps {
     change: number | null;
     lineData: { time: string; price: number }[];
     bgColor: string;
+    onPress: () => any;
 }
 
-const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, symbol, price, change, lineData, bgColor }) => {
+const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, symbol, price, change, lineData, bgColor, onPress }) => {
     return (
-        <>
+        <Pressable onPress={onPress}>
             <Box className="p-2 flex flex-row gap-2 items-center">
                 <Box className={`${bgColor} max-w-[4rem] p-4 rounded-2xl z-10`}>
                     <Icon className="w-8 h-8" />
@@ -37,7 +38,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, s
                     <Text className="text-[#969AA0]">{symbol}</Text>
                 </Box>
             </Box>
-        </>
+        </Pressable>
     );
 };
 
