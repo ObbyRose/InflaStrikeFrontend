@@ -3,6 +3,6 @@ export type Props = {
 }
 
 export type SignUpScreensProps = {
-    handleScreenChange: (newScreenStep: number) => void
+    handleScreenChange: (newScreenStep: number | 'next', data?: any) => void;
 }
 export type TTheme = "light" | "dark";

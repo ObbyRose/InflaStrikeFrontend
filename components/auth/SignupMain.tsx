@@ -63,10 +63,9 @@ function SignupMain({ handleScreenChange }: SignUpScreensProps) {
 
         if (valid) {
             setIsLoading(true);
-            console.log({ fName, lName, email, pass });
             setTimeout(() => { 
                 setIsLoading(false);
-                handleScreenChange(1);
+                handleScreenChange('next', { fName, lName, email, password: pass });
             }, 1000);
         }
     }

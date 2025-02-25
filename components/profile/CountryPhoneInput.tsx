@@ -8,16 +8,29 @@ import { Box } from "../ui/box";
 interface CountryPhoneInputProps {
     phoneNumber: string;
     setPhoneNumber?: React.Dispatch<React.SetStateAction<string>>;
-    updateField?: (field: string, value: string) => void
+    updateField?: (field: string, value: string) => void;
+    setPrefix?: React.Dispatch<React.SetStateAction<string>>;
+    error?: string;
+    setError?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber}: CountryPhoneInputProps) => {
+const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix, error, setError}: CountryPhoneInputProps) => {
     const [selectedCountry, setSelectedCountry] = useState({ code: "+972", label: "Israel", flag: "🇮🇱" });
 
+    const onChangeText = (text: string) => {
+        if(setError) setError("");
+        // If need prefix
+        if(setPrefix) setPrefix(selectedCountry.code);
+        // Select Update Method
+        if(updateField)
+            return updateField("phoneNumber", text.replace(/[^0-9]/g, ''))
+        if(setPhoneNumber)
+            return setPhoneNumber(text);
+        return null;
+    }
+
     return (
-        <Box className="flex flex-col gap-2">
-            {/* <Text className="font-semibold text-lg">Phone number</Text> */}
-        
+        <Box className="flex flex-col gap-2">        
             <Box className="flex flex-row flex-wrap gap-2 items-center">
                 {/* Country Code Select */}
                 <Select
@@ -65,12 +78,7 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber}: CountryP
                         className="p-2 rounded-lg border border-black h-[40px]"
                         style={{ paddingLeft: selectedCountry.code.length * 8 + 20 }}
                         value={phoneNumber}
-                        onChangeText={(text) => 
-                            updateField ?
-                                updateField("phoneNumber", text.replace(/[^0-9]/g, '')) :
-                            setPhoneNumber ?
-                                setPhoneNumber(text) : null
-                        }
+                        onChangeText={onChangeText}
                         placeholder="Phone number"
                     />
                     
@@ -78,6 +86,8 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber}: CountryP
                         {selectedCountry.code + " |"}
                     </Text>
                 </View>
+                {error && <Text className="text-red-500 text-sm ps-3  mb-1 mt-2 w-full">{error}</Text>}
+                
             </Box>
         </Box>
     )

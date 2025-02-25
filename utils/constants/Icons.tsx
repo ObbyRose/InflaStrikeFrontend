@@ -642,6 +642,57 @@ export const IC_ProfileSettings = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_ChevronRight = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 6 10"
+      fill="none"
+    >
+      <Path
+        d="M1 9l4-4-4-4"
+        stroke="#000"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_IDCard = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={20}
+        height={20}
+      >
+        <Path fill="#fff" d="M0 0H20V20H0z" />
+      </Mask>
+      <G mask="url(#a)" stroke="#fff" strokeWidth={1.5}>
+        <Path d="M9.5 9.5h5" strokeLinecap="square" />
+        <Rect x={2} y={4} width={16} height={12} rx={2} />
+        <Path d="M9.5 12.5h5" strokeLinecap="square" />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
 export const IC_CreditCard = ({ className }: IconsProps) => {
   return (
       <Box className={cn(className)}>
@@ -671,24 +722,6 @@ export const IC_CreditCard = ({ className }: IconsProps) => {
         <Path d="M3.5 9.5h17" strokeLinecap="square" />
         <Path d="M14.5 13.5h3M16.5 15.5h1" strokeLinecap="round" />
       </G>
-    </Svg>
-      </Box>
-  );
-};
-
-export const IC_Phone = ({ className }: IconsProps) => {
-  return (
-      <Box className={cn(className)}>
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-    >
-      <Path
-        d="M19.519 15.578L17.542 13.6a1.634 1.634 0 00-1.163-.481c-.439 0-.852.17-1.163.481l-.69.69c-.38.38-.977.518-1.683.389-.786-.144-1.588-.593-2.259-1.264-.671-.67-1.12-1.473-1.263-2.259-.13-.706.009-1.303.389-1.683l.689-.69c.31-.31.482-.723.482-1.163 0-.44-.171-.852-.482-1.163L8.422 4.482A1.634 1.634 0 007.26 4c-.439 0-.852.171-1.163.482l-.69.69c-.64.64-1.07 1.463-1.273 2.443-.189.906-.176 1.905.037 2.968.423 2.108 1.625 4.276 3.298 5.95 1.673 1.672 3.841 2.875 5.95 3.297a8.32 8.32 0 001.633.17c.463 0 .91-.044 1.335-.133.98-.204 1.802-.633 2.444-1.274l.689-.689a1.647 1.647 0 000-2.326z"
-        stroke="#38BDF8"
-        strokeWidth={1.5}
-      />
     </Svg>
       </Box>
   );
@@ -983,11 +1016,74 @@ export const IC_Profile = ({ className, color='#B0B9C1' }: IconsProps) => {
   );
 };
 
+export const IC_Phone = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <Path
+        d="M19.519 15.578L17.542 13.6a1.634 1.634 0 00-1.163-.481c-.439 0-.852.17-1.163.481l-.69.69c-.38.38-.977.518-1.683.389-.786-.144-1.588-.593-2.259-1.264-.671-.67-1.12-1.473-1.263-2.259-.13-.706.009-1.303.389-1.683l.689-.69c.31-.31.482-.723.482-1.163 0-.44-.171-.852-.482-1.163L8.422 4.482A1.634 1.634 0 007.26 4c-.439 0-.852.171-1.163.482l-.69.69c-.64.64-1.07 1.463-1.273 2.443-.189.906-.176 1.905.037 2.968.423 2.108 1.625 4.276 3.298 5.95 1.673 1.672 3.841 2.875 5.95 3.297a8.32 8.32 0 001.633.17c.463 0 .91-.044 1.335-.133.98-.204 1.802-.633 2.444-1.274l.689-.689a1.647 1.647 0 000-2.326z"
+        stroke="#38BDF8"
+        strokeWidth={1.5}
+      />
+    </Svg>
+      </Box>
+  );
+};
 
+export const IC_Passport = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={20}
+        height={20}
+      >
+        <Path fill="#fff" d="M0 0H20V20H0z" />
+      </Mask>
+      <G mask="url(#a)" stroke="#fff">
+        <Rect x={3} y={1} width={14} height={18} rx={2} strokeWidth={1.5} />
+        <Path
+          clipRule="evenodd"
+          d="M10 14a4 4 0 110-8 4 4 0 010 8z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M8.685 6.4h.4a11.37 11.37 0 000 7.2h-.4M11 6.4a11.37 11.37 0 010 7.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M6.4 11.4V11c2.336.78 4.864.78 7.2 0v.4M6.4 9.085a11.37 11.37 0 017.2 0"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
 
-export const IconsMap = {
-    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio
-    ,IC_Eye, IC_Lock, IC_Person, IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings, IC_AddCard, IC_CardAdded, IC_Home, IC_Profile
+  export const IconsMap = {
+    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,
+    IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio, IC_Eye, IC_Lock, IC_Person,
+    IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
+    IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile
 };
 
 export function getIconByString(icon: string) {

@@ -13,7 +13,7 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /(bg|border|text|stroke|fill)-(primary|secondary|tertiary|error|success|warning|info|typography|outline|background|indicator)-(0|50|100|200|300|400|500|600|700|800|900|950|white|gray|black|error|warning|muted|success|info|light|dark|primary)/,
+        /(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right)-(primary|secondary|tertiary|error|success|warning|info|typography|outline|background|indicator|[0-9]+|px|full|screen|auto)/,
     },
     'fill-button-light',
     'fill-button-dark',
@@ -63,6 +63,8 @@ module.exports = {
     'text-buttonText-light',
     'text-link-light',
     'text-link-dark',
+    'bg-link-light',
+    'bg-link-dark',
     'text-gray-light',
     'text-gray-dark',
     'bg-default-light',

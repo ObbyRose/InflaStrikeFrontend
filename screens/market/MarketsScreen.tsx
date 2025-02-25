@@ -127,6 +127,10 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                                 change={parseFloat(item.priceChangePercent)}
                                 lineData={item.history}
                                 bgColor="white"
+                                onPress={() => navigation.navigate("MainApp", { 
+                                    screen: "Coin", 
+                                    params: { coin: item} 
+                                })}
                             />
                         );
                     }}

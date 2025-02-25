@@ -23,7 +23,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({ id, toast, title, desc }) =
     return (
     <Toast
         nativeID={id}
-        className="relative p-6 gap-3 w-full bg-background-0 shadow-hard-4 flex-row mt-16"
+        className={`relative p-6 gap-3 w-full bg-lightGray-${appliedTheme} shadow-hard-4 flex-row mt-16`}
         style={{ top: insets.top + 10 }}
     >
         <Pressable className="absolute top-4 right-3" onPress={() => toast.close(id)}>
