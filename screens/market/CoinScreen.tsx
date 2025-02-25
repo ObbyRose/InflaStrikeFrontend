@@ -6,6 +6,7 @@ import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import ButtonsTrain from '@/components/ButtonsTrain';
 import { formatNumber } from '@/utils/functions/help';
+import CandleChartComponent from '@/components/market/CandleChart';
 
 
 type RootStackParamList = {
@@ -90,6 +91,10 @@ function CoinScreen() {
                     buttons={["Price", "Depth", "Info"]}
                     handlePress={handleCategoryPress}
                 />
+
+                { category === "Price" &&
+                    <CandleChartComponent />
+                }
             </Box>
         </Box>
     );
