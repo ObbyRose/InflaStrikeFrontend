@@ -20,7 +20,6 @@ import {
     fetchXRPLineData
 } from "../utils/api/BinanceAPI";
 import { Props } from "@/types/NavigationTypes";
-import BackHeader from "@/components/BackHeader";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
