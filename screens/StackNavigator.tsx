@@ -25,10 +25,11 @@ import CoinScreen from './market/CoinScreen';
 import SecuritySettingsScreen from './settings/securitySettings/SecuritySettingsScreen';
 import PinSettingsScreen from './settings/securitySettings/PinSettingsScreen';
 import PasswordSettings from './settings/securitySettings/PasswordSettingsScreen';
-import PinScreen from './ChangePinScreen';
-import ChangePinScreen from './ChangePinScreen';
-import CreatePinScreen from './CreatePinScreen';
-import ConfirmPinScreen from './ConfirmPinScreen';
+import PinScreen from './PinScreen/ChangePinScreen';
+import ChangePinScreen from './PinScreen/ChangePinScreen';
+import CreatePinScreen from './PinScreen/CreatePinScreen';
+import ConfirmPinScreen from './PinScreen/ConfirmPinScreen';
+import EnterChangePinScreen from './PinScreen/EnterChangePinScreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -49,6 +50,8 @@ const SettingsNavigator = () => (
     <SettingsStack.Screen name="PasswordSettings" component={PasswordSettings} />
   <SettingsStack.Screen name="CreatePin" component={CreatePinScreen} />
   <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
+  <SettingsStack.Screen name="EnterChangePin" component={EnterChangePinScreen} />
+  <SettingsStack.Screen name="ChangePin" component={ChangePinScreen} />
   </SettingsStack.Navigator>
 );
 

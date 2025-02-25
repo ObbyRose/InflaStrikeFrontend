@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, Vibration } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
-import usePinStore from '../context/pinStore';
+import usePinStore from '../../context/pinStore';
 import { VStack } from '@/components/ui/vstack';
 import { Text } from '@/components/ui/text';
 import { HStack } from '@/components/ui/hstack';
