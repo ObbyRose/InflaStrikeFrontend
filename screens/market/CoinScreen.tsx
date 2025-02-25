@@ -6,6 +6,10 @@ import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import ButtonsTrain from '@/components/ButtonsTrain';
 import { formatNumber } from '@/utils/functions/help';
+import CandleChartComponent from '@/components/market/CandleChart';
+import { Divider } from '@/components/ui/divider';
+import { ScrollView } from 'react-native';
+import CoinOrderHistory from '@/components/market/CoinOrderHistory';
 
 
 type RootStackParamList = {
@@ -15,15 +19,13 @@ type RootStackParamList = {
 type CoinScreenRouteProp = RouteProp<RootStackParamList, 'CoinScreen'>;
 
 function CoinScreen() {
-    // Store initial route params in ref to prevent loss during rerenders
     const route = useRoute<CoinScreenRouteProp>();
-    const initialParams = useRef(route.params).current;
-    const coin = initialParams?.coin;
+    const coin = route.params?.coin;
+    console.log(coin.symbol)
     
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
     
-    const [data, setData] = useState(null);
     const [category, setCategory] = useState("Price");
 
     const ErrorContext = ({ err } : {err : string}) => (
@@ -40,32 +42,16 @@ function CoinScreen() {
     if (!coin)
         return <ErrorContext err="Symbol Not Found" />
 
-    const fetchHistoricalData = async (symbol: string) => {
-        try {
-            const response = await fetch(
-                `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=24`
-            );
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching historical data:", error);
-            return [];
-        }
-    };
-
-    useEffect(() => {
-        if (coin?.symbol) {
-            fetchHistoricalData(coin.symbol)
-                .then(data => setData(data))
-                .catch(err => console.log("Error in useEffect:", err));
-        }
-    }, []); 
-
-    const handleCategoryPress = useCallback((newCategory: string) => {
+    const handleCategoryPress = (newCategory: string) => {
         setCategory(newCategory);
-    }, []);
+    };
+    
 
     const CoinContent = () => (
-        <Box className='flex-1'>
+        <ScrollView
+            nestedScrollEnabled={true} 
+            className='flex-1 bg-white'
+        >
             <BackHeader 
                 title={coin.symbol} 
                 icons={["icon1","icon2"]}
@@ -73,25 +59,35 @@ function CoinScreen() {
 
             <Box className='flex-1 p-1'>
                 {/* Title */}
-                <Box className='p-5 flex-row justify-between'>
-                    <Box className='gap-3'>
-                        <Text className={`text-gray-${appliedTheme}`}>{coin.symbol}</Text>
-                        <Text className={`text-3xl font-extrabold`}>
-                            {formatNumber(parseFloat(coin.lastPrice), 2)}
-                        </Text>
+                <Box className='p-5 gap-6'>
+                    <Box className='flex-row justify-between'>
+                        <Box className='gap-3'>
+                            <Text className={`text-gray-${appliedTheme}`}>{coin.symbol}</Text>
+                            <Text className={`text-3xl font-extrabold`}>
+                                {formatNumber(parseFloat(coin.lastPrice), 2)}
+                            </Text>
+                        </Box>
+                        <Box className='justify-end'>
+                            <Text className='text-green-500 '>+980.67 (2.16%)</Text>
+                        </Box>
                     </Box>
-                    <Box className='justify-end'>
-                        <Text className='text-green-500 '>+980.67 (2.16%)</Text>
-                    </Box>
-                </Box>
 
-                <ButtonsTrain
+                    <ButtonsTrain
                     activeButton={category}
                     buttons={["Price", "Depth", "Info"]}
                     handlePress={handleCategoryPress}
-                />
+                    />
+                </Box>
+
+                { category === "Price" &&
+                    <CandleChartComponent symbol={coin.symbol}/>
+                }
+                <Divider />
+                <Box>
+                    <CoinOrderHistory />
+                </Box>
             </Box>
-        </Box>
+        </ScrollView>
     );
 
     try {
