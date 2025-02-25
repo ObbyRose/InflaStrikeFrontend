@@ -11,6 +11,9 @@ import { Image } from '@/components/ui/image';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import BasicProfilePage from './BasicProfilePage';
 import EditProfilePage from './EditProfilePage';
+import BackHeader from '@/components/BackHeader';
+import { Box } from '@/components/ui/box';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 const dummyUser = {
   fullName: 'Tony Stark',
@@ -30,7 +33,7 @@ const dummyUser = {
 const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState(dummyUser);
-
+  const { appliedTheme } = useTheme();
   function updateUser(updates: Partial<typeof user>) {
     setUser((prevUser) => ({ ...prevUser, ...updates }));
     setIsEditing(false);
@@ -39,17 +42,18 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   if (isEditing) {
     return (
       <EditProfilePage
-        user={user}
-        setUser={setUser}
-        setIsEditing={setIsEditing}
-        updateUser={updateUser}
+      user={user}
+      setUser={setUser}
+      setIsEditing={setIsEditing}
+      updateUser={updateUser}
       />
     );
   }
   return (
-    <>
+    <Box className={` p-4 bg-background-${appliedTheme} h-full`}>
+      <BackHeader title='Edit Profile' />
       <BasicProfilePage user={user} setIsEditing={setIsEditing} />
-    </>
+    </Box>
   );
 };
 

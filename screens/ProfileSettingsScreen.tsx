@@ -8,12 +8,14 @@ import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { Button } from '@/components/ui/button'
 import { Clipboard } from 'react-native';
+import BackHeader from '@/components/BackHeader'
 
 const ProfileSettingsScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
 
     return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
+            <BackHeader title='Profile Settings' />
             <Box className='flex gap-2 mb-6 p-4 bg-[#F2F2F7] rounded-2xl'>
                 <Text className='text-xl font-bold mt-4'>Profile Token</Text>
                 <Text className='text-[#828A99] text-[12px] mb-2'>8219F492-3FF3-401C-A2C9-FEB4C9E736ED</Text>

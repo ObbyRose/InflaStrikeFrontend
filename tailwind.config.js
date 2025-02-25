@@ -15,6 +15,8 @@ module.exports = {
       pattern:
         /(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right)-(primary|secondary|tertiary|error|success|warning|info|typography|outline|background|indicator|[0-9]+|px|full|screen|auto)/,
     },
+    'fill-button-light',
+    'fill-button-dark',
     'bg-background-light',
     'bg-background-dark',
     'text-text-light',
@@ -87,7 +89,7 @@ module.exports = {
             dark: '#545454',
           },
           layoutBottom:{
-            light: '#d9dadb',
+            light: '#ffffff',
             dark: '#383838',
           },
           layoutTop:{

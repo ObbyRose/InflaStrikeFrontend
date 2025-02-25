@@ -6,6 +6,7 @@ import { Text } from '@/components/ui/text'
 import { IC_AddCard } from '@/utils/constants/Icons'
 import { Props } from '@/types/NavigationTypes'
 import { TouchableOpacity } from 'react-native'
+import BackHeader from '@/components/BackHeader'
 
 const PaymentMethodScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme()
@@ -13,7 +14,7 @@ const PaymentMethodScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <Box className={`bg-background-${appliedTheme} h-full`}>
             <Box className="p-4">
-                
+            <BackHeader title='Payment Methods' />
                 {/* Credit / Debit Card */}
                 <TouchableOpacity onPress={() => navigation.navigate("LinkYourCard")} activeOpacity={0.7}>
                     <Box className="p-4 bg-[#F2F2F7] rounded-2xl mb-4">

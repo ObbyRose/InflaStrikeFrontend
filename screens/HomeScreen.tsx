@@ -20,6 +20,7 @@ import {
     fetchXRPLineData
 } from "../utils/api/BinanceAPI";
 import { Props } from "@/types/NavigationTypes";
+import BackHeader from "@/components/BackHeader";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -90,9 +91,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
-            <Box className={`p-4 bg-background-${appliedTheme} flex gap-2`}>
-
-                <Box className="flex-row justify-between items-center">
+            <Box className={`p-4 bg-background-${appliedTheme} h-full flex gap-2`}>
+                <Box className="flex-row justify-between items-center mt-4">
                     <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Profile" })} activeOpacity={0.7}>
                         <Avatar className="bg-indigo-600" size="lg">
                             <Icon as={User} size="xl" className="stroke-white" />
@@ -134,7 +134,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Crypto Market Section */}
                 <Box>
-                    <Box className="flex-row items-center justify-between">
+                    <Box className="flex-row items-center justify-between mt-4">
                         <Text className="text-[22px] font-semibold">Markets</Text>
                         <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>See All</Text>
                     </Box>

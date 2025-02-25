@@ -6,6 +6,7 @@ import { Textarea, TextareaInput } from "@/components/ui/textarea";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { ScrollView } from "react-native";
+import BackHeader from "@/components/BackHeader";
 
 const SupportScreen: React.FC = () => {
     const { appliedTheme } = useTheme();
@@ -21,6 +22,7 @@ const SupportScreen: React.FC = () => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
+                <BackHeader title="Contact Support" />
                 <Text className="text-xl font-bold mb-2">Support</Text>
                 <Text className="text-gray-500 mb-4">Need help? Send us a message.</Text>
 

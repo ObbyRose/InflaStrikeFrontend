@@ -6,6 +6,7 @@ import { useFormInput } from '@/hooks/useFormInput'
 import InputAuth from '@/components/auth/InputAuth'
 import { Button } from '@/components/ui/button'
 import { Props } from '@/types/NavigationTypes'
+import BackHeader from '@/components/BackHeader'
 
 const LinkYourCardScreen:React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -83,6 +84,7 @@ if (!formattedDate) {
     return (
         <Box className={`bg-background-${appliedTheme} h-full flex-1`}>
             <Box className="p-4 flex-1">
+                <BackHeader title='Add Credit / Debit Card' />
                 <Text className="text-black text-[24px] font-extrabold mb-2">Link your card</Text>
                 <Text className="text-[#828A99] text-[16px]">By adding a new card, you agree to the</Text>
                 <Text className="text-[#6666FF] text-[16px] underline mb-4">credit/debit card terms.</Text>

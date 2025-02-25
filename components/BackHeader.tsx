@@ -1,40 +1,46 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { IC_ArrowLeft } from "@/utils/constants/Icons";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
 
 interface BackHeaderProps {
-    title?: string, 
-    icons?: string[], 
+    title?: string;
+    icons?: string[];
     onPressIcons?: Function[];
 }
 
-function BackHeader({ title, icons, onPressIcons}: BackHeaderProps) {
+function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
-    
+
     return (
         <SafeAreaView>
-            <Box className={`p-4 bg-background-${appliedTheme} flex-row items-center`}>
+            <Box className={`p-4 mb-[1rem] bg-background-${appliedTheme} flex-row items-center justify-between relative`}>
+                
+                {/* Left Chevron Button */}
                 <TouchableOpacity
-                    className="self-start p-2 w-1/3"
+                    className="absolute left-4"
                     onPress={() => navigation.goBack()}
                     activeOpacity={0.7}
                 >
                     <IC_ArrowLeft className="w-8 h-8" />
                 </TouchableOpacity>
 
-                <Box className="flex-row flex-1 justify-between items-center">
-                    <Text className="font-bold">{title || ""}</Text>
-                    <Box className="flex-row items-center gap-5">
-                        {icons?.map(icon =>
-                            <Text key={icon}>{icon}</Text>
-                        )}
-                    </Box>
+                {/* Centered Title */}
+                <Box className="flex-1 items-center justify-center">
+                    <Text className="font-bold text-black text-xl text-center">{title || ""}</Text>
+                </Box>
+                {/* Right Icons */}
+                <Box className="flex-row items-center absolute right-4">
+                    {icons?.map((icon, index) => (
+                        <TouchableOpacity key={icon}>
+                            <Text>{icon}{icon}</Text>
+                        </TouchableOpacity>
+                    ))}
                 </Box>
             </Box>
         </SafeAreaView>

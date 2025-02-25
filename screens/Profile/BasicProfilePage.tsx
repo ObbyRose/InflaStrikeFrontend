@@ -5,6 +5,7 @@ import passwordConvertor from '@/utils/functions/passwordConvertor';
 import { Entypo } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface BasicProfilePageProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,6 +28,7 @@ export default function BasicProfilePage({ setIsEditing, user }: BasicProfilePag
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   return (
     <>
+    <ScrollView>
       <Button
         className="absolute right-4 top-4 w-fit rounded-full bg-transparent"
         onPress={() => setIsEditing(true)}>
@@ -39,7 +41,7 @@ export default function BasicProfilePage({ setIsEditing, user }: BasicProfilePag
           gender={user.gender}
           image={user.image}
           yearOfJoining={user.yearOfJoining}
-        />
+          />
         {/* Name field */}
         <View className="flex w-full gap-2 border-b border-gray-200 p-2">
           <Text className="text-gray-500">Your name</Text>
@@ -76,6 +78,7 @@ export default function BasicProfilePage({ setIsEditing, user }: BasicProfilePag
           </View>
         </View>
       </View>
+    </ScrollView>
     </>
   );
 }
