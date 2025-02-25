@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/actionsheet"
 import { Check } from "lucide-react-native";
 import { Icon } from "@/components/ui/icon";
+import BackHeader from "@/components/BackHeader";
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme, setTheme } = useTheme();
@@ -49,6 +50,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
+          <BackHeader title="Settings" />
             <TouchableOpacity onPress={() => navigation.navigate("ProfileSettings")} activeOpacity={0.7}>
                 <SettingItem title="Profile Settings" IconComponent={IC_ProfileSettings} />
             </TouchableOpacity>
