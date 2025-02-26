@@ -7,7 +7,11 @@ import { Progress, ProgressFilledTrack } from "../ui/progress";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { IM_ProcessingVerification } from "@/utils/constants/Images";
 
-function SignupCaptureID({ handleScreenChange }: SignUpScreensProps) {
+interface SignupCaptureIDProps extends SignUpScreensProps {
+    type: "ID Card" | "Driver's License" | 'Passport';
+}
+
+function SignupCaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
     const { appliedTheme } = useTheme();
     const [permission, requestPermission] = useCameraPermissions();
     const [frontPhoto, setFrontPhoto] = useState<string | null>(null);
@@ -47,9 +51,9 @@ function SignupCaptureID({ handleScreenChange }: SignUpScreensProps) {
     };
 
     const confirmAndProceed = () => {
-        if (step === 0 && frontPhoto) {
-            setStep(1);
-        } else if (step === 1 && backPhoto) {
+        if (step === 0 && frontPhoto && type === "ID Card") {
+                setStep(1);
+        } else if (step === 1 && backPhoto || step === 0) {
             setStep(2);
             // Pass both photos to the next screen
             setTimeout(() => {

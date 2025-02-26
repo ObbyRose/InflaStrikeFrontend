@@ -19,10 +19,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("MAIN");
+    const [screenStep , setScreenStep ] = useState("PERSONAL_INFO");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
-    const [finalData, setFinalData] = useState({});
+    const [finalData, setFinalData] = useState<any>({});
 
     const screens = ['MAIN', 'VERIFY_EMAIL', 'STATUS1', 'PHONE_NUMBER', 'VERIFY_PHONE', 'STATUS2', 'PERSONAL_INFO', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
 
@@ -36,7 +36,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
         // Update finalData
         if (data) {
-            setFinalData(prevData => ({
+            setFinalData((prevData:any) => ({
             ...prevData,
             ...data
             }));
@@ -129,7 +129,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                         { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
                         { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
                         { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} type={finalData.idMethod}/>}
                         { screenStep === 'VERIFIED' && <SignupVerified handleScreenChange={handleScreenChange} />}
                     </Animated.View>
             </Box>
