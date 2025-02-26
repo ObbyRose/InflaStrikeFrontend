@@ -30,6 +30,7 @@ import ChangePinScreen from './PinScreen/ChangePinScreen';
 import CreatePinScreen from './PinScreen/CreatePinScreen';
 import ConfirmPinScreen from './PinScreen/ConfirmPinScreen';
 import EnterChangePinScreen from './PinScreen/EnterChangePinScreen';
+import testscreen from './testscreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -67,9 +68,10 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="test" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
+                <Stack.Screen name="test" component={testscreen} />
                 <Stack.Screen name="Notifications" component={NotificationsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Savings" component={SavingsScreen} />

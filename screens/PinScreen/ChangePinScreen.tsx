@@ -126,7 +126,7 @@ const ChangePinScreen: React.FC<Props> = ({ navigation }) => {
             {/* Status Message (Fixed at Bottom) */}
             <VStack className="items-center pb-6">
                 {message && (
-                    <Text className={message.includes('Successfully') ? 'text-green-500' : 'text-red-500'}>
+                    <Text className={(message.includes('Successfully') || message.includes('Confirmed!')) ? 'text-green-500' : 'text-red-500'}>
                         {message}
                     </Text>
                 )}
