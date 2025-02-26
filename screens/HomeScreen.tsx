@@ -18,7 +18,7 @@ import {
     fetchBitcoinLineData,
     fetchEthereumLineData,
     fetchXRPLineData
-} from "../utils/api/BinanceAPI";
+} from "../utils/api/external/BinanceAPI";
 import { Props } from "@/types/NavigationTypes";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {

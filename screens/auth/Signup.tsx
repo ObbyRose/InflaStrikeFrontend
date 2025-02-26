@@ -19,17 +19,19 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState(0);
+    const [screenStep , setScreenStep ] = useState("MAIN");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState({});
+
+    const screens = ['MAIN', 'VERIFY_EMAIL', 'STATUS1', 'PHONE_NUMBER', 'VERIFY_PHONE', 'STATUS2', 'PERSONAL_INFO', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
 
     useEffect(() => {
         console.log("FINAL DATA: ", finalData);
     }, [finalData]);
 
-    const handleScreenChange = (newScreenStep: number | 'next', data?: any) => {
-        const direction = newScreenStep === 'next' || newScreenStep > screenStep ? -1 : 1;
+    const handleScreenChange = (newScreenStep: 'back' | 'next', data?: any) => {
+        const direction = newScreenStep === 'next' ? -1 : 1;
         setIsGoingBack(direction === 1);
 
         // Update finalData
@@ -47,12 +49,19 @@ const Signup: React.FC<Props> = ({ navigation }) => {
             easing: Easing.ease,
             useNativeDriver: true,
         }).start(() => {
+            // After slide-out animation ends, change the screen step
+            
+        const currentIndex = screens.indexOf(screenStep);
 
-        // After slide-out animation ends, change the screen step
         if(newScreenStep === "next")
-            setScreenStep(prev => prev+1);
-        else
-            setScreenStep(newScreenStep);
+            setScreenStep(screens[currentIndex + 1]);
+        else {
+            if(screenStep === "MAIN")
+                navigation.navigate("Login");
+            else
+                setScreenStep(screens[currentIndex - 1]);
+
+        }
     
         // Then, trigger the slide-in animation
         slideAnim.setValue(-direction);
@@ -67,10 +76,10 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         const backAction = () => {
-        if(screenStep === 0)
+        if(screenStep === "MAIN")
             navigation.navigate("Login");
         else 
-            handleScreenChange(screenStep - 1);
+            handleScreenChange("back");
         return true; 
         };
     
@@ -89,7 +98,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         >
         <Box className={`flex-1 h-full min-h-screen bg-background-${appliedTheme}`}>
-            <BackAuth screenStep={screenStep} handleScreenChange={handleScreenChange} navigation={navigation}/>
+            <BackAuth handleScreenChange={handleScreenChange}/>
                 <Box className={`flex-1 p-10 pt-5`}>
                     <Animated.View
                         className="flex-1"
@@ -111,16 +120,16 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                             }),
                         }}
                     >
-                        { screenStep === 0 && <SignupMain handleScreenChange={handleScreenChange} />}
-                        { screenStep === 1 && <VerifyEmail handleScreenChange={handleScreenChange} />}
-                        { screenStep === 2 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
-                        { screenStep === 3 && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
-                        { screenStep === 4 && <VerifyPhone handleScreenChange={handleScreenChange}/>}
-                        { screenStep === 5 && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screenStep} />}
-                        { screenStep === 6 && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
-                        { screenStep === 7 && <SignupIDType handleScreenChange={handleScreenChange} />}
-                        { screenStep === 8 && <SignupCaptureID handleScreenChange={handleScreenChange} />}
-                        { screenStep === 9 && <SignupVerified handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'MAIN' && <SignupMain handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'VERIFY_EMAIL' && <VerifyEmail handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'STATUS1' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
+                        { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'VERIFY_PHONE' && <VerifyPhone handleScreenChange={handleScreenChange}/>}
+                        { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
+                        { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'VERIFIED' && <SignupVerified handleScreenChange={handleScreenChange} />}
                     </Animated.View>
             </Box>
         </Box>

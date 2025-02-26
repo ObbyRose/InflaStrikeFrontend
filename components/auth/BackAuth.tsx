@@ -7,18 +7,10 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { SignUpScreensProps } from "@/types/NavigationTypes";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 
-interface BackAuthProps extends SignUpScreensProps {
-    screenStep: number;
-    navigation: NavigationProp<ParamListBase>;
-}
-
-function BackAuth({ screenStep, handleScreenChange, navigation }: BackAuthProps) {
+function BackAuth({ handleScreenChange }: SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     function handleBackPress() {
-        if(screenStep === 0)
-            navigation.navigate("Login");
-        else 
-            handleScreenChange(screenStep - 1);
+        handleScreenChange('back');
     }
 
     return (
