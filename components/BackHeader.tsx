@@ -35,10 +35,10 @@ function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
                     <Text className="font-bold text-black text-xl text-center">{title || ""}</Text>
                 </Box>
                 {/* Right Icons */}
-                <Box className="flex-row items-center absolute right-4">
+                <Box className="flex-row items-center absolute gap-2 right-4">
                     {icons?.map((icon, index) => (
                         <TouchableOpacity key={icon}>
-                            <Text>{icon}{icon}</Text>
+                            <Text>{icon}</Text>
                         </TouchableOpacity>
                     ))}
                 </Box>
