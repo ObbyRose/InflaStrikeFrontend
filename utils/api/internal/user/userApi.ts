@@ -4,14 +4,15 @@ import axios from 'axios';
 //@ts-ignore
 import { BASE_API_URL } from '@env';
 import { GooglePlaceData } from 'react-native-google-places-autocomplete';
+import { User } from '@/context/userStore';
 
 interface loginUserReq {
     email: string,
     password: string;
 }
 
-interface loginUserRes {
-    // userId: ;
+interface loginUserRes extends User {
+    token: string;
 }
 
 export const loginUser  = async ({email, password} : loginUserReq) => {
