@@ -1204,6 +1204,25 @@ export const IC_FaceID = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_Swap = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 13 12"
+      fill="none"
+    >
+      <Path
+        d="M3.417 8.252V1m0 0L1 3.417M3.417 1l2.418 2.417m3.626 0v7.253m0 0l2.418-2.418M9.46 10.67L7.044 8.252"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
   export const IconsMap = {
     IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_Fingerprint,IC_FaceID,
     IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio, IC_Eye, IC_Lock, IC_Person,

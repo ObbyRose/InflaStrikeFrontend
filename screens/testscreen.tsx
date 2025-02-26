@@ -1,77 +1,91 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetSectionHeaderText } from "@/components/ui/actionsheet";
+import { Text, TextInput, TouchableOpacity } from "react-native";
 import { Button } from "@/components/ui/button";
-import ButtonsTrain from "@/components/ButtonsTrain";
 import { Box } from "@/components/ui/box";
-import { Divider } from "@/components/ui/divider";
+import { ChevronDown } from "lucide-react-native";
+import ButtonsTrain from "@/components/ButtonsTrain";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
+import { IC_Swap } from "@/utils/constants/Icons";
+import BackHeader from "@/components/BackHeader";
 
-const TradeActionSheet = () => {
-    const [showSheet, setShowSheet] = useState(false);
+const ExchangeScreen = () => {
     const [activeTab, setActiveTab] = useState("Limit");
+    const [amount, setAmount] = useState("126.00");
+    const [convertedAmount, setConvertedAmount] = useState("56.01");
+    const [fromCurrency, setFromCurrency] = useState("Bitcoin");
+    const [toCurrency, setToCurrency] = useState("Litecoin");
+    const [fromSymbol, setFromSymbol] = useState("₿");
+    const [toSymbol, setToSymbol] = useState("Ł");
     const { appliedTheme } = useTheme();
 
+    const swapCurrencies = () => {
+        setFromCurrency(toCurrency);
+        setToCurrency(fromCurrency);
+        setFromSymbol(toSymbol);
+        setToSymbol(fromSymbol);
+        setAmount(convertedAmount);
+        setConvertedAmount(amount);
+    };
+
     return (
-        <Box className="flex-1 justify-center items-center bg-gray-100">
-            {/* Open ActionSheet Button */}
-            <Button className="bg-green-500 px-6 py-3 rounded-lg" onPress={() => setShowSheet(true)}>
-                <Text className="text-white font-bold">Open Trade</Text>
-            </Button>
+        <Box className="p-4 h-full bg-white">
+            <BackHeader title="Exchange" />
+            <Box className="flex-1 items-center">
+                <Box className="flex-row w-full rounded-lg p-1">
+                    <ButtonsTrain
+                        buttons={['Market', 'Limit', 'Stop-Limit']}
+                        activeButton={activeTab}
+                        handlePress={setActiveTab}
+                    />
+                </Box>
 
-            {/* ActionSheet */}
-            <Actionsheet isOpen={showSheet} onClose={() => setShowSheet(false)}>
-                <ActionsheetBackdrop />
-                <ActionsheetContent className="bg-white rounded-t-2xl p-4 w-full">
-                    
-                    {/* Header - Tab Selection */}
-                    <ActionsheetSectionHeaderText>
-                        <ButtonsTrain
-                            activeButton={activeTab}
-                            handlePress={(newCategory) => setActiveTab(newCategory)}
-                            buttons={['Market', 'Limit', 'Stop-Limit']}
-                        />
-                    </ActionsheetSectionHeaderText>
-
-                    {/* Price, Amount, Total */}
-                    <Box className="mt-4 w-full">
-                        <Box className="flex-row justify-between items-center">
-                            <Text className="text-gray-500">Limit Price</Text>
-                            <Text className="text-black text-lg font-bold">12,394.00 USDT</Text>
+                {/* Currency Input Box (From) */}
+                <Box className="mt-4 bg-gray-100 rounded-lg p-4 flex-row justify-between items-center w-full">
+                    <TextInput
+                        className="text-xl font-bold flex-1"
+                        keyboardType="numeric"
+                        value={amount}
+                        onChangeText={setAmount}
+                    />
+                    <TouchableOpacity className="flex-row items-center">
+                        <Box className="bg-red-100 p-2 rounded-full mr-2">
+                            <Text className="text-red-500 font-bold">{fromSymbol}</Text>
                         </Box>
+                        <Text className="text-lg font-bold">{fromCurrency}</Text>
+                        <ChevronDown className="ml-1 text-gray-500" size={20} />
+                    </TouchableOpacity>
+                </Box>
 
-                        <Box className="flex-row justify-between items-center mt-2">
-                            <Text className="text-gray-500">Amount</Text>
-                            <Text className="text-black text-lg font-bold">0.5 BTC</Text>
+                {/* Swap Button */}
+                <TouchableOpacity
+                    onPress={swapCurrencies}
+                    className={`bg-button-${appliedTheme} p-3 rounded-full mt-4`}
+                >
+                    <IC_Swap className="text-white w-7 h-7" />
+                </TouchableOpacity>
+
+                {/* Currency Input Box (To) */}
+                <Box className="mt-4 bg-gray-100 rounded-lg p-4 flex-row justify-between items-center w-full">
+                    <Text className="text-xl font-bold flex-1">{convertedAmount}</Text>
+                    <TouchableOpacity className="flex-row items-center">
+                        <Box className="bg-green-100 p-2 rounded-full mr-2">
+                            <Text className="text-green-500 font-bold">{toSymbol}</Text>
                         </Box>
+                        <Text className="text-lg font-bold">{toCurrency}</Text>
+                        <ChevronDown className="ml-1 text-gray-500" size={20} />
+                    </TouchableOpacity>
+                </Box>
 
-                        <Box className="flex-row justify-between items-center mt-2">
-                            <Text className="text-gray-500">Total</Text>
-                            <Text className="text-black text-lg font-bold">0 USDT</Text>
-                        </Box>
-                    </Box>
-
-                    {/* Available Balance & Buy Button */}
-                    <Box className="mt-4 items-center">
-                        <Text className="text-gray-500">Avbl: 823,743 USDT</Text>
-                        <Button className="bg-green-500 rounded-full w-screen mt-3">
-                            <Text className="text-white font-bold">Place buy order</Text>
-                        </Button>
-                    </Box>
-
-                    {/* Numeric Keypad */}
-                    <Box className="flex-row flex-wrap justify-between mt-4 px-5">
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, ".", 0, "⌫"].map((key, index) => (
-                            <TouchableOpacity key={index} className="w-[30%] p-4 items-center">
-                                <Text className="text-black text-2xl font-bold">{key}</Text>
-                            </TouchableOpacity>
-                        ))}
-                    </Box>
-
-                </ActionsheetContent>
-            </Actionsheet>
+                {/* Exchange Button */}
+                <Box className="p-4 w-full">
+                    <Button className={`bg-button-${appliedTheme} w-full rounded-lg mt-6`}>
+                        <Text className="text-white text-lg font-bold">Exchange</Text>
+                    </Button>
+                </Box>
+            </Box>
         </Box>
     );
 };
 
-export default TradeActionSheet;
+export default ExchangeScreen;
+
