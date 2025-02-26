@@ -19,7 +19,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState(0);
+    const [screenStep , setScreenStep ] = useState(6);
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState({});
@@ -84,9 +84,10 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
     return (
     <SafeAreaView>
-        <ScrollView 
+        <ScrollView
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
         >
         <Box className={`flex-1 h-full min-h-screen bg-background-${appliedTheme}`}>
             <BackAuth screenStep={screenStep} handleScreenChange={handleScreenChange} navigation={navigation}/>

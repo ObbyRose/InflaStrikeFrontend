@@ -5,6 +5,7 @@ import StackNavigator from '@screens/StackNavigator';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from './utils/Themes/ThemeProvider';
 import { ToastProvider } from '@gluestack-ui/toast';
+import 'react-native-get-random-values';
 
 export default function App() {
   return (

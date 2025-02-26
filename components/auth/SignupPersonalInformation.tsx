@@ -4,29 +4,25 @@ import { Text } from '../ui/text'
 import InputAuth from './InputAuth'
 import { Button, ButtonSpinner, ButtonText } from '../ui/button'
 import { useFormInput } from '@/hooks/useFormInput'
-import { Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel } from '../ui/checkbox'
-import { CheckIcon } from '../ui/icon'
 import { SignUpScreensProps } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { validateAndConvertBirthday } from '@/utils/functions/help'
+import GooglePlacesInput from './GooglePlacesInput'
 
 function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
+    const [address, setAddress] = useState({});
     const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
         birthday: '',
-        address: '',
-        apartmentNumber: '',
-        city: '',
-        postal: '',
         api: ''
     });
 
-    const { birthday, address, apartmentNumber, city, postal } = values;
+    const { birthday } = values;
     
     function handleSubmit() {
         let valid = true;
-        let newErrors = { birthday: "", address: "", apartmentNumber: "", city: "", postal: ""};
+        let newErrors = { birthday: ""};
         let birthdayDate = null;
 
         if(!birthday.trim()) {
@@ -39,23 +35,6 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
                 valid = false;
             }
         }
-        
-        if (!address.trim()) {
-            newErrors.address = "Address is required.";
-            valid = false;
-        } 
-        if (!apartmentNumber.trim()) {
-            newErrors.apartmentNumber = "Apartment Number is required.";
-            valid = false;
-        }
-        if (!city.trim()) {
-            newErrors.city = "City or Town is required.";
-            valid = false;
-        }
-        if (!postal.trim()) {
-            newErrors.postal = "Postal is required.";
-            valid = false;
-        }
 
         setErrorByFields(newErrors)
 
@@ -65,7 +44,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
                 setIsLoading(false);
                 handleScreenChange('next', { 
                     birthday: birthdayDate?.toLocaleDateString("en-US"), 
-                    address, apartmentNumber, city, postal });
+                    address });
             }, 1000);
         }
     }
@@ -76,13 +55,17 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
         <Box className='mb-10 gap-2'>
             <Text className='text-4xl text-black font-bold mb-5'>Personal information</Text>
             {/* Inputs */}
+            <Text>Birthday</Text>
             <InputAuth 
                 type='birthday'
                 value={birthday}
                 onChangeText={(val) => handleInputChange("birthday", val)}
                 error={errors.birthday}
             />
-            <InputAuth 
+            <Text>Address</Text>
+
+            <GooglePlacesInput setAddress={setAddress}/>
+            {/* <InputAuth 
                 placeholder='Residential address'
                 value={address}
                 onChangeText={(val) => handleInputChange("address", val)}
@@ -108,7 +91,7 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
                 value={postal}
                 onChangeText={(val) => handleInputChange("postal", val)}
                 error={errors.postal}
-            />
+            /> */}
 
             <Text className={`text-gray-${appliedTheme} text-[12px]`}>
             We use 128-bit encryption for added security, and this information is only used for identity verification purposes.
