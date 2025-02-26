@@ -93,9 +93,10 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
     return (
     <SafeAreaView>
-        <ScrollView 
+        <ScrollView
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
         >
         <Box className={`flex-1 h-full min-h-screen bg-background-${appliedTheme}`}>
             <BackAuth handleScreenChange={handleScreenChange}/>
