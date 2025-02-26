@@ -10,6 +10,8 @@ import CandleChartComponent from '@/components/market/CandleChart';
 import { Divider } from '@/components/ui/divider';
 import { ScrollView } from 'react-native';
 import CoinOrderHistory from '@/components/market/CoinOrderHistory';
+import DepthChartComponent from '@/components/market/DepthChart';
+import CoinInfo from '@/components/market/CoinInfo';
 
 
 type RootStackParamList = {
@@ -21,12 +23,11 @@ type CoinScreenRouteProp = RouteProp<RootStackParamList, 'CoinScreen'>;
 function CoinScreen() {
     const route = useRoute<CoinScreenRouteProp>();
     const coin = route.params?.coin;
-    console.log(coin.symbol)
     
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
     
-    const [category, setCategory] = useState("Price");
+    const [category, setCategory] = useState("Info");
 
     const ErrorContext = ({ err } : {err : string}) => (
         <Box className="flex-1 items-center justify-center">
@@ -49,7 +50,6 @@ function CoinScreen() {
 
     const CoinContent = () => (
         <ScrollView
-            nestedScrollEnabled={true} 
             className='flex-1 bg-white'
         >
             <BackHeader 
@@ -82,8 +82,14 @@ function CoinScreen() {
                 { category === "Price" &&
                     <CandleChartComponent symbol={coin.symbol}/>
                 }
+                { category === "Depth" &&
+                    <DepthChartComponent symbol={coin.symbol}/>
+                }
+                { category === "Info" &&
+                    <CoinInfo symbol={coin.symbol}/>
+                }
                 <Divider />
-                <Box>
+                <Box className='p-2'> 
                     <CoinOrderHistory />
                 </Box>
             </Box>

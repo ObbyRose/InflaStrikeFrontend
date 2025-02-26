@@ -23,7 +23,7 @@ interface CandleChartComponentProps {
 const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
     const { appliedTheme } = useTheme();
     const { width } = Dimensions.get('window');
-    const intervals = ["1m", "5m", "15m", "30m", "1h", "1d", "1w", "All"];
+    const intervals = ["1m", "5m", "15m", "30m", "1h", "1d", "1w", "1M"];
     const [selectedInterval, setSelectedInterval] = useState("1d");
 
     const [chartData, setChartData] = useState<CandlestickData[]>([]);
@@ -79,12 +79,12 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
                 <CandlestickChart width={width * 0.95} height={200}>
                     <CandlestickChart.Candles />
                     <CandlestickChart.Crosshair color="#3949AB">
-                        <CandlestickChart.Tooltip textStyle={{ color: "white" }}
-                        style={{ 
-                            backgroundColor: "#4A3EF6", 
-                            borderRadius: 10,
-                            }}
-                        
+                        <CandlestickChart.Tooltip 
+                            textStyle={{ color: "white" }}
+                            style={{ 
+                                backgroundColor: "#4A3EF6", 
+                                borderRadius: 10,
+                                }}
                             />
                     </CandlestickChart.Crosshair>
                 </CandlestickChart>
@@ -138,7 +138,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
                         </Text>
                     </TouchableOpacity>
                 ))}
-            </Box>
+        </Box>
     </Box>
     );
 };

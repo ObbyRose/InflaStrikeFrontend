@@ -27,7 +27,7 @@ function CoinOrderHistory() {
     const categories = ["Order Book", "Trade History"];
 
     return (
-    <Box className=" rounded-lg p-3 bg-white w-full">
+    <Box className="relative rounded-lg p-3 bg-white w-full">
         {/* Header Tabs */}
         <Box className={`relative flex-row pt-2 gap-4`}>
             {categories.map(category =>
@@ -56,12 +56,12 @@ function CoinOrderHistory() {
 
         {/* Buy & Sell Buttons */}
         <Box className="flex-row mt-3 gap-3">
-        <Button className="bg-green-500 px-6 py-3 rounded-full flex-1 h-fit">
-            <ButtonText className="text-white font-semibold">Buy</ButtonText>
-        </Button>
-        <Button className="bg-red-500 px-6 py-3 rounded-full flex-1 h-fit">
-            <ButtonText className="text-white font-semibold">Sell</ButtonText>
-        </Button>
+            <Button className="bg-green-500 px-6 py-3 rounded-full flex-1 h-fit">
+                <ButtonText className="text-white font-semibold">Buy</ButtonText>
+            </Button>
+            <Button className="bg-red-500 px-6 py-3 rounded-full flex-1 h-fit">
+                <ButtonText className="text-white font-semibold">Sell</ButtonText>
+            </Button>
         </Box>
     </Box>
     );
