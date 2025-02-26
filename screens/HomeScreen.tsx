@@ -6,7 +6,8 @@ import { Icon } from "@/components/ui/icon";
 import { User } from "lucide-react-native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Settings, IC_NotificationsInactive } from "@/utils/constants/Icons";
+import { useUserStore } from "@/context/userStore"; // Import the Zustand store
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Settings, IC_NotificationsInactive } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -23,6 +24,7 @@ import { Props } from "@/types/NavigationTypes";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
+    const { user } = useUserStore();
     const [cryptoData, setCryptoData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -99,12 +101,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <Box className="flex-row items-center gap-2 mt-3">
-                    <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Notifications" })}>
-                        <Box className="flex-col items-center gap-1">
-                            <IC_NotificationsInactive className="h-7 w-7" />
-                            <Text className="text-2xs font-semibold text-[#969AA0]">Notifications</Text>
-                        </Box>
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Notifications" })}>
+                            <Box className="flex-col items-center gap-1">
+                                <IC_NotificationsInactive className="h-7 w-7" />
+                                <Text className="text-2xs font-semibold text-[#969AA0]">Notifications</Text>
+                            </Box>
+                        </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => navigation.navigate("SettingsStack", { screen: "Settings" })}>
                             <Box className="flex-col items-center gap-1">
@@ -114,18 +116,21 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         </TouchableOpacity>
                     </Box>
                 </Box>
+
                 {/* Greetings Section */}
                 <Box className="mb-4">
                     <Text className="text-[36px] mt-2 text-black font-bold">Hello,</Text>
-                    <Text className="text-[36px] text-black font-bold">Baba Cattington 👋</Text>
+                    <Text className="text-[36px] text-black font-bold">{user ? `${user.fName} ${user.lName}` : "User"} 👋</Text>
                 </Box>
 
-                {/* Net Liquid Value Section */}
+                {/* Net Liquid Value (NLVE) Section */}
                 <Box className={`bg-indigo-600 p-2 h-[100px] w-full rounded-3xl flex`}>
                     <Box className="p-2">
                         <Text className="text-white text-[18px]">Total Balance:</Text>
                         <Box>
-                            <Text className="text-white text-[20px] self-end">$ 415,312</Text>
+                            <Text className="text-white text-[20px] self-end">
+                                ${user?.nlve ? parseFloat(user.nlve).toLocaleString() : "0.00"}
+                            </Text>
                         </Box>
                         <Text className="text-[12px] text-white top-0">Cash Available</Text>
                     </Box>
@@ -135,7 +140,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 <Box>
                     <Box className="flex-row items-center justify-between mt-4">
                         <Text className="text-[22px] font-semibold">Markets</Text>
-                        <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>See All</Text>
+                        <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
+                            See All
+                        </Text>
                     </Box>
                 </Box>
 

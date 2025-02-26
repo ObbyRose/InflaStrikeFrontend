@@ -2,12 +2,13 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface User {
-    id: string;
-    firstName: string;
-    lastName: string;
+    userId: string;
+    fName: string;
+    lName: string;
     phone: string;
     email: string;
-    cryptoCoins: {currency: string, amount: number}[];
+    nlve: string;
+    cryptoCoins: {ownedCoins: string, amount: string}[];
     avatar?: string;
 }
 
