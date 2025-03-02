@@ -5299,7 +5299,7 @@ export const IconsMap = {
   IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
   IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile, IC_NotificationsInactive, IC_Arrow_Down, IC_Back,
   IC_Cross, IC_Options, IC_Help, IC_Arrow_Down_White, IC_Back_White, IC_Bell_White, IC_Cross_White, IC_Options_White, IC_Search_White, IC_Bell,
-  IC_Activity_Active, IC_Home_Active, IC_Invest_Active, IC_Profile_Active, IC_Activity_Inactive, IC_Home_Inactive, IC_Invest_Inactive, IC_Profile_Inactive, IC_Swap, IC_Swap_White, IC_Bell_V2, IC_Card_V2, IC_FaceID_V2, IC_Help_V2, IC_Logout_V2, IC_Password_V2, IC_PIN_V2, IC_Privacy_V2, IC_Profile_V2, IC_Terms_V2
+  IC_Activity_Active, IC_Home_Active, IC_Invest_Active, IC_Profile_Active, IC_Activity_Inactive, IC_Home_Inactive, IC_Invest_Inactive, IC_Profile_Inactive, IC_Swap, IC_Bell_V2, IC_Card_V2, IC_FaceID_V2, IC_Help_V2, IC_Logout_V2, IC_Password_V2, IC_PIN_V2, IC_Privacy_V2, IC_Profile_V2, IC_Terms_V2
 };
 
 export function getIconByString(icon: string) {
