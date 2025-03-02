@@ -1015,51 +1015,6 @@ export const IC_Phone = ({ className }: IconsProps) => {
   );
 };
 
-export const IC_Passport = ({ className }: IconsProps) => {
-  return (
-      <Box className={cn(className)}>
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="none"
-    >
-      <Mask
-        id="a"
-        style={{
-          maskType: "luminance"
-        }}
-        maskUnits="userSpaceOnUse"
-        x={0}
-        y={0}
-        width={20}
-        height={20}
-      >
-        <Path fill="#fff" d="M0 0H20V20H0z" />
-      </Mask>
-      <G mask="url(#a)" stroke="#fff">
-        <Rect x={3} y={1} width={14} height={18} rx={2} strokeWidth={1.5} />
-        <Path
-          clipRule="evenodd"
-          d="M10 14a4 4 0 110-8 4 4 0 010 8z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <Path
-          d="M8.685 6.4h.4a11.37 11.37 0 000 7.2h-.4M11 6.4a11.37 11.37 0 010 7.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <Path
-          d="M6.4 11.4V11c2.336.78 4.864.78 7.2 0v.4M6.4 9.085a11.37 11.37 0 017.2 0"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </G>
-    </Svg>
-      </Box>
-  );
-};
-
 export const IC_Security = ({ className }: IconsProps) => {
   return (
       <Box className={cn(className)}>
@@ -2537,6 +2492,2805 @@ export const IC_Edit = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_Letter = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M2.083 3.75c0-.92.747-1.667 1.667-1.667h9.167c.92 0 1.667.746 1.667 1.667v12.5c0 .92.746 1.667 1.666 1.667v0H3.75c-.92 0-1.667-.747-1.667-1.667V3.75z"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M14.584 11.25h1.666c.92 0 1.667.746 1.667 1.667v3.333c0 .92-.746 1.667-1.667 1.667v0c-.92 0-1.666-.747-1.666-1.667v-5z"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M5.417 10h5.833M5.417 13.333H8.75M5.417 6.667h5.833"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Minus = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M4 10h12"
+        stroke="#363D4E"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Plus = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M10 4v12M4 10h12"
+        stroke="#363D4E"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Search_Alter = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M12.914 12.914L17 17"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Circle
+        cx={8.75}
+        cy={8.75}
+        r={5.75}
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Arrow_Right = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M8 4l6 6-6 6"
+        stroke="#5C616F"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Info_Circle = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle
+        cx={10}
+        cy={10}
+        r={7.5}
+        stroke="#5C616F"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M9 10h1v4h1"
+        stroke="#5C616F"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Circle cx={10} cy={6.75} r={1.25} fill="#5C616F" />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Arrow_Right_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M8 16l6-6-6-6"
+        stroke="#F6F7F8"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Arrow_Up_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M16 12l-6-6-6 6"
+        stroke="#F6F7F8"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Edit_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M11.693 16.963h6.002"
+        stroke="#F6F7F8"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M10.898 2.9c.694-.884 1.815-.838 2.7-.145l1.308 1.026c.885.694 1.198 1.77.504 2.655L7.61 16.39c-.26.334-.659.53-1.082.535l-3.01.038-.68-2.931c-.097-.412 0-.845.26-1.179L10.898 2.9z"
+        stroke="#F6F7F8"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M9.438 4.763L13.948 8.3"
+        stroke="#F6F7F8"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Plus_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M10 4v12M4 10h12"
+        stroke="#F6F7F8"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Bank_Of_America = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Rect width={48} height={48} rx={24} fill="#E31837" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Rect width={48} height={48} rx={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)" fillRule="evenodd" clipRule="evenodd" fill="#fff">
+        <Path d="M23.943 35c6-5.243 14.428-10.34 19.057-12.175-.714-.466-1.829-1.136-3.086-1.864-5.971 2.01-12.943 6.466-19.171 11.505 1.057.815 2.171 1.66 3.2 2.534zM21.2 20.758c-.886-.437-1.857-.845-2.6-1.194-2.257 1.135-5.2 2.854-8.914 5.562.8.437 1.657.962 2.571 1.486 2.857-2.156 5.743-4.194 8.943-5.854zM26.543 18.253c-1.086-.612-4.857-2.04-7.457-2.65-.772.29-1.858.727-2.6 1.048.943.262 4.457 1.223 7.457 2.767.771-.379 1.857-.845 2.6-1.165zM13.771 17.874c-3.343 1.573-6.857 3.728-8.771 4.98.685.32 1.371.583 2.314 1.05 4.229-2.914 7.543-4.69 8.857-5.273-.942-.35-1.828-.582-2.4-.757zM29.057 17.35c.771-.262 1.657-.496 2.429-.729-2.229-.96-5.029-1.98-7.543-2.621-.4.117-1.6.437-2.429.7.857.261 3.686.931 7.543 2.65zM14.97 28.3c.915.553 1.886 1.31 2.829 1.951 6.257-4.951 12.428-8.767 19.2-10.922-.943-.495-1.772-.932-2.829-1.456-4.057 1.049-11 3.874-19.2 10.427z" />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Citi_Bank = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Rect width={48} height={48} rx={24} fill="#330497" />
+      <Mask
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Rect width={48} height={48} rx={24} fill="#fff" />
+      </Mask>
+      <Path
+        d="M17.744 28.654l-.057.055c-.923.94-1.99 1.439-3.091 1.439-2.297 0-3.964-1.723-3.964-4.1 0-2.374 1.667-4.1 3.964-4.1 1.1 0 2.168.5 3.09 1.443l.058.057 1.477-1.786-.04-.048c-1.228-1.452-2.702-2.158-4.514-2.158-1.818 0-3.48.611-4.678 1.715C8.687 22.366 8 24.051 8 26.047c0 1.995.687 3.684 1.989 4.88 1.198 1.108 2.86 1.717 4.678 1.717 1.812 0 3.286-.706 4.514-2.159l.04-.045-1.477-1.786zM20.714 32.401h2.61V19.663h-2.61V32.4zM33.544 29.631c-.696.424-1.344.637-1.926.637-.843 0-1.224-.445-1.224-1.436v-6.76h2.658v-2.398h-2.658V15.71l-2.557 1.37v2.594H25.63v2.399h2.207v7.19c0 1.959 1.16 3.297 2.892 3.332 1.177.023 1.886-.327 2.316-.583l.026-.02.628-2.455-.155.094zM35.706 32.401h2.61V19.663h-2.61V32.4z"
+        fill="#fff"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M39.88 17.402C37.49 14.02 33.524 12 29.488 12c-4.034 0-8.002 2.019-10.387 5.402l-.122.174h3.008l.033-.036c2.047-2.113 4.72-3.23 7.468-3.23 2.75 0 5.421 1.117 7.472 3.23l.033.036H40l-.12-.174z"
+        fill="#ED1C24"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Chase = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Rect width={48} height={48} rx={24} fill="#330497" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Rect width={48} height={48} rx={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M19.737 12.848c0-.469.38-.848.848-.848l7.696.002 7.144 6.785H19.737v-5.94zm16.015 7.137c.159.159.248.374.248.6l-.003 7.697-6.782 7.148V19.738h5.937c.225 0 .44.088.6.247zM27.415 36a.848.848 0 00.846-.848v-5.94H12.573l7.143 6.786 7.7.002zm-15.167-7.984a.848.848 0 01-.248-.6v-7.698l6.785-7.147v15.694h-5.938a.847.847 0 01-.599-.249z"
+          fill="#fff"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Visa = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Rect width={48} height={48} rx={24} fill="#330497" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Rect width={48} height={48} rx={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path
+          d="M21.408 29.342h-2.88l1.801-11.14h2.88l-1.801 11.14zM31.85 18.474A7.098 7.098 0 0029.266 18c-2.844 0-4.847 1.517-4.86 3.685-.023 1.6 1.435 2.49 2.525 3.023 1.114.545 1.493.9 1.493 1.386-.011.747-.9 1.09-1.73 1.09-1.15 0-1.766-.177-2.702-.592l-.38-.178-.402 2.5c.675.309 1.92.582 3.212.594 3.022 0 4.99-1.494 5.013-3.805.012-1.268-.758-2.24-2.418-3.034-1.007-.51-1.624-.853-1.624-1.374.012-.475.522-.96 1.659-.96a4.893 4.893 0 012.146.427l.26.118.392-2.406z"
+          fill="#fff"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M37.006 18.202h2.228l2.323 11.14H38.89s-.26-1.28-.343-1.672h-3.698l-.605 1.671h-3.022L35.5 19.127c.297-.723.819-.924 1.506-.924zm-.178 4.076l-1.15 3.117h2.394c-.118-.557-.664-3.223-.664-3.223l-.2-.96a61.75 61.75 0 01-.291.816c-.056.155-.094.26-.089.25z"
+          fill="#fff"
+        />
+        <Path
+          d="M16.122 18.202l-2.82 7.596-.31-1.54c-.52-1.778-2.156-3.71-3.982-4.67l2.584 9.742h3.046l4.528-11.128h-3.046z"
+          fill="#fff"
+        />
+        <Path
+          d="M10.682 18.202H6.047L6 18.427c3.615.924 6.01 3.153 6.993 5.831l-1.008-5.12c-.165-.711-.675-.913-1.303-.936z"
+          fill="#FAA61A"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Mastercard = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Rect width={48} height={48} rx={24} fill="#E3E0DA" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Rect width={48} height={48} rx={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path fill="#FF5F00" d="M20.5 16.8667H27.5V30.6334H20.5z" />
+        <Path
+          d="M20.704 23.75A8.807 8.807 0 0124 16.872 8.551 8.551 0 0018.66 15C13.873 15 10 18.913 10 23.75s3.873 8.75 8.66 8.75c2.02 0 3.873-.705 5.34-1.872-1.997-1.58-3.296-4.083-3.296-6.878z"
+          fill="#EB001B"
+        />
+        <Path
+          d="M38 23.75c0 4.837-3.873 8.75-8.66 8.75A8.551 8.551 0 0124 30.628c2.02-1.604 3.296-4.083 3.296-6.878A8.807 8.807 0 0024 16.872 8.551 8.551 0 0129.34 15c4.787 0 8.66 3.938 8.66 8.75z"
+          fill="#F79E1B"
+        />
+      </G>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_American_Express = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <Rect width={48} height={48} rx={24} fill="#330497" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Rect width={48} height={48} rx={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path fill="url(#pattern0_0_5755)" d="M5 19H43V29H5z" />
+        <Mask
+          id="b"
+          style={{
+            maskType: "alpha"
+          }}
+          maskUnits="userSpaceOnUse"
+          x={5}
+          y={19}
+          width={38}
+          height={10}
+        >
+          <Path fill="url(#pattern1_0_5755)" d="M5 19H43V29H5z" />
+        </Mask>
+        <G mask="url(#b)">
+          <Path fill="#fff" d="M5 19H43V29H5z" />
+        </G>
+      </G>
+      <Defs>
+        <Pattern
+          id="pattern0_0_5755"
+          patternContentUnits="objectBoundingBox"
+          width={1}
+          height={1}
+        >
+          <Use xlinkHref="#image0_0_5755" transform="scale(.00267 .0097)" />
+        </Pattern>
+        <Pattern
+          id="pattern1_0_5755"
+          patternContentUnits="objectBoundingBox"
+          width={1}
+          height={1}
+        >
+          <Use xlinkHref="#image0_0_5755" transform="scale(.00267 .0097)" />
+        </Pattern>
+        <Image
+          id="image0_0_5755"
+          width={375}
+          height={103}
+          preserveAspectRatio="none"
+          xlinkHref="data:image/png;base64,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"
+        />
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_ATM_Locator = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 53 57"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path opacity={0.48} fill="#005267" d="M0 24H22V48H0z" />
+        <Circle opacity={0.48} cx={41} cy={9} r={15} fill="#005267" />
+        <Rect
+          x={6}
+          y={10.5}
+          width={36}
+          height={39.5}
+          rx={2.5}
+          fill="url(#paint0_linear_0_7442)"
+        />
+        <Rect x={9.5} y={14.5} width={29} height={6} rx={1} fill="#330497" />
+        <Path
+          d="M11.5 16.5h25V36a2 2 0 01-2 2h-21a2 2 0 01-2-2V16.5z"
+          fill="url(#paint1_linear_0_7442)"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M13.5 16.5h21V30a6 6 0 00-6 6h-9a6 6 0 00-6-6V16.5z"
+          fill="url(#paint2_linear_0_7442)"
+        />
+        <Path
+          opacity={0.48}
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M19.99 15.457a4.5 4.5 0 108.127.223l-8.128-.223z"
+          fill="#330497"
+        />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_7442)">
+        <Circle cx={35} cy={35} r={11} fill="#330497" />
+      </G>
+      <Circle
+        cx={34}
+        cy={34}
+        r={4}
+        stroke="#E8F2FF"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M37.108 36.858L40 39.75"
+        stroke="#E8F2FF"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7442"
+          x1={6}
+          y1={10.5}
+          x2={6}
+          y2={50}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7442"
+          x1={11.5}
+          y1={16.5}
+          x2={11.5}
+          y2={38}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#fff" />
+          <Stop offset={1} stopColor="#E7F2FF" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_7442"
+          x1={13.5}
+          y1={16.5}
+          x2={13.5}
+          y2={36}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#EFFCFF" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Budget = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={-5}
+          y={20}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={34}
+          cy={8}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Rect
+          x={8}
+          y={15}
+          width={39}
+          height={28}
+          rx={3}
+          fill="url(#paint0_linear_0_7370)"
+        />
+        <Rect
+          x={11}
+          y={12}
+          width={39}
+          height={28}
+          rx={3}
+          fill="url(#paint1_linear_0_7370)"
+        />
+        <G filter="url(#filter0_d_0_7370)">
+          <Rect
+            x={15}
+            y={8}
+            width={38}
+            height={28}
+            rx={3}
+            fill="url(#paint2_linear_0_7370)"
+          />
+        </G>
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M47 10a2 2 0 012 2v20a2 2 0 01-2 2H24a7 7 0 00-7-7V17a7 7 0 007-7h23z"
+          fill="url(#paint3_linear_0_7370)"
+        />
+        <G opacity={0.8} filter="url(#filter1_d_0_7370)">
+          <Circle cx={35} cy={22} r={9} fill="#330497" />
+        </G>
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M35.5 18.423V17.5h-1v.93c-1.371.16-2.313.968-2.313 2.064 0 1.032.642 1.624 2.025 1.936l.288.063v1.954c-.565-.109-.922-.402-1.063-.82H32c.115 1.109 1.046 1.824 2.5 1.952v.921h1v-.926c1.47-.155 2.5-.979 2.5-2.151 0-1.019-.648-1.585-2.031-1.89l-.469-.105v-1.87c.536.105.879.39.983.79h1.377c-.126-1.097-1-1.793-2.36-1.925zm-1 1.146c-.534.12-.896.431-.896.849 0 .365.286.612.896.783v-1.633zm1 3.145v1.738c.634-.111 1.05-.447 1.05-.896 0-.41-.335-.676-1.05-.842z"
+          fill="#E8F2FF"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7370"
+          x1={8.09971}
+          y1={15}
+          x2={8.09971}
+          y2={42.8568}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#6BB5C5" />
+          <Stop offset={1} stopColor="#409DB5" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7370"
+          x1={11.0997}
+          y1={12}
+          x2={11.0997}
+          y2={39.8568}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#B6ECF8" />
+          <Stop offset={1} stopColor="#6CB4C7" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_7370"
+          x1={15}
+          y1={8}
+          x2={15}
+          y2={36}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint3_linear_0_7370"
+          x1={49}
+          y1={10}
+          x2={17}
+          y2={10}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop offset={0.00996708} stopColor="#fff" />
+          <Stop offset={1} stopColor="#fff" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Drivers_License = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+  <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="url(#paint0_linear_0_7388)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={27}
+          y={23}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={7}
+          cy={9}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Rect x={10} y={8.5} width={40} height={31} rx={3} fill="#FF4000" />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10 11.5a3 3 0 013-3h34a3 3 0 013 3v21a3 3 0 01-3 3H13a3 3 0 01-3-3v-21z"
+          fill="url(#paint1_linear_0_7388)"
+        />
+        <Rect x={15} y={14.5} width={12} height={14} rx={1} fill="#E6C5BA" />
+        <Path
+          d="M32 16.5h6M42 16.5h7"
+          stroke="#FF4000"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M32 21.5h17M32 25.5h12"
+          stroke="#E6C5BA"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7388"
+          x1={-24}
+          y1={24}
+          x2={24}
+          y2={72}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FF5D00" />
+          <Stop offset={1} stopColor="#FF4000" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7388"
+          x1={10.0738}
+          y1={8.5}
+          x2={10.0738}
+          y2={35.4004}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#fff" />
+          <Stop offset={1} stopColor="#F6EAE4" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_History = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 53 49"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={25} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={1}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={25} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path opacity={0.48} fill="#005267" d="M26 25H48V49H26z" />
+        <Circle opacity={0.48} cx={7} cy={10} r={15} fill="#005267" />
+        <Rect
+          x={11.5}
+          y={21}
+          width={32}
+          height={39.5}
+          rx={2.5}
+          fill="url(#paint0_linear_0_7425)"
+        />
+        <Rect
+          x={6.5}
+          y={16}
+          width={32}
+          height={39.5}
+          rx={2.5}
+          fill="url(#paint1_linear_0_7425)"
+        />
+        <Rect x={11.5} y={23} width={11} height={10} rx={1} fill="#fff" />
+        <Path
+          d="M15 30.25h4"
+          stroke="#0BB8E4"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M12 38.5h18M12 42.5h11.5"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_7425)">
+        <Circle cx={35} cy={14} r={11} fill="#330497" />
+      </G>
+      <Path
+        d="M33.538 12.362l-3.714-.112-.242-3.71M31.694 17.751a5 5 0 10-.853-6.528"
+        stroke="#E8F2FF"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7425"
+          x1={11.5818}
+          y1={21}
+          x2={11.5818}
+          y2={60.298}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#8DD5E5" />
+          <Stop offset={1} stopColor="#5DA8BB" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7425"
+          x1={6.5}
+          y1={16}
+          x2={6.5}
+          y2={55.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_ID_Card = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+<Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="url(#paint0_linear_0_7112)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={-9}
+          y={-5}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={37}
+          cy={40}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Rect x={10} y={8.5} width={40} height={31} rx={3} fill="#227955" />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10 11.5a3 3 0 013-3h34a3 3 0 013 3v21a3 3 0 01-3 3H13a3 3 0 01-3-3v-21z"
+          fill="url(#paint1_linear_0_7112)"
+        />
+        <Rect x={15} y={14.5} width={12} height={14} rx={1} fill="#B7D4C7" />
+        <Path
+          d="M32 16.5h18"
+          stroke="#4A9475"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          opacity={0.32}
+          d="M32 21.5h17M32 25.5h12"
+          stroke="#4A9475"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7112"
+          x1={-24}
+          y1={24}
+          x2={24}
+          y2={72}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#19B600" />
+          <Stop offset={1} stopColor="#268B61" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7112"
+          x1={10}
+          y1={8.5}
+          x2={10}
+          y2={35.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#fff" />
+          <Stop offset={1} stopColor="#D5E8E0" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Identity = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 53 49"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={29} cy={25} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={5}
+        y={1}
+        width={48}
+        height={48}
+      >
+        <Circle cx={29} cy={25} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={32}
+          y={24}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={12}
+          cy={10}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Rect x={15} y={11.5} width={40} height={31} rx={3} fill="#330497" />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M15 14.5a3 3 0 013-3h34a3 3 0 013 3v21a3 3 0 01-3 3H18a3 3 0 01-3-3v-21z"
+          fill="url(#paint0_linear_0_7352)"
+        />
+        <Rect x={20} y={17.5} width={12} height={14} rx={1} fill="#fff" />
+        <Path
+          d="M37 19.5h6M47 19.5h7"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          opacity={0.48}
+          d="M37 24.5h17M37 28.5h12"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_7352)">
+        <Circle cx={16} cy={12} r={9} fill="#330497" />
+      </G>
+      <Path
+        d="M12 12.183l2.546 2.567L20 9.25"
+        stroke="#E8F2FF"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7352"
+          x1={15}
+          y1={11.5}
+          x2={15}
+          y2={38.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Invite = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={23}
+          y={-9}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={9}
+          cy={40}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Path
+          d="M8 18a6 6 0 016-6h20a6 6 0 016 6v29a2 2 0 01-2 2H10a2 2 0 01-2-2V18z"
+          fill="url(#paint0_linear_0_7322)"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10 14.54a.54.54 0 01.54-.54h5.175a2.69 2.69 0 012.093 1c.51.632 1.28 1 2.093 1h8.198a2.69 2.69 0 002.093-1c.511-.632 1.28-1 2.093-1h5.174a.54.54 0 01.541.54V52a1 1 0 01-1 1H11a1 1 0 01-1-1V14.54z"
+          fill="#fff"
+        />
+        <Path
+          opacity={0.32}
+          d="M16 41.25h16M16 44.25h9.5"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Rect x={18} y={21} width={12} height={12} rx={6} fill="#fff" />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_7322)">
+        <Circle cx={24} cy={28} r={9} fill="#330497" />
+      </G>
+      <Path
+        d="M24.5 24.5l-4 3.5 4 3.5"
+        stroke="#E8F2FF"
+        strokeWidth={1.22727}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Circle cx={20.5} cy={28} r={1.5} fill="#E8F2FF" />
+      <Circle cx={25} cy={24} r={1.5} fill="#E8F2FF" />
+      <Circle cx={25} cy={32} r={1.5} fill="#E8F2FF" />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7322"
+          x1={8.08181}
+          y1={12}
+          x2={8.08181}
+          y2={48.8108}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#B6ECF8" />
+          <Stop offset={1} stopColor="#6CB4C7" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Passport = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="url(#paint0_linear_0_7096)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={5}
+          y={16}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={38}
+          cy={8}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Rect
+          x={9}
+          y={12}
+          width={30}
+          height={36}
+          rx={2}
+          fill="url(#paint1_linear_0_7096)"
+        />
+        <Rect
+          x={9}
+          y={12}
+          width={28}
+          height={36}
+          rx={2}
+          fill="url(#paint2_linear_0_7096)"
+        />
+        <Path
+          opacity={0.48}
+          d="M17 18h12"
+          stroke="#330497"
+          strokeWidth={3}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Circle
+          cx={23}
+          cy={33}
+          r={8}
+          stroke="#330497"
+          strokeWidth={1.37143}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Ellipse
+          cx={23}
+          cy={33}
+          rx={4}
+          ry={8}
+          stroke="#330497"
+          strokeWidth={1.37143}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M16 29.5s3.25 1 7 1 7-1 7-1M16 36.5s3.25-1 7-1 7 1 7 1"
+          stroke="#330497"
+          strokeWidth={1.37143}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7096"
+          x1={0}
+          y1={24}
+          x2={48}
+          y2={24}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7096"
+          x1={9}
+          y1={12}
+          x2={9}
+          y2={48}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#A5CEFF" />
+          <Stop offset={1} stopColor="#7493BD" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_7096"
+          x1={9.8016}
+          y1={12.7937}
+          x2={9.8016}
+          y2={46.7325}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FBFDFF" />
+          <Stop offset={1} stopColor="#CADCF4" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Piggy_Bank = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+   <Svg
+      viewBox="0 0 53 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={23}
+          y={24}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={14}
+          cy={8}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M20.307 17.955a.531.531 0 01-.708-.265c-.781-1.736-3.404-7.549-3.794-8.222-.46-.793 2.186-.617 4.329.743 2.142 1.36 5.776 4.77 4.609 5.522-.907.584-3.38 1.738-4.436 2.222z"
+          fill="#3E7583"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M42.527 39.565h7.515l-.613 5.148a2.685 2.685 0 01-1.869 2.246l.053-1.262v-.026a.268.268 0 00-.537.004l-.057 1.393a2.69 2.69 0 01-.255.012h-1.317l.195-1.356.002-.025a.268.268 0 00-.23-.279l-.025-.002a.268.268 0 00-.278.23l-.203 1.415a2.684 2.684 0 01-2.381-2.667v-4.83zM24.292 39.565h7.514l-.612 5.148a2.684 2.684 0 01-1.693 2.185l.055-1.2v-.025a.268.268 0 00-.536 0l-.063 1.373c-.14.022-.283.034-.428.034h-1.16l.216-1.352.003-.025a.268.268 0 00-.533-.06l-.229 1.433a2.684 2.684 0 01-2.534-2.68v-4.83z"
+          fill="#619BAA"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M14.266 38.54c-1.912-2.319-9.477-11.32-9.477-11.32l3.937-8.589 4.476 1.674c2.823-4.65 7.936-7.757 13.774-7.757H38.59c8.893 0 16.103 7.21 16.103 16.103 0 6.673-4.06 12.399-9.844 14.841l-.252 2.116a2.684 2.684 0 01-2.218 2.33l.044-1.168v-.026a.268.268 0 00-.536.005l-.046 1.225H40.3l.154-1.18.002-.026a.269.269 0 00-.234-.275l-.025-.002a.268.268 0 00-.275.234l-.154 1.18a2.685 2.685 0 01-2.072-2.614v-.537H26.822l-.101.854a2.685 2.685 0 01-2.038 2.293l.043-1.131v-.026a.268.268 0 00-.537.005l-.046 1.224-.087.002h-1.454l.154-1.18.002-.027a.269.269 0 00-.234-.275l-.026-.002a.268.268 0 00-.275.234l-.158 1.214a2.685 2.685 0 01-2.246-2.648V43.08a16.169 16.169 0 01-5.553-4.54z"
+          fill="url(#paint0_linear_0_7126)"
+        />
+        <Rect
+          x={30.0769}
+          y={15.8462}
+          width={15.2308}
+          height={3.38462}
+          rx={1.69231}
+          fill="#330497"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M23.886 16.345a.531.531 0 01-.708-.265c-.782-1.736-3.405-7.549-3.795-8.223-.459-.793 2.186-.617 4.329.744 2.143 1.36 5.776 4.77 4.61 5.522-.908.584-3.38 1.737-4.436 2.222z"
+          fill="#569CAF"
+        />
+        <Ellipse
+          cx={16.7837}
+          cy={21.1975}
+          rx={0.71569}
+          ry={1.96815}
+          transform="rotate(25 16.784 21.198)"
+          fill="#3E7583"
+        />
+        <Ellipse
+          cx={7.0486}
+          cy={23.0616}
+          rx={2.08027}
+          ry={4.73073}
+          transform="rotate(27 7.049 23.062)"
+          fill="#3E7583"
+        />
+        <Ellipse
+          cx={6.41209}
+          cy={22.6903}
+          rx={0.357845}
+          ry={1.6103}
+          transform="rotate(25 6.412 22.69)"
+          fill="#569CAF"
+        />
+        <Ellipse
+          cx={7.48557}
+          cy={23.2269}
+          rx={0.357845}
+          ry={1.6103}
+          transform="rotate(25 7.486 23.227)"
+          fill="#569CAF"
+        />
+        <Path
+          d="M12.906 29.112s3.077.357 4.67-1.312M19.378 17.902s1.257.852 1.257 2.104"
+          stroke="#3E7583"
+          strokeWidth={0.71569}
+          strokeLinecap="round"
+        />
+      </G>
+      <G opacity={0.9} filter="url(#filter0_d_0_7126)">
+        <Circle cx={38.0673} cy={10.5673} r={8.56731} fill="#FEA200" />
+      </G>
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M38.543 7.162v-.878h-.952v.884c-1.305.154-2.202.922-2.202 1.966 0 .982.611 1.546 1.928 1.842l.274.061v1.86c-.537-.104-.878-.383-1.012-.781H35.21c.11 1.056.996 1.736 2.38 1.858v.877h.952v-.882c1.399-.147 2.38-.93 2.38-2.047 0-.97-.617-1.51-1.934-1.8l-.446-.099v-1.78c.51.1.837.372.936.752h1.31c-.12-1.044-.95-1.707-2.246-1.833zm-.952 1.09c-.508.115-.853.412-.853.81 0 .347.273.582.853.744V8.253zm.952 2.995v1.655c.604-.106 1-.426 1-.853 0-.39-.319-.644-1-.802z"
+        fill="#E8F2FF"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M45.308 17.539c0 .934-.803 1.692-1.792 1.692H31.869c-.99 0-1.792-.758-1.792-1.692 0-.203.038-.397.107-.577.25.652.91 1.117 1.685 1.117h11.647c.775 0 1.435-.465 1.685-1.116.069.179.107.373.107.576z"
+        fill="#330497"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7126"
+          x1={4.78931}
+          y1={12.5479}
+          x2={4.78931}
+          y2={47.9745}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#7DBCCC" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Setting = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={24} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={24} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={29}
+          y={31}
+          width={30}
+          height={33}
+          rx={2}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Circle
+          opacity={0.12}
+          cx={9}
+          cy={9}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M36.464 20.96l-2.194-.28a11.032 11.032 0 00-.664-1.602l1.355-1.744c.548-.706.484-1.702-.142-2.31l-1.838-1.837a1.739 1.739 0 00-2.316-.148l-1.742 1.355a10.99 10.99 0 00-1.604-.664l-.279-2.19A1.747 1.747 0 0025.307 10h-2.614c-.883 0-1.628.662-1.733 1.537l-.28 2.193a10.86 10.86 0 00-1.603.664l-1.743-1.355c-.705-.547-1.701-.484-2.31.143l-1.837 1.836a1.74 1.74 0 00-.148 2.317l1.355 1.743a10.9 10.9 0 00-.664 1.603l-2.19.279c-.878.105-1.54.85-1.54 1.733v2.614c0 .883.662 1.628 1.537 1.733l2.193.28c.18.556.403 1.092.664 1.602l-1.355 1.744c-.548.706-.484 1.702.143 2.31l1.837 1.837a1.74 1.74 0 002.316.147l1.743-1.355c.51.262 1.046.484 1.603.664l.279 2.189c.105.88.85 1.542 1.733 1.542h2.614c.883 0 1.628-.661 1.733-1.536l.28-2.194c.556-.18 1.092-.404 1.602-.664l1.744 1.355c.706.548 1.702.484 2.31-.142l1.837-1.838a1.738 1.738 0 00.148-2.316l-1.355-1.743c.262-.51.484-1.046.664-1.603l2.189-.279a1.747 1.747 0 001.54-1.733v-2.614a1.745 1.745 0 00-1.535-1.733zM24 29.833A5.84 5.84 0 0118.167 24 5.84 5.84 0 0124 18.167 5.84 5.84 0 0129.833 24 5.84 5.84 0 0124 29.833z"
+          fill="url(#paint0_linear_0_7341)"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7341"
+          x1={10}
+          y1={10}
+          x2={10}
+          y2={38}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Subscription = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 51 50"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={26} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={2}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={26} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.12}
+          x={23}
+          y={-7}
+          width={30}
+          height={33}
+          rx={2}
+          fill="#000"
+        />
+        <Circle
+          opacity={0.12}
+          cx={9}
+          cy={42}
+          r={12}
+          stroke="#000"
+          strokeWidth={6}
+        />
+        <Rect
+          x={13}
+          y={14}
+          width={22}
+          height={24}
+          rx={2}
+          fill="url(#paint0_linear_0_7298)"
+        />
+        <Rect x={16} y={17} width={16} height={9} rx={1} fill="#fff" />
+        <Path
+          d="M16 30.25h14M16 34.25h7.5"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Rect
+          x={-13}
+          y={14}
+          width={22}
+          height={24}
+          rx={2}
+          fill="url(#paint1_linear_0_7298)"
+        />
+        <Rect x={-10} y={17} width={16} height={9} rx={1} fill="#68AFC0" />
+        <Path
+          d="M-10 30.25H4"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Rect
+          x={39}
+          y={14}
+          width={22}
+          height={24}
+          rx={2}
+          fill="url(#paint2_linear_0_7298)"
+        />
+        <Rect x={42} y={17} width={16} height={9} rx={1} fill="#68AFC0" />
+        <Path
+          d="M42 30.25h14"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_7298)">
+        <Circle cx={35} cy={12} r={9} fill="#330497" />
+      </G>
+      <Path
+        d="M33.804 10.66l-3.04-.092-.197-3.034M32.295 15.07a4.09 4.09 0 10-.698-5.34"
+        stroke="#E8F2FF"
+        strokeWidth={1.22727}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7298"
+          x1={13}
+          y1={14}
+          x2={13}
+          y2={38}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7298"
+          x1={-12.8349}
+          y1={14.3601}
+          x2={-12.8349}
+          y2={38}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#88D3E4" />
+          <Stop offset={1} stopColor="#58ABC0" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_7298"
+          x1={39.1651}
+          y1={14.3601}
+          x2={39.1651}
+          y2={38}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#88D3E4" />
+          <Stop offset={1} stopColor="#58ABC0" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Top_Up = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 49"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={25} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={1}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={25} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path opacity={0.48} fill="#005267" d="M0 1H22V25H0z" />
+        <Circle opacity={0.48} cx={41} cy={40} r={15} fill="#005267" />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M8.958 21.266a2.5 2.5 0 012.39-1.766h24.88a2.5 2.5 0 012.359 1.672l3.13 8.918c.188.532.283 1.092.283 1.656V37H6v-5.356a5 5 0 01.22-1.468l2.738-8.91z"
+          fill="url(#paint0_linear_0_6798)"
+        />
+        <Rect x={9} y={22} width={30} height={20} rx={2.5} fill="#fff" />
+        <Circle
+          cx={24}
+          cy={32}
+          r={4}
+          stroke="#0BB8E4"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M6 31.5A2.5 2.5 0 018.5 29h8.616a4 4 0 012.746 1.092l1.392 1.314a4 4 0 005.492 0l1.392-1.314A4 4 0 0130.884 29H39.5a2.5 2.5 0 012.5 2.5V54a2.5 2.5 0 01-2.5 2.5h-31A2.5 2.5 0 016 54V31.5z"
+          fill="url(#paint1_linear_0_6798)"
+        />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_6798)">
+        <Circle cx={24} cy={14} r={11} fill="#330497" />
+      </G>
+      <Path
+        d="M24 9.5v9M19.5 14h9"
+        stroke="#E8F2FF"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_6798"
+          x1={6.09204}
+          y1={19.5}
+          x2={6.09204}
+          y2={36.9105}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#9ED6E2" />
+          <Stop offset={1} stopColor="#6CB4C7" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_6798"
+          x1={6}
+          y1={29}
+          x2={6}
+          y2={56.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Top_Up1 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 48 49"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={24} cy={25} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={1}
+        width={48}
+        height={48}
+      >
+        <Circle cx={24} cy={25} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)" fill="#005267">
+        <Path opacity={0.48} d="M0 1H22V25H0z" />
+        <Circle opacity={0.48} cx={41} cy={40} r={15} />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_2043_13706)">
+        <Circle cx={24} cy={14} r={11} fill="#330497" />
+      </G>
+      <Path
+        d="M24 9.5v9M19.5 14h9"
+        stroke="#E8F2FF"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs></Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Transaction = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 53 49"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={29} cy={25} r={24} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={5}
+        y={1}
+        width={48}
+        height={48}
+      >
+        <Circle cx={29} cy={25} r={24} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Path opacity={0.48} fill="#005267" d="M31 1H53V25H31z" />
+        <Circle opacity={0.48} cx={12} cy={40} r={15} fill="#005267" />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10.5 25.395a2.5 2.5 0 011.824-2.407l23.5-6.597A2.5 2.5 0 0139 18.798v34.02a2.5 2.5 0 01-2.675 2.494l-23.5-1.649A2.5 2.5 0 0110.5 51.17V25.395z"
+          fill="url(#paint0_linear_0_7403)"
+        />
+        <Rect
+          x={10.5}
+          y={23.5}
+          width={37}
+          height={30}
+          rx={2.5}
+          fill="url(#paint1_linear_0_7403)"
+        />
+        <Path
+          d="M16.5 33.75H27M16.5 37.75H24"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Rect x={33.5} y={31} width={12} height={9.5} rx={2} fill="#fff" />
+        <Circle
+          cx={38.25}
+          cy={35.75}
+          r={1.75}
+          stroke="#0BB8E4"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <G opacity={0.8} filter="url(#filter0_d_0_7403)">
+        <Circle cx={18} cy={14} r={11} fill="#330497" />
+      </G>
+      <Path
+        d="M20.888 9.868l-.693-.288.693.288zm0-.575l-.693.287.693-.287zm-.406-.405l-.288.692h.001l.287-.693zm-.287-.057v-.75.75zm-4.95 0v-.75.75zm-.75.75h-.75.75zm.75.75v.75-.75zm3.139 0l.53.53a.75.75 0 00-.53-1.28v.75zm1.81-.75l1.387.574c.073-.178.114-.372.114-.574h-1.5zm0 0h1.5c0-.202-.04-.397-.113-.575l-1.386.575zm0 0l1.387-.574a1.498 1.498 0 00-.326-.487l-1.06 1.06zm.001 0l1.06-1.061a1.498 1.498 0 00-.487-.326l-.573 1.387zm0 0l.574-1.386a1.498 1.498 0 00-.574-.114v1.5zm-4.95 0h4.95v-1.5h-4.95v1.5zm0 0v-1.5a1.5 1.5 0 00-1.5 1.5h1.5zm0 0h-1.5a1.5 1.5 0 001.5 1.5v-1.5zm3.139 0h-3.14v1.5h3.14v-1.5zm-4.553 6.364l5.083-5.084-1.06-1.06-5.084 5.083 1.06 1.06zm0 0l-1.061-1.061a1.5 1.5 0 000 2.121l1.06-1.06zm0 0l-1.061 1.06a1.5 1.5 0 002.121 0l-1.06-1.06zm6.364-6.364l-6.364 6.364 1.06 1.06 6.364-6.364-1.06-1.06zm0 0l1.06 1.06c.143-.143.252-.309.326-.487l-1.386-.573zM15.436 17.956l.692.287-.692-.287zm0 .574l.693-.287-.693.287zm.406.406l.287-.693-.287.693zm.287.057v.75-.75zm4.95 0v.75-.75zm.75-.75h.75-.75zm-.75-.75v-.75.75zm-3.14 0l-.53-.53a.75.75 0 00.53 1.28v-.75zm5.084-5.084l-.53-.53.53.53zm-6.894 5.834l-1.386-.575a1.497 1.497 0 00-.114.575h1.5zm0 0h-1.5c0 .202.04.396.114.574l1.385-.575zm0 0l-1.387.574c.074.177.183.343.326.486l1.06-1.06zm0 0l-1.061 1.06c.143.143.309.252.487.326l.573-1.386zm0 0l-.575 1.386c.178.073.373.114.575.114v-1.5zm4.95 0h-4.95v1.5h4.95v-1.5zm0 0v1.5a1.5 1.5 0 001.5-1.5h-1.5zm0 0h1.5a1.5 1.5 0 00-1.5-1.5v1.5zm-3.14 0h3.14v-1.5h-3.14v1.5zm4.554-6.364l-5.084 5.083 1.06 1.061 5.084-5.084-1.06-1.06zm0 0l1.06 1.06a1.5 1.5 0 000-2.121l-1.06 1.06zm0 0l1.06-1.061a1.5 1.5 0 00-2.121 0l1.06 1.06zm-6.364 6.364l6.364-6.364-1.061-1.061-6.364 6.364 1.06 1.06zm0 0l-1.061-1.061a1.498 1.498 0 00-.325.487l1.386.573z"
+        fill="#E8F2FF"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7403"
+          x1={10.5729}
+          y1={15.5}
+          x2={10.5729}
+          y2={55.2955}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#B6ECF8" />
+          <Stop offset={1} stopColor="#6CB4C7" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7403"
+          x1={10.5}
+          y1={23.5}
+          x2={10.5}
+          y2={53.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Magnifier = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={32} cy={32} r={32} fill="#5200FF" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={64}
+        height={64}
+      >
+        <Circle cx={32} cy={32} r={32} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          x={4}
+          y={-2}
+          width={28}
+          height={35}
+          rx={2}
+          fill="url(#paint0_linear_0_6813)"
+        />
+        <Path
+          d="M9 22.75h17.5M9 17.25h17.5M9 11.75h17.5M9 6.25h17.5M9 28.25h14.5"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M18.094 18.355s6.158-2.95 9.579-3.355C31.093 14.595 38 16 38 16v18a5 5 0 01-5 5H16s-2.423-6.844-2.017-10.84c.405-3.996 4.11-9.805 4.11-9.805z"
+          fill="url(#paint1_linear_0_6813)"
+        />
+        <Path
+          d="M14 30.25h11.5M17 22.25h14.5"
+          stroke="#330497"
+          strokeWidth={2.4}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Circle opacity={0.48} cx={61.6667} cy={33} r={20} fill="#005267" />
+        <Circle
+          cx={30.1611}
+          cy={30.6614}
+          r={16}
+          transform="rotate(-45 30.161 30.661)"
+          fill="#fff"
+          fillOpacity={0.24}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M17.433 17.933c-7.03 7.03-7.03 18.427 0 25.456 6.552 6.552 16.897 6.997 23.964 1.337l6.442 6.441 2.828-2.828-6.441-6.442c5.66-7.067 5.215-17.412-1.337-23.963-7.03-7.03-18.426-7.03-25.456 0zm2.829 2.829c5.467-5.468 14.331-5.468 19.799 0 5.467 5.467 5.467 14.331 0 19.799-5.468 5.467-14.332 5.467-19.8 0-5.467-5.468-5.467-14.332 0-19.8z"
+          fill="url(#paint2_linear_0_6813)"
+        />
+        <Rect
+          x={44.3032}
+          y={51.8745}
+          width={10}
+          height={18}
+          rx={4}
+          transform="rotate(-45 44.303 51.874)"
+          fill="url(#paint3_linear_0_6813)"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_6813"
+          x1={4}
+          y1={-2}
+          x2={4}
+          y2={33}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_6813"
+          x1={13.9246}
+          y1={14.9094}
+          x2={13.9246}
+          y2={38.9999}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#DDF5FA" />
+          <Stop offset={1} stopColor="#A1D5E2" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_6813"
+          x1={4.70532}
+          y1={30.6614}
+          x2={36.5251}
+          y2={62.4812}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FCFEFF" />
+          <Stop offset={1} stopColor="#CAF4FF" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint3_linear_0_6813"
+          x1={44.3032}
+          y1={51.8745}
+          x2={44.3032}
+          y2={69.8745}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#3FD7EE" />
+          <Stop offset={1} stopColor="#259AB8" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Bell_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7190)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M16.511 9.038c.6-.158 1.217.192 1.378.783l.31 1.143c3.222-.304 6.29 1.717 7.154 4.898l1.289 4.732c1.154.4 1.938 1.138 2.242 2.255.735 2.7-2.089 4.866-6.8 6.227l-.654.18-.339.088c-4.932 1.24-8.62.796-9.37-1.965-.304-1.117.001-2.143.797-3.058l-1.286-4.732c-.866-3.181.765-6.442 3.71-7.765l-.312-1.143c-.16-.59.195-1.198.795-1.356l1.086-.287zm3.185 13.846c-4.1 1.081-6.366 2.706-6.02 3.979.346 1.273 3.134 1.564 7.233.482 4.1-1.082 6.366-2.707 6.02-3.98-.346-1.272-3.134-1.563-7.233-.481zm.173.755l.57-.154c.328 1.432-.557 2.879-2.02 3.265a2.83 2.83 0 01-3.125-1.22c1.185-.74 2.741-1.375 4.575-1.891z"
+          fill="#fff"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7190"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Card_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7178)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <G filter="url(#filter0_d_0_7178)">
+          <Rect
+            x={9}
+            y={12}
+            width={24}
+            height={19}
+            rx={3}
+            fill="url(#paint1_linear_0_7178)"
+          />
+        </G>
+        <Rect x={7} y={10} width={24} height={19} rx={3} fill="#fff" />
+        <Path
+          d="M10 14h18"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Circle opacity={0.4} cx={15.5} cy={23.5} r={2.5} fill="#330497" />
+        <Circle cx={11.5} cy={23.5} r={2.5} fill="#330497" />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7178"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7178"
+          x1={9}
+          y1={12}
+          x2={9}
+          y2={31}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#BEEDF7" />
+          <Stop offset={1} stopColor="#75BDD0" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_FaceID_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7201)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Rect x={9} y={9} width={22} height={22} rx={6} fill="#fff" />
+        <Path
+          d="M16.762 16.821a.729.729 0 00-.728.729v1.4a.729.729 0 101.457 0v-1.4a.729.729 0 00-.729-.729zM23.238 16.821a.729.729 0 00-.73.729v1.4a.729.729 0 101.458 0v-1.4a.729.729 0 00-.729-.729zM16.597 22.81a.728.728 0 000 1.03A4.782 4.782 0 0020 25.25c1.285 0 2.495-.501 3.403-1.41a.73.73 0 00-.93-1.115l-.1.085a3.331 3.331 0 01-2.373.982 3.331 3.331 0 01-2.372-.982.728.728 0 00-1.03 0zM20.437 16.821a.729.729 0 00-.728.729v2.946c0 .214-.047.248-.249.248a.729.729 0 100 1.457c1.01 0 1.706-.697 1.706-1.705V17.55a.729.729 0 00-.729-.729zM16.675 11.09h-1.584a4.006 4.006 0 00-4 4.001v2.46a.729.729 0 101.457-.001V15.09a2.547 2.547 0 012.543-2.543h1.584a.729.729 0 100-1.458zM11.819 21.721a.729.729 0 00-.729.73v2.458a4.005 4.005 0 004.001 4h1.584a.729.729 0 100-1.457h-1.584a2.547 2.547 0 01-2.543-2.543V22.45a.729.729 0 00-.73-.729zM24.909 11.09h-1.584a.729.729 0 100 1.458h1.584a2.547 2.547 0 012.544 2.543v2.46a.729.729 0 101.457 0v-2.46a4.006 4.006 0 00-4.001-4zM28.181 21.721a.729.729 0 00-.728.73v2.458a2.547 2.547 0 01-2.544 2.543h-1.584a.729.729 0 100 1.458h1.584a4.005 4.005 0 004.001-4.001V22.45a.729.729 0 00-.729-.729z"
+          fill="#330497"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7201"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Help_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7274)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle cx={20} cy={20} r={11} fill="#fff" />
+        <Path
+          d="M20 22.25v0c0-1.054.601-2.004 1.425-2.662.774-.617 1.575-1.473 1.575-2.37 0-1.735-1.246-2.968-3-2.968s-3 1.233-3 2.968"
+          stroke="#330497"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Circle cx={20} cy={25.5} r={1.25} fill="#330497" />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7274"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Logout_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7285)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Rect
+          x={11.75}
+          y={10.75}
+          width={16.5}
+          height={18.5}
+          rx={2.25}
+          stroke="#fff"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11 13.711a3 3 0 013.629-2.933l8 1.714A3 3 0 0125 15.425V29.29a3 3 0 01-3.629 2.933l-8-1.714A3 3 0 0111 27.575V13.71z"
+          fill="#fff"
+        />
+        <Path
+          d="M15 21.5h5M18 18.5l3 3-3 3"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7285"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Password_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7218)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Rect x={12.5} y={16.5} width={15} height={15} rx={7} fill="#fff" />
+        <Circle cx={20} cy={22.5} r={2} fill="#330497" />
+        <Rect
+          x={19.2}
+          y={23.5}
+          width={1.6}
+          height={4}
+          rx={0.8}
+          fill="#330497"
+        />
+        <Path
+          d="M15 23v-9a5 5 0 019.777-1.48"
+          stroke="#fff"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+        />
+        <Path
+          d="M27.114 14.296l1.91-1.021M27.742 17.184l2.141.352"
+          stroke="#fff"
+          strokeWidth={1.4}
+          strokeLinecap="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7218"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_PIN_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+     <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7232)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M14.5 14.25a2 2 0 100-4 2 2 0 000 4zm0 5.5a2 2 0 100-4 2 2 0 000 4zm7.5-7.5a2 2 0 11-4 0 2 2 0 014 0zm-2 7.5a2 2 0 100-4 2 2 0 000 4zm7.5-7.5a2 2 0 11-4 0 2 2 0 014 0zm-2 7.5a2 2 0 100-4 2 2 0 000 4zm-9 3.5a2 2 0 11-4 0 2 2 0 014 0zm3.5 2a2 2 0 100-4 2 2 0 000 4zm2 3.5a2 2 0 11-4 0 2 2 0 014 0zm3.5-3.5a2 2 0 100-4 2 2 0 000 4z"
+          fill="#fff"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7232"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Privacy_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7264)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10.327 13.653a2.64 2.64 0 012.1-2.938l3.075-.615 3.129-.783a5.28 5.28 0 012.54-.005l3.211.788 3 .61a2.64 2.64 0 012.092 2.935l-1.477 11.081a5.28 5.28 0 01-3.154 4.156l-2.863 1.227a5.28 5.28 0 01-4.16 0l-2.863-1.227a5.28 5.28 0 01-3.154-4.156l-1.476-11.073z"
+          fill="#fff"
+        />
+        <Path
+          d="M16.05 19.269l3.079 2.931 4.621-4.4"
+          stroke="#330497"
+          strokeWidth={1.6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7264"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Profile_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7168)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Rect x={9} y={9} width={22} height={22} rx={4} fill="#fff" />
+        <Circle
+          cx={20}
+          cy={16.5715}
+          r={2.85714}
+          fill="#330497"
+          stroke="#330497"
+          strokeWidth={1.02857}
+          strokeLinejoin="round"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M14.286 24.653c0-.779.336-1.525 1.028-1.883.934-.483 2.502-1.056 4.686-1.056s3.752.573 4.686 1.056c.692.358 1.028 1.104 1.028 1.883 0 .902-.73 1.633-1.632 1.633h-8.164a1.633 1.633 0 01-1.632-1.633z"
+          fill="#330497"
+          stroke="#330497"
+          strokeWidth={1.02857}
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7168"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Terms_V2 = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle cx={20} cy={20} r={20} fill="url(#paint0_linear_0_7250)" />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={40}
+        height={40}
+      >
+        <Circle cx={20} cy={20} r={20} fill="#fff" />
+      </Mask>
+      <G mask="url(#a)">
+        <Rect
+          opacity={0.08}
+          x={-5}
+          y={24}
+          width={24}
+          height={24}
+          rx={1.66667}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <Circle
+          opacity={0.08}
+          cx={34}
+          cy={7}
+          r={12}
+          stroke="#000"
+          strokeWidth={5}
+        />
+        <G filter="url(#filter0_d_0_7250)">
+          <Rect
+            x={12}
+            y={11}
+            width={17}
+            height={20}
+            rx={2}
+            fill="url(#paint1_linear_0_7250)"
+          />
+        </G>
+        <Rect x={10} y={9} width={17} height={20} rx={2} fill="#fff" />
+        <Path
+          d="M14 13h9M14 17h9"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          opacity={0.4}
+          d="M14 21h6M14 25h2.5"
+          stroke="#330497"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_7250"
+          x1={0}
+          y1={20}
+          x2={40}
+          y2={20}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_7250"
+          x1={12}
+          y1={11}
+          x2={12}
+          y2={31}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#BEEDF7" />
+          <Stop offset={1} stopColor="#75BDD0" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+
+
 
 
 export const IconsMap = {
@@ -2545,7 +5299,7 @@ export const IconsMap = {
   IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
   IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile, IC_NotificationsInactive, IC_Arrow_Down, IC_Back,
   IC_Cross, IC_Options, IC_Help, IC_Arrow_Down_White, IC_Back_White, IC_Bell_White, IC_Cross_White, IC_Options_White, IC_Search_White, IC_Bell,
-  IC_Activity_Active, IC_Home_Active, IC_Invest_Active, IC_Profile_Active, IC_Activity_Inactive, IC_Home_Inactive, IC_Invest_Inactive, IC_Profile_Inactive, IC_Swap
+  IC_Activity_Active, IC_Home_Active, IC_Invest_Active, IC_Profile_Active, IC_Activity_Inactive, IC_Home_Inactive, IC_Invest_Inactive, IC_Profile_Inactive, IC_Swap, IC_Swap_White, IC_Bell_V2, IC_Card_V2, IC_FaceID_V2, IC_Help_V2, IC_Logout_V2, IC_Password_V2, IC_PIN_V2, IC_Privacy_V2, IC_Profile_V2, IC_Terms_V2
 };
 
 export function getIconByString(icon: string) {
