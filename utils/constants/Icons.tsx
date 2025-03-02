@@ -94,25 +94,6 @@ export const IC_Ethereum = ({ className }: IconsProps) => {
     );
 };
 
-export const IC_Search = ({ className }: IconsProps) => {
-    return (
-        <Box className={cn(className)}>
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-      fill="none"
-    >
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M14.914 16c.547 0 .934-.42.934-.96a.914.914 0 00-.269-.673l-3.964-3.973a6.446 6.446 0 001.33-3.922C12.945 2.912 10.033 0 6.472 0 2.921 0 0 2.904 0 6.472c0 3.56 2.912 6.473 6.472 6.473a6.451 6.451 0 003.763-1.212l3.99 3.99a.96.96 0 00.69.277zm-8.442-4.452c-2.777 0-5.075-2.298-5.075-5.076 0-2.777 2.298-5.075 5.075-5.075 2.778 0 5.076 2.298 5.076 5.075 0 2.778-2.298 5.076-5.076 5.076z"
-        fill="#969AA0"
-      />
-    </Svg>
-        </Box>
-    );
-};
-
 export const IC_PieGraph = ({ className }: IconsProps) => {
     return (
         <Box className={cn(className)}>
@@ -1668,12 +1649,9 @@ export const IC_Profile_Inactive = ({ className }: IconsProps) => {
   return (
       <Box className={cn(className)}>
         <Svg
-      width={28}
-      height={28}
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
     >
       <Circle
         cx={14}
@@ -1699,11 +1677,875 @@ export const IC_Profile_Inactive = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_Arrow_Down = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M4 9l8 8 8-8"
+        stroke="#363D4E"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Back = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M15 4l-8 8 8 8"
+        stroke="#363D4E"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Cross = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M6 6l12 12M18 6L6 18"
+        stroke="#363D4E"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Options = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7.2 12a2.4 2.4 0 11-4.802-.002A2.4 2.4 0 017.2 12zm7.2 0a2.4 2.4 0 11-4.802-.002A2.4 2.4 0 0114.4 12zm7.2 0a2.4 2.4 0 11-4.802-.002A2.4 2.4 0 0121.6 12z"
+        fill="#363D4E"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Help = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle
+        cx={12}
+        cy={12}
+        r={10}
+        stroke="#363D4E"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M12 14.5v-.154c0-1.113.638-2.114 1.5-2.818.75-.612 1.5-1.442 1.5-2.31 0-1.735-1.246-2.968-3-2.968S9 7.483 9 9.218"
+        stroke="#363D4E"
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+      <Circle cx={12} cy={17.5} r={1.25} fill="#363D4E" />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Search = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3.1 10.5a7.4 7.4 0 1114.8 0 7.4 7.4 0 01-14.8 0zM10.5.9a9.6 9.6 0 000 19.2 9.56 9.56 0 005.966-2.079l4.756 4.757a1.1 1.1 0 101.556-1.556l-4.756-4.756A9.56 9.56 0 0020.1 10.5 9.6 9.6 0 0010.5.9z"
+        fill="#363D4E"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Arrow_Down_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M4 9l8 8 8-8"
+        stroke="#F6F7F8"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Back_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M15 4l-8 8 8 8"
+        stroke="#F6F7F8"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Bell_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8.318 1.04a1.19 1.19 0 011.453.82l.328 1.198c3.4-.319 6.639 1.798 7.552 5.13l1.36 4.958c1.218.42 2.046 1.192 2.367 2.363.775 2.829-2.205 5.097-7.179 6.523l-.69.19-.357.09c-5.207 1.3-9.099.834-9.891-2.058-.321-1.17.001-2.245.841-3.203l-1.358-4.958c-.913-3.332.808-6.748 3.916-8.134L6.331 2.76c-.17-.619.207-1.255.84-1.42l1.147-.301zm3.36 14.505c-4.326 1.133-6.719 2.836-6.353 4.169.365 1.333 3.308 1.638 7.635.504 4.327-1.133 6.72-2.835 6.354-4.169-.366-1.333-3.308-1.638-7.635-.504zm.183.791l.602-.162c.347 1.501-.587 3.016-2.132 3.421-1.303.341-2.633-.214-3.299-1.277 1.251-.776 2.894-1.442 4.83-1.982z"
+        fill="#F6F7F8"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Cross_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M6 6l12 12M18 6L6 18"
+        stroke="#F6F7F8"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Options_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7.2 12a2.4 2.4 0 11-4.802-.002A2.4 2.4 0 017.2 12zm7.2 0a2.4 2.4 0 11-4.802-.002A2.4 2.4 0 0114.4 12zm7.2 0a2.4 2.4 0 11-4.802-.002A2.4 2.4 0 0121.6 12z"
+        fill="#F6F7F8"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Search_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3.1 10.5a7.4 7.4 0 1114.8 0 7.4 7.4 0 01-14.8 0zM10.5.9a9.6 9.6 0 000 19.2 9.56 9.56 0 005.966-2.079l4.756 4.757a1.1 1.1 0 101.556-1.556l-4.756-4.756A9.56 9.56 0 0020.1 10.5 9.6 9.6 0 0010.5.9z"
+        fill="#F6F7F8"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Bell = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+     <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6.931.866a.992.992 0 011.212.684l.273.998c2.834-.265 5.532 1.499 6.293 4.276l1.133 4.13c1.015.35 1.706.994 1.973 1.97.646 2.357-1.838 4.247-5.982 5.436l-.575.158-.298.076c-4.339 1.082-7.582.694-8.243-1.716-.267-.975.002-1.87.702-2.669l-1.132-4.131C1.526 7.3 2.96 4.454 5.55 3.299l-.274-.998a.965.965 0 01.7-1.184l.955-.25zm2.802 12.088c-3.606.944-5.6 2.363-5.296 3.474.305 1.11 2.757 1.365 6.363.42 3.606-.944 5.6-2.363 5.295-3.474-.304-1.11-2.757-1.365-6.362-.42zm.152.66l.5-.135c.29 1.25-.488 2.513-1.776 2.85-1.085.284-2.194-.178-2.749-1.064 1.043-.647 2.412-1.202 4.025-1.652z"
+        fill="#363D4E"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Camera_Purple = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M2 7.348a2 2 0 012-2h3l1.923-1.806A2 2 0 0110.292 3h3.416a2 2 0 011.37.542L17 5.348h3a2 2 0 012 2V19a2 2 0 01-2 2H4a2 2 0 01-2-2V7.348z"
+        stroke="url(#paint0_linear_0_5233)"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Circle cx={5.5} cy={8.5} r={1.5} fill="url(#paint1_linear_0_5233)" />
+      <Circle
+        cx={12}
+        cy={13}
+        r={4}
+        stroke="url(#paint2_linear_0_5233)"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5233"
+          x1={2}
+          y1={12}
+          x2={22}
+          y2={12}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5233"
+          x1={4}
+          y1={8.5}
+          x2={7}
+          y2={8.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_5233"
+          x1={8}
+          y1={13}
+          x2={16}
+          y2={13}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Direction_Purple = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M17.908 4.121c.375-.167.75-.161 1.126.016.376.177.652.454.829.829.177.375.183.75.016 1.126l-5.975 13.012c-.229.48-.578.766-1.047.86-.47.094-.897.005-1.283-.266-.386-.271-.578-.667-.578-1.189v-5.505H5.49c-.522 0-.918-.192-1.189-.578a1.598 1.598 0 01-.266-1.283c.094-.469.38-.818.86-1.048l13.012-5.974z"
+        fill="url(#paint0_linear_0_5277)"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5277"
+          x1={4}
+          y1={12}
+          x2={20}
+          y2={12}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Location_Purple = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M12 22c5.333-3.546 8-7.546 8-12 0-4.017-3.582-8-8-8s-8 3.983-8 8c0 4.422 2.667 8.422 8 12z"
+        stroke="url(#paint0_linear_0_5188)"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M12 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
+        stroke="url(#paint1_linear_0_5188)"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5188"
+          x1={4}
+          y1={12}
+          x2={20}
+          y2={12}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5188"
+          x1={9.5}
+          y1={10}
+          x2={14.5}
+          y2={10}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Scan_Face_Purple = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M7.453 8.48A4.566 4.566 0 0112 3.5v0a4.566 4.566 0 014.547 4.98l-.185 2.036A4.38 4.38 0 0112 14.5v0a4.38 4.38 0 01-4.362-3.984L7.453 8.48z"
+        stroke="url(#paint0_linear_0_5213)"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M19 .6a.9.9 0 100 1.8V.6zm2 .9h.9a.9.9 0 00-.9-.9v.9zm-.9 2a.9.9 0 101.8 0h-1.8zm1.8 10a.9.9 0 10-1.8 0h1.8zm-.9 2v.9a.9.9 0 00.9-.9H21zm-2-.9a.9.9 0 100 1.8v-1.8zM5 16.4a.9.9 0 100-1.8v1.8zm-2-.9h-.9a.9.9 0 00.9.9v-.9zm.9-2a.9.9 0 10-1.8 0h1.8zm-1.8-10a.9.9 0 101.8 0H2.1zm.9-2V.6a.9.9 0 00-.9.9H3zm2 .9A.9.9 0 105 .6v1.8zm14 0h2V.6h-2v1.8zm1.1-.9v2h1.8v-2h-1.8zm0 12v2h1.8v-2h-1.8zm.9 1.1h-2v1.8h2v-1.8zm-16 0H3v1.8h2v-1.8zm-1.1.9v-2H2.1v2h1.8zm0-12v-2H2.1v2h1.8zM3 2.4h2V.6H3v1.8z"
+        fill="url(#paint1_linear_0_5213)"
+      />
+      <Path
+        d="M3 22.5v0c0-1.2.751-2.273 1.88-2.683L8.5 18.5s1.75 1 3.5 1 3.5-1 3.5-1l3.62 1.317A2.856 2.856 0 0121 22.5v0"
+        stroke="url(#paint2_linear_0_5213)"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5213"
+          x1={7}
+          y1={9}
+          x2={17}
+          y2={9}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5213"
+          x1={3}
+          y1={8.5}
+          x2={21}
+          y2={8.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_5213"
+          x1={3}
+          y1={20.5}
+          x2={21}
+          y2={20.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Lamp_Purple = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15 21.5a2 2 0 01-2 2h-2a2 2 0 01-2-2h6zm-3-16a6.5 6.5 0 013.001 12.267L15 20.5H9v-2.732A6.5 6.5 0 0112 5.5zM3 11a1 1 0 01.117 1.993L3 13H2a1 1 0 01-.117-1.993L2 11h1zm19 0a1 1 0 01.117 1.993L22 13h-1a1 1 0 01-.117-1.993L21 11h1zm-1.87-6.834a1 1 0 01.147 1.314l-.079.098-.672.74a1 1 0 01-1.559-1.247l.079-.098.672-.74a1 1 0 011.413-.067zm-16.259 0a1 1 0 011.413.067l.672.74.079.098a1 1 0 01-1.559 1.247l-.672-.74-.079-.098a1 1 0 01.146-1.314zM12 1a1 1 0 01.993.883L13 2v1a1 1 0 01-1.993.117L11 3V2a1 1 0 011-1z"
+        fill="url(#paint0_linear_0_5281)"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5281"
+          x1={1}
+          y1={12.25}
+          x2={23}
+          y2={12.25}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Camera_Orange = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M2 7.348a2 2 0 012-2h3l1.923-1.806A2 2 0 0110.292 3h3.416a2 2 0 011.37.542L17 5.348h3a2 2 0 012 2V19a2 2 0 01-2 2H4a2 2 0 01-2-2V7.348z"
+        stroke="#F26333"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Circle cx={5.5} cy={8.5} r={1.5} fill="#F26333" />
+      <Circle
+        cx={12}
+        cy={13}
+        r={4}
+        stroke="#FFA080"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Scan_Face_Orange = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M7.453 8.48A4.566 4.566 0 0112 3.5v0a4.566 4.566 0 014.547 4.98l-.185 2.036A4.38 4.38 0 0112 14.5v0a4.38 4.38 0 01-4.362-3.984L7.453 8.48z"
+        stroke="#F26333"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M19 .6a.9.9 0 100 1.8V.6zm2 .9h.9a.9.9 0 00-.9-.9v.9zm-.9 2a.9.9 0 101.8 0h-1.8zm1.8 10a.9.9 0 10-1.8 0h1.8zm-.9 2v.9a.9.9 0 00.9-.9H21zm-2-.9a.9.9 0 100 1.8v-1.8zM5 16.4a.9.9 0 100-1.8v1.8zm-2-.9h-.9a.9.9 0 00.9.9v-.9zm.9-2a.9.9 0 10-1.8 0h1.8zm-1.8-10a.9.9 0 101.8 0H2.1zm.9-2V.6a.9.9 0 00-.9.9H3zm2 .9A.9.9 0 105 .6v1.8zm14 0h2V.6h-2v1.8zm1.1-.9v2h1.8v-2h-1.8zm0 12v2h1.8v-2h-1.8zm.9 1.1h-2v1.8h2v-1.8zm-16 0H3v1.8h2v-1.8zm-1.1.9v-2H2.1v2h1.8zm0-12v-2H2.1v2h1.8zM3 2.4h2V.6H3v1.8z"
+        fill="#FFA080"
+      />
+      <Path
+        d="M3 22.5v0c0-1.2.751-2.273 1.88-2.683L8.5 18.5s1.75 1 3.5 1 3.5-1 3.5-1l3.62 1.317A2.856 2.856 0 0121 22.5v0"
+        stroke="#F26333"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Camera_Flip = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M2 7.348a2 2 0 012-2h3l1.923-1.806A2 2 0 0110.292 3h3.416a2 2 0 011.37.542L17 5.348h3a2 2 0 012 2V19a2 2 0 01-2 2H4a2 2 0 01-2-2V7.348z"
+        fill="#363D4E"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M17.3 12.75c0 .084-.002.167-.006.25h1.75a.2.2 0 01.146.336l-2.543 2.755a.2.2 0 01-.283.011l-2.554-2.766a.2.2 0 01.147-.336h1.735A3.7 3.7 0 0010.3 9.463L9.187 8.257A5.3 5.3 0 0117.3 12.75zm-10.594-.255h-1.75a.2.2 0 01-.146-.336l2.554-2.766a.2.2 0 01.283.011l2.543 2.755a.2.2 0 01-.147.336H8.31a3.7 3.7 0 005.391 3.542l1.113 1.206a5.3 5.3 0 01-8.107-4.747z"
+        fill="#fff"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_NoFlash = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12.28 2.504c.2-.314.545-.504.917-.504.498 0 .903.404.903.903v5.764c0 .194.136.36.327.4l3.74.763a.593.593 0 01.387.893l-2.169 3.517 4.299 4.03a1 1 0 01-1.271 1.54l-.097-.08-16-15a1 1 0 011.271-1.54l.097.08 4.462 4.184 3.135-4.95zM7.288 10.39l7.27 6.815-2.656 4.307A1.027 1.027 0 0110 20.973v-5.916a.07.07 0 00-.056-.068l-3.487-.698a1.02 1.02 0 01-.662-1.546l1.492-2.355z"
+        fill="#363D4E"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Recieve = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M17.26 4c-.726 2.325-1.648 4.098-2.766 5.318-1.118 1.22-2.666 2.17-4.643 2.85l-1.23-3.21-3.513 6.899a.99.99 0 00.43 1.33l.096.042L12.85 20l-1.228-3.206c2.6-1 4.445-2.595 5.534-4.785 1.089-2.19 1.123-4.86.102-8.009z"
+        fill="#363D4E"
+        stroke="#363D4E"
+        strokeWidth={1.77987}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Camera_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M2 7.348a2 2 0 012-2h3l1.923-1.806A2 2 0 0110.292 3h3.416a2 2 0 011.37.542L17 5.348h3a2 2 0 012 2V19a2 2 0 01-2 2H4a2 2 0 01-2-2V7.348z"
+        stroke="#F6F7F8"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Circle cx={5.5} cy={8.5} r={1.5} fill="#F6F7F8" />
+      <Circle
+        cx={12}
+        cy={13}
+        r={4}
+        stroke="#F6F7F8"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Arrow_Left_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M15 4.5L7.5 12l7.5 7.5"
+        stroke="#F6F7F8"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Circle_Tick_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M1.8 12C1.8 6.367 6.366 1.8 12 1.8c5.633 0 10.2 4.567 10.2 10.2 0 5.633-4.567 10.2-10.2 10.2-5.633 0-10.2-4.567-10.2-10.2zm15.344-4.265a1 1 0 00-1.409.12L10.53 14.03 8.2 11.745l-.095-.083a1 1 0 00-1.306 1.51l3.099 3.042.093.08a1 1 0 001.372-.15l5.901-7 .075-.1a1 1 0 00-.195-1.309z"
+        fill="#F6F7F8"
+      />
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Tick_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M4.8 12.26l4.958 5.04L19.2 5.7"
+        stroke="#F6F7F8"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Scan_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M16.222 1.6a.9.9 0 000 1.8V1.6zM22.4 16.222a.9.9 0 00-1.8 0h1.8zM16.222 20.6a.9.9 0 000 1.8v-1.8zm-8.444 1.8a.9.9 0 100-1.8v1.8zM1.6 7.778a.9.9 0 001.8 0H1.6zM16.222 3.4h2.64V1.6h-2.64v1.8zm2.64 0c.96 0 1.738.779 1.738 1.739h1.8A3.539 3.539 0 0018.861 1.6v1.8zM20.6 5.14v2.639h1.8V5.139h-1.8zm0 11.083v2.64h1.8v-2.64h-1.8zm0 2.64c0 .96-.778 1.738-1.739 1.738v1.8a3.539 3.539 0 003.54-3.539h-1.8zM18.861 20.6h-2.639v1.8h2.64v-1.8zm-11.083 0H5.139v1.8h2.639v-1.8zm-2.639 0c-.96 0-1.739-.778-1.739-1.739H1.6a3.539 3.539 0 003.539 3.54v-1.8zM3.4 18.861v-2.639H1.6v2.64h1.8zm0-11.083V5.139H1.6v2.639h1.8zm0-2.639c0-.96.779-1.739 1.739-1.739V1.6A3.539 3.539 0 001.6 5.14h1.8zM5.14 3.4h2.639V1.6H5.139v1.8z"
+        fill="#F6F7F8"
+      />
+      <Rect
+        x={7.5}
+        y={7.5}
+        width={9}
+        height={9}
+        rx={2}
+        stroke="#F6F7F8"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Star = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M10.186 15.098a.4.4 0 00-.372 0l-4.387 2.306a.4.4 0 01-.58-.422l.838-4.884a.4.4 0 00-.115-.354l-3.55-3.46a.4.4 0 01.223-.682l4.904-.712a.4.4 0 00.301-.22l2.193-4.443a.4.4 0 01.718 0l2.193 4.444a.4.4 0 00.301.219l4.904.712a.4.4 0 01.222.683l-3.549 3.459a.4.4 0 00-.115.354l.838 4.884a.4.4 0 01-.58.422l-4.387-2.306z"
+        stroke="url(#paint0_linear_0_5180)"
+        strokeWidth={2}
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5180"
+          x1={1}
+          y1={10.5}
+          x2={19}
+          y2={10.5}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Check_Off = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M4 9.8L8.132 14 16 6"
+        stroke="#A7AAB2"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Check_On = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M4 9.8L8.132 14 16 6"
+        stroke="#00B167"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Edit = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M11.7 17.398h6.377"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M10.855 2.456c.737-.94 1.928-.89 2.868-.153l1.39 1.09c.94.737 1.273 1.88.536 2.82L7.36 16.79a1.48 1.48 0 01-1.15.568l-3.197.04-.724-3.114c-.102-.437 0-.897.277-1.252l8.29-10.575z"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M9.303 4.436l4.794 3.758"
+        stroke="#363D4E"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+
+
 export const IconsMap = {
-    IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_Fingerprint,IC_FaceID,
-    IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio, IC_Eye, IC_Lock, IC_Person,
-    IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
-    IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile, IC_NotificationsInactive
+  IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings, IC_Fingerprint, IC_FaceID,
+  IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio, IC_Eye, IC_Lock, IC_Person,
+  IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
+  IC_AddCard, IC_CardAdded, IC_EyeOff, IC_ChevronRight, IC_IDCard, IC_Passport, IC_Home, IC_Profile, IC_NotificationsInactive, IC_Arrow_Down, IC_Back,
+  IC_Cross, IC_Options, IC_Help, IC_Arrow_Down_White, IC_Back_White, IC_Bell_White, IC_Cross_White, IC_Options_White, IC_Search_White, IC_Bell,
+  IC_Activity_Active, IC_Home_Active, IC_Invest_Active, IC_Profile_Active, IC_Activity_Inactive, IC_Home_Inactive, IC_Invest_Inactive, IC_Profile_Inactive, IC_Swap
 };
 
 export function getIconByString(icon: string) {
