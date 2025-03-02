@@ -9,7 +9,7 @@ const ThemeContext = createContext<{ appliedTheme: "light" | "dark"; theme: "lig
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const systemTheme = useColorScheme();
-    
+    // console.log("systemTheme",systemTheme)
     const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
 
     useEffect(() => {
@@ -27,7 +27,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         await AsyncStorage.setItem("theme", selectedTheme);
     };
 
-    const appliedTheme = theme === "system" ? (systemTheme ?? "light") : theme;
+    let appliedTheme = theme === "system" ? (systemTheme ?? "light") : theme;
+
+    appliedTheme = "dark";
     
     return (
         <ThemeContext.Provider value={{ appliedTheme,theme, setTheme: setThemeMode }}>

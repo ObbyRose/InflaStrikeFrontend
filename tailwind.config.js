@@ -13,75 +13,85 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /^(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right|flex|grid|items|justify|opacity|z|overflow|rounded||space|transition|duration|ease|scale|translate|inset|order|col|row|aspect|content|place|auto|relative|absolute|fixed|sticky|hidden|block|inline|table|text|font|leading|tracking|align|shadow)-.*/,
+        /^(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right|flex|grid|items|justify|opacity|z|overflow|rounded|space|scale|translate|inset|col|row|text|font|leading|tracking|align|shadow)-\d+/
     },
     {
-      pattern: /^(bg|text|fill|icon|divider|button|link|layout|gray|default)-\w+-light|dark$/,
+      pattern: 
+      /^(bg|text|border|fill)-(input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
     },
   ],
   theme: {
     extend: {
       colors: {
-          button: {
-            light: '#4A3EF6',
-            dark: '#363636',
-          },
-          text: {
-            light: '#1F2937',
-            dark: '#ffff',
-          },
-          divider: {
-            light: '#979797',
-            dark: '#545454',
-          },
-          layoutBottom:{
-            light: '#ffffff',
-            dark: '#383838',
-          },
-          layoutTop:{
-            light: '#1E3A8A',
-            dark: 'black',
-          },
-          iconBottom:{
-            light: '#474747',
-            dark: '#d9d9d9',
-          },
-          iconTop:{
-            light: '#d9d9d9',
-            dark: '#a8a8a8',
-          },
-          iconTopActive:{
-            light: '#ffff',
-            dark: '#ffff',
-          },
-          iconBottomActive:{
-            light: '#18097a',
-            dark: '#608afc',
-          },
-          iconGeneral: {
-            light: '#1F2937',
-            dark: '#608afc',
-          },
-          buttonText: {
-            light: "#ffffff",
-            dark: "#ffffff",
-          },
-          link : {
-            light: "#6666FF",
-            dark: "#6666FF",
-          },
-          gray : {
-            light: "#828A99",
-            dark: "#828A99",
-          },
-          lightGray : {
-            light: "#F2F2F7",
-            dark: "#F2F2F7",
-          },
-          default : {
-            light: "#ffffff",
-            dark: "#000000",
-          },
+        // V2
+        "input": {
+          light: '#FFFFFF',
+          dark: '#161C2C',
+        },
+
+        // V1
+        button: {
+          light: '#4A3EF6',
+          dark: '#363636',
+        },
+        text: {
+          light: '#1F2937',
+          dark: '#ffff',
+        },
+        divider: {
+          light: '#979797',
+          dark: '#545454',
+        },
+        layoutBottom:{
+          light: '#ffffff',
+          dark: '#383838',
+        },
+        layoutTop:{
+          light: '#1E3A8A',
+          dark: 'black',
+        },
+        iconBottom:{
+          light: '#474747',
+          dark: '#d9d9d9',
+        },
+        iconTop:{
+          light: '#d9d9d9',
+          dark: '#a8a8a8',
+        },
+        iconTopActive:{
+          light: '#ffff',
+          dark: '#ffff',
+        },
+        iconBottomActive:{
+          light: '#18097a',
+          dark: '#608afc',
+        },
+        iconGeneral: {
+          light: '#1F2937',
+          dark: '#608afc',
+        },
+        buttonText: {
+          light: "#ffffff",
+          dark: "#ffffff",
+        },
+        link : {
+          light: "#6666FF",
+          dark: "#6666FF",
+        },
+        gray : {
+          light: "#828A99",
+          dark: "#828A99",
+        },
+        lightGray : {
+          light: "#F2F2F7",
+          dark: "#F2F2F7",
+        },
+        default : {
+          light: "#ffffff",
+          dark: "#000000",
+        },
+
+
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
           50: 'rgb(var(--color-primary-50)/<alpha-value>)',
@@ -228,8 +238,8 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#ffffff', // #f2f2f2
-          dark: '#2b2b2b',
+          light: '#ffffff',
+          dark: '#090D19',
         },
         indicator: {
           primary: 'rgb(var(--color-indicator-primary)/<alpha-value>)',

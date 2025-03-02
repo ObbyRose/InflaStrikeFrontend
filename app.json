@@ -10,6 +10,7 @@
     "experiments": {
       "tsconfigPaths": true
     },
+    "userInterfaceStyle": "automatic",
 
     "plugins": [
       [
