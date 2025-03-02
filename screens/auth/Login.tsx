@@ -1,4 +1,5 @@
 import InputAuth from '@/components/auth/InputAuth'
+import { LinearGradient } from '@/components/gradient/MyLinearGradient'
 import { Box } from '@/components/ui/box'
 import { Button, ButtonSpinner, ButtonText } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
@@ -81,12 +82,13 @@ const Login: React.FC<Props> = ({ navigation }) => {
 
                 { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
                 {/* Login Button & Forgot Pass */}
-                <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
-                onPress={handleSubmitLogin}
-                >
-                    <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign In"}</ButtonText>
-                </Button>
-                
+                <LinearGradient variant={appliedTheme} style={{ borderRadius: 24, padding: 10 }}>
+                    <Button onPress={handleSubmitLogin} className="items-center">
+                        <ButtonText className="text-white">
+                        {isLoading ? <ButtonSpinner color={"white"} className="h-6" /> : "Sign In"}
+                        </ButtonText>
+                    </Button>
+                </LinearGradient>
                 <Text className={`text-link-${appliedTheme} my-3 mx-auto font-bold tracking-wide`}>Forgot password ?</Text>
             </Box>
         </Box>
