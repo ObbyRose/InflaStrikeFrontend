@@ -1223,7 +1223,483 @@ export const IC_Swap = ({ className }: IconsProps) => {
   );
 };
 
-  export const IconsMap = {
+// V2 ICONS
+export const IC_Activity_Active = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4.508 15.5s2.414-2.669 4.782-3.784C11.658 10.6 15 10.8 15 10.8V13l5.86-4.186a1 1 0 000-1.628L15 3v2.5s-4.456 0-7.335 2.5c-2.88 2.5-3.157 7.5-3.157 7.5z"
+        fill="url(#paint0_linear_0_5068)"
+        stroke="url(#paint1_linear_0_5068)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M23.492 14s-2.414 2.669-4.782 3.784C16.342 18.9 13 18.7 13 18.7v-2.2l-5.86 4.186a1 1 0 000 1.628L13 26.5V24s4.456 0 7.335-2.5c2.88-2.5 3.157-7.5 3.157-7.5z"
+        fill="url(#paint2_linear_0_5068)"
+        stroke="url(#paint3_linear_0_5068)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5068"
+          x1={4.5083}
+          y1={9.25}
+          x2={22}
+          y2={9.25}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5068"
+          x1={4.5083}
+          y1={9.25}
+          x2={22}
+          y2={9.25}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_5068"
+          x1={23.4917}
+          y1={20.25}
+          x2={6}
+          y2={20.25}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint3_linear_0_5068"
+          x1={23.4917}
+          y1={20.25}
+          x2={6}
+          y2={20.25}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Home_Active = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3.5 12.543a3 3 0 011.096-2.318l7.5-6.16a3 3 0 013.808 0l7.5 6.16a3 3 0 011.096 2.318V23.5a2 2 0 01-2 2h-4.16a1 1 0 01-1-1v-3.708a2 2 0 00-2-2h-2.68a2 2 0 00-2 2V24.5a1 1 0 01-1 1H5.5a2 2 0 01-2-2V12.543z"
+        fill="url(#paint0_linear_0_5083)"
+        stroke="url(#paint1_linear_0_5083)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5083"
+          x1={3.5}
+          y1={14}
+          x2={24.5}
+          y2={14}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5083"
+          x1={3.5}
+          y1={14}
+          x2={24.5}
+          y2={14}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Invest_Active = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14 20.993c4.32 0 6.752 1.56 7.971 2.732.54.52.135 1.275-.615 1.275H6.644c-.75 0-1.155-.755-.615-1.275C7.248 22.552 9.68 20.993 14 20.993z"
+        fill="url(#paint0_linear_0_5073)"
+        stroke="url(#paint1_linear_0_5073)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15 10.984s0-9.019 9-7.997c0 0-.023 4.558-2.613 6.61C18.797 11.649 15 10.984 15 10.984z"
+        fill="url(#paint2_linear_0_5073)"
+        stroke="url(#paint3_linear_0_5073)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M13.315 15.401s-.901-6.412-8.71-4.557c0 0 .343 3.447 2.688 4.585 2.346 1.138 6.022-.028 6.022-.028z"
+        fill="url(#paint4_linear_0_5073)"
+        stroke="url(#paint5_linear_0_5073)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14 20.993s-.27-4.885 0-7.183 1.16-2.663 1.16-2.663"
+        fill="url(#paint6_linear_0_5073)"
+      />
+      <Path
+        d="M14 20.993s-.27-4.885 0-7.183 1.16-2.663 1.16-2.663"
+        stroke="url(#paint7_linear_0_5073)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5073"
+          x1={5}
+          y1={22.9966}
+          x2={23}
+          y2={22.9966}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5073"
+          x1={5}
+          y1={22.9966}
+          x2={23}
+          y2={22.9966}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_5073"
+          x1={15}
+          y1={7.01506}
+          x2={24}
+          y2={7.01506}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint3_linear_0_5073"
+          x1={15}
+          y1={7.01506}
+          x2={24}
+          y2={7.01506}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint4_linear_0_5073"
+          x1={12.9248}
+          y1={12.6256}
+          x2={5.0027}
+          y2={13.739}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint5_linear_0_5073"
+          x1={12.9248}
+          y1={12.6256}
+          x2={5.0027}
+          y2={13.739}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint6_linear_0_5073"
+          x1={13.8647}
+          y1={16.0701}
+          x2={15.1597}
+          y2={16.0701}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint7_linear_0_5073"
+          x1={13.8647}
+          y1={16.0701}
+          x2={15.1597}
+          y2={16.0701}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Profile_Active = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle
+        cx={14}
+        cy={8}
+        r={5}
+        fill="url(#paint0_linear_0_5079)"
+        stroke="url(#paint1_linear_0_5079)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4 22.143c0-1.363.588-2.67 1.799-3.296C7.435 18.001 10.179 17 14 17c3.822 0 6.565 1.002 8.201 1.847 1.21.626 1.799 1.933 1.799 3.296A2.857 2.857 0 0121.143 25H6.857A2.857 2.857 0 014 22.143z"
+        fill="url(#paint2_linear_0_5079)"
+        stroke="url(#paint3_linear_0_5079)"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_5079"
+          x1={9}
+          y1={8}
+          x2={19}
+          y2={8}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_5079"
+          x1={9}
+          y1={8}
+          x2={19}
+          y2={8}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_5079"
+          x1={4}
+          y1={21}
+          x2={24}
+          y2={21}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint3_linear_0_5079"
+          x1={4}
+          y1={21}
+          x2={24}
+          y2={21}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Activity_Inactive = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M4.508 15.5s2.414-2.669 4.782-3.784C11.658 10.6 15 10.8 15 10.8V13l5.86-4.186a1 1 0 000-1.628L15 3v2.5s-4.456 0-7.335 2.5c-2.88 2.5-3.157 7.5-3.157 7.5z"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M23.492 14s-2.414 2.669-4.782 3.784C16.342 18.9 13 18.7 13 18.7v-2.2l-5.86 4.186a1 1 0 000 1.628L13 26.5V24s4.456 0 7.335-2.5c2.88-2.5 3.157-7.5 3.157-7.5z"
+        fill="#B0B9C1"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Home_Inactive = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3.5 12.543a3 3 0 011.096-2.318l7.5-6.16a3 3 0 013.808 0l7.5 6.16a3 3 0 011.096 2.318V23.5a2 2 0 01-2 2h-4.16a1 1 0 01-1-1v-3.708a2 2 0 00-2-2h-2.68a2 2 0 00-2 2V24.5a1 1 0 01-1 1H5.5a2 2 0 01-2-2V12.543z"
+        fill="#B0B9C1"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Invest_Inactive = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14 20.993c4.32 0 6.752 1.56 7.971 2.732.54.52.135 1.275-.615 1.275H6.644c-.75 0-1.155-.755-.615-1.275C7.248 22.552 9.68 20.993 14 20.993z"
+        fill="#B0B9C1"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M15 10.984s0-9.019 9-7.997c0 0-.023 4.558-2.613 6.61C18.797 11.649 15 10.984 15 10.984zM13.315 15.402s-.901-6.413-8.71-4.558c0 0 .343 3.447 2.688 4.585 2.346 1.138 6.022-.027 6.022-.027z"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14 20.993s-.27-4.885 0-7.183 1.16-2.663 1.16-2.663"
+        fill="#B0B9C1"
+      />
+      <Path
+        d="M14 20.993s-.27-4.885 0-7.183 1.16-2.663 1.16-2.663"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_Profile_Inactive = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      width={28}
+      height={28}
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Circle
+        cx={14}
+        cy={8}
+        r={5}
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4 22.143c0-1.363.588-2.67 1.799-3.296C7.435 18.001 10.179 17 14 17c3.822 0 6.565 1.002 8.201 1.847 1.21.626 1.799 1.933 1.799 3.296A2.857 2.857 0 0121.143 25H6.857A2.857 2.857 0 014 22.143z"
+        fill="#B0B9C1"
+        stroke="#B0B9C1"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IconsMap = {
     IC_Email, IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_PieGraph, IC_Search, IC_NotificationSettings,IC_Fingerprint,IC_FaceID,
     IC_ProfileSettings, IC_CreditCard, IC_Phone, IC_GreenVi, IC_Mail, IC_Market, IC_Invest, IC_Portfolio, IC_Eye, IC_Lock, IC_Person,
     IC_ArrowLeft, IC_Settings, IC_DisplaySetting, IC_LanguageSetting, IC_ThemeSettings, IC_UserPreferencesSettings,
