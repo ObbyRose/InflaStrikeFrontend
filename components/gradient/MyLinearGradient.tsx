@@ -44,7 +44,7 @@ const MyLinearGradient = ({ children, type, color}: MyLinearGradientProps) => {
   return (
     <LinearGradient
       className={cn("w-full",`
-        ${type === "button" ? "rounded-3xl p-2 h-fit items-center" : ""}
+        ${type === "button" ? "rounded-full p-2 h-fit items-center" : ""}
         ${type === "background" ? "" : ""}
         `)}
         {...getOptions(color)}
