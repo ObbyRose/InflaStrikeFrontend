@@ -1,130 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import { Dimensions, Vibration } from 'react-native';
+import React, { useEffect } from 'react';
+import { TouchableOpacity, Dimensions, Vibration } from 'react-native';
 import usePinStore from '../../context/pinStore';
-import * as LocalAuthentication from 'expo-local-authentication';
 import { VStack } from '@/components/ui/vstack';
-import { Text } from '@/components/ui/text';
 import { HStack } from '@/components/ui/hstack';
 import { Box } from '@/components/ui/box';
-import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Button, ButtonText } from '@/components/ui/button';
+import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import { IC_FaceID, IC_Fingerprint } from '@/utils/constants/Icons';
-import { Props } from '@/types/NavigationTypes';
 import BackHeader from '@/components/BackHeader';
 
-const { height } = Dimensions.get('window');
-
-const CreatePinScreen: React.FC<Props> = ({ navigation }) => {
-    const { pin, setPin, clearPin } = usePinStore();
-    const [message, setMessage] = useState<string>('');
-    const [tempAuth, setTempAuth] = useState<string | null>(null); // Stores PIN or Fingerprint
+const CreatePinScreen: React.FC = () => {
+    const { pin, setPin, deleteLastDigit } = usePinStore();
     const { appliedTheme } = useTheme();
 
     useEffect(() => {
         if (pin.length === 4) {
-            handlePinSubmit();
+            Vibration.vibrate(50); // Small vibration when PIN is full
         }
     }, [pin]);
 
-    const handlePinSubmit = () => {
-        if (pin.length === 4) {
-            setTempAuth(pin); // Save the PIN
-            navigation.navigate('ConfirmPin', { authType: 'pin', authData: pin });
-            clearPin();
-        } else {
-            setMessage('Please enter a 4-digit PIN.');
-            Vibration.vibrate();
-        }
-    };
-
-    const handleFingerprint = async () => {
-        const hasHardware = await LocalAuthentication.hasHardwareAsync();
-        const isEnrolled = await LocalAuthentication.isEnrolledAsync();
-
-        if (hasHardware && isEnrolled) {
-            const result = await LocalAuthentication.authenticateAsync({
-                promptMessage: 'Authenticate with Fingerprint',
-                fallbackLabel: 'Use PIN',
-            });
-
-            if (result.success) {
-                setMessage('Fingerprint Authentication Granted');
-                setTempAuth('fingerprint'); // Save fingerprint authentication temporarily
-                navigation.navigate('ConfirmPin', { authType: 'fingerprint', authData: 'fingerprint' });
-            } else {
-                setMessage('Fingerprint Authentication Failed');
-                Vibration.vibrate();
-            }
-        } else {
-            setMessage('Fingerprint Authentication Not Available');
-            Vibration.vibrate();
-        }
-    };
-
     return (
-        <VStack className="flex-1 bg-white px-6" style={{ height }}>
-            <BackHeader title="Create PIN" />
-            {/* Top Section - Title */}
-            <VStack className="items-center mt-20">
-                <Text className="text-3xl font-bold text-gray-900">Create PIN</Text>
-                <Text className="text-gray-500 mt-2">Enter a 4-digit PIN or use Fingerprint</Text>
-            </VStack>
+        <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
+            <Box className="p-4 h-full flex">
+                    <BackHeader title="Create PIN" />
+                <VStack className="flex-1 items-center justify-between">
+                    {/* Back Button */}
 
-            {/* Middle Section - PIN Indicator */}
-            <HStack className="justify-center gap-4 mt-12">
-                {[...Array(4)].map((_, i) => (
-                    <Box
-                        key={i}
-                        className={`w-5 h-5 rounded-full border border-gray-400 ${
-                            pin.length > i ? `bg-button-${appliedTheme}` : 'bg-white'
-                        }`}
-                    />
-                ))}
-            </HStack>
+                    {/* Title */}
+                    <VStack className="items-center">
+                        <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Create your PIN</Text>
+                        <Text className={`text-subText-${appliedTheme} mt-2`}>
+                            Create a four-digit passcode to secure your account
+                        </Text>
+                    </VStack>
 
-            {/* Bottom Section - Numpad */}
-            <VStack className="space-y-4 pb-10 gap-6 flex-1 justify-center">
-                {[
-                    [1, 2, 3],
-                    [4, 5, 6],
-                    [7, 8, 9],
-                    ['face', 0, 'fingerprint'],
-                ].map((row, rowIndex) => (
-                    <HStack key={rowIndex} className="justify-center gap-6">
-                        {row.map((num, index) => (
-                            <Button
+                    {/* PIN Input Display */}
+                    <HStack className="gap-4 justify-center">
+                        {[0, 1, 2, 3].map((index) => (
+                            <Box
                                 key={index}
-                                className="w-20 h-20 border bg-white border-black rounded-full items-center justify-center"
-                                onPress={() => {
-                                    if (typeof num === 'number') setPin(num.toString());
-                                    if (num === 'face') console.log('Face ID Triggered');
-                                    if (num === 'fingerprint') handleFingerprint();
-                                }}
+                                className={`w-14 h-16 border-2 rounded-lg flex items-center justify-center ${
+                                    pin.length === index ? `border-${appliedTheme === 'light' ? 'purple-500' : 'white'}` : 'border-transparent'
+                                }${appliedTheme === 'light' ? ' bg-white' : ' bg-card-dark'}`}
                             >
-                                {num === 'fingerprint' ? (
-                                    <IC_Fingerprint className="text-2xl text-button-light" />
-                                ) : num === 'face' ? (
-                                    <IC_FaceID className="text-2xl text-button-light" />
-                                ) : (
-                                    <Text className="text-2xl font-bold text-button-light">
-                                        {typeof num === 'number' ? num : ''}
-                                    </Text>
+                                {pin.length > index && (
+                                    <Box
+                                        style={{
+                                            width: 12,
+                                            height: 12,
+                                            backgroundColor: appliedTheme === 'light' ? '#5506FD' : '#FFFFFF',
+                                            borderRadius: 6,
+                                        }}
+                                    />
                                 )}
-                            </Button>
+                            </Box>
                         ))}
                     </HStack>
-                ))}
-            </VStack>
 
-            {/* Status Message (Fixed at Bottom) */}
-            <VStack className="items-center pb-6">
-                {message && (
-                    <Text className={message.includes('Granted') ? 'text-green-500' : 'text-red-500'}>
-                        {message}
-                    </Text>
-                )}
-            </VStack>
-        </VStack>
+                    {/* Number Pad */}
+                    <VStack className="space-y-6 mt-6">
+                        {[
+                            ['1', '2', '3'],
+                            ['4', '5', '6'],
+                            ['7', '8', '9'],
+                            ['' , '0', '<'], // Aligns delete button
+                        ].map((row, rowIndex) => (
+                            <HStack key={rowIndex} className="justify-center gap-14">
+                                {row.map((digit, index) => (
+                                    <TouchableOpacity
+                                        key={index}
+                                        onPress={() => {
+                                            if (digit === '<') {
+                                                deleteLastDigit();
+                                            } else {
+                                                setPin(digit);
+                                            }
+                                        }}
+                                        className="w-20 h-20 rounded-lg flex items-center justify-center"
+                                    >
+                                        <Text className={`text-3xl font-semibold text-text-${appliedTheme}`}>{digit}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </HStack>
+                        ))}
+                    </VStack>
+
+                    {/* Create PIN Button (wrapped in Box with padding) */}
+                    <Box className="w-full pb-6">
+                        <MyLinearGradient type="button" color="purple">
+                            <Button className="w-full h-14 rounded-full">
+                                <ButtonText className="text-lg">Create PIN</ButtonText>
+                            </Button>
+                        </MyLinearGradient>
+                    </Box>
+                </VStack>
+            </Box>
+        </MyLinearGradient>
     );
 };
 
