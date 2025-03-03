@@ -9,7 +9,7 @@ import { Button, ButtonText } from '@/components/ui/button'
 import { TouchableOpacity } from 'react-native'
 
 const ConfirmGovernmentId = () => {
-    const { appliedTheme, setTheme } = useTheme()
+    const { appliedTheme } = useTheme()
     
     return (
         <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>

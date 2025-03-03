@@ -116,7 +116,7 @@ type IAlertDialogBackdropProps = React.ComponentPropsWithoutRef<
 const AlertDialog = React.forwardRef<
   React.ElementRef<typeof UIAccessibleAlertDialog>,
   IAlertDialogProps
->(({ className, size = 'md', ...props }, ref) => {
+>(({ className, size = 'lg', ...props }, ref) => {
   return (
     <UIAccessibleAlertDialog
       ref={ref}
