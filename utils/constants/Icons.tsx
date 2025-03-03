@@ -5953,3 +5953,46 @@ export const IconsMap = {
 export function getIconByString(icon: string) {
     return icon && icon in IconsMap ? IconsMap[icon as keyof typeof IconsMap] : null;
 }
+
+// Yaniv Icons
+export const IC_Vi = ({ className, color }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      width={14}
+      height={10}
+      viewBox="0 0 14 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M1 4.8L5.132 9 13 1"
+        stroke={color || "#A7AAB2"}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
+export const IC_ChevronLeft = ({ className, color }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M15 4l-8 8 8 8"
+        stroke={color || "#363D4E"}
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};

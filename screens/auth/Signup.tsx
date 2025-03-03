@@ -21,12 +21,14 @@ import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("VERIFY_PHONE");
+    const [screenStep , setScreenStep ] = useState("CREATE_PASSWORD");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState<any>({});
+    const [ headerStep,  setHeaderStep] = useState(0);
 
-    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD',    'MAIN', 'VERIFY_EMAIL', 'STATUS1' , 'STATUS2', 'PERSONAL_INFO', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
+    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO',     
+        'MAIN', 'VERIFY_EMAIL', 'STATUS1' , 'STATUS2', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
 
     useEffect(() => {
         console.log("FINAL DATA: ", finalData);
@@ -61,6 +63,8 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                 navigation.navigate("Login");
             else
                 setScreenStep(screens[currentIndex - 1]);
+
+            setHeaderStep(prev => prev > 0 ? prev-1 : prev);
         }
     
         // Then, trigger the slide-in animation
@@ -100,7 +104,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         >
         <MyLinearGradient type='background' color={appliedTheme === "dark" ? "dark" : 'light-blue'}>
         <Box className={`flex-1 min-h-screen`}>
-            <BackAuth handleScreenChange={handleScreenChange}/>
+            <BackAuth handleScreenChange={handleScreenChange} headerStep={headerStep}/>
                 <Box className={`flex-1 p-10 pt-5`}>
                     <Animated.View
                         className="flex-1"
@@ -125,6 +129,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                         { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
                         { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
                         { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
+                        { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
 
 
 
@@ -132,7 +137,6 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                         { screenStep === 'VERIFY_EMAIL' && <VerifyEmail handleScreenChange={handleScreenChange} />}
                         { screenStep === 'STATUS1' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
                         { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
-                        { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
                         { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
                         { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} type={finalData.idMethod}/>}
                         { screenStep === 'VERIFIED' && <SignupVerified handleScreenChange={handleScreenChange} />}

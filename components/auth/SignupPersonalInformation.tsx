@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box } from '../ui/box'
 import { Text } from '../ui/text'
 import InputAuth from './InputAuth'
@@ -9,7 +9,11 @@ import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { validateAndConvertBirthday } from '@/utils/functions/help'
 import GooglePlacesInput from './GooglePlacesInput'
 
-function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
+interface SignupPersonalInformationProps extends SignUpScreensProps {
+    setHeaderStep: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function SignupPersonalInformation({ handleScreenChange, setHeaderStep }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const [address, setAddress] = useState({});
@@ -19,6 +23,10 @@ function SignupPersonalInformation({ handleScreenChange }: SignUpScreensProps) {
     });
 
     const { birthday } = values;
+
+    useEffect(() => {
+        setHeaderStep(prev => (prev !== 1 ? 1 : prev));
+    }, []);
     
     function handleSubmit() {
         let valid = true;

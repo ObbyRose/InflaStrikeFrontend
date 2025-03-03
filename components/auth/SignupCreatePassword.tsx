@@ -1,19 +1,14 @@
 import { Box } from '@/components/ui/box'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Text } from '../ui/text';
 import { SignUpScreensProps } from '@/types/NavigationTypes';
-import { Button, ButtonSpinner, ButtonText } from '../ui/button';
-import { useToast } from '../ui/toast';
-import { showNewToast } from '@/utils/constants/Toasts';
+import { Button, ButtonText } from '../ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import InputAuth from './InputAuth';
-import { useFormInput } from '@/hooks/useFormInput';
-import { Input, InputField } from '../ui/input';
-import { FormControl } from '../ui/form-control';
-import { Clipboard, Keyboard, KeyboardAvoidingView, Pressable, TextInput } from 'react-native';
-import { IM_PhoneHandConfirm, IM_PhoneHandPassword } from '@/utils/constants/Images';
-import OverlayLoading from '../OverlayLoading';
+import {  Keyboard, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { IM_PhoneHandPassword } from '@/utils/constants/Images';
 import MyLinearGradient from '../gradient/MyLinearGradient';
+import { IC_Vi } from '@/utils/constants/Icons';
 
 interface VerifyPhoneProps extends SignUpScreensProps {
     phoneEntered: string;
@@ -24,6 +19,13 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
     const [error, setError] = useState('');
     const [pass, setPass] = useState('');
 
+    const isRightLength = pass.length >= 8;
+    const hasUppercaseOrSymbol = /[A-Z!@#$%^&*(),.?":{}|<>]/.test(pass);
+    const hasNumber = /[0-9]/.test(pass);
+
+    const handlePassSubmit = () => {
+        handleScreenChange('next', { pass })
+    }
 
     return (
     <Box className='flex-1 py-5'>
@@ -33,36 +35,59 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
         </Box>
 
         <Box className='flex-1 justify-between'>
-            <Box>
+            {/* Password Main Logic */}
+            <Box className='flex-1 justify-between gap-5'>  
                 {/* Titles */}
-                <Box className='mb-7 gap-2'>
+                <Box className='gap-2'>
                     <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Create Password</Text>
                     <Text className={`text-subText-${appliedTheme} text-lg`}>
                         {`Choose a secure password that will be easy for you to remember.`}
                     </Text>
                 </Box>
+
                 {/* Code Input */}
-                <Box>
+                <Box className="flex-1 gap-2">
                     <InputAuth 
-                    icon="IC_Lock" 
-                    placeholder='Password' 
-                    type='pass'
-                    value={pass}
-                    onChangeText={(val) => setPass(val)}
-                    // error={errors.pass}
+                        icon="IC_Lock" 
+                        placeholder='Password' 
+                        type='pass'
+                        value={pass}
+                        onChangeText={(val) => setPass(val)}
                     />
+
+                    {/* Validation Section */}
+                    <Box className='gap-1'>
+                        <Box className='flex-row gap-3 items-center'>
+                            <IC_Vi className='w-5 h-5 justify-center items-center' 
+                                color={isRightLength ? "green" : ""} />
+                            <Text>Has at least 8 characters</Text>
+                        </Box>
+                        <Box className='flex-row gap-3 items-center'>
+                            <IC_Vi className='w-5 h-5 justify-center items-center' 
+                                color={hasUppercaseOrSymbol ? 'green' : ''} />
+                            <Text>Has an uppercase letter or symbol</Text>
+                        </Box>
+                        <Box className='flex-row gap-3 items-center'>
+                            <IC_Vi className='w-5 h-5 justify-center items-center' 
+                                color={hasNumber ? 'green' : ''} />
+                            <Text>Has a number</Text>
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
 
             {/* Buttons */}
             <Box className='gap-5'>
-                <MyLinearGradient type='button' color='purple'>
+                <MyLinearGradient type='button' 
+                    color={ hasUppercaseOrSymbol && isRightLength && hasNumber ? 'purple' : "disabled-button"}
+                >
                     <Button 
-                    // onPress={() => handlePhoneSubmit()} 
+                    onPress={() => handlePassSubmit()} 
                     className='w-full'
                     style={{ backgroundColor: 'initial' }}
                     >
-                        <ButtonText className="text-white">
+                        <ButtonText 
+                        className={ hasUppercaseOrSymbol && isRightLength && hasNumber ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                             Continue
                         </ButtonText>
                     </Button>
