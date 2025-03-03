@@ -36,7 +36,7 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
         </Text>
         {thingToDo.length > 1 && (
           <Text className={`text-text-${appliedTheme} rounded-full bg-[#2d363a45] p-2`}>
-            {currentIndex} / {thingToDo.length}
+            {currentIndex + 1} / {thingToDo.length}
           </Text>
         )}
       </Box>

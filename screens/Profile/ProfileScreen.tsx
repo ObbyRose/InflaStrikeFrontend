@@ -1,17 +1,30 @@
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
+import SettingItem from '@/components/SettingItems';
 import ThingToDo from '@/components/ThingToDo';
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
+import { Props } from '@/types/NavigationTypes';
+import {
+  IC_Arrow_Right,
+  IC_Budget,
+  IC_Invite,
+  IC_Piggy_Bank,
+  IC_Setting,
+  IC_Settings,
+  IC_Subscription,
+  IC_ThemeSettings,
+} from '@/utils/constants/Icons';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Alert, ScrollView, TouchableOpacity } from 'react-native';
 
-export default function ProfileScreen() {
+interface ProfileScreenProps extends Props {}
+
+export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   const { appliedTheme } = useTheme();
-  const navigation = useNavigation();
   const user = {
     name: 'John Abraham',
     username: '$dylanrobinson',
@@ -45,7 +58,7 @@ export default function ProfileScreen() {
   // const iconsColor = appliedTheme === 'dark' ? '#fff' : '#000';
   const iconsColor = '#fff';
   return (
-    <Box className={`bg-card-${appliedTheme}`}>
+    <Box>
       <MyLinearGradient type="background" color="blue">
         <Box className="flex h-[375px] items-center  p-4">
           {/* back and setting box */}
@@ -77,18 +90,32 @@ export default function ProfileScreen() {
         </Box>
       </MyLinearGradient>
 
-      {/* things to do component */}
-      <Box className="absolute top-[55%] z-50 flex h-fit w-full items-center justify-center">
-        <ThingToDo thingToDo={thingToDo} />
-      </Box>
-
-      <ScrollView className={`bg-card-${appliedTheme} mt-[75px] w-full `}>
+      <ScrollView className={` w-full p-2`}>
         {/* more features box */}
-        <Box></Box>
+        <Box className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
+          <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
+          <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
+          <SettingItem title="Budgets" IconComponent={IC_Budget} />
+          <SettingItem title="Bundles" IconComponent={IC_Subscription} />
+        </Box>
 
         {/* setting and invite friends box */}
-        <Box></Box>
+        <Box className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
+          {/* invite new friends box */}
+          <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
+
+          {/* setting box */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
+            <SettingItem title="Setting" IconComponent={IC_Setting} />
+          </TouchableOpacity>
+        </Box>
       </ScrollView>
+
+      {/* things to do component */}
+      <Box className="absolute top-[35%] z-50 flex h-fit w-full items-center justify-center">
+        <ThingToDo thingToDo={thingToDo} />
+      </Box>
     </Box>
   );
 }
