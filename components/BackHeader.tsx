@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { IC_ArrowLeft } from "@/utils/constants/Icons";
+import { IC_Arrow_Left, IC_Arrow_Left_White, IC_ArrowLeft } from "@/utils/constants/Icons";
 import { TouchableOpacity, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
@@ -27,12 +27,16 @@ function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
                     onPress={() => navigation.goBack()}
                     activeOpacity={0.7}
                 >
-                    <IC_ArrowLeft className="w-8 h-8" />
+                    {appliedTheme === "dark" ? (
+                        <IC_Arrow_Left_White className="w-8 h-8" />
+                    ) : (
+                        <IC_Arrow_Left className="w-8 h-8" />
+                    )}
                 </TouchableOpacity>
 
                 {/* Centered Title */}
                 <Box className="flex-1 items-center justify-center">
-                    <Text className="font-bold text-black text-xl text-center">{title || ""}</Text>
+                    <Text className={`font-bold text-text-${appliedTheme} text-xl text-center`}>{title || ""}</Text>
                 </Box>
                 {/* Right Icons */}
                 <Box className="flex-row items-center absolute gap-2 right-4">

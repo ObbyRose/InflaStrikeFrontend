@@ -6,15 +6,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from './utils/Themes/ThemeProvider';
 import { ToastProvider } from '@gluestack-ui/toast';
 import 'react-native-get-random-values';
+import { PaperProvider } from 'react-native-paper';
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
         <GluestackUIProvider>
-          <ToastProvider>
-            <StackNavigator />
-          </ToastProvider>
+          <PaperProvider>
+            <ToastProvider>
+              <StackNavigator />
+            </ToastProvider>
+          </PaperProvider>
         </GluestackUIProvider>
       </ThemeProvider>
     </SafeAreaProvider>

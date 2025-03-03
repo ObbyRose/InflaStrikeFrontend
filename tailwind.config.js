@@ -16,8 +16,12 @@ module.exports = {
         /^(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right|flex|grid|items|justify|opacity|z|overflow|rounded|space|scale|translate|inset|col|row|text|font|leading|tracking|align|shadow)-\d+/
     },
     {
-      pattern: 
-      /^(bg|text|border|fill)-(card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+      pattern:
+      /^(bg|text|border|fill)-(badge|subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+    },
+    {
+      pattern:
+      /^(bg|text|border|fill)-(orange|purple|cyan)-\d+/,
     },
   ],
   theme: {
@@ -71,6 +75,10 @@ module.exports = {
           light: '#363D4E',
           dark: '#E5F9FE',
         },
+        subTextGray: {
+          light: '#5C616F',
+          dark: '#FBFDFF',
+        },
 
         // Button
         button: {
@@ -86,10 +94,14 @@ module.exports = {
           dark: 'rgba(251, 253, 255, 0.4)',
         },
 
-        // Card
+        // Backgrounds
         card: {
           light: '#FFFFFF',
           dark: '#161C2C',
+        },
+        badge: {
+          light: '#E5F9FE',
+          dark: '#363D4E',
         },
 
         // Other
@@ -97,7 +109,7 @@ module.exports = {
 
         // V1 - DONT USE FOR NOW
         divider: {
-          light: '#979797',
+          light: '#CDD4DB',
           dark: '#545454',
         },
         layoutBottom:{

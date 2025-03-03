@@ -7,7 +7,8 @@ import SignupPhoneNumber from '@/components/auth/SignupPhoneNumber'
 import SignupStatus from '@/components/auth/SignupStatus'
 import SignupVerified from '@/components/auth/SignupVerified'
 import VerifyEmail from '@/components/auth/VerifyEmail'
-import VerifyPhone from '@/components/auth/VerifyPhone'
+import SignupVerifyPhone from '@/components/auth/SignupVerifyPhone'
+import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import { Box } from '@/components/ui/box'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
@@ -15,16 +16,17 @@ import React, { useEffect, useState } from 'react'
 import { BackHandler, ScrollView } from 'react-native'
 import { Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
 
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("MAIN");
+    const [screenStep , setScreenStep ] = useState("VERIFY_PHONE");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState<any>({});
 
-    const screens = ['MAIN', 'VERIFY_EMAIL', 'STATUS1', 'PHONE_NUMBER', 'VERIFY_PHONE', 'STATUS2', 'PERSONAL_INFO', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
+    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD',    'MAIN', 'VERIFY_EMAIL', 'STATUS1' , 'STATUS2', 'PERSONAL_INFO', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
 
     useEffect(() => {
         console.log("FINAL DATA: ", finalData);
@@ -49,18 +51,16 @@ const Signup: React.FC<Props> = ({ navigation }) => {
             easing: Easing.ease,
             useNativeDriver: true,
         }).start(() => {
-            // After slide-out animation ends, change the screen step
-            
-        const currentIndex = screens.indexOf(screenStep);
 
+        // After slide-out animation ends, change the screen step
+        const currentIndex = screens.indexOf(screenStep);
         if(newScreenStep === "next")
             setScreenStep(screens[currentIndex + 1]);
         else {
-            if(screenStep === "MAIN")
+            if(screenStep === "PHONE_NUMBER")
                 navigation.navigate("Login");
             else
                 setScreenStep(screens[currentIndex - 1]);
-
         }
     
         // Then, trigger the slide-in animation
@@ -76,7 +76,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         const backAction = () => {
-        if(screenStep === "MAIN")
+        if(screenStep === "PHONE_NUMBER")
             navigation.navigate("Login");
         else 
             handleScreenChange("back");
@@ -98,7 +98,8 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
         >
-        <Box className={`flex-1 h-full min-h-screen bg-background-${appliedTheme}`}>
+        <MyLinearGradient type='background' color={appliedTheme === "dark" ? "dark" : 'light-blue'}>
+        <Box className={`flex-1 min-h-screen`}>
             <BackAuth handleScreenChange={handleScreenChange}/>
                 <Box className={`flex-1 p-10 pt-5`}>
                     <Animated.View
@@ -121,11 +122,15 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                             }),
                         }}
                     >
+                        { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
+                        { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
+                        { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
+
+
+
                         { screenStep === 'MAIN' && <SignupMain handleScreenChange={handleScreenChange} />}
                         { screenStep === 'VERIFY_EMAIL' && <VerifyEmail handleScreenChange={handleScreenChange} />}
                         { screenStep === 'STATUS1' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
-                        { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'VERIFY_PHONE' && <VerifyPhone handleScreenChange={handleScreenChange}/>}
                         { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
                         { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
                         { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
@@ -134,6 +139,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                     </Animated.View>
             </Box>
         </Box>
+        </MyLinearGradient>
     </ScrollView>
     </SafeAreaView>
     )
