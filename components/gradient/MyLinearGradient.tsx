@@ -1,12 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { blue } from 'react-native-reanimated/lib/typescript/Colors'
 import { LinearGradient } from '../ui/linear-gradient';
 import { cn } from '../ui/cn';
-import { Button } from 'react-native';
 
 interface MyLinearGradientProps {
-  type: "button" | "background";
+  type: "button" | "background" | "text";
   color: "blue" | "purple" | "blue-purple" | "light-blue";
   children: React.ReactNode;
 }
