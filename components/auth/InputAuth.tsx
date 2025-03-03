@@ -4,6 +4,7 @@ import { Input, InputField } from "../ui/input";
 import { getIconByString, IC_Eye, IC_EyeOff } from "@/utils/constants/Icons";
 import { KeyboardTypeOptions, Pressable, TextInput } from "react-native";
 import { Text } from "../ui/text";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
 
 interface InputAuthProps {
     icon?: string;
@@ -30,7 +31,8 @@ function InputAuth({
     }: InputAuthProps) {
     const [showPass, setShowPass] = useState(false);
     const IconComponent = getIconByString(icon || "");
-
+    const { appliedTheme } = useTheme();
+    
     const togglePasswordVisibility = () => {
         setShowPass(!showPass);
     };
@@ -182,7 +184,7 @@ function InputAuth({
 
     return (
         <Box className={className}>
-        <Input className="relative rounded-xl h-14 mb-4" isInvalid={!!error}>
+        <Input className={`relative rounded-xl h-14 mb-4 bg-input-${appliedTheme}`} isInvalid={!!error}>
             {IconComponent && <IconComponent className="absolute left-2 w-7 h-7" />}
             <InputField
                 className={IconComponent ? "px-12" : "pe-12"}
