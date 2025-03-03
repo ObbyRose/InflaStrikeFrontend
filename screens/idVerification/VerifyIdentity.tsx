@@ -15,7 +15,7 @@ import { Divider } from '@/components/ui/divider';
 
 
 const VerifyIdentity = () => {
-    const { appliedTheme, setTheme } = useTheme();
+    const { appliedTheme } = useTheme();
     const [showActionSheet, setShowActionSheet] = useState(false);
 
     return (
@@ -55,7 +55,6 @@ const VerifyIdentity = () => {
                             <Text className={`text-subTextGray-${appliedTheme} p-4 text-center text-[16px]`}>
                                 Take a driver's license, national identity card or passport photo.
                             </Text>
-                            <Button onPress={() => setTheme(appliedTheme === 'dark' ? 'light' : 'dark')}></Button>
                         </Box>
                         
                         {/* Open ActionSheet on press */}
