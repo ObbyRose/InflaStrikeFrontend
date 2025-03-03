@@ -7,7 +7,7 @@ import { Button } from 'react-native';
 
 interface MyLinearGradientProps {
   type: "button" | "background";
-  color: "blue" | "purple" | "blue-purple" | "light-blue";
+  color: "blue" | "purple" | "blue-purple" | "light-blue" | "dark";
   children: React.ReactNode;
 }
 
@@ -34,8 +34,7 @@ const MyLinearGradient = ({ children, type, color}: MyLinearGradientProps) => {
         "blue": { colors: ["#0650FD", "#000C2D"], start: [0, 1], end: [1, 0]},
         "light-blue": { colors: ["#e8ebf5", "#fbfcff"], start: [0.5, 0], end: [0.5, 1], locations:[0.8, 1] },
         "blue-purple": { colors: ["#091abb", "#007ce6", "#00C3FF", "#00aeee", "#7072f3", "#7971f5"], start: [0, 0], end: [1, 1] },
-        
-        
+        "dark": { colors: ["#090D19", "#090D19"], start: [0, 0], end: [1, 1] },
         "default": { colors: ["#0091FF", "#00C3FF"], start: [0, 0], end: [1, 1] }
     };
     return gradientPositions[color] || gradientPositions["default"];
