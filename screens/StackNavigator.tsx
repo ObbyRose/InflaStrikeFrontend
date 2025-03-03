@@ -60,7 +60,7 @@ const SettingsNavigator = () => (
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="VerifyIdentity">
+      <Stack.Navigator initialRouteName="Signup">
         {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
