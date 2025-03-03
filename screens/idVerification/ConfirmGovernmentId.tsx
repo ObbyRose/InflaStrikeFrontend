@@ -18,7 +18,7 @@ const ConfirmGovernmentId = () => {
                 
                 {/* Most Inner Box */}
                 <Box className={`bg-card-${appliedTheme} w-full rounded-t-2xl p-4 items-center justify-center gap-16 absolute bottom-0 h-[75%]`}>
-                    <IC_Government_ID className='-mt-[8rem] border-white' />
+                    <IC_Government_ID className='-mt-[8rem] border-white' /> {/* Here will go the photo of the ID currently a placeholder */}
                     <Box className='flex flex-col items-center gap-6'>
                         <IC_Magnifier className="w-20 h-20" />
                         <Text className={`text-text-${appliedTheme} font-bold text-[24px]`}>Check Quality</Text>
