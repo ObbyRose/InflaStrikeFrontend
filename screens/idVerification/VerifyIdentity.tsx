@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box } from '@/components/ui/box';
 import BackHeader from '@/components/BackHeader';
 import RoundedBox from '@/components/RoundedBox';
-import { IC_Camera_Purple, IC_Drivers_License, IC_ID_Card, IC_IDCard, IC_Passport, IC_Passport_Photo, IC_Scan_Face_Purple, IC_Selfie_Photo } from '@/utils/constants/Icons';
+import { IC_Camera_Purple, IC_Drivers_License, IC_ID_Card, IC_Passport, IC_Passport_Photo, IC_Scan_Face_Purple, IC_Selfie_Photo } from '@/utils/constants/Icons';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { Text } from '@/components/ui/text';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
