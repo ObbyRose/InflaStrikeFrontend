@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       pattern:
-      /^(bg|text|border|fill)-(subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+      /^(bg|text|border|fill)-(subTextGray|badge|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
     },
   ],
   theme: {
@@ -105,7 +105,7 @@ module.exports = {
 
         // V1 - DONT USE FOR NOW
         divider: {
-          light: '#979797',
+          light: '#CDD4DB',
           dark: '#545454',
         },
         layoutBottom:{

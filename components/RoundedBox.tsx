@@ -10,7 +10,7 @@ interface RoundedBoxProps {
 const RoundedBox: React.FC<RoundedBoxProps> = ({ children }) => {
     const { appliedTheme } = useTheme()
     return (
-        <Box className={`bg-card-${appliedTheme} rounded-2xl h-[280px] w-full flex items-center justify-center`}>
+        <Box className={`bg-card-${appliedTheme} p-4 rounded-2xl h-[280px] w-full flex items-center justify-center`}>
             {children}
         </Box>
     )

@@ -643,6 +643,26 @@ export const IC_ChevronRight = ({ className }: IconsProps) => {
   );
 };
 
+export const IC_ChevronRight_White = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 6 10"
+      fill="none"
+    >
+      <Path
+        d="M1 9l4-4-4-4"
+        stroke="#ffffff"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+      </Box>
+  );
+};
+
 export const IC_IDCard = ({ className }: IconsProps) => {
   return (
       <Box className={cn(className)}>
@@ -2595,6 +2615,235 @@ export const IC_Passport_Photo = ({ className }: IconsProps) => {
           <Stop offset={1} stopColor="#E5E8ED" />
         </LinearGradient>
       </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Selfie_Photo = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+   <Svg
+      width={102}
+      height={102}
+      viewBox="0 0 102 102"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <G filter="url(#filter0_d_0_693)">
+        <Rect x={15} y={3} width={72} height={72} rx={16} fill="#fff" />
+        <Rect x={14.5} y={2.5} width={73} height={73} rx={16.5} stroke="#fff" />
+      </G>
+      <Mask
+        id="a"
+        style={{
+          maskType: "alpha"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={15}
+        y={3}
+        width={72}
+        height={72}
+      >
+        <Path
+          d="M71 3H31c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h40c8.837 0 16-7.163 16-16V19c0-8.837-7.163-16-16-16z"
+          fill="#325CD8"
+        />
+      </Mask>
+      <G mask="url(#a)">
+        <Mask
+          id="b"
+          style={{
+            maskType: "alpha"
+          }}
+          maskUnits="userSpaceOnUse"
+          x={15}
+          y={3}
+          width={72}
+          height={72}
+        >
+          <Path d="M87 3H15v72h72V3z" fill="#fff" />
+        </Mask>
+        <G mask="url(#b)">
+          <Path d="M87 3H15v72h72V3z" fill="#1761C5" />
+          <Path
+            opacity={0.21}
+            d="M26.7 31.8c12.302 0 22.275-9.973 22.275-22.275 0-12.302-9.973-22.275-22.275-22.275-12.302 0-22.275 9.973-22.275 22.275C4.425 21.827 14.398 31.8 26.7 31.8zM83.625 99.3c16.154 0 29.25-13.096 29.25-29.25S99.779 40.8 83.625 40.8s-29.25 13.096-29.25 29.25S67.471 99.3 83.625 99.3z"
+            stroke="#fff"
+            strokeWidth={9}
+          />
+          <Mask
+            id="c"
+            style={{
+              maskType: "alpha"
+            }}
+            maskUnits="userSpaceOnUse"
+            x={41}
+            y={40}
+            width={20}
+            height={32}
+          >
+            <Path
+              d="M43.964 40.725h14.072L60.675 72h-19.35l2.639-31.275z"
+              fill="#fff"
+            />
+          </Mask>
+          <G mask="url(#c)">
+            <Path
+              d="M43.964 40.725h14.072L60.675 72h-19.35l2.639-31.275z"
+              fill="#fff"
+            />
+            <Path
+              opacity={0.6}
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M43.4 43.704c1.046 3.001 3.54 4.836 7.485 5.504 3.944.669 7.046.669 9.306 0l-1.24-7.809-16.12.075.57 2.23z"
+              fill="#1761C5"
+            />
+          </G>
+          <Mask
+            id="d"
+            style={{
+              maskType: "alpha"
+            }}
+            maskUnits="userSpaceOnUse"
+            x={17}
+            y={49}
+            width={68}
+            height={27}
+          >
+            <Path
+              d="M27.786 55.965L43.27 49.71c2.773 7.053 5.35 10.58 7.73 10.58 2.38 0 4.968-3.527 7.763-10.58l15.456 6.254a13.05 13.05 0 017.712 8.724l2.819 10.537h-67.5l2.818-10.532a13.05 13.05 0 017.718-8.728z"
+              fill="#fff"
+            />
+          </Mask>
+          <G mask="url(#d)">
+            <Path
+              d="M27.786 55.965L43.27 49.71c2.773 7.053 5.35 10.58 7.73 10.58 2.38 0 4.968-3.527 7.763-10.58l15.456 6.254a13.05 13.05 0 017.712 8.724l2.819 10.537h-67.5l2.818-10.532a13.05 13.05 0 017.718-8.728z"
+              fill="url(#paint0_linear_0_693)"
+            />
+            <Path d="M51.45 58.575h-.9V75.45h.9V58.575z" fill="#BECAE4" />
+            <Path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M32.142 75.225l.847-5.528-2.3 5.528h1.453zM71.812 75.225l-.847-5.528 2.3 5.528h-1.453z"
+              fill="#BECAE4"
+            />
+          </G>
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M38.778 51.33l4.421-1.82c2.605 6.877 5.143 10.27 7.128 10.695-1.112 4.538-2.132 6.972-3.061 7.301-.643.228-4.571-2.32-6.833-7.915-.544-1.346-1.23-3.842-2.057-7.487a.675.675 0 01.402-.773zM63.201 51.33l-4.421-1.82c-2.605 6.877-5.143 10.27-7.127 10.695 1.11 4.538 2.131 6.972 3.06 7.301.643.228 4.571-2.32 6.833-7.915.544-1.346 1.23-3.842 2.057-7.487a.675.675 0 00-.402-.773z"
+            fill="#002F70"
+          />
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M40.2 15.825h22.95c-.029 10.188-.179 17.138-.45 20.852a10.756 10.756 0 01-10.727 9.973h-.596a10.756 10.756 0 01-10.727-9.973c-.479-6.56-.629-13.511-.45-20.852z"
+            fill="#fff"
+          />
+          <Path
+            d="M45.6 35.722c1.118 0 2.025-.453 2.025-1.012 0-.56-.907-1.013-2.025-1.013-1.118 0-2.025.454-2.025 1.013 0 .559.907 1.012 2.025 1.012zM57.975 35.722c1.118 0 2.025-.453 2.025-1.012 0-.56-.907-1.013-2.025-1.013-1.118 0-2.025.454-2.025 1.013 0 .559.907 1.012 2.025 1.012z"
+            fill="#FDE0D5"
+          />
+          <Path
+            d="M46.612 31.125a1.012 1.012 0 100-2.025 1.012 1.012 0 000 2.025zM56.962 31.125a1.012 1.012 0 100-2.025 1.012 1.012 0 000 2.025z"
+            fill="#002F70"
+          />
+          <Path
+            opacity={0.34}
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M42.494 17.692c.755 3.19 2.857 4.562 6.305 4.118 5.171-.666 8.163-6.594 13.025-1.464-2.043-4.475-5.338-6.445-9.887-5.91-4.548.536-7.696 1.621-9.443 3.256z"
+            fill="#325CD8"
+          />
+          <Path
+            d="M42.494 17.691c.583 1.748 2.39 2.899 5.42 3.452"
+            stroke="#002F70"
+            strokeWidth={0.675}
+            strokeLinecap="round"
+          />
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M40.2 31.125c-4.7-10.434-4.277-16.441 1.269-18.021.222-4.145 2.126-6.277 5.71-6.394 5.377-.177 6.252 1.582 10.857 2.2 4.606.617 8.117 5.07 8.117 10.297 0 3.485-1.001 7.458-3.003 11.918.322-8.086-1.208-12.564-4.591-13.433-5.075-1.304-6.55 1.844-9.847 1.844-2.2 0-4.272-.67-6.218-2.013a44.913 44.913 0 01-.598 5.535c-.322 1.91-.888 4.6-1.696 8.067z"
+            fill="#002F70"
+          />
+          <Path
+            d="M44.076 26.44c1.36-.924 2.794-1.088 4.3-.495M59.627 26.44c-1.361-.924-2.795-1.088-4.301-.495"
+            stroke="#002F70"
+            strokeWidth={0.9}
+            strokeLinecap="round"
+          />
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M62.774 30.778c1.045-2.653 2.363-3.175 3.954-1.565 2.386 2.414-.39 9.124-4.29 6.868l.336-5.303z"
+            fill="#fff"
+          />
+          <Path
+            d="M64.082 33.758c.294-1.907.828-3.032 1.603-3.374"
+            stroke="#CCD4E6"
+            strokeWidth={0.675}
+            strokeLinecap="round"
+          />
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M40.503 30.778c-1.045-2.653-2.363-3.175-3.954-1.565-2.386 2.414.39 9.124 4.29 6.868l-.336-5.303z"
+            fill="#fff"
+          />
+          <Path
+            d="M39.195 33.758c-.294-1.907-.828-3.032-1.603-3.374"
+            stroke="#CCD4E6"
+            strokeWidth={0.675}
+            strokeLinecap="round"
+          />
+          <Path
+            d="M51.653 26.398v2.335c0 1.436 2.998 5.994 1.054 6.561-1.296.38-1.941.556-1.935.53"
+            stroke="#CCD4E6"
+            strokeWidth={0.9}
+            strokeLinecap="round"
+          />
+          <Path
+            d="M48.885 39.925c2.292 1.067 4.289 1.067 5.99 0"
+            stroke="#CCD4E6"
+            strokeWidth={0.675}
+            strokeLinecap="round"
+          />
+        </G>
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_693"
+          x1={51}
+          y1={49.71}
+          x2={51}
+          y2={75.2249}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#F4F5F7" />
+          <Stop offset={1} stopColor="#E5E8ED" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
+export const IC_Arrow_Left = ({ className }: IconsProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M15 4l-8 8 8 8"
+        stroke="#363D4E"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </Svg>
       </Box>
   );
