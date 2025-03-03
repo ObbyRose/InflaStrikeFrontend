@@ -6,6 +6,7 @@ import { IM_PhoneHand, IM_PhoneHandMain } from '@/utils/constants/Images';
 import { Button, ButtonText } from '../ui/button';
 import CountryPhoneInput from '../profile/CountryPhoneInput';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
+import MyLinearGradient from '../gradient/MyLinearGradient';
 
 function SignupPhoneNumber({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
@@ -19,7 +20,7 @@ function SignupPhoneNumber({ handleScreenChange } : SignUpScreensProps) {
         else if(phoneNumber.length < 9)
             setError("Phone number is too short")
         else
-            handleScreenChange('next', { phoneNumber: prefix + phoneNumber })
+            handleScreenChange('next', { phoneNumber: prefix + " " + phoneNumber })
     }
 
     return (
@@ -42,27 +43,31 @@ function SignupPhoneNumber({ handleScreenChange } : SignUpScreensProps) {
             
             </Box>
             {/* Buttons */}
-            <Box className='gap-3'>
-                <Text className={`text-center text-subText-${appliedTheme}`}>
+            <Box className='gap-5'>
+                <Text className={`px-2 text-center text-sm text-subText-${appliedTheme}`}>
                     By using our mobile app, you agree to our  
-                    <Text className={`font-bold underline text-subText-${appliedTheme}`}
+                    <Text className={`font-bold underline text-sm text-subText-${appliedTheme}`}
                     onPress={() => console.log("Terms of Use Clicked")}>
                         {" Terms of Use "}
                     </Text>
                     and
-                    <Text className={`font-bold underline underline-offset-8 text-subText-${appliedTheme}`}
+                    <Text className={`font-bold underline text-sm text-subText-${appliedTheme}`}
                     onPress={() => console.log("Privacy Policy Clicked")}
                     >
                         {" Privacy Policy "}
                     </Text>
                 </Text>
-                <Button variant={`rounded-solid-${appliedTheme}`}  className='h-fit'
-                onPress={() => handlePhoneSubmit()}
-                >
-                    <ButtonText className="text-white">
-                        Continue
-                    </ButtonText>
-                </Button>
+                <MyLinearGradient type='button' color='purple'>
+                    <Button 
+                    onPress={() => handlePhoneSubmit()} 
+                    className='w-full'
+                    style={{ backgroundColor: 'initial' }}
+                    >
+                        <ButtonText className="text-white">
+                            Continue
+                        </ButtonText>
+                    </Button>
+                </MyLinearGradient>
             </Box>
         </Box>
     </Box>

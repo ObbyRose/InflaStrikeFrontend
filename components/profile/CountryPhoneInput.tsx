@@ -33,7 +33,7 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
 
     return (
         <Box className="flex flex-col gap-2">        
-            <Box className="flex flex-row flex-wrap gap-2 items-center">
+            <Box className="flex flex-row flex-wrap gap-2 items-center ">
                 {/* Country Code Select */}
                 <Select
                 selectedValue={selectedCountry.code}
@@ -43,7 +43,7 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
                 }}
                 >
                 <SelectTrigger className={`w-fit px-1 border-0 bg-input-${appliedTheme} rounded-lg h-[55px]`}>
-                    <SelectInput 
+                    <SelectInput className={`text-text-${appliedTheme}`}
                     placeholder={selectedCountry.flag + " " + selectedCountry.label}
                     value={selectedCountry.flag + " " + selectedCountry.label}
                     pointerEvents="none"
@@ -51,20 +51,22 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
                     <SelectIcon className="mr-2" as={ChevronDownIcon} />
                 </SelectTrigger>
 
-                <SelectPortal>
+                <SelectPortal className="">
                     <SelectBackdrop />
-                    <SelectContent className="max-h-[400px]">
-                        <SelectDragIndicatorWrapper>
-                            <SelectDragIndicator />
+                    <SelectContent className={`max-h-[400px] bg-card-${appliedTheme} `}>
+                        <SelectDragIndicatorWrapper className="">
+                            <SelectDragIndicator className=""/>
                         </SelectDragIndicatorWrapper>
                         
-                        <ScrollView className="w-full">
+                        <ScrollView className="w-full ">
                             {countryCodes.map((country) => (
                                 <SelectItem
                                     key={country.code + country.label}
                                     label={country.flag + " " + country.label}
                                     value={country.code}
-                                    className={`${selectedCountry.code === country.code ? "bg-blue-500" : ""}`}
+                                    className={`selected:bg-red-500 ${selectedCountry.code === country.code ? "bg-red-500 text-white" : "text-text-${appliedTheme}"}`}
+                                    textStyle={{ className: `text-text-${appliedTheme}` }}
+                                    style= { { backgroundColor: "transparent"} }
                                 />
                             ))}
                         </ScrollView>
@@ -82,7 +84,7 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
                         value={phoneNumber}
                         onChangeText={onChangeText}
                         placeholder="Phone number"
-                        placeholderTextColor={`${appliedTheme === 'dark' ? 'text-subText' : 'text-white'}`} 
+                        placeholderTextColor={`rgba(251, 253, 255, 0.48)`} 
                     />
                     
                     <Text className={`absolute left-3 top-[27.5px] -translate-y-1/2 text-text-${appliedTheme}`}>
