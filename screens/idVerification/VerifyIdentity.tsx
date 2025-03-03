@@ -11,10 +11,11 @@ import { TouchableOpacity } from 'react-native';
 import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText } from '@/components/ui/actionsheet';
 import SettingItem from '@/components/SettingItems';
 import { Divider } from '@/components/ui/divider';
+import { Props } from '@/types/NavigationTypes';
 
 
 
-const VerifyIdentity = () => {
+const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
     const [showActionSheet, setShowActionSheet] = useState(false);
 
