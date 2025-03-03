@@ -19,7 +19,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("MAIN");
+    const [screenStep , setScreenStep ] = useState("PHONE_NUMBER");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState<any>({});
@@ -49,10 +49,9 @@ const Signup: React.FC<Props> = ({ navigation }) => {
             easing: Easing.ease,
             useNativeDriver: true,
         }).start(() => {
-            // After slide-out animation ends, change the screen step
-            
-        const currentIndex = screens.indexOf(screenStep);
 
+        // After slide-out animation ends, change the screen step
+        const currentIndex = screens.indexOf(screenStep);
         if(newScreenStep === "next")
             setScreenStep(screens[currentIndex + 1]);
         else {
@@ -60,7 +59,6 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                 navigation.navigate("Login");
             else
                 setScreenStep(screens[currentIndex - 1]);
-
         }
     
         // Then, trigger the slide-in animation

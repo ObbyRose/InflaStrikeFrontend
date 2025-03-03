@@ -4,6 +4,7 @@ import { countryCodes } from "@/utils/constants/countries";
 import { Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger } from "../ui/select";
 import { View, Text, TextInput, ScrollView } from 'react-native';
 import { Box } from "../ui/box";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
 
 interface CountryPhoneInputProps {
     phoneNumber: string;
@@ -15,6 +16,7 @@ interface CountryPhoneInputProps {
 }
 
 const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix, error, setError}: CountryPhoneInputProps) => {
+    const { appliedTheme } = useTheme();
     const [selectedCountry, setSelectedCountry] = useState({ code: "+972", label: "Israel", flag: "🇮🇱" });
 
     const onChangeText = (text: string) => {
@@ -40,13 +42,13 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
                     if (country) setSelectedCountry(country);
                 }}
                 >
-                <SelectTrigger className="w-fit border rounded-lg h-[40px]">
+                <SelectTrigger className={`w-fit px-1 border-0 bg-input-${appliedTheme} rounded-lg h-[55px]`}>
                     <SelectInput 
                     placeholder={selectedCountry.flag + " " + selectedCountry.label}
                     value={selectedCountry.flag + " " + selectedCountry.label}
                     pointerEvents="none"
                     />
-                    <SelectIcon className="mr-1" as={ChevronDownIcon} />
+                    <SelectIcon className="mr-2" as={ChevronDownIcon} />
                 </SelectTrigger>
 
                 <SelectPortal>
@@ -73,16 +75,17 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
                 {/* Phone Number Input */}
                 <View className="relative flex-1 min-w-[150px]">
                     <TextInput
+                        className={`rounded-lg bg-input-${appliedTheme} text-text-${appliedTheme} h-[55px]`}
                         keyboardType="phone-pad"
                         maxLength={11}
-                        className="p-2 rounded-lg border border-black h-[40px]"
-                        style={{ paddingLeft: selectedCountry.code.length * 8 + 20 }}
+                        style={{ paddingLeft: selectedCountry.code.length * 8 + 24 }}
                         value={phoneNumber}
                         onChangeText={onChangeText}
                         placeholder="Phone number"
+                        placeholderTextColor={`${appliedTheme === 'dark' ? 'text-subText' : 'text-white'}`} 
                     />
                     
-                    <Text className="absolute left-2 top-[19.1px] -translate-y-1/2">
+                    <Text className={`absolute left-3 top-[27.5px] -translate-y-1/2 text-text-${appliedTheme}`}>
                         {selectedCountry.code + " |"}
                     </Text>
                 </View>
