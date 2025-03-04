@@ -17,17 +17,18 @@ import { BackHandler, ScrollView } from 'react-native'
 import { Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
+import SignupAddress from '@/components/auth/SignupAddress'
 
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("CREATE_PASSWORD");
+    const [screenStep , setScreenStep ] = useState("ADDRESS");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState<any>({});
-    const [ headerStep,  setHeaderStep] = useState(0);
+    const [ headerStep,  setHeaderStep] = useState<number | null>(null);
 
-    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO',     
+    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS',    
         'MAIN', 'VERIFY_EMAIL', 'STATUS1' , 'STATUS2', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
 
     useEffect(() => {
@@ -56,15 +57,25 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
         // After slide-out animation ends, change the screen step
         const currentIndex = screens.indexOf(screenStep);
-        if(newScreenStep === "next")
+        if(newScreenStep === "next"){
             setScreenStep(screens[currentIndex + 1]);
-        else {
+
+            if(screenStep === "CREATE_PASSWORD")
+                setHeaderStep(1);
+            else if(screenStep === "")
+                setHeaderStep(2);
+            else if(screenStep === "")
+                setHeaderStep(3);
+            else
+                setHeaderStep(null);
+
+        } else { // "back"
             if(screenStep === "PHONE_NUMBER")
                 navigation.navigate("Login");
             else
                 setScreenStep(screens[currentIndex - 1]);
 
-            setHeaderStep(prev => prev > 0 ? prev-1 : prev);
+            setHeaderStep(prev => !prev ?  prev : prev === 1 ? null : prev - 1 )          
         }
     
         // Then, trigger the slide-in animation
@@ -130,12 +141,12 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                         { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
                         { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
                         { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
+                        { screenStep === 'ADDRESS' && <SignupAddress handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} />}
 
 
 
                         { screenStep === 'MAIN' && <SignupMain handleScreenChange={handleScreenChange} />}
                         { screenStep === 'VERIFY_EMAIL' && <VerifyEmail handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'STATUS1' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
                         { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
                         { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
                         { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} type={finalData.idMethod}/>}

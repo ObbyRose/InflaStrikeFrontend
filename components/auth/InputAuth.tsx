@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Box } from "../ui/box";
 import { Input, InputField } from "../ui/input";
 import { getIconByString, IC_Eye, IC_EyeOff } from "@/utils/constants/Icons";
-import { KeyboardTypeOptions, Pressable, TextInput } from "react-native";
+import { KeyboardTypeOptions, Pressable, Animated, TextInput } from "react-native";
 import { Text } from "../ui/text";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
+import { cn } from "../ui/cn";
 
 interface InputAuthProps {
     icon?: string;
@@ -16,6 +17,7 @@ interface InputAuthProps {
     maxLength?: number;
     keyboardType?: KeyboardTypeOptions;
     className?: string;
+    classNameInput?: string;
 }
 
 function InputAuth({
@@ -28,11 +30,37 @@ function InputAuth({
     maxLength,
     keyboardType,
     className,
-    }: InputAuthProps) {
+    classNameInput
+}: InputAuthProps) {
     const [showPass, setShowPass] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const IconComponent = getIconByString(icon || "");
     const { appliedTheme } = useTheme();
+    const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
     
+    useEffect(() => {
+        Animated.timing(animatedValue, {
+            toValue: (isFocused || value.length > 0) ? 1 : 0,
+            duration: 200,
+            useNativeDriver: false,
+        }).start();
+    }, [isFocused, value, animatedValue]);
+
+    const labelTop = animatedValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: [20, 6]
+    });
+    
+    const labelLeft = animatedValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: [16, 13]
+    });
+    
+    const labelSize = animatedValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: [16, 12]
+    });
+
     const togglePasswordVisibility = () => {
         setShowPass(!showPass);
     };
@@ -90,12 +118,12 @@ function InputAuth({
     };
 
     const handleCardDateInput = (text: string) => {
+        // Existing card date input logic
         let cleaned = text.replace(/\D/g, "");
         let formatted = "";
         let prevValue = value.replace(/\D/g, "");
     
         if (cleaned.length > prevValue.length) { 
-            // User is typing
             if (cleaned.length >= 2) {
                 let month = cleaned.slice(0, 2);
                 if (parseInt(month) < 1 || parseInt(month) > 12) return;
@@ -107,7 +135,6 @@ function InputAuth({
                 formatted += cleaned.slice(2, 4);
             }
         } else { 
-            // User is deleting
             if (value.endsWith(" / ") && text.length < value.length) {
                 cleaned = cleaned.slice(0, -1);
             }
@@ -126,6 +153,7 @@ function InputAuth({
     };
 
     const handleCardNumberInput = (text: string) => {
+        // Existing card number input logic
         let cleaned = text.replace(/\D/g, "");
         let formatted = "";
         
@@ -151,6 +179,7 @@ function InputAuth({
                 return onChangeText;
         }
     }
+    
     const getInputLength = () => {
         switch(type) {
             case "birthday":
@@ -163,16 +192,7 @@ function InputAuth({
                 return maxLength;
         }
     }
-    const getInputPlaceholder = () => {
-        switch(type) {
-            case "birthday":
-                return "MM / DD / YYYY";
-            case "card date":
-                return "MM / YY";
-            default:
-                return placeholder;
-        }
-    }
+    
     const getInputKeyboard = () => {
         switch(type) {
             case "birthday": case "card date": case "card number":
@@ -182,26 +202,65 @@ function InputAuth({
         }
     }
 
+    const handleFocus = () => setIsFocused(true);
+    const handleBlur = () => setIsFocused(false);
+
     return (
         <Box className={className}>
-        <Input className={`relative rounded-xl h-14 mb-4 bg-input-${appliedTheme}`} isInvalid={!!error}>
-            {IconComponent && <IconComponent className="absolute left-2 w-7 h-7" />}
-            <InputField
-                className={IconComponent ? "px-12" : "pe-12"}
-                keyboardType={getInputKeyboard()}
-                placeholder={getInputPlaceholder()}
-                secureTextEntry={type === "pass" && !showPass}
-                value={value}
-                onChangeText={getInputHandler()}
-                maxLength={getInputLength()}
-            />
-            {type === "pass" && (
-                <Pressable onPress={togglePasswordVisibility} className="absolute right-3">
-                    {showPass ? <IC_Eye className="w-7 h-7" /> : <IC_EyeOff className="w-7 h-7" />}
-                </Pressable>
-            )}
-        </Input>
-        {error && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{error}</Text>}
+            <Input 
+                className={cn(`relative border-0 rounded-xl h-[64px] mb-4 bg-input-${appliedTheme}`, classNameInput)} 
+                // isInvalid={!!error}
+            >
+                {/* Animated floating label */}
+                <Animated.View
+                pointerEvents="none"
+                    style={{
+                        position: 'absolute',
+                        top: labelTop,
+                        left: labelLeft,
+                        zIndex: 10,
+                        backgroundColor: 'transparent'
+                    }}
+                >
+                    <Animated.Text
+                        className={isFocused ? `text-text-${appliedTheme}` : `text-inputPlaceholderText-${appliedTheme}`}
+                        style={{
+                            fontSize: labelSize,
+                        }}
+                    >
+                        {placeholder}
+                    </Animated.Text>
+                </Animated.View>
+                
+                
+                <InputField
+                    className={`h-full w-full pl-5 pr-12 text-lg text-text-${appliedTheme}`}
+                    keyboardType={getInputKeyboard()}
+                    secureTextEntry={type === "pass" && !showPass}
+                    value={value}
+                    onChangeText={getInputHandler()}
+                    maxLength={getInputLength()}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    style={{
+                        paddingTop: 15,
+                    }}
+                />
+
+                {type === "pass" ?
+                    <Pressable onPress={togglePasswordVisibility} className="absolute right-3">
+                        {showPass ? 
+                        <IC_Eye className="w-7 h-7" color={appliedTheme === "dark" ? "white": ""}/> 
+                        : 
+                        <IC_EyeOff className="w-7 h-7" color={appliedTheme === "dark" ? "white": ""}/>}
+                    </Pressable>
+                :
+                <>{IconComponent && <IconComponent className="absolute right-3 w-6 h-6" 
+                    color={appliedTheme === "dark" ? "white": ""} />}</>
+                }
+
+            </Input>
+            {error && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{error}</Text>}
         </Box>
     );
 }

@@ -7,6 +7,7 @@ import ButtonsTrain from "@/components/ButtonsTrain";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { IC_Swap } from "@/utils/constants/Icons";
 import BackHeader from "@/components/BackHeader";
+import GooglePlacesInput from "@/components/auth/GooglePlacesInput";
 
 const ExchangeScreen = () => {
     const [activeTab, setActiveTab] = useState("Limit");
@@ -83,6 +84,7 @@ const ExchangeScreen = () => {
                     </Button>
                 </Box>
             </Box>
+
         </Box>
     );
 };
