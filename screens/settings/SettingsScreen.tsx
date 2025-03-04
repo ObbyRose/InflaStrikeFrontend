@@ -69,7 +69,9 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           </Text>
           <SettingItem title="Personal Information" IconComponent={IC_Profile_V2} />
           <Divider />
-          <SettingItem title="Bank & Cards" IconComponent={IC_Card_V2} />
+          <TouchableOpacity onPress={() => navigation.navigate('PaymentMethod')}>
+            <SettingItem title="Bank & Cards" IconComponent={IC_Card_V2} />
+          </TouchableOpacity>
           <Divider />
           <SettingItem title="Notifications" IconComponent={IC_Bell_V2} />
         </Box>
