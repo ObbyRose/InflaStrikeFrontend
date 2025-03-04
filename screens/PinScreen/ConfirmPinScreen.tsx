@@ -1,148 +1,117 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, Vibration } from 'react-native';
-import * as LocalAuthentication from 'expo-local-authentication';
+import { TouchableOpacity, Vibration } from 'react-native';
 import usePinStore from '../../context/pinStore';
 import { VStack } from '@/components/ui/vstack';
-import { Text } from '@/components/ui/text';
 import { HStack } from '@/components/ui/hstack';
 import { Box } from '@/components/ui/box';
-import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import { Props } from '@/types/NavigationTypes';
-import { IC_FaceID, IC_Fingerprint } from '@/utils/constants/Icons';
 import BackHeader from '@/components/BackHeader';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
-
-const { height } = Dimensions.get('window');
+import { Props } from '@/types/NavigationTypes';
 
 const ConfirmPinScreen: React.FC<Props> = ({ navigation, route }) => {
-    const { pin, setPin, clearPin } = usePinStore();
-    const [message, setMessage] = useState<string>('');
+    const { deleteLastDigit, clearPin } = usePinStore();
     const { appliedTheme } = useTheme();
-    const { authType, authData } = route.params; // Retrieve stored PIN or Fingerprint authentication
+    
+    const { createdPin } = route.params;
+    const [enteredPin, setEnteredPin] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
-        if (authType === 'fingerprint') {
-            handleFingerprintConfirmation(); // Automatically prompt fingerprint authentication
+        console.log('🚀 Received PIN (createdPin):', createdPin);
+        console.log('📌 Entered PIN State:', enteredPin);
+
+        if (!createdPin) {
+            setMessage('❌ Error: No PIN received. Try again.');
         }
-    }, []);
+    }, [createdPin, enteredPin]);
 
+    // ✅ Automatically confirm when 4 digits are entered
     useEffect(() => {
-        if (authType === 'pin' && pin.length === 4) {
+        if (enteredPin.length === 4) {
             handlePinConfirmation();
         }
-    }, [pin]);
+    }, [enteredPin]);
 
-    const handlePinConfirmation = () => {
-        if (pin === authData) {
-            setMessage('PIN Confirmed!');
-            setTimeout(() => {
-                navigation.navigate('MainApp', { screen: 'Home' });
-            }, 500);
-        } else {
-            setMessage('PINs do not match. Try again.');
-            Vibration.vibrate();
-            clearPin();
+    const handlePinPress = (digit: string) => {
+        if (digit === '<') {
+            setEnteredPin((prev) => prev.slice(0, -1)); // Remove last digit
+        } else if (enteredPin.length < 4) {
+            setEnteredPin((prev) => prev + digit);
         }
     };
 
-    const handleFingerprintConfirmation = async () => {
-        const hasHardware = await LocalAuthentication.hasHardwareAsync();
-        const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+    const handlePinConfirmation = () => {
+        console.log('🔍 Entered PIN:', enteredPin);
+        console.log('🔐 Expected PIN (createdPin):', createdPin);
 
-        if (!hasHardware || !isEnrolled) {
-            setMessage('Fingerprint authentication not available.');
-            return;
-        }
-
-        const result = await LocalAuthentication.authenticateAsync({
-            promptMessage: 'Confirm Fingerprint',
-            fallbackLabel: 'Use PIN instead',
-        });
-
-        if (result.success && authType === 'fingerprint' && authData === 'fingerprint') {
-            setMessage('Fingerprint Confirmed!');
+        if (enteredPin === createdPin) {
+            setMessage('✅ PIN Confirmed!');
             setTimeout(() => {
-                navigation.navigate('MainApp', { screen: 'Home' });
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'MainApp', params: { screen: 'Home' } }],
+                });
+
+                setTimeout(() => {
+                    clearPin();
+                }, 200);
             }, 500);
         } else {
-            setMessage('Fingerprint authentication failed.');
+            setMessage('❌ PINs do not match. Try again.');
             Vibration.vibrate();
+            setTimeout(() => setEnteredPin(''), 300);
         }
     };
 
     return (
         <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
-            <VStack style={{ height }}>
+            <Box className="p-4 h-full flex">
                 <BackHeader title="Confirm PIN" />
-                {/* Top Section - Title */}
-                <VStack className="items-center mt-20">
-                    <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>
-                        {authType === 'fingerprint' ? 'Confirm Fingerprint' : 'Confirm PIN'}
-                    </Text>
-                    <Text className={`text-subText-${appliedTheme} mt-2`}>
-                        {authType === 'fingerprint' ? 'Scan your fingerprint again' : 'Re-enter your PIN'}
-                    </Text>
-                </VStack>
+                <VStack className="flex-1 items-center justify-between">
+                    
+                    {/* Title */}
+                    <VStack className="items-center">
+                        <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Confirm PIN</Text>
+                        <Text className={`text-subText-${appliedTheme} mt-2`}>Re-enter your PIN</Text>
+                    </VStack>
 
-                {/* Middle Section - PIN Indicator (Only for PIN confirmation) */}
-                {authType === 'pin' && (
-                    <HStack className="justify-center gap-4 mt-12">
-                        {[...Array(4)].map((_, i) => (
-                            <Box
-                                key={i}
-                                className={`w-16 h-16 bg-card-${appliedTheme} ${
-                                    pin.length > i ? `bg-button-${appliedTheme}` : 'bg-white'
-                                }`}
-                                />
+                    {/* PIN Input Display */}
+                    <HStack className="gap-4 justify-center">
+                        {[0, 1, 2, 3].map((index) => (
+                            <Box key={index} className="w-14 h-16 border-2 rounded-lg flex items-center justify-center bg-card-dark">
+                                {enteredPin.length > index && <Box className="w-3 h-3 bg-white rounded-full" />}
+                            </Box>
                         ))}
                     </HStack>
-                )}
 
-                {/* Bottom Section - Numpad (Only for PIN confirmation) */}
-                {authType === 'pin' && (
-                    <VStack className="space-y-4 pb-10 gap-6 flex-1 justify-center">
+                    {/* Number Pad */}
+                    <VStack className="space-y-6 mt-6">
                         {[
-                            [1, 2, 3],
-                            [4, 5, 6],
-                            [7, 8, 9],
-                            ['face', 0, 'fingerprint'],
+                            ['1', '2', '3'],
+                            ['4', '5', '6'],
+                            ['7', '8', '9'],
+                            ['', '0', '<'],
                         ].map((row, rowIndex) => (
-                            <HStack key={rowIndex} className="justify-center gap-6">
-                                {row.map((num, index) => (
-                                    <Button
+                            <HStack key={rowIndex} className="justify-center gap-14">
+                                {row.map((digit, index) => (
+                                    <TouchableOpacity
                                         key={index}
-                                        className="w-20 h-20 bg-white border-purple-500 rounded-full items-center justify-center"
-                                        onPress={() => {
-                                            if (typeof num === 'number') setPin(num.toString());
-                                            if (num === 'face') console.log('Face ID Triggered');
-                                            if (num === 'fingerprint') handleFingerprintConfirmation();
-                                        }}
-                                        >
-                                        {num === 'fingerprint' ? (
-                                            <IC_Fingerprint className="text-2xl text-button-light" />
-                                        ) : num === 'face' ? (
-                                            <IC_FaceID className="text-2xl text-button-light" />
-                                        ) : (
-                                            <Text className="text-2xl font-bold text-button-light">
-                                                {typeof num === 'number' ? num : ''}
-                                            </Text>
-                                        )}
-                                    </Button>
+                                        onPress={() => handlePinPress(digit)}
+                                        className="w-20 h-20 rounded-lg flex items-center justify-center"
+                                    >
+                                        <Text className={`text-3xl font-semibold text-text-${appliedTheme}`}>{digit}</Text>
+                                    </TouchableOpacity>
                                 ))}
                             </HStack>
                         ))}
                     </VStack>
-                )}
-
-                <VStack className="items-center pb-6">
-                    {message && (
-                        <Text className={message.includes('Confirmed') ? 'text-green-500' : 'text-red-500'}>
-                            {message}
-                        </Text>
-                    )}
+                        <Box className='mt-4'></Box>
+                    {/* Error Message */}
+                    {message && <Text className={`${message.includes('Confirmed') ? 'text-green-500' : 'text-red-500'}`}>{message}</Text>}
                 </VStack>
-            </VStack>
+            </Box>
         </MyLinearGradient>
     );
 };

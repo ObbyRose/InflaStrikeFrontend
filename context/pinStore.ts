@@ -13,11 +13,9 @@ const usePinStore = create<PinState>((set, get) => ({
         set((state) => {
             if (state.pin.length < 4) {
                 const newPin = state.pin + digit;
-                setTimeout(() => {
-                    if (newPin.length === 4 && onComplete) {
-                        onComplete(newPin); // Now correctly typed
-                    }
-                }, 0); // Ensure state is updated before checking
+                if (newPin.length === 4 && onComplete) {
+                    setTimeout(() => onComplete(newPin), 0);
+                }
                 return { pin: newPin };
             }
             return state;
