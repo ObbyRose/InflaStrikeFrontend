@@ -17,7 +17,11 @@ module.exports = {
     },
     {
       pattern:
-      /^(bg|text|border|fill)-(subTextGray|badge|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+      /^(bg|text|border|fill)-(badge|subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+    },
+    {
+      pattern:
+      /^(bg|text|border|fill)-(orange|purple|cyan)-(50|100|200|300|400|500|600|700|800|900)$/,
     },
   ],
   theme: {
