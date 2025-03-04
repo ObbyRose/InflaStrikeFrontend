@@ -9,9 +9,12 @@ import { VStack } from '@/components/ui/vstack';
 import { Props } from '@/types/NavigationTypes';
 import {
   IC_Arrow_Right,
+  IC_Bell_V2,
   IC_Budget,
+  IC_Card_V2,
   IC_Invite,
   IC_Piggy_Bank,
+  IC_Profile_V2,
   IC_Setting,
   IC_Settings,
   IC_Subscription,
@@ -26,6 +29,7 @@ interface ProfileScreenProps extends Props {}
 
 export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   const { appliedTheme } = useTheme();
+  // const appliedTheme = 'dark';
   const user = {
     name: 'John Abraham',
     username: '$dylanrobinson',
@@ -34,21 +38,21 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   };
   const thingToDo = [
     {
-      icon: '',
+      icon: IC_Card_V2,
       header: 'Verify your identity #1',
       description: 'Take a government ID & selfie photo to get verified',
       actionText: 'Verify now',
       actionFunction: () => {},
     },
     {
-      icon: '',
+      icon: IC_Profile_V2,
       header: 'Verify your identity #2',
       description: 'Take a government ID & selfie photo to get verified',
       actionText: 'Verify now',
       actionFunction: () => {},
     },
     {
-      icon: '',
+      icon: IC_Bell_V2,
       header: 'Verify your identity #3',
       description: 'Take a government ID & selfie photo to get verified',
       actionText: 'Verify now',
@@ -56,16 +60,14 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
     },
   ];
 
-  // const iconsColor = appliedTheme === 'dark' ? '#fff' : '#000';
-  const iconsColor = '#fff';
   return (
-    <Box>
+    <Box className="mb-[210px] h-full">
       <MyLinearGradient type="background" color="blue">
-        <Box className="flex h-[375px] items-center  p-4">
+        <Box className="flex h-[50%] items-center  p-4">
           {/* back and setting box */}
           <Box className="flex w-full flex-row justify-between">
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Ionicons name="arrow-back" size={30} color={`${iconsColor}`} />
+              <Ionicons name="arrow-back" size={30} color={`white`} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => Alert.alert('a function will be added soon')}>
               {/* <Text className={`text-[30px] text-iconGeneral-${appliedTheme}`}> */}
@@ -74,7 +76,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
           </Box>
 
           {/* avatar, name and username box*/}
-          <Box className="flex w-full items-center justify-center gap-4">
+          <Box className="flex w-full items-center justify-center gap-4  p-6">
             <Avatar size="2xl">
               <AvatarFallbackText>{user.name}</AvatarFallbackText>
               <AvatarImage
@@ -83,15 +85,13 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
                 }}
               />
             </Avatar>
-            <Text className={`text-text-${appliedTheme} text-[24px] font-bold`}>{user.name}</Text>
-            <Text className={`text-subText-${appliedTheme} text-[15px] font-medium`}>
-              {user.username}
-            </Text>
+            <Text className={`text-[24px] font-bold text-white`}>{user.name}</Text>
+            <Text className={`text-[15px] font-medium text-[#f6f7f8]`}>{user.username}</Text>
           </Box>
         </Box>
       </MyLinearGradient>
 
-      <ScrollView className={` w-full p-2`}>
+      <ScrollView className={`mt-[60px] w-full p-2`}>
         {/* more features box */}
         <Box className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
           <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
@@ -118,7 +118,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
       </ScrollView>
 
       {/* things to do component */}
-      <Box className="absolute top-[35%] z-50 flex h-fit w-full items-center justify-center">
+      <Box className="absolute top-[33%] z-50 flex h-fit w-full items-center justify-center">
         <ThingToDo thingToDo={thingToDo} />
       </Box>
     </Box>

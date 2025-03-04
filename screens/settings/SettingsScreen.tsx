@@ -47,12 +47,12 @@ import { Text } from '@/components/ui/text';
 import PurpleSwitch from '@/components/PurpleSwitch';
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
-  // const { appliedTheme } = useTheme();
-  const appliedTheme = 'dark';
+  const { appliedTheme } = useTheme();
+  // const appliedTheme = 'dark';
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
 
   return (
-    <Box>
+    <Box className="h-full">
       <MyLinearGradient type="background" color="blue">
         <BackHeader />
 

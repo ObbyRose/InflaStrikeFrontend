@@ -9,7 +9,7 @@ import { TouchableOpacity } from 'react-native';
 
 interface ThingToDoProps {
   thingToDo: {
-    icon: string;
+    icon: React.ElementType;
     header: string;
     description: string;
     actionText: string;
@@ -20,6 +20,7 @@ interface ThingToDoProps {
 export default function ThingToDo({ thingToDo }: ThingToDoProps) {
   const { appliedTheme } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const CurrentIcon = thingToDo[currentIndex].icon;
 
   function handleNextMission() {
     if (currentIndex === thingToDo.length - 1) {
@@ -30,18 +31,16 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
 
   return (
     <Box className="flex w-[90%] items-center justify-center">
-      <Box className="mb-2 flex w-full flex-row justify-between p-2">
-        <Text className={`text-[15px] font-semibold text-text-${appliedTheme} p-2`}>
-          Things to do
-        </Text>
+      <Box className=" flex w-full flex-row justify-between p-2">
+        <Text className={`p-2 text-[15px] font-semibold text-white`}>Things to do</Text>
         {thingToDo.length > 1 && (
-          <Text className={`text-text-${appliedTheme} rounded-full bg-[#2d363a45] p-2`}>
+          <Text className={`rounded-full bg-[#ffffff29] p-2 text-white`}>
             {currentIndex + 1} / {thingToDo.length}
           </Text>
         )}
       </Box>
       <Box className={`bg-card-${appliedTheme}  flex h-fit w-full flex-row gap-3 rounded-xl p-2`}>
-        <IC_Identity className="h-[48px] w-[48px]" />
+        <CurrentIcon className="h-[48px] w-[48px]" />
 
         <Box className="flex h-fit w-[75%] gap-3">
           <Text className={`text-text-${appliedTheme} text-[17px] font-semibold`}>
@@ -52,7 +51,7 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
           </Text>
           <MyLinearGradient type="button" color="purple">
             <TouchableOpacity onPress={thingToDo[currentIndex].actionFunction}>
-              <Text className={`text-text-${appliedTheme}`}>
+              <Text className={`text-[15px] font-medium text-white`}>
                 {thingToDo[currentIndex].actionText}
               </Text>
             </TouchableOpacity>
@@ -61,7 +60,7 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
       </Box>
       {thingToDo.length > 1 && (
         <TouchableOpacity
-          className={`h-4  w-[90%] rounded-b-xl bg-gray-500`}
+          className={`h-4 w-[90%] rounded-b-xl bg-gray-500`}
           onPress={handleNextMission}>
           <Text> </Text>
         </TouchableOpacity>
