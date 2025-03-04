@@ -3,6 +3,7 @@ import SettingItem from '@/components/SettingItems';
 import ThingToDo from '@/components/ThingToDo';
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
 import { Box } from '@/components/ui/box';
+import { Divider } from '@/components/ui/divider';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
 import { Props } from '@/types/NavigationTypes';
@@ -95,7 +96,11 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
         <Box className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
           <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
           <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
+          <Divider />
+
           <SettingItem title="Budgets" IconComponent={IC_Budget} />
+          <Divider />
+
           <SettingItem title="Bundles" IconComponent={IC_Subscription} />
         </Box>
 
@@ -103,7 +108,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
         <Box className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
           {/* invite new friends box */}
           <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
-
+          <Divider />
           {/* setting box */}
           <TouchableOpacity
             onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>

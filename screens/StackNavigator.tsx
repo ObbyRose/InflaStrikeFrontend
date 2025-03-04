@@ -50,21 +50,25 @@ const SettingsNavigator = () => (
     <SettingsStack.Screen name="SecuritySettings" component={SecuritySettingsScreen} />
     <SettingsStack.Screen name="PinSettings" component={PinSettingsScreen} />
     <SettingsStack.Screen name="PasswordSettings" component={PasswordSettings} />
-  <SettingsStack.Screen name="CreatePin" component={CreatePinScreen} />
-  <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
-  <SettingsStack.Screen name="EnterChangePin" component={EnterChangePinScreen} />
-  <SettingsStack.Screen name="ChangePin" component={ChangePinScreen} />
+    <SettingsStack.Screen name="CreatePin" component={CreatePinScreen} />
+    <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
+    <SettingsStack.Screen name="EnterChangePin" component={EnterChangePinScreen} />
+    <SettingsStack.Screen name="ChangePin" component={ChangePinScreen} />
   </SettingsStack.Navigator>
 );
 
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName="SettingsStack">
         {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
-        <Stack.Screen name="VerifyIdentity" component={VerifyIdentity} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="VerifyIdentity"
+          component={VerifyIdentity}
+          options={{ headerShown: false }}
+        />
 
         {/* Main App with Layout */}
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
@@ -89,7 +93,11 @@ const StackNavigator = () => {
         </Stack.Screen>
 
         {/* Separate Settings Stack (Not Wrapped by Layout) */}
-        <Stack.Screen name="SettingsStack" component={SettingsNavigator} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="SettingsStack"
+          component={SettingsNavigator}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
