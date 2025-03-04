@@ -1,36 +1,56 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Box } from '@/components/ui/box'
-import { Divider } from '@/components/ui/divider'
-import { ChevronRight } from 'lucide-react-native'
-import { Icon } from '@/components/ui/icon'
-import { Props } from '@/types/NavigationTypes'
-import { useTheme } from '@/utils/Themes/ThemeProvider'
-import BackHeader from '@/components/BackHeader'
+import React, { useState } from 'react';
+import { Box } from '@/components/ui/box';
+import { Divider } from '@/components/ui/divider';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
+import { IC_FaceID_V2, IC_Fingerprint, IC_Password_V2, IC_PIN_V2 } from '@/utils/constants/Icons';
+import { Props } from '@/types/NavigationTypes';
+import { ScrollView, Switch, TouchableOpacity } from 'react-native';
+import BackHeader from '@/components/BackHeader';
+import MyLinearGradient from '@/components/gradient/MyLinearGradient';
+import { Text } from '@/components/ui/text';
+import PurpleSwitch from '@/components/PurpleSwitch';
+import SettingItem from '@/components/SettingItems';
 
-const PinSettingsScreen:React.FC<Props> = ({ navigation }) => {
+const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
+    const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
+
     return (
-        <Box className={`flex gap-4 p-4 h-full bg-background-${appliedTheme}`}>
-            <BackHeader title='PIN / Face ID Settings' />
-            <TouchableOpacity onPress={() => navigation.navigate('CreatePin')} activeOpacity={0.7}>
-                <Box className='flex justify-between flex-row items-center'>
-                    <Text className='font-extrabold text-lg text-black'>Create PIN / Face ID</Text>
-                    <Icon as={ChevronRight} />
-                </Box>
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
-            
-            <TouchableOpacity onPress={() => navigation.navigate('EnterChangePin')} activeOpacity={0.7}>
-                <Box className='flex justify-between flex-row items-center'>
-                    <Text className='font-extrabold text-lg text-black'>Change PIN / Face ID</Text>
-                    <Icon as={ChevronRight} />
-                </Box>
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
+        <Box className="h-full">
+            <MyLinearGradient type="background" color="blue">
+                <BackHeader />
 
+                <Box className="flex h-[75px] w-full justify-center p-4">
+                    <Text className={`relative -top-6 text-[24px] font-bold text-white`}>Pin Settings</Text>
+                </Box>
+            </MyLinearGradient>
+
+            <ScrollView className={`relative -top-6 flex w-full gap-3 rounded-t-3xl bg-card-${appliedTheme}`}>
+                <Box className={`flex gap-2 bg-card-${appliedTheme} w-full p-4`}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ChangePin')}>
+                        <SettingItem title="Change PIN" IconComponent={IC_Password_V2} />
+                    </TouchableOpacity>
+                    <Divider />
+
+                    <TouchableOpacity onPress={() => navigation.navigate('CreatePin')}>
+                        <SettingItem title="Create PIN" IconComponent={IC_PIN_V2} />
+                    </TouchableOpacity>
+                    <Divider />
+
+                    <TouchableOpacity onPress={() => navigation.navigate('FaceId')}>
+                        <SettingItem title="Add / Change Face ID" IconComponent={IC_FaceID_V2} />
+                    </TouchableOpacity>
+                    <Divider />
+
+                    <TouchableOpacity onPress={() => navigation.navigate('TouchId')}>
+                        <SettingItem title="Add / Change Touch ID" IconComponent={IC_Fingerprint} />
+                    </TouchableOpacity>
+                    <Divider />
+
+                </Box>
+            </ScrollView>
         </Box>
-    )
-}
+    );
+};
 
-export default PinSettingsScreen
+export default PinSettingsScreen;
