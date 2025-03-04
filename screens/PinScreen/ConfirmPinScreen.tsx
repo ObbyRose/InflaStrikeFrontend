@@ -51,7 +51,7 @@ const ConfirmPinScreen: React.FC<Props> = ({ navigation, route }) => {
             setTimeout(() => {
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: 'MainApp', params: { screen: 'Home' } }],
+                    routes: [{ name: 'TouchId' }],
                 });
 
                 setTimeout(() => {

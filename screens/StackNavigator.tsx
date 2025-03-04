@@ -33,6 +33,8 @@ import EnterChangePinScreen from './PinScreen/EnterChangePinScreen';
 import testscreen from './testscreen';
 import VerifyIdentity from './idVerification/VerifyIdentity';
 import ConfirmGovernmentId from './idVerification/ConfirmGovernmentId';
+import TouchId from './idVerification/TouchId';
+import FaceId from './idVerification/FaceId';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -55,6 +57,8 @@ const SettingsNavigator = () => (
   <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
   <SettingsStack.Screen name="EnterChangePin" component={EnterChangePinScreen} />
   <SettingsStack.Screen name="ChangePin" component={ChangePinScreen} />
+  <SettingsStack.Screen name="TouchId" component={TouchId} />
+  <SettingsStack.Screen name="FaceId" component={FaceId} />
   </SettingsStack.Navigator>
 );
 

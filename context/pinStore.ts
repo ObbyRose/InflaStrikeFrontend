@@ -2,13 +2,16 @@ import { create } from 'zustand';
 
 interface PinState {
     pin: string;
+    biometricAuth: boolean;
     setPin: (digit: string, onComplete?: (updatedPin: string) => void) => void;
     clearPin: () => void;
     deleteLastDigit: () => void;
+    setBiometricAuth: (status: boolean) => void;
 }
 
-const usePinStore = create<PinState>((set, get) => ({
+const usePinStore = create<PinState>((set) => ({
     pin: '',
+    biometricAuth: false,
     setPin: (digit, onComplete) =>
         set((state) => {
             if (state.pin.length < 4) {
@@ -25,6 +28,7 @@ const usePinStore = create<PinState>((set, get) => ({
         set((state) => ({
             pin: state.pin.slice(0, -1),
         })),
+    setBiometricAuth: (status) => set({ biometricAuth: status }),
 }));
 
 export default usePinStore;
