@@ -57,7 +57,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         <BackHeader />
 
         <Box className="flex h-[75px] w-full justify-center p-4">
-          <Text className={`relative -top-6 text-[28px] font-bold text-white`}>Setting</Text>
+          <Text className={`relative -top-6 text-[28px] font-bold text-white`}>Settings</Text>
         </Box>
       </MyLinearGradient>
 
