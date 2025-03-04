@@ -33,7 +33,7 @@ const Layout = ({ children, navigation }: LayoutProps) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
             {/* Status Bar */}
-            <StatusBar barStyle="light-content" backgroundColor="#4A3EF6" />
+            <StatusBar barStyle="light-content" backgroundColor="#e8ebf5" />
 
             {/* Main Rendered Screens */}
             <View style={{ flex: 1 }}>{children}</View>

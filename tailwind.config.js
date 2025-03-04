@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       pattern:
-      /^(bg|text|border|fill)-(badge|subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+      /^(bg|text|border|fill)-(background|badge|subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
     },
     {
       pattern:
@@ -61,8 +61,8 @@ module.exports = {
           dark: '#161C2C',
         },
         inputPlaceholderText: {
-          light: 'rgba(251, 253, 255, 0.48)',
-          dark: 'rgba(251, 253, 255, 0.48)',
+          light: '#888b94',
+          dark: '#888b94',
         },
 
 

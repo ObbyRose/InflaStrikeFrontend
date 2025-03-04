@@ -22,6 +22,7 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
     const isRightLength = pass.length >= 8;
     const hasUppercaseOrSymbol = /[A-Z!@#$%^&*(),.?":{}|<>]/.test(pass);
     const hasNumber = /[0-9]/.test(pass);
+    const isActive = hasUppercaseOrSymbol && isRightLength && hasNumber
 
     const handlePassSubmit = () => {
         handleScreenChange('next', { pass })
@@ -60,17 +61,17 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
                         <Box className='flex-row gap-3 items-center'>
                             <IC_Vi className='w-5 h-5 justify-center items-center' 
                                 color={isRightLength ? "green" : ""} />
-                            <Text>Has at least 8 characters</Text>
+                            <Text className={`text-subText-${appliedTheme}`}>Has at least 8 characters</Text>
                         </Box>
                         <Box className='flex-row gap-3 items-center'>
                             <IC_Vi className='w-5 h-5 justify-center items-center' 
                                 color={hasUppercaseOrSymbol ? 'green' : ''} />
-                            <Text>Has an uppercase letter or symbol</Text>
+                            <Text className={`text-subText-${appliedTheme}`}>Has an uppercase letter or symbol</Text>
                         </Box>
                         <Box className='flex-row gap-3 items-center'>
                             <IC_Vi className='w-5 h-5 justify-center items-center' 
                                 color={hasNumber ? 'green' : ''} />
-                            <Text>Has a number</Text>
+                            <Text className={`text-subText-${appliedTheme}`}>Has a number</Text>
                         </Box>
                     </Box>
                 </Box>
@@ -79,15 +80,15 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
             {/* Buttons */}
             <Box className='gap-5'>
                 <MyLinearGradient type='button' 
-                    color={ hasUppercaseOrSymbol && isRightLength && hasNumber ? 'purple' : "disabled-button"}
+                    color={ isActive ? 'purple' : "disabled-button"}
                 >
                     <Button 
-                    onPress={() => handlePassSubmit()} 
+                    onPress={() => isActive ? handlePassSubmit() : null} 
                     className='w-full'
                     style={{ backgroundColor: 'initial' }}
                     >
                         <ButtonText 
-                        className={ hasUppercaseOrSymbol && isRightLength && hasNumber ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
+                        className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                             Continue
                         </ButtonText>
                     </Button>

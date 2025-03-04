@@ -6,115 +6,103 @@ import { Button, ButtonSpinner, ButtonText } from '../ui/button'
 import { useFormInput } from '@/hooks/useFormInput'
 import { SignUpScreensProps } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
-import { validateAndConvertBirthday } from '@/utils/functions/help'
+import { convertBirthday } from '@/utils/functions/help'
 import GooglePlacesInput from './GooglePlacesInput'
+import MyLinearGradient from '../gradient/MyLinearGradient'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {
-    setHeaderStep: React.Dispatch<React.SetStateAction<number>>;
+    setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 function SignupPersonalInformation({ handleScreenChange, setHeaderStep }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
-    const [address, setAddress] = useState({});
-    const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
+    const { values, errors, handleInputChange } = useFormInput({
+        fName: '',
+        lName: '',
         birthday: '',
+        ssn: '',
         api: ''
     });
 
-    const { birthday } = values;
+    const { fName, lName, birthday, ssn } = values;
+    const isActive = fName.trim() && lName.trim() && birthday.length === 14 && ssn.length === 4;
 
-    useEffect(() => {
-        setHeaderStep(prev => (prev !== 1 ? 1 : prev));
-    }, []);
+    useEffect(() => setHeaderStep(prev => prev !== 1 ? 1: prev), [])
     
     function handleSubmit() {
-        let valid = true;
-        let newErrors = { birthday: ""};
-        let birthdayDate = null;
+        setIsLoading(true);
 
-        if(!birthday.trim()) {
-            newErrors.birthday = "birthday is required.";
-            valid = false;
-        } else {
-            birthdayDate = validateAndConvertBirthday(birthday);
-            if (!birthdayDate) {
-                newErrors.birthday = "birthday format is invalid.";
-                valid = false;
-            }
-        }
-
-        setErrorByFields(newErrors)
-
-        if (valid) {
-            setIsLoading(true);
-            setTimeout(() => { 
-                setIsLoading(false);
-                handleScreenChange('next', { 
-                    birthday: birthdayDate?.toLocaleDateString("en-US"), 
-                    address });
-            }, 1000);
-        }
+        setTimeout(() => {
+            setIsLoading(false);
+            handleScreenChange('next', {
+                birthday: convertBirthday(birthday)?.toLocaleDateString("en-US"), 
+                fName, lName, ssn
+            });
+        }, 1000);
     }
 
     return (
     <Box className='flex-1 justify-between'>
         {/* Title */}
-        <Box className='mb-10 gap-2'>
-            <Text className='text-4xl text-black font-bold mb-5'>Personal information</Text>
+        <Box className='mb-10 gap-7'>
+            <Box className='gap-2'>
+                <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Personal info</Text>
+                <Text className={`text-subText-${appliedTheme} text-lg`}>
+                    We ask for your personal information to verify your application details.
+                </Text>
+            </Box>
             {/* Inputs */}
-            <Text>Birthday</Text>
-            <InputAuth 
-                type='birthday'
-                value={birthday}
-                onChangeText={(val) => handleInputChange("birthday", val)}
-                error={errors.birthday}
-            />
-            <Text>Address</Text>
+            <Box className='gap-2'>
+                <InputAuth 
+                    icon="IC_Person" 
+                    placeholder='First Name'
+                    value={fName}
+                    onChangeText={(val) => handleInputChange("fName", val)}
+                />
+                <InputAuth 
+                    icon="IC_Person" 
+                    placeholder='Last Name'
+                    value={lName}
+                    onChangeText={(val) => handleInputChange("lName", val)}
+                />
+                <InputAuth
+                    icon="IC_Lock"
+                    type='birthday'
+                    placeholder='Date of birth ( MM / DD / YYYY )'
+                    value={birthday}
+                    onChangeText={(val) => handleInputChange("birthday", val)}
+                />
+                <InputAuth 
+                    icon="IC_Lock" 
+                    placeholder='Social security number (last 4 digits)'
+                    keyboardType='numeric'
+                    maxLength={4}
+                    value={ssn}
+                    onChangeText={(val) => handleInputChange("ssn", val)}
+                />
+                <Text className={`text-subTextGray-${appliedTheme} text-[12px]`}>
+                    We use 128-bit encryption for security, and this is only used for identity verification purpose.
+                </Text>
+            </Box>
 
-            <GooglePlacesInput setAddress={setAddress}/>
-            {/* <InputAuth 
-                placeholder='Residential address'
-                value={address}
-                onChangeText={(val) => handleInputChange("address", val)}
-                error={errors.address}
-            />
-            <InputAuth 
-                placeholder='Apartment number'
-                maxLength={10}
-                value={apartmentNumber}
-                onChangeText={(val) => handleInputChange("apartmentNumber", val)}
-                error={errors.apartmentNumber}
-            />
-            <InputAuth 
-                placeholder='City or town' 
-                value={city}
-                onChangeText={(val) => handleInputChange("city", val)}
-                error={errors.city}
-            />
-            <InputAuth 
-                placeholder='Postal code' 
-                keyboardType='numeric'
-                maxLength={10}
-                value={postal}
-                onChangeText={(val) => handleInputChange("postal", val)}
-                error={errors.postal}
-            /> */}
-
-            <Text className={`text-gray-${appliedTheme} text-[12px]`}>
-            We use 128-bit encryption for added security, and this information is only used for identity verification purposes.
-            </Text>
+            {/* <GooglePlacesInput setAddress={setAddress}/> */}
 
             { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
         </Box>
+
         {/* Submit Button */}
-        <Box>
-            <Button variant={`rounded-solid-${appliedTheme}`} className="h-fit"
-            onPress={handleSubmit}
+        <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
+            <Button 
+                onPress={() => isActive ? handleSubmit() : null} 
+                className='w-full'
+                style={{ backgroundColor: 'initial' }}
             >
-                <ButtonText className="text-white">{isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}</ButtonText>
+                <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
+                    {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
+                    </ButtonText>
             </Button>
-        </Box>
+        </MyLinearGradient>
     </Box>
     )
 }

@@ -8,7 +8,7 @@ import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Text } from "../ui/text";
 
 interface BackAuthProps extends SignUpScreensProps{
-    headerStep?: number;
+    headerStep?: number | null;
 }
 function BackAuth({ handleScreenChange, headerStep}: BackAuthProps) {
     const { appliedTheme } = useTheme();
@@ -18,7 +18,7 @@ function BackAuth({ handleScreenChange, headerStep}: BackAuthProps) {
 
     return (
         <SafeAreaView>
-            <Box className={`flex-row justify-between p-4 bg-background-${appliedTheme}`}>
+            <Box className={`flex-row justify-between p-4`}>
                 <TouchableOpacity
                     className="self-start p-2"
                     onPress={() => handleBackPress()}
@@ -29,7 +29,7 @@ function BackAuth({ handleScreenChange, headerStep}: BackAuthProps) {
 
                 {headerStep && 
                 <Box className={`items-center justify-center rounded-full p-3 bg-card-${appliedTheme}`}>
-                    <Text className={`font-bold text-text-${appliedTheme}`}>
+                    <Text className={`font-semibold text-text-${appliedTheme}`}>
                         {`Step ${headerStep} of 3`}
                     </Text>
                 </Box>
