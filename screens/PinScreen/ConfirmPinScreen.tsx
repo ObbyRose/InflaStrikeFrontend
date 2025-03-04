@@ -80,8 +80,19 @@ const ConfirmPinScreen: React.FC<Props> = ({ navigation, route }) => {
                     {/* PIN Input Display */}
                     <HStack className="gap-4 justify-center">
                         {[0, 1, 2, 3].map((index) => (
-                            <Box key={index} className="w-14 h-16 border-2 rounded-lg flex items-center justify-center bg-card-dark">
-                                {enteredPin.length > index && <Box className="w-3 h-3 bg-white rounded-full" />}
+                            <Box
+                                key={index}
+                                className={`w-14 h-16 border-2 rounded-lg flex items-center justify-center bg-card-${appliedTheme} ${
+                                    enteredPin.length === index ? (appliedTheme === 'dark' ? 'border-white' : 'border-purple-500') : 'border-transparent'
+                                }`}
+                            >
+                                {enteredPin.length > index && (
+                                    <Box
+                                        className={`w-3 h-3 ${
+                                            appliedTheme === 'light' ? 'bg-purple-500' : 'bg-white'
+                                        } rounded-full`}
+                                    />
+                                )}
                             </Box>
                         ))}
                     </HStack>
@@ -107,9 +118,7 @@ const ConfirmPinScreen: React.FC<Props> = ({ navigation, route }) => {
                             </HStack>
                         ))}
                     </VStack>
-                        <Box className='mt-4'></Box>
-                    {/* Error Message */}
-                    {message && <Text className={`${message.includes('Confirmed') ? 'text-green-500' : 'text-red-500'}`}>{message}</Text>}
+                        <Box className='mt-4'>{message && <Text className={`${message.includes('Confirmed') ? 'text-green-500' : 'text-red-500'}`}>{message}</Text>}</Box>
                 </VStack>
             </Box>
         </MyLinearGradient>

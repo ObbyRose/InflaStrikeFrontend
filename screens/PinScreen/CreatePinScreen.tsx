@@ -53,8 +53,19 @@ const CreatePinScreen: React.FC<Props> = ({ navigation }) => {
 
                     <HStack className="gap-4 justify-center">
                         {[0, 1, 2, 3].map((index) => (
-                            <Box key={index} className="w-14 h-16 border-2 rounded-lg flex items-center justify-center bg-card-dark">
-                                {pin.length > index && <Box className="w-3 h-3 bg-white rounded-full" />}
+                            <Box
+                                key={index}
+                                className={`w-14 h-16 border-2 rounded-lg flex items-center justify-center bg-card-${appliedTheme} ${
+                                    pin.length === index ? (appliedTheme === 'dark' ? 'border-white' : 'border-purple-500') : 'border-transparent'
+                                }`}
+                            >
+                                {pin.length > index && (
+                                    <Box
+                                        className={`w-3 h-3 ${
+                                            appliedTheme === 'light' ? 'bg-purple-500' : 'bg-white'
+                                        } rounded-full`}
+                                    />
+                                )}
                             </Box>
                         ))}
                     </HStack>
