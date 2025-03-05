@@ -7,6 +7,7 @@ import { ThemeProvider } from './utils/Themes/ThemeProvider';
 import { ToastProvider } from '@gluestack-ui/toast';
 import 'react-native-get-random-values';
 import { PaperProvider } from 'react-native-paper';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <PaperProvider>
             <ToastProvider>
               <StackNavigator />
+              <StatusBar backgroundColor="#5506FD" barStyle="light-content" />
             </ToastProvider>
           </PaperProvider>
         </GluestackUIProvider>

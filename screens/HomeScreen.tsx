@@ -20,6 +20,7 @@ import {
 import { Props } from "@/types/NavigationTypes";
 import MyLinearGradient from "@/components/gradient/MyLinearGradient";
 import RoundedBox from "@/components/RoundedBox";
+import OptionCard from "@/components/OptionCard";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -92,12 +93,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
             <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'purple'}>
-                <Box className="h-[40%] p-4 gap-2">
+                <Box className="h-[30%] p-4 gap-2">
                     <Box className="flex flex-row items-center justify-between">
                         <IC_Tothor className="w-40" />
                         <IC_Bell_White className="w-7 h-7" />
                     </Box>
-                    <Box className="flex flex-col gap-4">
+                    <Box className="flex flex-col gap-4 p-4">
                         <Text className="text-white font-medium text-[17px]">Safe-to-spend</Text>
                         <Box className="flex-row gap-4 items-center">
                         <Text className="text-white font-medium text-4xl">$ 2,987.56</Text>
@@ -107,7 +108,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     </Box>
 
                     <Box className="items-center bottom-0 mt-6">
-                        <Box className={`bg-card-${appliedTheme} p-2 border-2 border-slate-500 rounded-full w-[80%] z-10`}>
+                        <Box className={`bg-card-${appliedTheme} p-2 rounded-full w-[80%] z-10`}>
                             <Box className={`flex flex-row justify-evenly`}>
                                 <Box className="flex-col items-center text-center">
                                     <IC_Top_Up className="w-12 h-12"/>
@@ -136,17 +137,54 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 <Box className={`p-4 bg-background-${appliedTheme} h-full`}>
                 {/* Recommended Bundles Section */}
                 <Box>
-                    <Box className="flex-row items-center justify-between mt-12">
+                    <Box className="flex-row items-center justify-between mt-10">
                         <Text className="text-[22px] font-semibold">Recommended Bundles</Text>
-                        <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
-                            See All
-                        </Text>
                     </Box>
+                    <Text className={`mt-2 mb-4 font-medium text-subText-${appliedTheme}`}>There are 4 recommended bundles</Text>
+                    <ScrollView 
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        <Box className="flex-row gap-2">
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>MAGA Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+15%</Text>
+                                </Box>
+                            </OptionCard>
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Tothor Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+24%</Text>
+                                </Box>
+                            </OptionCard>
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Earth Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+35%</Text>
+                                </Box>
+                            </OptionCard>
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>DOGE Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+4%</Text>
+                                </Box>
+                            </OptionCard>
+                        </Box>
+                    </ScrollView>
                 </Box>
 
                     {/* Crypto Market Section */}
                     <Box>
-                        <Box className="flex-row items-center justify-between mt-12">
+                        <Box className="flex-row items-center justify-between mt-2">
                             <Text className="text-[22px] font-semibold">Markets</Text>
                             <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
                                 See All
