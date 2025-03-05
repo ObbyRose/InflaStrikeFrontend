@@ -1041,3 +1041,346 @@ export const IM_PhoneHandPassword = ({ className }: ImageProps) => {
       </Box>
   );
 };
+
+export const IM_PARTY = ({ className }: ImageProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      viewBox="0 0 210 180"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={210}
+        height={180}
+      >
+        <Path fill="#fff" d="M0 0H210V180H0z" />
+      </Mask>
+      <G mask="url(#a)">
+        <Ellipse
+          cx={76.5}
+          cy={170}
+          rx={51.5}
+          ry={4}
+          fill="url(#paint0_linear_0_549)"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M89.12 43.39a4.054 4.054 0 014.66-1.46l1.441.513 62.094 89.707s.318 1.668.413 2.714c.036.391.083 1.263.129 2.201a4.028 4.028 0 01-3.087 4.102l-120.39 29.06a16.216 16.216 0 01-17.249-6.696l-.462-.685a16.216 16.216 0 01.253-18.501L89.121 43.389z"
+          fill="url(#paint1_linear_0_549)"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M89.12 43.39a4.054 4.054 0 014.66-1.46l1.441.513 62.094 89.707s.318 1.668.413 2.714c.036.391.083 1.263.129 2.201a4.028 4.028 0 01-3.087 4.102l-120.39 29.06a16.216 16.216 0 01-17.249-6.696l-.462-.685a16.216 16.216 0 01.253-18.501L89.121 43.389z"
+          fill="url(#paint2_linear_0_549)"
+        />
+        <Mask
+          id="b"
+          style={{
+            maskType: "luminance"
+          }}
+          maskUnits="userSpaceOnUse"
+          x={13}
+          y={41}
+          width={145}
+          height={130}
+        >
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M89.12 43.39a4.054 4.054 0 014.66-1.46l1.441.513 62.094 89.707s.318 1.668.413 2.714c.036.391.083 1.263.129 2.201a4.028 4.028 0 01-3.087 4.102l-120.39 29.06a16.216 16.216 0 01-17.249-6.696l-.462-.685a16.216 16.216 0 01.253-18.501L89.121 43.389z"
+            fill="#fff"
+          />
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M89.12 43.39a4.054 4.054 0 014.66-1.46l1.441.513 62.094 89.707s.318 1.668.413 2.714c.036.391.083 1.263.129 2.201a4.028 4.028 0 01-3.087 4.102l-120.39 29.06a16.216 16.216 0 01-17.249-6.696l-.462-.685a16.216 16.216 0 01.253-18.501L89.121 43.389z"
+            stroke="#fff"
+          />
+        </Mask>
+        <G mask="url(#b)" fillRule="evenodd" clipRule="evenodd">
+          <Path
+            opacity={0.4}
+            d="M79.723 53.331c14.174 45.663 39.738 83.08 53.571 93.923l-22.047 7.567C85.624 116.833 77.16 77.846 78.696 54.024l1.027-.693z"
+            fill="url(#paint3_linear_0_549)"
+          />
+          <Path
+            opacity={0.4}
+            d="M54.398 69.435c14.174 45.663 33.016 87.614 46.85 98.456l-22.047 7.567C53.578 137.471 51.835 93.95 53.37 70.128l1.027-.693z"
+            fill="url(#paint4_linear_0_549)"
+          />
+          <Path
+            opacity={0.4}
+            d="M21.147 75.236c14.174 45.664 33.016 87.615 46.85 98.457L45.95 181.26C20.326 143.273 18.584 99.752 20.12 75.929l1.027-.693z"
+            fill="url(#paint5_linear_0_549)"
+          />
+        </G>
+        <Ellipse
+          cx={124.115}
+          cy={90.8716}
+          rx={58.3784}
+          ry={11.7568}
+          transform="rotate(56 124.115 90.872)"
+          fill="url(#paint6_linear_0_549)"
+        />
+        <Ellipse
+          cx={124.115}
+          cy={90.871}
+          rx={55.9459}
+          ry={10.1351}
+          transform="rotate(56 124.115 90.871)"
+          fill="url(#paint7_linear_0_549)"
+        />
+        <Path
+          d="M128.519 94l8.497-12h12.656L156 70"
+          stroke="url(#paint8_linear_0_549)"
+          strokeWidth={5}
+        />
+        <Path
+          d="M174.462 118.249s10.096-2.911 17.014 6.97"
+          stroke="#4DC895"
+          strokeWidth={5}
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M116.86 56.98s1.378 4.852 2.632 6.557c3.628 4.934 9.195 6.056 15.344 3.601 12.413-4.954 12.04-23.115 6.587-29.448-5.453-6.332-13.025-9.105-20.021-8.438l-2.448 2.923s8.063-.642 13.543 2.786c5.48 3.428 8.68 7.622 9.26 11.063.58 3.442-.302 10.352-2.385 13.258-2.084 2.906-6.258 6.837-11.443 5.354-5.185-1.483-7.899-7.06-8.437-11.53l-2.632 3.874z"
+          fill="url(#paint9_linear_0_549)"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M113 69.863s12.388.27 14.699-5.026c2.31-5.297-.899-7.831-2.84-8.562-1.942-.731-5.898-.623-7.999.705l2.632-3.874s8.6-1.879 10.954 4.926c2.354 6.805-1.148 13.49-5.587 15.724-4.439 2.232-11.265 2.817-11.265 2.817l-.594-6.71z"
+          fill="url(#paint10_linear_0_549)"
+        />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M160.868 29c.992 8.625-2.692 15.216-11.14 19.469-12.995 6.541-23.441.949-30.84-16.284l2.514-2.933c6.577 15.66 15.794 20.903 26.469 15.529 6.831-3.438 7.211-8.628 6.269-15.781h6.728z"
+          fill="url(#paint11_linear_0_549)"
+        />
+        <Circle cx={75} cy={31} r={3} fill="url(#paint12_linear_0_549)" />
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M173.515 42s3.535-.707 5.657-2.828c2.121-2.122 2.828-5.657 2.828-5.657s.707 3.535 2.828 5.657c2.122 2.12 5.657 2.828 5.657 2.828s-3.535.707-5.657 2.828C182.707 46.95 182 50.485 182 50.485s-.707-3.535-2.828-5.657c-2.122-2.12-5.657-2.828-5.657-2.828z"
+          fill="url(#paint13_linear_0_549)"
+        />
+        <Circle cx={182} cy={81} r={4} fill="url(#paint14_linear_0_549)" />
+        <Rect
+          x={119}
+          y={4}
+          width={12}
+          height={12}
+          rx={4}
+          fill="url(#paint15_linear_0_549)"
+        />
+        <Rect x={166} y={146} width={8} height={8} rx={2} fill="#FEA200" />
+        <Path
+          d="M139.957 110.974s10.963-12.551 26.549-8.551c5.161 1.324 10.08 1.288 14.756-.109"
+          stroke="url(#paint16_linear_0_549)"
+          strokeWidth={5}
+        />
+      </G>
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_0_549"
+          x1={128}
+          y1={166}
+          x2={25}
+          y2={166}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#0A1C47" stopOpacity={0.01} />
+          <Stop offset={1} stopColor="#040C22" stopOpacity={0.154868} />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_0_549"
+          x1={24.3313}
+          y1={20.4679}
+          x2={-21.3752}
+          y2={153.37}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#1ADDF3" />
+          <Stop offset={1} stopColor="#0BB8E4" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint2_linear_0_549"
+          x1={47.3415}
+          y1={75.4763}
+          x2={13.3996}
+          y2={157.664}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#0BB8E4" stopOpacity={0.01} />
+          <Stop offset={1} stopColor="#184F5D" stopOpacity={0.683198} />
+        </LinearGradient>
+        <LinearGradient
+          id="paint3_linear_0_549"
+          x1={36.8475}
+          y1={16.718}
+          x2={-1.24633}
+          y2={61.695}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#001646" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint4_linear_0_549"
+          x1={8.21397}
+          y1={35.0534}
+          x2={-35.0644}
+          y2={93.789}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#001646" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint5_linear_0_549"
+          x1={-25.037}
+          y1={40.8552}
+          x2={-68.3154}
+          y2={99.5907}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#001646" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint6_linear_0_549"
+          x1={65.7364}
+          y1={79.1148}
+          x2={65.7364}
+          y2={102.628}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#1ADDF3" />
+          <Stop offset={1} stopColor="#0BB8E4" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint7_linear_0_549"
+          x1={68.1691}
+          y1={90.871}
+          x2={180.061}
+          y2={90.871}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5506FD" />
+          <Stop offset={1} stopColor="#330497" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint8_linear_0_549"
+          x1={138.886}
+          y1={58.9208}
+          x2={117.41}
+          y2={88.0066}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FFA080" />
+          <Stop offset={1} stopColor="#FFCEB7" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint9_linear_0_549"
+          x1={116.86}
+          y1={29.1553}
+          x2={116.86}
+          y2={68.3921}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FEA200" />
+          <Stop offset={1} stopColor="#F48827" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint10_linear_0_549"
+          x1={113}
+          y1={52.6992}
+          x2={113}
+          y2={76.5725}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FFE657" />
+          <Stop offset={1} stopColor="#FFC82C" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint11_linear_0_549"
+          x1={118.888}
+          y1={29}
+          x2={118.888}
+          y2={51.1236}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FFE657" />
+          <Stop offset={1} stopColor="#FFC82C" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint12_linear_0_549"
+          x1={72}
+          y1={28}
+          x2={72}
+          y2={34}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#00C5DD" />
+          <Stop offset={1} stopColor="#0093B9" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint13_linear_0_549"
+          x1={173.515}
+          y1={42}
+          x2={182}
+          y2={50.4853}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#00C5DD" />
+          <Stop offset={1} stopColor="#0093B9" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint14_linear_0_549"
+          x1={178}
+          y1={77}
+          x2={178}
+          y2={85}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#FFB300" />
+          <Stop offset={1} stopColor="#FF7C00" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint15_linear_0_549"
+          x1={119}
+          y1={4}
+          x2={119}
+          y2={16}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#5BB0F0" />
+          <Stop offset={1} stopColor="#2E78DC" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint16_linear_0_549"
+          x1={165.852}
+          y1={96.0932}
+          x2={160.597}
+          y2={116.333}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#3385CA" />
+          <Stop offset={1} stopColor="#62BBE7" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};

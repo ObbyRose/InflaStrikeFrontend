@@ -18,26 +18,51 @@ import { Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
 import SignupAddress from '@/components/auth/SignupAddress'
+import SignupAlmostThere from '@/components/auth/SignupAlmostThere'
+import { SignupFinalDataType } from '@/types/other'
 
+const dummyFinalData = {"address": {"city": "נס ציונה", "coords": {"lat": 31.9293254, "lng": 34.7947742}, "country": "ישראל", "postal": "7054112", "street": "עמק השושנים", "subpremise": "Ap12"}, "birthday": "12/11/2007", "fName": "Xhjzus", "lName": "Jdjdis", "pass": "Xhxhsjwiieiei3i322", "phoneNumber": "+1 268 89764646616", "ssn": "7716"};
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("ADDRESS");
+    const [screenStep , setScreenStep ] = useState("ALMOST_THERE");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
-    const [finalData, setFinalData] = useState<any>({});
+    const [finalData, setFinalData] = useState<SignupFinalDataType | null>(dummyFinalData);
     const [ headerStep,  setHeaderStep] = useState<number | null>(null);
+    const [ comeFromEdit, setComeFromEdit] = useState(false);
 
-    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS',    
-        'MAIN', 'VERIFY_EMAIL', 'STATUS1' , 'STATUS2', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
+    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS', "ALMOST_THERE", 'VERIFIED'];
 
     useEffect(() => {
         console.log("FINAL DATA: ", finalData);
     }, [finalData]);
 
-    const handleScreenChange = (newScreenStep: 'back' | 'next', data?: any) => {
-        const direction = newScreenStep === 'next' ? -1 : 1;
-        setIsGoingBack(direction === 1);
+    const handleScreenChange = (newScreenStep: 'back' | 'next' | string, data?: any, fromEdit = false) => {
+        if (!['back', 'next'].includes(newScreenStep) && !screens.includes(newScreenStep)) {
+            console.log("Invalid screen step");
+            return null;
+        }
+        const isScreenName = typeof newScreenStep === 'string' && !['back', 'next'].includes(newScreenStep);
+
+        let direction = 0; 
+        let isGoingBack = false;
+
+        if (isScreenName) {
+            const currentIndex = screens.indexOf(screenStep);
+            const targetIndex = screens.indexOf(newScreenStep);
+            isGoingBack = targetIndex < currentIndex;
+        } else {
+            isGoingBack = newScreenStep === 'back';
+        }
+
+        setIsGoingBack(isGoingBack);
+        direction = isGoingBack ? 1 : -1;
+
+        if(fromEdit)
+            setComeFromEdit(true);
+        else
+            setComeFromEdit(false);
 
         // Update finalData
         if (data) {
@@ -57,8 +82,22 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
         // After slide-out animation ends, change the screen step
         const currentIndex = screens.indexOf(screenStep);
-        if(newScreenStep === "next"){
-            setScreenStep(screens[currentIndex + 1]);
+        if (isScreenName) {
+            // If we're going to a specific screen, navigate directly there
+            setScreenStep(newScreenStep);
+
+            // Adjust the header step logic based on the screen
+            if (newScreenStep === "CREATE_PASSWORD")
+                setHeaderStep(1);
+            else if (newScreenStep === "PERSONAL_INFO")
+                setHeaderStep(2);
+            else if (newScreenStep === "ADDRESS")
+                setHeaderStep(3);
+            else
+                setHeaderStep(null);
+
+        } else if(newScreenStep === "next"){
+            setScreenStep(comeFromEdit ? "ALMOST_THERE" : screens[currentIndex + 1]);
 
             if(screenStep === "CREATE_PASSWORD")
                 setHeaderStep(1);
@@ -138,18 +177,18 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                         }}
                     >
                         { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
-                        { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData.phoneNumber || "your phone"}/>}
+                        { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData?.phoneNumber || "your phone"}/>}
+                        { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData?.phoneNumber || "your phone"}/>}
                         { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
                         { screenStep === 'ADDRESS' && <SignupAddress handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} />}
+                        { screenStep === 'ALMOST_THERE' && <SignupAlmostThere handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} finalData={finalData}/>}
 
 
 
                         { screenStep === 'MAIN' && <SignupMain handleScreenChange={handleScreenChange} />}
                         { screenStep === 'VERIFY_EMAIL' && <VerifyEmail handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
                         { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} type={finalData.idMethod}/>}
+                        {/* { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} type={finalData?.idMethod}/>} */}
                         { screenStep === 'VERIFIED' && <SignupVerified handleScreenChange={handleScreenChange} />}
                     </Animated.View>
             </Box>

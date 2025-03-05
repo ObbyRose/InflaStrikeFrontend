@@ -7,7 +7,6 @@ import { useFormInput } from '@/hooks/useFormInput'
 import { SignUpScreensProps } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { convertBirthday } from '@/utils/functions/help'
-import GooglePlacesInput from './GooglePlacesInput'
 import MyLinearGradient from '../gradient/MyLinearGradient'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {

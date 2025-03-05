@@ -18,6 +18,7 @@ interface InputAuthProps {
     keyboardType?: KeyboardTypeOptions;
     className?: string;
     classNameInput?: string;
+    isReadOnly?: boolean;
 }
 
 function InputAuth({
@@ -30,7 +31,8 @@ function InputAuth({
     maxLength,
     keyboardType,
     className,
-    classNameInput
+    classNameInput,
+    isReadOnly = false
 }: InputAuthProps) {
     const [showPass, setShowPass] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
@@ -210,6 +212,7 @@ function InputAuth({
             <Input 
                 className={cn(`relative border-0 rounded-xl h-[64px] mb-4 bg-input-${appliedTheme}`, classNameInput)} 
                 // isInvalid={!!error}
+                isReadOnly={isReadOnly}
             >
                 {/* Animated floating label */}
                 <Animated.View
@@ -231,7 +234,6 @@ function InputAuth({
                         {placeholder}
                     </Animated.Text>
                 </Animated.View>
-                
                 
                 <InputField
                     className={`h-full w-full pl-5 pr-12 text-lg text-text-${appliedTheme}`}

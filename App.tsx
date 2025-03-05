@@ -13,14 +13,14 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <GluestackUIProvider>
-          <PaperProvider>
+        <PaperProvider>
+          <GluestackUIProvider>
             <ToastProvider>
               <StackNavigator />
               <StatusBar backgroundColor="#5506FD" barStyle="light-content" />
             </ToastProvider>
-          </PaperProvider>
-        </GluestackUIProvider>
+          </GluestackUIProvider>
+        </PaperProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

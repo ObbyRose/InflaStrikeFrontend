@@ -6,18 +6,24 @@ import { SignUpScreensProps } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import MyLinearGradient from '../gradient/MyLinearGradient'
 import AddressSearch from './AddressSearchSheet'
+import InputAuth from './InputAuth'
+import { Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { Address } from '@/types/other'
+import { IC_CurrentLocation } from '@/utils/constants/Icons'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
+const dummyAddress = {"address": {"city": "Jerusalem", "coords": {"lat": 9.040974799999999, "lng": 7.494399499999999}, "country": "Israel", "place_id": "EiZFbWVrIFJlZmEnaW0gU3RyZWV0LCBKZXJ1c2FsZW0sIElzcmFlbCIuKiwKFAoSCasOiBsmKAMVEUZVPxWx5J3mEhQKEglL_ME01tcCFRHL4W5FPmJv2Q", "postal": "900103", "street": "Emek Refa'im Street"}}
+
 function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
-    const [ address, setAddress] = useState({});
+    const [ address, setAddress] = useState<Address | null>(null);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-    const isActive = !!address;
+    const isActive = !!address?.postal;
 
     useEffect(() => setHeaderStep(prev => prev !== 2 ? 2: prev), [])
     
@@ -26,7 +32,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
 
         setTimeout(() => {
             setIsLoading(false);
-            handleScreenChange('next', {address });
+            handleScreenChange('next', { address });
         }, 1000);
     }
 
@@ -42,10 +48,53 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
                     Juta Mastercard® Debit Card.
                 </Text>
             </Box>
+            
             {/* Address Input */}
-            <Button onPress={() => setIsSheetOpen(true)}>
-                <ButtonText>Search Address</ButtonText>
-            </Button>
+            <Box className='relative gap-2'>
+                <InputAuth
+                    value={address?.street || ""}
+                    onChangeText={() => {}}
+                    placeholder="Street address"
+                    isReadOnly={true}
+                />
+                {!address && <Pressable onPress={() => setIsSheetOpen(true)}
+                    className='absolute inset-0 z-10'
+                />}
+
+                {address && <>
+                    <InputAuth
+                        value={address?.city || ""}
+                        onChangeText={() => {}}
+                        placeholder="City"
+                        isReadOnly={true}
+                    />
+                    <InputAuth
+                        value={address?.country || ""}
+                        onChangeText={() => {}}
+                        placeholder="State"
+                        isReadOnly={true}
+                    />
+                    <InputAuth
+                        value={address?.postal || ""}
+                        onChangeText={(val) => setAddress((prev) => ({ ...prev!, postal: val }))}
+                        placeholder="Zip Code"
+                        keyboardType='numeric'
+                        maxLength={10}
+                    />
+                </>}
+                { address &&
+                <Box className="mx-auto">
+                    <TouchableOpacity
+                        className="flex-row items-center gap-2"
+                        onPress={() => {setAddress(null); setIsSheetOpen(true);}}
+                        activeOpacity={0.6}
+                    >
+                        <IC_CurrentLocation className="w-5 h-5" />
+                        <Text className="text-lg font-semibold text-purple-500">Select Another Address</Text>
+                    </TouchableOpacity>
+                </Box>
+                }
+            </Box>
 
             <AddressSearch 
                 isOpen={isSheetOpen}
