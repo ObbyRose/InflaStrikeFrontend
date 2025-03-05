@@ -181,8 +181,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         </Box>
                     </ScrollView>
                 </Box>
-
                     {/* Crypto Market Section */}
+                    <Divider className={`bg-divider-${appliedTheme} mt-4`} />
                     <Box>
                         <Box className="flex-row items-center justify-between mt-2">
                             <Text className="text-[22px] font-semibold">Markets</Text>
