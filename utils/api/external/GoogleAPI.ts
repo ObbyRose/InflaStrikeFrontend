@@ -23,3 +23,27 @@ export const fetchAutocomplete = async (query: string) => {
         return [];
     }
 };
+
+export const getCoordinatesAndPostalByPlaceId = async (placeId: string) => {
+    const endpoint = `https://maps.googleapis.com/maps/api/place/details/json`;
+    const params = new URLSearchParams({
+        placeid: placeId,
+        key: GOOGLE_MAP_API_KEY,
+        fields: 'geometry,address_component'
+    });
+
+    try {
+        const response = await fetch(`${endpoint}?${params}`);
+        const data = await response.json();
+
+        if (data.status === 'OK' && data.result.geometry) {
+            return data.result;
+        } else {
+            console.error('Error fetching coordinates:', data.error_message);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching place details:', error);
+        return null;
+    }
+};
