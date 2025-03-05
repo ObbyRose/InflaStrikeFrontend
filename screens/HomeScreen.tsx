@@ -4,7 +4,7 @@ import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -145,10 +145,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     >
-                        <Box className="flex-row gap-2">
+                        <Box className="flex-row gap-4">
                             <OptionCard>
                                 <Box className="gap-1">
-                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <IC_Bitcoin className="w-12 h-12" />
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>MAGA Bundle</Text>
                                     <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+15%</Text>
@@ -156,7 +156,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             </OptionCard>
                             <OptionCard>
                                 <Box className="gap-1">
-                                    <IC_Bitcoin className="w-8 h-8" />
+                                    {appliedTheme === 'dark' ? 
+                                        <IC_Tothor_Logo_Only_White className="w-12 h-12" /> :
+                                        <IC_Tothor_Logo_Only className="w-12 h-12" />
+                                    }
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Tothor Bundle</Text>
                                     <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+24%</Text>
@@ -164,7 +167,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             </OptionCard>
                             <OptionCard>
                                 <Box className="gap-1">
-                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <IC_Gold className="w-12 h-12" />
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Earth Bundle</Text>
                                     <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+35%</Text>
@@ -172,7 +175,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             </OptionCard>
                             <OptionCard>
                                 <Box className="gap-1">
-                                    <IC_Bitcoin className="w-8 h-8" />
+                                    <IC_Doge className="w-12 h-12" />
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>DOGE Bundle</Text>
                                     <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+4%</Text>
