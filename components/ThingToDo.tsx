@@ -29,6 +29,10 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
     setCurrentIndex((prev) => prev + 1);
   }
 
+  if (thingToDo.length === 0) {
+    return <></>;
+  }
+
   return (
     <Box className="flex w-[90%] items-center justify-center">
       <Box className=" flex w-full flex-row justify-between p-2">

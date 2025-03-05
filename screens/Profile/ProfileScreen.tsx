@@ -23,13 +23,12 @@ import {
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { Alert, ScrollView, TouchableOpacity } from 'react-native';
+import { Alert, ScrollView, TouchableOpacity, View } from 'react-native';
 
 interface ProfileScreenProps extends Props {}
 
 export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   const { appliedTheme } = useTheme();
-  // const appliedTheme = 'dark';
   const user = {
     name: 'John Abraham',
     username: '$dylanrobinson',
@@ -40,7 +39,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
     {
       icon: IC_Card_V2,
       header: 'Verify your identity #1',
-      description: 'Take a government ID & selfie photo to get verified',
+      description: 'Take a government ID & selfie photo to get verified ',
       actionText: 'Verify now',
       actionFunction: () => {},
     },
@@ -61,22 +60,21 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   ];
 
   return (
-    <Box className="mb-[210px] h-full">
+    <View className="flex-1">
       <MyLinearGradient type="background" color="blue">
-        <Box className="flex h-[50%] items-center  p-4">
+        <View className="flex h-[250px] items-center p-4">
           {/* back and setting box */}
-          <Box className="flex w-full flex-row justify-between">
+          <View className="flex w-full flex-row justify-between">
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Ionicons name="arrow-back" size={30} color={`white`} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => Alert.alert('a function will be added soon')}>
-              {/* <Text className={`text-[30px] text-iconGeneral-${appliedTheme}`}> */}
               <Text className={`text-[30px] text-[white]`}>•••</Text>
             </TouchableOpacity>
-          </Box>
+          </View>
 
           {/* avatar, name and username box*/}
-          <Box className="flex w-full items-center justify-center gap-4  p-6">
+          <View className="flex w-full items-center justify-center gap-4 p-6">
             <Avatar size="2xl">
               <AvatarFallbackText>{user.name}</AvatarFallbackText>
               <AvatarImage
@@ -87,13 +85,18 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
             </Avatar>
             <Text className={`text-[24px] font-bold text-white`}>{user.name}</Text>
             <Text className={`text-[15px] font-medium text-[#f6f7f8]`}>{user.username}</Text>
-          </Box>
-        </Box>
+          </View>
+        </View>
       </MyLinearGradient>
 
-      <ScrollView className={`mt-[60px] w-full p-2`}>
+      {/* Things to do component */}
+      <View className="z-50 -mt-10 px-4">
+        <ThingToDo thingToDo={thingToDo} />
+      </View>
+
+      <ScrollView className={`w-full flex-1 p-2`} contentContainerStyle={{ paddingTop: 20 }}>
         {/* more features box */}
-        <Box className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
+        <View className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
           <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
           <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
           <Divider />
@@ -102,10 +105,10 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
           <Divider />
 
           <SettingItem title="Bundles" IconComponent={IC_Subscription} />
-        </Box>
+        </View>
 
         {/* setting and invite friends box */}
-        <Box className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
+        <View className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
           {/* invite new friends box */}
           <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
           <Divider />
@@ -114,13 +117,8 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
             onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
             <SettingItem title="Setting" IconComponent={IC_Setting} />
           </TouchableOpacity>
-        </Box>
+        </View>
       </ScrollView>
-
-      {/* things to do component */}
-      <Box className="absolute top-[33%] z-50 flex h-fit w-full items-center justify-center">
-        <ThingToDo thingToDo={thingToDo} />
-      </Box>
-    </Box>
+    </View>
   );
 }
