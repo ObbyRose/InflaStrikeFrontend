@@ -92,7 +92,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
-            <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'purple'}>
+            <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
                 <Box className="h-[30%] p-4 gap-2">
                     <Box className="flex flex-row items-center justify-between">
                         <IC_Tothor className="w-40" />
@@ -107,7 +107,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         <Text className="text-white text-[14px]">Updated 2 mins ago</Text>
                     </Box>
 
-                    <Box className="items-center bottom-0 mt-6">
+                    <Box className="items-center -bottom-2 mt-6">
                         <Box className={`bg-card-${appliedTheme} p-2 rounded-full w-[80%] z-10`}>
                             <Box className={`flex flex-row justify-evenly`}>
                                 <Box className="flex-col items-center text-center">
@@ -138,7 +138,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 {/* Recommended Bundles Section */}
                 <Box>
                     <Box className="flex-row items-center justify-between mt-10">
-                        <Text className="text-[22px] font-semibold">Recommended Bundles</Text>
+                        <Text className={`text-[22px] font-semibold text-text-${appliedTheme}`}>Recommended Bundles</Text>
                     </Box>
                     <Text className={`mt-2 mb-4 font-medium text-subText-${appliedTheme}`}>There are 4 recommended bundles</Text>
                     <ScrollView 
