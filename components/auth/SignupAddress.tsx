@@ -7,8 +7,9 @@ import { useTheme } from '@/utils/Themes/ThemeProvider'
 import MyLinearGradient from '../gradient/MyLinearGradient'
 import AddressSearch from './AddressSearchSheet'
 import InputAuth from './InputAuth'
-import { Pressable, TouchableWithoutFeedback } from 'react-native'
+import { Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { Address } from '@/types/other'
+import { IC_CurrentLocation } from '@/utils/constants/Icons'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
@@ -22,7 +23,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
     const [ address, setAddress] = useState<Address | null>(null);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-    const isActive = !!address;
+    const isActive = !!address?.postal;
 
     useEffect(() => setHeaderStep(prev => prev !== 2 ? 2: prev), [])
     
@@ -54,6 +55,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
                     value={address?.street || ""}
                     onChangeText={() => {}}
                     placeholder="Street address"
+                    isReadOnly={true}
                 />
                 {!address && <Pressable onPress={() => setIsSheetOpen(true)}
                     className='absolute inset-0 z-10'
@@ -64,18 +66,34 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
                         value={address?.city || ""}
                         onChangeText={() => {}}
                         placeholder="City"
+                        isReadOnly={true}
                     />
                     <InputAuth
                         value={address?.country || ""}
                         onChangeText={() => {}}
                         placeholder="State"
+                        isReadOnly={true}
                     />
                     <InputAuth
                         value={address?.postal || ""}
-                        onChangeText={() => {}}
+                        onChangeText={(val) => setAddress((prev) => ({ ...prev!, postal: val }))}
                         placeholder="Zip Code"
+                        keyboardType='numeric'
+                        maxLength={10}
                     />
                 </>}
+                { address &&
+                <Box className="mx-auto">
+                    <TouchableOpacity
+                        className="flex-row items-center gap-2"
+                        onPress={() => {setAddress(null); setIsSheetOpen(true);}}
+                        activeOpacity={0.6}
+                    >
+                        <IC_CurrentLocation className="w-5 h-5" />
+                        <Text className="text-lg font-semibold text-purple-500">Select Another Address</Text>
+                    </TouchableOpacity>
+                </Box>
+                }
             </Box>
 
             <AddressSearch 

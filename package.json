@@ -25,6 +25,7 @@
     "@gluestack-ui/image": "^0.1.11",
     "@gluestack-ui/input": "^0.1.32",
     "@gluestack-ui/link": "^0.1.23",
+    "@gluestack-ui/modal": "^0.1.40",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
     "@gluestack-ui/overlay": "^0.1.16",
     "@gluestack-ui/progress": "^0.1.18",
@@ -52,6 +53,7 @@
     "expo-camera": "^16.0.17",
     "expo-linear-gradient": "~14.0.2",
     "expo-local-authentication": "^15.0.2",
+    "expo-location": "~18.0.7",
     "expo-router": "^3.1.0",
     "expo-secure-store": "^14.0.1",
     "expo-status-bar": "~2.0.1",
@@ -68,6 +70,7 @@
     "react-native-gesture-handler": "~2.20.2",
     "react-native-get-random-values": "^1.11.0",
     "react-native-linear-gradient": "^2.8.3",
+    "react-native-maps": "1.18.0",
     "react-native-paper": "^5.13.1",
     "react-native-pie": "^1.1.2",
     "react-native-pie-chart": "^4.0.1",
@@ -79,8 +82,7 @@
     "react-native-wagmi-charts": "^2.6.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "^13.13.2",
-    "zustand": "^5.0.3",
-    "react-native-maps": "1.18.0"
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

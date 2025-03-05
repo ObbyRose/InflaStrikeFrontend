@@ -8,9 +8,10 @@ interface MyLinearGradientProps {
   type: "button" | "background" | "text";
   color: "blue" | "purple" | "blue-purple" | "light-blue" | "disabled-button" | "dark";
   children: React.ReactNode;
+  className?: string;
 }
 
-const MyLinearGradient = ({ children, type, color}: MyLinearGradientProps) => {
+const MyLinearGradient = ({ children, type, color, className}: MyLinearGradientProps) => {
   const { appliedTheme } = useTheme();
 
   const modifiedChildren = React.Children.map(children, (child, index) => {
@@ -48,7 +49,7 @@ const MyLinearGradient = ({ children, type, color}: MyLinearGradientProps) => {
       className={cn("w-full",`
         ${type === "button" ? "rounded-full p-2 h-fit items-center" : ""}
         ${type === "background" ? "" : ""}
-        `)}
+        `, className)}
         {...getOptions(color)}
       
     >

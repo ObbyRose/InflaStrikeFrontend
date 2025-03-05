@@ -12,13 +12,13 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <GluestackUIProvider>
-          <PaperProvider>
+        <PaperProvider>
+          <GluestackUIProvider>
             <ToastProvider>
               <StackNavigator />
             </ToastProvider>
-          </PaperProvider>
-        </GluestackUIProvider>
+          </GluestackUIProvider>
+        </PaperProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

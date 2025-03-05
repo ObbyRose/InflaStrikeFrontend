@@ -24,7 +24,7 @@ export const fetchAutocomplete = async (query: string) => {
     }
 };
 
-export const getCoordinatesAndPostalByPlaceId = async (placeId: string) => {
+export const getPlaceIdDetails = async (placeId: string) => {
     const endpoint = `https://maps.googleapis.com/maps/api/place/details/json`;
     const params = new URLSearchParams({
         placeid: placeId,
