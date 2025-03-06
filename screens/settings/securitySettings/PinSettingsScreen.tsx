@@ -4,17 +4,15 @@ import { Divider } from '@/components/ui/divider';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { IC_FaceID_V2, IC_Fingerprint, IC_Password_V2, IC_PIN_V2 } from '@/utils/constants/Icons';
 import { Props } from '@/types/NavigationTypes';
-import { ScrollView, Switch, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import BackHeader from '@/components/BackHeader';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { Text } from '@/components/ui/text';
-import PurpleSwitch from '@/components/PurpleSwitch';
 import SettingItem from '@/components/SettingItems';
 import CardUpRounded from '@/components/CardUpRounded';
 
 const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
 
     return (
         <Box className="h-full">
@@ -45,7 +43,7 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
                         <SettingItem title="Add / Change Touch ID" IconComponent={IC_Fingerprint} />
                     </TouchableOpacity>
                     <Divider />
-
+                    
                 </Box>
             </CardUpRounded>
         </Box>
