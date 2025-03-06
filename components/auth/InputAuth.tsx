@@ -257,7 +257,7 @@ function InputAuth({
                         <IC_EyeOff className="w-7 h-7" color={appliedTheme === "dark" ? "white": ""}/>}
                     </Pressable>
                 :
-                <>{IconComponent && <IconComponent className="absolute right-3 w-6 h-6" 
+                <>{IconComponent && <IconComponent className="absolute right-4 w-7 h-7"
                     color={appliedTheme === "dark" ? "white": ""} />}</>
                 }
 

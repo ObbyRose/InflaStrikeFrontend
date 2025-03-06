@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Box } from "../ui/box";
-import { IC_ChevronLeft } from "@/utils/constants/Icons";
+import { getIconByString, IC_ChevronLeft, IC_Help } from "@/utils/constants/Icons";
 import { TouchableOpacity } from "react-native";
 import { SignUpScreensProps } from "@/types/NavigationTypes";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
@@ -9,23 +9,35 @@ import { Text } from "../ui/text";
 
 interface BackAuthProps extends SignUpScreensProps{
     headerStep?: number | null;
+    theme?: string;
+    title?: string;
+    icons?: string[];
+    onPressIcons?: Function[];
 }
-function BackAuth({ handleScreenChange, headerStep}: BackAuthProps) {
+function BackAuth({ handleScreenChange, headerStep, theme, title, icons, onPressIcons}: BackAuthProps) {
     const { appliedTheme } = useTheme();
     function handleBackPress() {
         handleScreenChange('back');
     }
-
+    console.log(theme)
     return (
-        <SafeAreaView>
-            <Box className={`flex-row justify-between p-4`}>
+        <SafeAreaView className="z-50">
+            <Box className={`flex-row justify-between p-4 items-center relative`}>
+                
                 <TouchableOpacity
-                    className="self-start p-2"
+                    className="absolute left-4"
                     onPress={() => handleBackPress()}
                     activeOpacity={0.7}
                 >
-                    <IC_ChevronLeft className="w-8 h-8" color={appliedTheme === "dark" ? "white" : "black" } />
+                    <IC_ChevronLeft className="w-8 h-8" color={[theme,appliedTheme].includes("dark") ? "white" : "black"} />
                 </TouchableOpacity>
+
+                <Box className="flex-1 items-center justify-center">
+                    <Text className={`font-bold  text-xl text-center ${[theme,appliedTheme].includes("dark") ? "text-text-dark" : "text-text-light"}`}>
+                        {title || ""}
+                    </Text>
+                </Box>
+                
 
                 {headerStep && 
                 <Box className={`items-center justify-center rounded-full p-3 bg-card-${appliedTheme}`}>
@@ -34,6 +46,18 @@ function BackAuth({ handleScreenChange, headerStep}: BackAuthProps) {
                     </Text>
                 </Box>
                 }
+
+                {/* Right Icons */}
+                <Box className="flex-row items-center absolute gap-2 right-4">
+                    {icons?.map((icon, index) => {
+                        const IconComponent = getIconByString(icon || "");
+                        return (
+                        <TouchableOpacity key={icon}>
+                            {IconComponent && <IconComponent className="w-8 h-8" color={[theme,appliedTheme].includes("dark") ? "white" : "black"}/>}
+                        </TouchableOpacity>
+                        )
+                    })}
+                </Box>
             </Box>
         </SafeAreaView>
     );
