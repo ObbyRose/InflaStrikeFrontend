@@ -93,9 +93,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
             <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-                <Box className="h-[30%] p-4 gap-2">
+                <Box className="h-[40%] p-4 gap-4">
                     <Box className="flex flex-row items-center justify-between">
-                        <IC_Tothor className="w-40" />
+                        <IC_Tothor className="w-40 h-16" />
                         <IC_Bell_White className="w-7 h-7" />
                     </Box>
                     <Box className="flex flex-col gap-4 p-4">
@@ -107,7 +107,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         <Text className="text-white text-[14px]">Updated 2 mins ago</Text>
                     </Box>
 
-                    <Box className="items-center -bottom-2 mt-6">
+                    <Box className="items-center h-full mt-2">
                         <Box className={`bg-card-${appliedTheme} p-2 rounded-full w-[80%] z-10`}>
                             <Box className={`flex flex-row justify-evenly`}>
                                 <Box className="flex-col items-center text-center">
@@ -184,27 +184,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         </Box>
                     </ScrollView>
                 </Box>
-                    {/* Crypto Market Section */}
                     <Divider className={`bg-divider-${appliedTheme} mt-4`} />
-                    <Box>
-                        <Box className="flex-row items-center justify-between mt-2">
-                            <Text className="text-[22px] font-semibold">Markets</Text>
-                            <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
-                                See All
-                            </Text>
-                        </Box>
-                    </Box>
-                    {/* Crypto Market Cards */}
-                    {loading ? (
-                        <Text>Loading...</Text>
-                    ) : (
-                        cryptoData.map((crypto, index) => (
-                            <React.Fragment key={crypto.symbol}>
-                                <CryptoMarketCard {...crypto} />
-                                {index < cryptoData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
-                            </React.Fragment>
-                        ))
-                    )}
                 </Box>
             </MyLinearGradient>
         </ScrollView>
