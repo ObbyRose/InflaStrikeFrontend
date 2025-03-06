@@ -18,7 +18,7 @@ interface CryptoMarketCardProps {
 const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, symbol, price, change, lineData, bgColor, onPress }) => {
     return (
         <Pressable onPress={onPress}>
-            <Box className="p-2 flex flex-row gap-2 items-center">
+            <Box className="py-2 flex flex-row gap-4 items-center">
                 <Box className={`${bgColor} max-w-[4rem] p-4 rounded-2xl z-10`}>
                     <Icon className="w-8 h-8" />
                 </Box>
