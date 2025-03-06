@@ -34,7 +34,7 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
   }
 
   return (
-    <Box className="flex w-[90%] items-center justify-center">
+    <Box className="flex w-full items-center justify-center">
       <Box className=" flex w-full flex-row justify-between p-2">
         <Text className={`p-2 text-[15px] font-semibold text-white`}>Things to do</Text>
         {thingToDo.length > 1 && (
@@ -43,10 +43,10 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
           </Text>
         )}
       </Box>
-      <Box className={`bg-card-${appliedTheme}  flex h-fit w-full flex-row gap-3 rounded-xl p-2`}>
+      <Box className={`bg-card-${appliedTheme}  flex h-fit w-full flex-row gap-3 rounded-xl p-4`}>
         <CurrentIcon className="h-[48px] w-[48px]" />
 
-        <Box className="flex h-fit w-[75%] gap-3">
+        <Box className="flex h-fit w-[80%] gap-3">
           <Text className={`text-text-${appliedTheme} text-[17px] font-semibold`}>
             {thingToDo[currentIndex].header}
           </Text>
@@ -66,7 +66,6 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
         <TouchableOpacity
           className={`h-4 w-[90%] rounded-b-xl bg-gray-500`}
           onPress={handleNextMission}>
-          <Text> </Text>
         </TouchableOpacity>
       )}
     </Box>

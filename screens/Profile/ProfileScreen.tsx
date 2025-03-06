@@ -1,3 +1,4 @@
+import BackHeader from '@/components/BackHeader';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import SettingItem from '@/components/SettingItems';
 import ThingToDo from '@/components/ThingToDo';
@@ -13,6 +14,7 @@ import {
   IC_Budget,
   IC_Card_V2,
   IC_Invite,
+  IC_Logout_V2,
   IC_Piggy_Bank,
   IC_Profile_V2,
   IC_Setting,
@@ -58,67 +60,62 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
       actionFunction: () => {},
     },
   ];
-
+  
   return (
-    <Box className="flex-1">
-      <MyLinearGradient type="background" color="blue">
-        <Box className="flex h-[250px] items-center p-4">
-          {/* back and setting box */}
-          <Box className="flex w-full flex-row justify-between">
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Ionicons name="arrow-back" size={30} color={`white`} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => Alert.alert('a function will be added soon')}>
-              <Text className={`text-[30px] text-[white]`}>•••</Text>
-            </TouchableOpacity>
-          </Box>
-
-          {/* avatar, name and username box*/}
-          <Box className="flex w-full items-center justify-center gap-4 p-6">
-            <Avatar size="2xl">
+    <ScrollView>
+      <Box className='h-full'>
+        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[40%]'>
+          <BackHeader />
+          <Box className='justify-center items-center gap-2 p-4'>
+            <Avatar size="xl">
               <AvatarFallbackText>{user.name}</AvatarFallbackText>
               <AvatarImage
                 source={{
                   uri: user.image,
                 }}
-              />
-            </Avatar>
+                />
+            </Avatar> 
             <Text className={`text-[24px] font-bold text-white`}>{user.name}</Text>
-            <Text className={`text-[15px] font-medium text-[#f6f7f8]`}>{user.username}</Text>
+            <Text className={`text-[14px] text-white`}>{user.username}</Text>
+            <Box className='z-10'>
+              <ThingToDo thingToDo={thingToDo} />
+            </Box>
           </Box>
-        </Box>
-      </MyLinearGradient>
+        </MyLinearGradient>
 
-      {/* Things to do component */}
-      <Box className="z-50 -mt-10 px-4">
-        <ThingToDo thingToDo={thingToDo} />
+        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
+            <Box className='gap-4 p-4 justify-center'>
+                <Box className='p-8'></Box>
+              <Box className={`bg-card-${appliedTheme} p-2 rounded-xl`}>
+                <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
+                <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
+                <Divider />
+
+                <SettingItem title="Budgets" IconComponent={IC_Budget} />
+                <Divider />
+
+                <SettingItem title="Bundles" IconComponent={IC_Subscription} />
+              </Box>
+
+              {/* setting and invite friends box */}
+              <Box className={`bg-card-${appliedTheme} p-2 rounded-xl`}>
+                {/* invite new friends box */}
+                <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
+                <Divider />
+                {/* setting box */}
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
+                  <SettingItem title="Settings" IconComponent={IC_Setting} />
+                </TouchableOpacity>
+              </Box>
+
+              <Box className={`bg-card-${appliedTheme} p-2 rounded-xl`}>
+                <SettingItem title="Logout" IconComponent={IC_Logout_V2} />
+              </Box>
+
+            </Box>
+        </MyLinearGradient>
       </Box>
-
-      <ScrollView className={`w-full flex-1 p-2`} contentContainerStyle={{ paddingTop: 20 }}>
-        {/* more features box */}
-        <Box className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
-          <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
-          <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
-          <Divider />
-
-          <SettingItem title="Budgets" IconComponent={IC_Budget} />
-          <Divider />
-
-          <SettingItem title="Bundles" IconComponent={IC_Subscription} />
-        </Box>
-
-        {/* setting and invite friends box */}
-        <Box className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
-          {/* invite new friends box */}
-          <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
-          <Divider />
-          {/* setting box */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
-            <SettingItem title="Setting" IconComponent={IC_Setting} />
-          </TouchableOpacity>
-        </Box>
-      </ScrollView>
-    </Box>
+    </ScrollView>
   );
 }
