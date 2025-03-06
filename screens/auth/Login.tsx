@@ -54,13 +54,13 @@ const Login: React.FC<Props> = ({ navigation }) => {
     }
 
     return (
-    <MyLinearGradient type='background' color='light-blue'>
+    <MyLinearGradient type='background' color={appliedTheme === "dark" ? 'dark' : 'light-blue'}>
     <Box className={`h-full p-10 pt-36 justify-between`}>
         <Box>
             {/* Title */}
             <Box className='my-10 gap-2'>
                 <Text className={`text-4xl text-text-${appliedTheme} font-bold`}>Welcome</Text>
-                <Text className={`text-xl text-subtext-${appliedTheme}`}>Sign in to your account</Text>
+                <Text className={`text-xl text-subText-${appliedTheme}`}>Sign in to your account</Text>
             </Box>
             {/* Main Login */}
             <Box className='gap-2'>

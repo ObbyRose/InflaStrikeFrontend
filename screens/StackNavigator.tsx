@@ -32,7 +32,7 @@ import ConfirmPinScreen from './PinScreen/ConfirmPinScreen';
 import EnterChangePinScreen from './PinScreen/EnterChangePinScreen';
 import testscreen from './testscreen';
 import VerifyIdentity from './idVerification/VerifyIdentity';
-import ConfirmGovernmentId from './idVerification/ConfirmGovernmentId';
+import ConfirmGovernmentId from '../components/idVerification/ConfirmGovernmentId';
 import TouchId from './idVerification/TouchId';
 import FaceId from './idVerification/FaceId';
 
@@ -65,7 +65,7 @@ const SettingsNavigator = () => (
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName="Login">
         {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
