@@ -19,7 +19,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("PERSONAL_INFO");
+    const [screenStep , setScreenStep ] = useState("MAIN");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState<any>({});

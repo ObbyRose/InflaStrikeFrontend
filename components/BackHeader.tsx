@@ -19,7 +19,7 @@ function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
 
     return (
         <SafeAreaView>
-            <Box className={`p-4 mb-[1rem] bg-background-${appliedTheme} flex-row items-center justify-between relative`}>
+            <Box className={`p-4 mb-[1rem] bg-transparent flex-row items-center justify-between relative`}>
                 
                 {/* Left Chevron Button */}
                 <TouchableOpacity

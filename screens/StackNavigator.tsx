@@ -59,7 +59,7 @@ const SettingsNavigator = () => (
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName="MainApp">
         {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
@@ -68,7 +68,7 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Portfolio" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="test" component={testscreen} />
