@@ -27,66 +27,141 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-          button: {
-            light: '#4A3EF6',
-            dark: '#363636',
-          },
-          text: {
-            light: '#1F2937',
-            dark: '#ffff',
-          },
-          divider: {
-            light: '#979797',
-            dark: '#545454',
-          },
-          layoutBottom:{
-            light: '#ffffff',
-            dark: '#383838',
-          },
-          layoutTop:{
-            light: '#1E3A8A',
-            dark: 'black',
-          },
-          iconBottom:{
-            light: '#474747',
-            dark: '#d9d9d9',
-          },
-          iconTop:{
-            light: '#d9d9d9',
-            dark: '#a8a8a8',
-          },
-          iconTopActive:{
-            light: '#ffff',
-            dark: '#ffff',
-          },
-          iconBottomActive:{
-            light: '#18097a',
-            dark: '#608afc',
-          },
-          iconGeneral: {
-            light: '#1F2937',
-            dark: '#608afc',
-          },
-          buttonText: {
-            light: "#ffffff",
-            dark: "#ffffff",
-          },
-          link : {
-            light: "#6666FF",
-            dark: "#6666FF",
-          },
-          gray : {
-            light: "#828A99",
-            dark: "#828A99",
-          },
-          lightGray : {
-            light: "#F2F2F7",
-            dark: "#F2F2F7",
-          },
-          default : {
-            light: "#ffffff",
-            dark: "#000000",
-          },
+        // V2
+        // Base Colors
+        orange: "#F26333",
+        purple: {
+          50: "#D4CAFF",
+          100: "#B8A8FF",
+          200: "#9C86FF",
+          300: "#8064FF",
+          400: "#6342FF",
+          500: "#5506FD",
+          600: "#4A05D9",
+          700: "#3F04B6",
+          800: "#340396",
+          900: "#290275",
+        },
+        cyan: {
+          50: "#E5F9FE",
+          100: "#D0F2FD",
+          200: "#B1ECFB",
+          300: "#8CE6F9",
+          400: "#67E0F7",
+          500: "#44C8E9",
+          600: "#33A8C8",
+          700: "#2787A7",
+          800: "#1C6686",
+          900: "#005267",
+        },
+
+        // Input
+        input: {
+          light: '#FFFFFF',
+          dark: '#161C2C',
+        },
+        inputPlaceholderText: {
+          light: '#888b94',
+          dark: '#888b94',
+        },
+
+
+        // Text
+        text: {
+          light: '#040C22',
+          dark: '#FBFDFF',
+        },
+        subText: {
+          light: '#363D4E',
+          dark: '#E5F9FE',
+        },
+        subTextGray: {
+          light: '#5C616F',
+          dark: '#FBFDFF',
+        },
+
+        // Button
+        button: {
+          light: '#4A3EF6',
+          dark: '#363636',
+        },
+        buttonDisable: {
+          light: '#E8EBEE',
+          dark: '#161C2C',
+        },
+        buttonDisableText: {
+          light: 'rgba(4, 12, 34, 0.4)',
+          dark: 'rgba(251, 253, 255, 0.4)',
+        },
+
+        // Backgrounds
+        card: {
+          light: '#FFFFFF',
+          dark: '#161C2C',
+        },
+        badge: {
+          light: '#E5F9FE',
+          dark: '#363D4E',
+        },
+
+        // Other
+        overlay: "rgba(0, 0, 0, 0.6)",
+
+        // V1 - DONT USE FOR NOW
+        divider: {
+          light: '#CDD4DB',
+          dark: '#545454',
+        },
+        layoutBottom:{
+          light: '#ffffff',
+          dark: '#383838',
+        },
+        layoutTop:{
+          light: '#1E3A8A',
+          dark: 'black',
+        },
+        iconBottom:{
+          light: '#474747',
+          dark: '#d9d9d9',
+        },
+        iconTop:{
+          light: '#d9d9d9',
+          dark: '#a8a8a8',
+        },
+        iconTopActive:{
+          light: '#ffff',
+          dark: '#ffff',
+        },
+        iconBottomActive:{
+          light: '#18097a',
+          dark: '#608afc',
+        },
+        iconGeneral: {
+          light: '#1F2937',
+          dark: '#608afc',
+        },
+        buttonText: {
+          light: "#ffffff",
+          dark: "#ffffff",
+        },
+        link : {
+          light: "#6666FF",
+          dark: "#6666FF",
+        },
+        gray : {
+          light: "#828A99",
+          dark: "#828A99",
+        },
+        lightGray : {
+          light: "#F2F2F7",
+          dark: "#F2F2F7",
+        },
+        default : {
+          light: "#ffffff",
+          dark: "#000000",
+        },
+
+        // Gluestack NativeWind Base
         primary: {
           0: 'rgb(var(--color-primary-0)/<alpha-value>)',
           50: 'rgb(var(--color-primary-50)/<alpha-value>)',
@@ -197,9 +272,6 @@ module.exports = {
           800: 'rgb(var(--color-typography-800)/<alpha-value>)',
           900: 'rgb(var(--color-typography-900)/<alpha-value>)',
           950: 'rgb(var(--color-typography-950)/<alpha-value>)',
-          white: '#FFFFFF',
-          gray: '#D4D4D4',
-          black: '#181718',
         },
         outline: {
           0: 'rgb(var(--color-outline-0)/<alpha-value>)',
@@ -233,8 +305,8 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#ffffff', // #f2f2f2
-          dark: '#2b2b2b',
+          light: '#ffffff',
+          dark: '#090D19',
         },
         indicator: {
           primary: 'rgb(var(--color-indicator-primary)/<alpha-value>)',
@@ -242,6 +314,7 @@ module.exports = {
           error: 'rgb(var(--color-indicator-error)/<alpha-value>)',
         },
       },
+      // Other Styling
       fontFamily: {
         heading: undefined,
         body: undefined,
@@ -267,6 +340,9 @@ module.exports = {
       },
       spacing: {
         '3.5': '0.875rem',
+        '21': '5.25rem',
+        '22': '5.5rem',
+        '23': '5.75rem',
       },
     },
   },
