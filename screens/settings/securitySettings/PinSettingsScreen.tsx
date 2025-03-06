@@ -22,6 +22,7 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
                     <Text className={`text-[24px] font-bold text-white`}>Pin Settings</Text>
                 </Box>
             </MyLinearGradient>
+            
             <CardUpRounded className='p-0'>
                 <Box className={`flex gap-2 rounded-t-3xl bg-card-${appliedTheme} w-full p-4`}>
                     <TouchableOpacity onPress={() => navigation.navigate('ChangePin')}>
@@ -43,7 +44,7 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
                         <SettingItem title="Add / Change Touch ID" IconComponent={IC_Fingerprint} />
                     </TouchableOpacity>
                     <Divider />
-                    
+
                 </Box>
             </CardUpRounded>
         </Box>

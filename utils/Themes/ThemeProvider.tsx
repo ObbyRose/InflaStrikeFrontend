@@ -28,8 +28,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     let appliedTheme = theme === "system" ? (systemTheme ?? "light") : theme;
-
-    appliedTheme = "dark";
     
     return (
         <ThemeContext.Provider value={{ appliedTheme,theme, setTheme: setThemeMode }}>

@@ -60,21 +60,21 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   ];
 
   return (
-    <View className="flex-1">
+    <Box className="flex-1">
       <MyLinearGradient type="background" color="blue">
-        <View className="flex h-[250px] items-center p-4">
+        <Box className="flex h-[250px] items-center p-4">
           {/* back and setting box */}
-          <View className="flex w-full flex-row justify-between">
+          <Box className="flex w-full flex-row justify-between">
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Ionicons name="arrow-back" size={30} color={`white`} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => Alert.alert('a function will be added soon')}>
               <Text className={`text-[30px] text-[white]`}>•••</Text>
             </TouchableOpacity>
-          </View>
+          </Box>
 
           {/* avatar, name and username box*/}
-          <View className="flex w-full items-center justify-center gap-4 p-6">
+          <Box className="flex w-full items-center justify-center gap-4 p-6">
             <Avatar size="2xl">
               <AvatarFallbackText>{user.name}</AvatarFallbackText>
               <AvatarImage
@@ -85,18 +85,18 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
             </Avatar>
             <Text className={`text-[24px] font-bold text-white`}>{user.name}</Text>
             <Text className={`text-[15px] font-medium text-[#f6f7f8]`}>{user.username}</Text>
-          </View>
-        </View>
+          </Box>
+        </Box>
       </MyLinearGradient>
 
       {/* Things to do component */}
-      <View className="z-50 -mt-10 px-4">
+      <Box className="z-50 -mt-10 px-4">
         <ThingToDo thingToDo={thingToDo} />
-      </View>
+      </Box>
 
       <ScrollView className={`w-full flex-1 p-2`} contentContainerStyle={{ paddingTop: 20 }}>
         {/* more features box */}
-        <View className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
+        <Box className={`bg-card-${appliedTheme} m-2 rounded-xl p-2`}>
           <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
           <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
           <Divider />
@@ -105,10 +105,10 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
           <Divider />
 
           <SettingItem title="Bundles" IconComponent={IC_Subscription} />
-        </View>
+        </Box>
 
         {/* setting and invite friends box */}
-        <View className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
+        <Box className={`bg-card-${appliedTheme} m-2 gap-4 rounded-xl p-2`}>
           {/* invite new friends box */}
           <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
           <Divider />
@@ -117,8 +117,8 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
             onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
             <SettingItem title="Setting" IconComponent={IC_Setting} />
           </TouchableOpacity>
-        </View>
+        </Box>
       </ScrollView>
-    </View>
+    </Box>
   );
 }
