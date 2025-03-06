@@ -27,7 +27,7 @@ function CoinScreen() {
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
     
-    const [category, setCategory] = useState("Info");
+    const [category, setCategory] = useState("Price");
 
     const ErrorContext = ({ err } : {err : string}) => (
         <Box className="flex-1 items-center justify-center">
