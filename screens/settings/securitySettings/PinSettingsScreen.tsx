@@ -10,6 +10,7 @@ import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { Text } from '@/components/ui/text';
 import PurpleSwitch from '@/components/PurpleSwitch';
 import SettingItem from '@/components/SettingItems';
+import CardUpRounded from '@/components/CardUpRounded';
 
 const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -17,16 +18,14 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <Box className="h-full">
-            <MyLinearGradient type="background" color="blue">
+            <MyLinearGradient type="background" color="blue" className='h-[25%]'>
                 <BackHeader />
-
-                <Box className="flex h-[75px] w-full justify-center p-4">
-                    <Text className={`relative -top-6 text-[24px] font-bold text-white`}>Pin Settings</Text>
+                <Box className="h-[45%] justify-end p-4">
+                    <Text className={`text-[24px] font-bold text-white`}>Pin Settings</Text>
                 </Box>
             </MyLinearGradient>
-
-            <ScrollView className={`relative -top-6 flex w-full gap-3 rounded-t-3xl bg-card-${appliedTheme}`}>
-                <Box className={`flex gap-2 bg-card-${appliedTheme} w-full p-4`}>
+            <CardUpRounded className='p-0'>
+                <Box className={`flex gap-2 rounded-t-3xl bg-card-${appliedTheme} w-full p-4`}>
                     <TouchableOpacity onPress={() => navigation.navigate('ChangePin')}>
                         <SettingItem title="Change PIN" IconComponent={IC_Password_V2} />
                     </TouchableOpacity>
@@ -48,7 +47,7 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
                     <Divider />
 
                 </Box>
-            </ScrollView>
+            </CardUpRounded>
         </Box>
     );
 };

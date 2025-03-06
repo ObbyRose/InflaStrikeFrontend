@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { IC_Arrow_Left, IC_Arrow_Left_White, IC_ArrowLeft } from "@/utils/constants/Icons";
-import { TouchableOpacity, Dimensions } from "react-native";
+import { IC_Arrow_Left, IC_Arrow_Left_White } from "@/utils/constants/Icons";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Box } from "./ui/box";
@@ -11,15 +11,25 @@ interface BackHeaderProps {
     title?: string;
     icons?: string[];
     onPressIcons?: Function[];
+    bgColor?: "transparent" | "white" | "black";
 }
 
-function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
+function BackHeader({ title, icons, onPressIcons, bgColor = "transparent" }: BackHeaderProps) {
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
 
+    // Determine the background class based on the bgColor prop
+    const getBgClass = () => {
+        switch(bgColor) {
+            case "white": return "bg-white";
+            case "black": return "bg-black";
+            default: return "bg-transparent";
+        }
+    };
+
     return (
         <SafeAreaView>
-            <Box className={`p-4 mb-[1rem] bg-background-${appliedTheme} flex-row items-center justify-between relative`}>
+            <Box className={`p-4 mb-[1rem] ${getBgClass()} flex-row items-center justify-between relative`}>
                 
                 {/* Left Chevron Button */}
                 <TouchableOpacity
@@ -41,7 +51,7 @@ function BackHeader({ title, icons, onPressIcons }: BackHeaderProps) {
                 {/* Right Icons */}
                 <Box className="flex-row items-center absolute gap-2 right-4">
                     {icons?.map((icon, index) => (
-                        <TouchableOpacity key={icon}>
+                        <TouchableOpacity key={icon} onPress={() => onPressIcons?.[index]?.()}>
                             <Text>{icon}</Text>
                         </TouchableOpacity>
                     ))}
