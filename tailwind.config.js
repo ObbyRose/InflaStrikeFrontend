@@ -13,10 +13,15 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /^(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right|flex|grid|items|justify|opacity|z|overflow|rounded||space|transition|duration|ease|scale|translate|inset|order|col|row|aspect|content|place|auto|relative|absolute|fixed|sticky|hidden|block|inline|table|text|font|leading|tracking|align|shadow)-.*/,
+        /^(bg|border|text|stroke|fill|h|w|gap|p|m|top|bottom|left|right|flex|grid|items|justify|opacity|z|overflow|rounded|space|scale|translate|inset|col|row|text|font|leading|tracking|align|shadow)-\d+/
     },
     {
-      pattern: /^(bg|text|fill|icon|divider|button|link|layout|gray|default)-\w+-light|dark$/,
+      pattern:
+      /^(bg|text|border|fill)-(background|badge|subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
+    },
+    {
+      pattern:
+      /^(bg|text|border|fill)-(orange|purple|cyan)-(50|100|200|300|400|500|600|700|800|900)$/,
     },
   ],
   theme: {
