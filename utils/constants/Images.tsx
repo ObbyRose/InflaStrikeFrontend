@@ -701,3 +701,216 @@ export const IM_PhoneHandVerified = ({ className }: ImageProps) => {
       </Box>
   );
 };
+export const IM_America = ({ className }: ImageProps) => {
+  return (
+      <Box className={cn(className)}>
+        <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      fill="none"
+    >
+      <Path
+        clipRule="evenodd"
+        d="M127.069 94.933a8 8 0 012.928-10.928l19.919-11.5a8 8 0 0110.928 2.928v0a8 8 0 01-2.928 10.928l-19.919 11.5a8 8 0 01-10.928-2.928v0z"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M70 24c-5.523 0-10 4.477-10 10v133c0 5.523 4.477 10 10 10h60c5.523 0 10-4.477 10-10v-20h-9.151a7 7 0 110-14h.5a7.5 7.5 0 010-15H128a8 8 0 010-16h12V34c0-5.523-4.477-10-10-10H70z"
+        fill="#252D3F"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M72 32a8 8 0 00-8 8v116a8 8 0 008 8h56a8 8 0 008-8v-9h-5.151a7 7 0 110-14h.5a7.5 7.5 0 010-15H128a8 8 0 010-16h8V40a8 8 0 00-8-8H72z"
+        fill="#4A3EF6"
+      />
+      <Rect
+        x={80}
+        y={56}
+        width={40}
+        height={40}
+        rx={20}
+        fill="url(#paint0_linear_835_5795)"
+      />
+      <Mask
+        id="a"
+        style={{
+          maskType: "luminance"
+        }}
+        maskUnits="userSpaceOnUse"
+        x={90}
+        y={66}
+        width={20}
+        height={20}
+      >
+        <Path fill="#fff" d="M90 66H110V86H90z" />
+      </Mask>
+      <G mask="url(#a)" fill="#fff">
+        <Path d="M99.375 80.5c1-1 2.5-1 3.5 0l.75.75L106 78.625c-.875-.5-1.625-.5-2.5-.5-.875-.125-1.75-.375-1.75-1.125s1-.5 1.75-1.875c0 0 3.375-9.125-3.625-9.125-6.875 0-3.5 9.125-3.5 9.125.75 1.25 1.75 1 1.75 1.875s-.875.875-1.75 1c-1.375.125-2.625-.125-3.875 2.125C91.75 81.5 91.375 86 91.375 86h10l-2-2c-1-1-1-2.5 0-3.5zM108.625 86s-.125-1.125-.25-2.5L106 86h2.625z" />
+        <Path d="M102.875 85.625l-2.5-2.5c-.5-.5-.5-1.25 0-1.75s1.25-.5 1.75 0L103.75 83l4.125-4.5c.5-.5 1.25-.5 1.75-.125.5.5.5 1.25.125 1.75l-5 5.375c-.375.375-.625.5-1 .5s-.625-.125-.875-.375z" />
+      </G>
+      <Rect
+        x={85}
+        y={110}
+        width={37}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Rect
+        x={85}
+        y={116}
+        width={37}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Rect x={73} y={107} width={8} height={8} rx={4} fill="#5ACC6D" />
+      <Path
+        d="M75.133 111l1.334 1.333 2.666-2.666"
+        stroke="#fff"
+        strokeWidth={0.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Rect x={73} y={119} width={8} height={8} rx={4} fill="#5ACC6D" />
+      <Path
+        d="M75.133 123l1.334 1.333 2.666-2.666"
+        stroke="#fff"
+        strokeWidth={0.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Rect x={73} y={131} width={8} height={8} rx={4} fill="#5ACC6D" />
+      <Path
+        d="M75.133 135l1.334 1.333 2.666-2.666"
+        stroke="#fff"
+        strokeWidth={0.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Rect
+        x={85}
+        y={122}
+        width={37}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Rect
+        x={85}
+        y={128}
+        width={37}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Rect
+        x={85}
+        y={134}
+        width={18}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.304058}
+      />
+      <Circle cx={100} cy={170} r={4} fill="#fff" fillOpacity={0.16206} />
+      <Rect
+        x={94}
+        y={28}
+        width={15}
+        height={2}
+        rx={1}
+        fill="#fff"
+        fillOpacity={0.164458}
+      />
+      <Circle cx={92} cy={29} r={1} fill="#fff" fillOpacity={0.164458} />
+      <Path
+        d="M35.149 168.23c1.397-2.119 2.096-4.099 2.096-5.94 0-5.134-6.63-25.789-2.593-40.341s10.46-19.016 2.955-48.217c-1.617-8.747 16.352-16.79 22.837 15.913"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M44 46.5v4M46 48.5h-4M156 158.5v4M158 160.5h-4"
+        stroke="#4A3EF6"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+      <Path
+        d="M179.689 89.628a1.94 1.94 0 110-3.878 1.94 1.94 0 010 3.878z"
+        stroke="#69DB7C"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M15 108.5v4M17 110.5h-4"
+        stroke="#DB7F69"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+      <Path
+        d="M37.507 74.006a3.906 3.906 0 012.11-1.757c2.063-.74 4.377.223 5.168 2.151l1.252 3.19c.376.96-.14 2.024-1.16 2.39L39.246 82v0"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Rect
+        x={120}
+        y={102}
+        width={39}
+        height={16}
+        rx={8}
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Rect
+        x={123.849}
+        y={118}
+        width={32}
+        height={15}
+        rx={7.5}
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Rect
+        x={123.849}
+        y={133}
+        width={29}
+        height={14}
+        rx={7}
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Path
+        d="M142.5 16.5l1-3M146.135 20.024l2.828-1.414M137.414 16.828L136 14"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+        strokeLinecap="square"
+      />
+      <Path
+        d="M97.142 176.267S84.43 189.272 83 193"
+        stroke="#ADB8CC"
+        strokeWidth={1.5}
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_835_5795"
+          x1={100.057}
+          y1={115.829}
+          x2={139.943}
+          y2={75.9431}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop stopColor="#52D9FF" />
+          <Stop offset={1} stopColor="#D51AFF" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+      </Box>
+  );
+};
