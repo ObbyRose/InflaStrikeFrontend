@@ -242,7 +242,7 @@ const PortfolioScreen = ({navigation}: Props) => {
         <Box>
             <Box className="flex-row items-center justify-between mt-4">
                 <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Transactions History</Text>
-                <Text className="text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
+                <Text className="text-[#0A6CFF]" onPress={() => {}}>
                     See All
                 </Text>
             </Box>
