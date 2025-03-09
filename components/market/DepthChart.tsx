@@ -5,6 +5,7 @@ import { Box } from '../ui/box';
 import { Text } from '../ui/text';
 import { Dimensions } from 'react-native';
 import { Spinner } from '../ui/spinner';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 interface Order {
     price: number;
@@ -28,6 +29,7 @@ function DepthChartComponent({ symbol = 'BTCUSDT' }: DepthChartProps) {
     const [midPrice, setMidPrice] = useState<number>(0);
     const [maxVolume, setMaxVolume] = useState<number>(0);
     const { width } = Dimensions.get('window');
+    const { appliedTheme } = useTheme();
 
     useEffect(() => {
         async function fetchOrderBook(): Promise<void> {
@@ -150,7 +152,7 @@ function DepthChartComponent({ symbol = 'BTCUSDT' }: DepthChartProps) {
     };
 
     return (
-    <Box className="bg-white rounded-lg flex flex-col space-y-4">                
+    <Box className={`bg-card-${appliedTheme} rounded-lg flex flex-col space-y-4`}>                
         {loading ?
             <Spinner className='h-[235px]'/>
         : 

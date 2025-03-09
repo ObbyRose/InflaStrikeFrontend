@@ -53,48 +53,48 @@ function CoinInfo({ symbol = 'BTCUSDT' }: CoinInfoTextroTexts) {
     }, [])
 
     return (
-        <Box className="relative bg-gray-100 p-4 rounded-lg m-5 gap-4">
+        <Box className={`relative bg-card-${appliedTheme} p-4 rounded-lg m-5 gap-4`}>
             {coinDetails ? (<>
-                <Text className="text-xl font-bold">About {coinDetails.name}</Text>
+                <Text className={`font-bold text-xl text-text-${appliedTheme}`}>About {coinDetails.name}</Text>
                 <Text className={`absolute top-4 right-4 font-bold text-link-${appliedTheme}`}>Read More</Text>
-                <Text><Text className="font-bold">Description:</Text> {coinDetails.description.slice(0,100) + "..."}</Text>
+                <Text className={`text-text-${appliedTheme}`}><Text className={`font-bold text-text-${appliedTheme}`}>Description:</Text> {coinDetails.description.slice(0,100) + "..."}</Text>
                 
                 <Box className="gap-3">
                     <Box className="flex-row justify-between">
                         <Box className="flex-row gap-3 items-center">
                             <IC_Envelope className="w-5 h-5"/>
-                            <Text className="font-bold">Market Cap:</Text> 
+                            <Text className={`font-bold text-text-${appliedTheme}`}>Market Cap:</Text> 
                         </Box>
-                        <Text>${coinDetails.market_cap.toLocaleString()}</Text>
+                        <Text className={`text-text-${appliedTheme}`}>${coinDetails.market_cap.toLocaleString()}</Text>
                     </Box>
                     <Box className="flex-row justify-between">
                         <Box className="flex-row gap-3">
                             <IC_Envelope className="w-5 h-5"/>
-                            <Text className="font-bold">Circulating Supply</Text> 
+                            <Text className={`font-bold text-text-${appliedTheme}`}>Circulating Supply</Text> 
                         </Box>
-                        <Text>{coinDetails.circulating_supply.toLocaleString()}</Text>
+                        <Text className={`text-text-${appliedTheme}`}>{coinDetails.circulating_supply.toLocaleString()}</Text>
                     </Box>
                     <Box className="flex-row justify-between">
                         <Box className="flex-row gap-3">
                             <IC_Envelope className="w-5 h-5"/>
-                            <Text className="font-bold">Total Supply:</Text> 
+                            <Text className={`font-bold text-text-${appliedTheme}`}>Total Supply:</Text> 
                         </Box>
-                        <Text>{coinDetails.total_supply.toLocaleString()}</Text>
+                        <Text className={`text-text-${appliedTheme}`}>{coinDetails.total_supply.toLocaleString()}</Text>
                     </Box>
                     <Box className="flex-row justify-between">
                         <Box className="flex-row gap-3">
                             <IC_Envelope className="w-5 h-5"/>
-                            <Text className="font-bold">Max Supply:</Text> 
+                            <Text className={`font-bold text-text-${appliedTheme}`}>Max Supply:</Text> 
                         </Box>
-                        <Text>{coinDetails.max_supply.toLocaleString()}</Text>
+                        <Text className={`text-text-${appliedTheme}`}>{coinDetails.max_supply.toLocaleString()}</Text>
                     </Box>
                     <Pressable onPress={() => Linking.openURL(coinDetails.website)}>
                     <Box className="flex-row justify-between">
                             <Box className="flex-row gap-3">
                                 <IC_Envelope className="w-5 h-5"/>
-                                <Text className="font-bold">Website:</Text> 
+                                <Text className={`font-bold text-text-${appliedTheme}`}>Website:</Text> 
                             </Box>
-                            <Text>{coinDetails.website}</Text>
+                            <Text className={`text-text-${appliedTheme}`}>{coinDetails.website}</Text>
                         </Box>
                     </Pressable>
                 </Box>

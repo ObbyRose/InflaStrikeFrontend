@@ -27,13 +27,13 @@ function CoinOrderHistory() {
     const categories = ["Order Book", "Trade History"];
 
     return (
-    <Box className="relative rounded-lg p-3 bg-white w-full">
+    <Box className={`relative rounded-lg p-3 bg-card-${appliedTheme} w-full`}>
         {/* Header Tabs */}
         <Box className={`relative flex-row pt-2 gap-4`}>
             {categories.map(category =>
                 <Text key={category} onPress={() => setSelectedCategory(category)}
                 className={`${category === selectedCategory ? 
-                    "text-black font-semibold border-b-4 border-indigo-500 z-10" :
+                    `text-text-${appliedTheme} font-semibold border-b-4 border-indigo-500 z-10` :
                     `text-gray-${appliedTheme}`
                     }`}>
                     {category}

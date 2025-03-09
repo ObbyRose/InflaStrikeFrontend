@@ -96,7 +96,7 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                     placeholder="Search Crypto..."
                     value={searchQuery}
                     onChangeText={setSearchQuery}
-                    className="flex-1 text-black"
+                    className={`"flex-1 text-black"`}
                 />
             </Box>
 

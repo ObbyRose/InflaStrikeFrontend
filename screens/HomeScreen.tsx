@@ -101,8 +101,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                     <Box className="flex flex-col gap-4 p-4">
                         <Text className="text-white font-medium text-[17px]">Safe-to-spend</Text>
                         <Box className="flex-row gap-4 items-center">
-                        <Text className="text-white font-medium text-4xl">$ 2,987.56</Text>
-                        <IC_Info className="w-6 h-6" />
+                            <Text className="text-white font-medium text-4xl">${user?.nlve || 0}</Text>
+                            <IC_Info className="w-6 h-6" />
                         </Box>
                         <Text className="text-white text-[14px]">Updated 2 mins ago</Text>
                     </Box>

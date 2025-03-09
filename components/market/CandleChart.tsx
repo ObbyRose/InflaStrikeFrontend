@@ -74,7 +74,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
     <Box>
         {chartData?.length ?
         <CandlestickChart.Provider data={chartData}>
-            <Box className="mx-auto h-fit">
+            <Box className={`mx-auto h-fit bg-card-${appliedTheme} p-1 rounded-xl`}>
                 {/* Candlestick Chart */}
                 <CandlestickChart width={width * 0.95} height={200}>
                     <CandlestickChart.Candles />
@@ -106,7 +106,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
                 </View>
 
                 {/* Date Labels */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5, marginTop: 5 }}>
+                <Box style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5, marginTop: 5 }}>
                     {chartData.map((item, index) => (
                         index % Math.floor(chartData.length / 5) === 0 ? ( // Show date every few bars
                             <Text key={index} style={{ fontSize: 10, color: 'gray' }}>
@@ -116,7 +116,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
                             <Text key={index} style={{ fontSize: 10, color: 'gray' }}> </Text>
                         )
                     ))}
-                </View>
+                </Box>
             </Box>
         </CandlestickChart.Provider>
         :
@@ -130,7 +130,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
                         key={interval}
                         onPress={() => handleIntervalChange(interval)}
                         className={`px-3 py-1 mx-1 rounded-2xl ${
-                            selectedInterval === interval ? "bg-indigo-600" : "bg-white"
+                            selectedInterval === interval ? "bg-indigo-600" : `bg-card-${appliedTheme}`
                         }`}
                     >
                         <Text className={`text-sm text-${selectedInterval === interval ? "white" : `gray-${appliedTheme}`}`}>

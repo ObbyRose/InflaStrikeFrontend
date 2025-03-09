@@ -12,6 +12,7 @@ import { ScrollView } from 'react-native';
 import CoinOrderHistory from '@/components/market/CoinOrderHistory';
 import DepthChartComponent from '@/components/market/DepthChart';
 import CoinInfo from '@/components/market/CoinInfo';
+import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 
 
 type RootStackParamList = {
@@ -49,21 +50,18 @@ function CoinScreen() {
     
 
     const CoinContent = () => (
-        <ScrollView
-            className='flex-1 bg-white'
-        >
-            <BackHeader 
-                title={coin.symbol} 
-                icons={["icon1","icon2"]}
-            />
+        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
 
+        <ScrollView
+            className={`flex-1`}
+            >
             <Box className='flex-1 p-1'>
                 {/* Title */}
                 <Box className='p-5 gap-6'>
                     <Box className='flex-row justify-between'>
                         <Box className='gap-3'>
-                            <Text className={`text-gray-${appliedTheme}`}>{coin.symbol}</Text>
-                            <Text className={`text-3xl font-extrabold`}>
+                            <Text className={`text-subText-${appliedTheme}`}>{coin.symbol}</Text>
+                            <Text className={`text-3xl font-extrabold text-text-${appliedTheme}`}>
                                 {formatNumber(parseFloat(coin.lastPrice), 2)}
                             </Text>
                         </Box>
@@ -94,6 +92,7 @@ function CoinScreen() {
                 </Box>
             </Box>
         </ScrollView>
+    </MyLinearGradient>
     );
 
     try {
