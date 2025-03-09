@@ -914,3 +914,26 @@ export const IM_America = ({ className }: ImageProps) => {
       </Box>
   );
 };
+export const IM_Layout = ({ className }: ImageProps) => {
+  return (
+      <Box className={cn(className)}>
+    <Svg
+      width={375}
+      height={132}
+      viewBox="0 0 375 132"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <G filter="url(#filter0_d_2381_4615)">
+        <Path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M188 32c15.089 0 26.499 11.605 32.714 19.873C224.3 56.643 229.745 60 235.713 60H375v56H0V60h140.287c5.968 0 11.413-3.356 14.999-8.127C161.501 43.605 172.911 32 188 32z"
+          fill="#fff"
+        />
+      </G>
+      <Defs></Defs>
+    </Svg>
+      </Box>
+  );
+};
