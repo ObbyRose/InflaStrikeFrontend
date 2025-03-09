@@ -1,5 +1,6 @@
 import BackHeader from '@/components/BackHeader'
 import CardUpRounded from '@/components/CardUpRounded'
+import DropdownTothor from '@/components/DropdownTothor'
 import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import LineChartWagmi from '@/components/LineChartWagmi'
 import { Box } from '@/components/ui/box'
@@ -7,11 +8,12 @@ import { Button, ButtonText } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { IC_Help, IC_Info, IC_Info_Circle, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
-import React from 'react'
+import React, { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 
 const TothorScreen = () => {
   const { appliedTheme } = useTheme()
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <Box className={`bg-background-${appliedTheme} h-full`}>
     <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-1/4 p-4'>
@@ -61,8 +63,9 @@ const TothorScreen = () => {
         <Box className='p-2' />
 
         <MyLinearGradient type='button' color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-          <Button className='w-full rounded-full'>
+          <Button className='w-full rounded-full' onPress={() => setIsOpen(true)}>
             <ButtonText className='text-[16px]'>Start Saving With Tothor</ButtonText>
+            {isOpen && <DropdownTothor isOpen={isOpen} setIsOpen={setIsOpen} />}
           </Button>
         </MyLinearGradient>
 
