@@ -5,20 +5,23 @@ import { Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragI
 import { View, Text, TextInput, ScrollView } from 'react-native';
 import { Box } from "../ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
+import { signUpInputs } from "@/types/NavigationTypes";
 
 interface CountryPhoneInputProps {
     phoneNumber: string;
-    setPhoneNumber?: React.Dispatch<React.SetStateAction<string>>;
+    setPhoneNumber?: (val: string) => void;
     updateField?: (field: string, value: string) => void;
-    setPrefix?: React.Dispatch<React.SetStateAction<string>>;
+    prefix?: string;
+    setPrefix?: (val: string) => void;
     error?: string;
-    setError?: React.Dispatch<React.SetStateAction<string>>;
+    setError?: (val: string) => void;
 }
 
-const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix, error, setError}: CountryPhoneInputProps) => {
+const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, prefix, setPrefix, error, setError}: CountryPhoneInputProps) => {
     const { appliedTheme } = useTheme();
-    const [selectedCountry, setSelectedCountry] = useState({ code: "+972", label: "Israel", flag: "🇮🇱" });
-
+    const [selectedCountry, setSelectedCountry] = useState(() => 
+        countryCodes.find(country => prefix === country.code) || { code: "+972", label: "Israel", flag: "🇮🇱" });
+    
     const onChangeText = (text: string) => {
         if(setError) setError("");
         // If need prefix
@@ -36,42 +39,43 @@ const CountryPhoneInput = ({ phoneNumber, updateField, setPhoneNumber, setPrefix
             <Box className="flex flex-row flex-wrap gap-2 items-center ">
                 {/* Country Code Select */}
                 <Select
-                selectedValue={selectedCountry.code}
-                onValueChange={(val) => {
-                    const country = countryCodes.find(c => c.code === val);
-                    if (country) setSelectedCountry(country);
-                }}
+                    selectedValue={selectedCountry.code}
+                    onValueChange={(val) => {
+                        const country = countryCodes.find(c => c.code === val);
+                        if (country) setSelectedCountry(country);
+                        if(setPrefix) setPrefix(val);
+                    }}
                 >
-                <SelectTrigger className={`w-fit px-1 border-0 bg-input-${appliedTheme} rounded-lg h-[55px]`}>
-                    <SelectInput className={`text-text-${appliedTheme}`}
-                    placeholder={selectedCountry.flag + " " + selectedCountry.label}
-                    value={selectedCountry.flag + " " + selectedCountry.label}
-                    pointerEvents="none"
-                    />
-                    <SelectIcon className="mr-2" as={ChevronDownIcon} />
-                </SelectTrigger>
+                    <SelectTrigger className={`w-fit px-1 border-0 bg-input-${appliedTheme} rounded-lg h-[55px]`}>
+                        <SelectInput className={`text-text-${appliedTheme}`}
+                        placeholder={selectedCountry.flag + " " + selectedCountry.label}
+                        value={selectedCountry.flag + " " + selectedCountry.label}
+                        pointerEvents="none"
+                        />
+                        <SelectIcon className="mr-2" as={ChevronDownIcon} />
+                    </SelectTrigger>
 
-                <SelectPortal className="">
-                    <SelectBackdrop />
-                    <SelectContent className={`max-h-[400px] bg-card-${appliedTheme} `}>
-                        <SelectDragIndicatorWrapper className="">
-                            <SelectDragIndicator className=""/>
-                        </SelectDragIndicatorWrapper>
-                        
-                        <ScrollView className="w-full ">
-                            {countryCodes.map((country) => (
-                                <SelectItem
-                                    key={country.code + country.label}
-                                    label={country.flag + " " + country.label}
-                                    value={country.code}
-                                    className={`selected:bg-red-500 ${selectedCountry.code === country.code ? "bg-red-500 text-white" : "text-text-${appliedTheme}"}`}
-                                    textStyle={{ className: `text-text-${appliedTheme}` }}
-                                    style= { { backgroundColor: "transparent"} }
-                                />
-                            ))}
-                        </ScrollView>
-                    </SelectContent>
-                </SelectPortal>
+                    <SelectPortal className="">
+                        <SelectBackdrop />
+                        <SelectContent className={`max-h-[400px] bg-card-${appliedTheme} `}>
+                            <SelectDragIndicatorWrapper className="">
+                                <SelectDragIndicator className=""/>
+                            </SelectDragIndicatorWrapper>
+                            
+                            <ScrollView className="w-full ">
+                                {countryCodes.map((country) => (
+                                    <SelectItem
+                                        key={country.code + country.label}
+                                        label={country.flag + " " + country.label}
+                                        value={country.code}
+                                        className={`selected:bg-red-500 ${selectedCountry.code === country.code ? "bg-red-500 text-white" : "text-text-${appliedTheme}"}`}
+                                        textStyle={{ className: `text-text-${appliedTheme}` }}
+                                        style= { { backgroundColor: "transparent"} }
+                                    />
+                                ))}
+                            </ScrollView>
+                        </SelectContent>
+                    </SelectPortal>
                 </Select>
 
                 {/* Phone Number Input */}

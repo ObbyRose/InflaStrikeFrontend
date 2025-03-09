@@ -15,16 +15,16 @@ import MembershipModal from './MembershipModal'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
-    finalData: SignupFinalDataType | null;
     navigation: any;
 }
 
 const dummyAddress = {"address": {"city": "Jerusalem", "coords": {"lat": 9.040974799999999, "lng": 7.494399499999999}, "country": "Israel", "place_id": "EiZFbWVrIFJlZmEnaW0gU3RyZWV0LCBKZXJ1c2FsZW0sIElzcmFlbCIuKiwKFAoSCasOiBsmKAMVEUZVPxWx5J3mEhQKEglL_ME01tcCFRHL4W5FPmJv2Q", "postal": "900103", "street": "Emek Refa'im Street"}}
 
-function SignupAlmostThere({ handleScreenChange, setHeaderStep, finalData, navigation}: SignupPersonalInformationProps) {
+function SignupAlmostThere({ handleScreenChange, setHeaderStep, formHook, navigation}: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const finalData = formHook.values;
 
     useEffect(() => setHeaderStep(prev => prev !== 3 ? 3: prev), [])
     
