@@ -1,11 +1,18 @@
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { PieChart } from 'react-native-svg-charts';
-import { Alert, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
+import BackHeader from '@/components/BackHeader';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
+import { Props } from '@/types/NavigationTypes';
+import CryptoMarketCard from '@/components/CryptoMarketCard';
+import { IC_Bitcoin, IC_Doge, IC_Ethereum, IC_Tothor, IC_Tothor_Logo_Only, IC_Xrp } from '@/utils/constants/Icons';
+import { Divider } from '@/components/ui/divider';
+import { fetchBitcoinLineData, fetchBitcoinLivePrice, fetchBitcoinPercentageGain, fetchEthereumLineData, fetchEthereumLivePrice, fetchEthereumPercentageGain, fetchXRPLineData, fetchXRPLivePrice, fetchXRPPercentageGain } from '@/utils/api/external/BinanceAPI';
 
 interface PortfolioData {
   key: string;
@@ -13,16 +20,88 @@ interface PortfolioData {
   color: string;
 }
 
-const PortfolioScreen = () => {
-  const theme = 'light';
-  const [selectedSlice, setSelectedSlice] = useState<PortfolioData | null>(null);
+const dummyPieData: PortfolioData[] = [
+  { key: 'Available Money', value: 1000, color: 'red' },
+  { key: 'Bitcoin', value: 500, color: 'blue' },
+  { key: 'Ethereum', value: 200, color: 'green' },
+  { key: 'XRP', value: 100, color: 'yellow' },
+];
 
-  const data: PortfolioData[] = [
-    { key: 'Available Money', value: 1000, color: 'red' },
-    { key: 'Bitcoin', value: 500, color: 'blue' },
-    { key: 'Ethereum', value: 200, color: 'green' },
-    { key: 'XRP', value: 100, color: 'yellow' },
-  ];
+const dummyQuickBuy = [
+  IC_Bitcoin,
+  IC_Ethereum,
+  IC_Xrp,
+  IC_Doge,
+  IC_Tothor_Logo_Only,
+]
+
+
+const PortfolioScreen = ({navigation}: Props) => {
+  const { appliedTheme } = useTheme();
+  const [selectedSlice, setSelectedSlice] = useState<PortfolioData | null>(null);
+  const [historyData, setHistoryData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  
+  useEffect(() => {
+      async function fetchData() {
+          try {
+              setLoading(true);
+              const [btcLine, ethLine, xrpLine] = await Promise.all([
+                  fetchBitcoinLineData(),
+                  fetchEthereumLineData(),
+                  fetchXRPLineData(),
+              ]);
+
+              const [btcPrice, ethPrice, xrpPrice] = await Promise.all([
+                  fetchBitcoinLivePrice(),
+                  fetchEthereumLivePrice(),
+                  fetchXRPLivePrice(),
+              ]);
+
+              const [btcChange, ethChange, xrpChange] = await Promise.all([
+                  fetchBitcoinPercentageGain(),
+                  fetchEthereumPercentageGain(),
+                  fetchXRPPercentageGain(),
+              ]);
+
+              setHistoryData([
+                  { 
+                      name: "Bitcoin", 
+                      symbol: "BTC", 
+                      icon: IC_Bitcoin, 
+                      price: btcPrice, 
+                      change: btcChange, 
+                      lineData: btcLine, 
+                      bgColor: "bg-[hsl(7_91%_60%/0.1)]" 
+                  },
+                  { 
+                      name: "Ethereum", 
+                      symbol: "ETH", 
+                      icon: IC_Ethereum, 
+                      price: ethPrice, 
+                      change: ethChange, 
+                      lineData: ethLine, 
+                      bgColor: "bg-[hsl(169_44%_58%/0.1)]"
+                  },
+                  { 
+                      name: "XRP", 
+                      symbol: "XRP", 
+                      icon: IC_Xrp, 
+                      price: xrpPrice, 
+                      change: xrpChange, 
+                      lineData: xrpLine, 
+                      bgColor: "bg-[hsl(223_99%_69%/0.1)]"
+                  },
+              ]);
+          } catch (error) {
+              console.error("Error fetching market data:", error);
+          } finally {
+              setLoading(false);
+          }
+      }
+
+      fetchData();
+  }, []);
 
   function handleSetSelectedSlice(prev: PortfolioData | null, item: PortfolioData) {
     if (!prev) {
@@ -59,7 +138,7 @@ const PortfolioScreen = () => {
     return currency ? currency.color : 'grey';
   }
 
-  const pieData = data.map((item) => {
+  const pieData = dummyPieData.map((item) => {
     const currentColor = getAppropriateColor(item.key);
     return {
       value: item.value,
@@ -80,52 +159,109 @@ const PortfolioScreen = () => {
     };
   });
 
-  const totalValue = data.reduce((acc, item) => acc + item.value, 0);
+  const totalValue = dummyPieData.reduce((acc, item) => acc + item.value, 0);
   return (
-    <Box className="flex flex-1 items-center justify-center px-4 py-6">
-      <Text className="mb-4 text-center text-xl font-bold">Total value: {totalValue}$</Text>
+    <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
+      <Box className={`flex flex-1 px-4 py-6`}>
+        <BackHeader title='History'/>
+        <Box className='gap-1 mt-2'>
+          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
+          <Text className={`text-subText-${appliedTheme}`}>Total value: {totalValue}$</Text>
+        </Box>
 
-      {/* Chart Container */}
-      <Box className="flex h-[250px] w-[250px] items-center justify-center ">
-        <PieChart
-          style={{ height: 225, width: 225 }}
-          data={pieData}
-          innerRadius="50%"
-          outerRadius="90%"
-          padAngle={0.01}>
-          <View className="flex items-center justify-center">
-            <View className="flex h-1/3 w-1/3 items-center justify-center ">
-              {selectedSlice ? (
-                <>
-                  <Text className="text-center ">{selectedSlice.key}</Text>
-                  <Text className="text-center ">{selectedSlice.value}$</Text>
-                </>
+        {/* Chart Container */}
+        <Box className="items-center">
+          <PieChart
+            style={{ height: 225, width: 225 }}
+            data={pieData}
+            innerRadius="50%"
+            outerRadius="90%"
+            padAngle={0.01}
+            >
+              <View className="flex items-center justify-center">
+                <View className="flex h-1/3 w-1/3 items-center justify-center ">
+                  {selectedSlice ? (
+                    <>
+                      <Text className="text-center ">{selectedSlice.key}</Text>
+                      <Text className="text-center ">{selectedSlice.value}$</Text>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </View>
+              </View>
+          </PieChart>
+        </Box>
+
+        {/* Chart Details */}
+        <Box>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={dummyPieData}
+            keyExtractor={(item) => item.key}
+            renderItem={({ item }) => (
+              <View className="flex-grow-0 items-center p-2">
+                <Button
+                  variant="outline"
+                  className={`border-none bg-background-${appliedTheme}`}
+                  onPress={() => setSelectedSlice((prev) => handleSetSelectedSlice(prev, item))}>
+                  <Box
+                    className="h-[16px] w-[16px] rounded-full border border-black"
+                    style={{ backgroundColor: getAppropriateColor(item.key) }}
+                  />
+                  <ButtonText className={`text-text-${appliedTheme}`}>{item.key}</ButtonText>
+                </Button>
+              </View>
+            )}
+          />
+        </Box>
+
+        {/* Portfolio Value */}
+        <Box className='gap-3 my-3'>
+          <Box className='flex-row justify-between'>
+            <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Portfolio Value</Text>
+            <Text className={`text-subTextGray-${appliedTheme}`} onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
+                See All
+            </Text>
+          </Box>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={dummyQuickBuy}
+            keyExtractor={(item,idx) => String(idx)}
+            renderItem={({ item: Icon }) => (
+              <Pressable className="flex-grow-0 items-center p-4 mx-3 bg-gray-200 rounded-2xl">
+                <Icon className='w-12 h-12'/>
+              </Pressable>
+            )}
+          />
+        </Box>
+
+        {/* Transactions History */}
+        <Box>
+            <Box className="flex-row items-center justify-between mt-4">
+                <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Transactions History</Text>
+                <Text className="text-[#0A6CFF]" onPress={() => {}}>
+                    See All
+                </Text>
+            </Box>
+
+            {/* Transactions History */}
+            {loading ? (
+                  <Text>Loading...</Text>
               ) : (
-                <></>
+                  historyData.map((crypto, index) => (
+                      <React.Fragment key={crypto.symbol}>
+                          <CryptoMarketCard {...crypto} />
+                          {index < historyData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
+                      </React.Fragment>
+                  ))
               )}
-            </View>
-          </View>
-        </PieChart>
-      </Box>
+        </Box>
 
-      <ScrollView horizontal={true} className="">
-        {data.map((item) => {
-          return (
-            <View key={item.key} className="flex items-center p-2">
-              <Button
-                variant="outline"
-                className={`border-none bg-background-${theme}`}
-                onPress={() => setSelectedSlice((prev) => handleSetSelectedSlice(prev, item))}>
-                <Box
-                  className={`h-[16px] w-[16px] rounded-full border border-black`}
-                  style={{ backgroundColor: getAppropriateColor(item.key) }}></Box>
-                <ButtonText className={`text-text-${theme}`}>{item.key}</ButtonText>
-              </Button>
-            </View>
-          );
-        })}
-      </ScrollView>
-    </Box>
+      </Box>
+    </ScrollView>
   );
 };
 
