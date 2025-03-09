@@ -161,8 +161,8 @@ const PortfolioScreen = ({navigation}: Props) => {
 
   const totalValue = dummyPieData.reduce((acc, item) => acc + item.value, 0);
   return (
-    <ScrollView className="flex-1">
-      <Box className="flex flex-1 px-4 py-6">
+    <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
+      <Box className={`flex flex-1 px-4 py-6`}>
         <BackHeader title='History'/>
         <Box className='gap-1 mt-2'>
           <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
