@@ -6,6 +6,7 @@ import BackHeader from '@/components/BackHeader';
 import { Badge, BadgeText } from '@/components/ui/badge';
 import { Box } from '@/components/ui/box';
 import { IC_Bitcoin, IC_Ethereum, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons';
+import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 
 interface BundleData {
   title: string;
@@ -39,9 +40,9 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
   const bundleData = dummyBundleData;
 
   return (
-    <Box className='h-full bg-white'>
+    <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
       <ScrollView>
-        <Box className={`bg-purple-500 h-[70%] p-4`}>
+        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className={` h-[70%] p-4`}>
           <BackHeader title='investments' />
           <Box className='gap-4'>
             <Box className='p-4 justify-center gap-2 items-center'>
@@ -75,9 +76,9 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
               </ImageBackground>
             </Box>
           </Box>
-        </Box>
+        </MyLinearGradient>
       </ScrollView>
-    </Box>
+    </MyLinearGradient>
   );
 };
 
