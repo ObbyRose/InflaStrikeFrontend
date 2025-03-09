@@ -40,13 +40,13 @@ function BackHeader({ title, icons, onPressIcons, bgColor = "transparent" }: Bac
                     {appliedTheme === "dark" ? (
                         <IC_Arrow_Left_White className="w-8 h-8" />
                     ) : (
-                        <IC_Arrow_Left className="w-8 h-8" />
+                        <IC_Arrow_Left_White className="w-8 h-8" />
                     )}
                 </TouchableOpacity>
 
                 {/* Centered Title */}
                 <Box className="flex-1 items-center justify-center">
-                    <Text className={`font-bold text-text-${appliedTheme} text-xl text-center`}>{title || ""}</Text>
+                    <Text className={`font-bold text-white text-xl text-center`}>{title || ""}</Text>
                 </Box>
                 {/* Right Icons */}
                 <Box className="flex-row items-center absolute gap-2 right-4">

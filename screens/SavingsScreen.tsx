@@ -1,97 +1,63 @@
-import { TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import { Props } from 'types/NavigationTypes'
+import BackHeader from '@/components/BackHeader'
+import CardUpRounded from '@/components/CardUpRounded'
+import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import { Box } from '@/components/ui/box'
-import SliderWithPlusMinus from '@/components/SliderWithPlusMinus'
-import ComputedInterests from '@/components/savings/ComputedInterests'
-import OutlinedCard from '@/components/OutlinedCard'
 import { Text } from '@/components/ui/text'
-import ButtonsTrain from '@/components/ButtonsTrain'
-import { Button } from '@/components/ui/button'
-import DatePicker from '@/components/DatePicker'
+import { IC_Help, IC_Info, IC_Info_Circle, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons'
+import { useTheme } from '@/utils/Themes/ThemeProvider'
+import React from 'react'
+import { ScrollView } from 'react-native-gesture-handler'
 
-const SavingsScreen: React.FC<Props> = ({ navigation }) => {
-  const [activeButton, setActiveButton] = useState('New');
-  const [percentage,  setPercentage] = useState(0);
-  const [enabled, setEnabled] = useState(false)
-  const [lossPercentage, setLossPercentage] = useState(-4.3)
-  const [units, setUnits] = useState(2098)
-  const [valuation, setValuation] = useState(4988);
-  const [entryDate, setEntryDate] = useState<Date | null>(new Date());
-  const [exitDate, setExitDate] = useState<Date | null>(new Date());
-  // slider
-  const [sliderValue, setSliderValue] = React.useState(50);
-  const maxValue = 100;
-
-  const handlePress = (button: string) => {
-    setActiveButton(button);
-  };
-
+const SavingsScreen = () => {
+  const { appliedTheme } = useTheme()
   return (
-    <Box className='h-full p-5 gap-7'>
-
-      {/* Top Buttons */}
-      <Box>
-        <ButtonsTrain  
-          buttons={['New', 'onGoing', 'Closed', 'Canceled']} 
-          activeButton={activeButton}
-          handlePress={handlePress}
-        />
-      </Box>
-
-      {/* Date Inputs */}
-      <Box className='flex flex-row justify-between'>
-        <Box className="flex flex-wrap gap-2">
-        {/* First row */}
-        <Box className="flex flex-row items-center gap-x-2">
-          <Text className="">Entry date:</Text>
-          <DatePicker date={entryDate} setDate={setEntryDate} />
-        </Box>
-        {/* Second row*/}
-        <Text className="text-center -mt-3">{entryDate?.toDateString()}</Text>
-        </Box>
-        <Box>
-          <Box className="flex flex-wrap gap-2">
-            {/* First row */}
-            <Box className="flex flex-row items-center gap-x-2">
-              <Text className="">Exit date:</Text>
-              <DatePicker date={exitDate} setDate={setExitDate} />
+    <Box className={`bg-background-${appliedTheme} h-full`}>
+    <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-1/4 p-4'>
+        <BackHeader title='Savings' />
+        <Box className='items-center justify-center gap-4'>
+            <Box className={`p-4 bg-background-${appliedTheme} mt-4 rounded-full z-10`}>
+            {appliedTheme === 'light' ? (
+              <IC_Tothor_Logo_Only className='w-16 h-16' />
+            ) : (
+              <IC_Tothor_Logo_Only_White className='w-16 h-16' />
+            )}
             </Box>
-            {/* Second row*/}
-            <Text className="text-center -mt-3">{exitDate?.toDateString()}</Text>
-          </Box>
         </Box>
-      </Box>
+    </MyLinearGradient>
+    
+    <CardUpRounded className={`h-full bg-background-${appliedTheme} p-4`}>
+      <ScrollView bounces={false}>
+        <Box>
 
-      {/* Slider */}
-      <Box>
-        <SliderWithPlusMinus
-          maxValue={100}
-          setSliderValue={setSliderValue}
-          sliderValue={sliderValue}
-          buttonText="Get Data"
-          classNameBtn='bg-blue-500'
-        />
-      </Box>
-      
-      {/* Computed interests */}
-      <OutlinedCard title="Computed interests" className='flex flex-row items-center gap-4'>
-          <ComputedInterests
-            units={units}
-            valuation={valuation}
-            percentage={percentage}
-            lossPercentage={lossPercentage}
-            isEnabled={enabled}
-            onToggle={() => setEnabled(!enabled)}
-          />
-      </OutlinedCard>
+        {/* Description Card */}
+          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit-content`}>
+            <Box className='items-center justify-center gap-4 p-4'>
+              <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>Save Money With Tothor</Text>
+              <Text className={`text-[16px] text-center text-text-${appliedTheme}`}>Tothor is a crypto token that computes interest over time. Hold and watch your assets grow effortlessly! 🚀</Text>
+            </Box>
+        </Box>
+        {/* Token Info Card */}
+        <Box className='p-2' />
+          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit-content`}>
+            <Box className='items-center justify-center gap-3 p-4'>
+              <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>The Tothor Token (TTS$)</Text>
+              <Box className='flex-row gap-2'>
+                <Text className={`text-[24px] font-medium text-center text-text-${appliedTheme}`}>0,722$</Text>
+                <Text className={`text-[12px] font-medium text-center self-end text-text-${appliedTheme}`}>(+0.57%)</Text>
+              </Box>
+              <Box className='flex-row gap-2'>
+                <Text className={`text-[12px] font-medium text-center text-text-${appliedTheme}`}>Current Price</Text>
+                <IC_Info_Circle className='w-5 h-5' />
+              </Box>
+              <Text className={`text-[18px] font-bold text-center text-text-${appliedTheme}`}>1 Tothor Token = $0.722</Text>
+            </Box>
+        </Box>
 
-      <Box>
-        <Button variant='rounded' action='positive' className='self-center'>
-          <Text className='text-white font-semibold'>Validate</Text>
-        </Button>
-      </Box>
-      
+        </Box>
+
+      </ScrollView>
+    </CardUpRounded>
+
     </Box>
   )
 }
