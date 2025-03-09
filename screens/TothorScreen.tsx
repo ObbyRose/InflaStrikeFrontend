@@ -10,12 +10,12 @@ import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const SavingsScreen = () => {
+const TothorScreen = () => {
   const { appliedTheme } = useTheme()
   return (
     <Box className={`bg-background-${appliedTheme} h-full`}>
     <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-1/4 p-4'>
-        <BackHeader title='Savings' />
+        <BackHeader title='Tothor' />
         <Box className='items-center justify-center gap-4'>
             <Box className={`p-4 bg-background-${appliedTheme} mt-4 rounded-full z-10`}>
             {appliedTheme === 'light' ? (
@@ -28,7 +28,7 @@ const SavingsScreen = () => {
     </MyLinearGradient>
     
     <CardUpRounded className={`h-full bg-background-${appliedTheme} p-4`}>
-      <ScrollView bounces={false} className='mt-10'>
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false} className='mt-10'>
         <Box>
 
         {/* Description Card */}
@@ -53,7 +53,7 @@ const SavingsScreen = () => {
                 <IC_Info_Circle className='w-5 h-5' />
               </Box>
               <Text className={`text-[18px] font-bold text-center text-text-${appliedTheme}`}>1 Tothor Token = $0.722</Text>
-                          <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : 'purple'} className='h-[100px]'/>
+                          <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : '#4A3EF6'} className='h-[100px]'/>
             </Box>
         </Box>
         </Box>
@@ -75,4 +75,4 @@ const SavingsScreen = () => {
   )
 }
 
-export default SavingsScreen
+export default TothorScreen

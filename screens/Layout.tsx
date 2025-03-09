@@ -105,7 +105,7 @@ const Layout = ({ children, navigation }: LayoutProps) => {
                             <Box className={`bg-button-${appliedTheme} bottom-[18px] rounded-full w-16 h-16 items-center self-center justify-center`}>
                                 <IC_Tothor_Logo_Only_White className='w-10 h-10' />
                             </Box>
-                            <Text className={`text-sm bottom-4 justify-center text-center ${currentScreen === 'Savings' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}> Savings </Text>
+                            <Text className={`text-sm bottom-4 justify-center text-center ${currentScreen === 'Savings' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}> Tothor </Text>
                         </TouchableOpacity>
                     </Box>
 
