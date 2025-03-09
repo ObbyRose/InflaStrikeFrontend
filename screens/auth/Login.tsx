@@ -1,12 +1,13 @@
 import InputAuth from '@/components/auth/InputAuth'
+import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import { Box } from '@/components/ui/box'
 import { Button, ButtonSpinner, ButtonText } from '@/components/ui/button'
+import { LinearGradient } from '@/components/ui/linear-gradient'
 import { Text } from '@/components/ui/text'
 import { useFormInput } from '@/hooks/useFormInput'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React, { useState } from 'react'
-
 
 const Login: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme(); 
@@ -53,12 +54,13 @@ const Login: React.FC<Props> = ({ navigation }) => {
     }
 
     return (
-    <Box className={`h-full p-10 pt-36 justify-between bg-background-${appliedTheme}`}>
+    <MyLinearGradient type='background' color={appliedTheme === "dark" ? 'dark' : 'light-blue'}>
+    <Box className={`h-full p-10 pt-36 justify-between`}>
         <Box>
             {/* Title */}
             <Box className='my-10 gap-2'>
-                <Text className='text-4xl text-black font-bold'>Welcome</Text>
-                <Text className='text-xl text-gray-500'>Sign in to your account</Text>
+                <Text className={`text-4xl text-text-${appliedTheme} font-bold`}>Welcome</Text>
+                <Text className={`text-xl text-subText-${appliedTheme}`}>Sign in to your account</Text>
             </Box>
             {/* Main Login */}
             <Box className='gap-2'>
@@ -78,15 +80,19 @@ const Login: React.FC<Props> = ({ navigation }) => {
                     onChangeText={(val) => handleInputChange("pass", val)}
                     error={errors.pass}
                 />
+                {/* <MyLinearGradient type='text' color='purple'>
+                    <Text>HELLO</Text>
+                </MyLinearGradient> */}
 
                 { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
                 {/* Login Button & Forgot Pass */}
-                <Button variant={`rounded-solid-${appliedTheme}`}  className="h-fit"
-                onPress={handleSubmitLogin}
-                >
-                    <ButtonText className="text-white">{isLoading ? <ButtonSpinner color={"white"} className='h-6'/> : "Sign In"}</ButtonText>
-                </Button>
-                
+                <MyLinearGradient type='button' color='purple'>
+                    <Button onPress={handleSubmitLogin}>
+                        <ButtonText className="text-white">
+                        {isLoading ? <ButtonSpinner color={"white"} className="h-6" /> : "Sign In"}
+                        </ButtonText>
+                    </Button>
+                </MyLinearGradient>
                 <Text className={`text-link-${appliedTheme} my-3 mx-auto font-bold tracking-wide`}>Forgot password ?</Text>
             </Box>
         </Box>
@@ -102,6 +108,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
             
         </Box>
     </Box>
+    </MyLinearGradient>
     )
 }
 

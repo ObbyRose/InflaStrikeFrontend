@@ -11,7 +11,7 @@ const UISwitch = createSwitch({
 });
 
 const switchStyle = tva({
-  base: 'data-[focus=true]:outline-0 data-[focus=true]:ring-2 data-[focus=true]:ring-indicator-primary web:cursor-pointer disabled:cursor-not-allowed data-[disabled=true]:opacity-40 data-[invalid=true]:border-error-700 data-[invalid=true]:rounded-xl data-[invalid=true]:border-2',
+  base: 'data-[focus=true]:outline-0 data-[focus=true]:ring-2  web:cursor-pointer disabled:cursor-not-allowed data-[disabled=true]:opacity-40 data-[invalid=true]:border-error-700 data-[invalid=true]:rounded-xl data-[invalid=true]:border-2',
 
   variants: {
     size: {
@@ -19,23 +19,21 @@ const switchStyle = tva({
       md: '',
       lg: 'scale-125',
     },
+    color: {
+      normal: '',
+      purple: 'data-[focus=true]:ring-indicator-purple',
+    },
   },
 });
 
-type ISwitchProps = React.ComponentProps<typeof UISwitch> &
-  VariantProps<typeof switchStyle>;
-const Switch = React.forwardRef<
-  React.ElementRef<typeof UISwitch>,
-  ISwitchProps
->(({ className, size = 'md', ...props }, ref) => {
-  return (
-    <UISwitch
-      ref={ref}
-      {...props}
-      className={switchStyle({ size, class: className })}
-    />
-  );
-});
+type ISwitchProps = React.ComponentProps<typeof UISwitch> & VariantProps<typeof switchStyle>;
+const Switch = React.forwardRef<React.ElementRef<typeof UISwitch>, ISwitchProps>(
+  ({ className, size = 'md', color = 'normal', ...props }, ref) => {
+    return (
+      <UISwitch ref={ref} {...props} className={switchStyle({ size, color, class: className })} />
+    );
+  }
+);
 
 Switch.displayName = 'Switch';
 export { Switch };

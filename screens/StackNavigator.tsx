@@ -31,6 +31,10 @@ import CreatePinScreen from './PinScreen/CreatePinScreen';
 import ConfirmPinScreen from './PinScreen/ConfirmPinScreen';
 import EnterChangePinScreen from './PinScreen/EnterChangePinScreen';
 import testscreen from './testscreen';
+import VerifyIdentity from './idVerification/VerifyIdentity';
+import ConfirmGovernmentId from '../components/idVerification/ConfirmGovernmentId';
+import TouchId from './idVerification/TouchId';
+import FaceId from './idVerification/FaceId';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -49,20 +53,27 @@ const SettingsNavigator = () => (
     <SettingsStack.Screen name="SecuritySettings" component={SecuritySettingsScreen} />
     <SettingsStack.Screen name="PinSettings" component={PinSettingsScreen} />
     <SettingsStack.Screen name="PasswordSettings" component={PasswordSettings} />
-  <SettingsStack.Screen name="CreatePin" component={CreatePinScreen} />
-  <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
-  <SettingsStack.Screen name="EnterChangePin" component={EnterChangePinScreen} />
-  <SettingsStack.Screen name="ChangePin" component={ChangePinScreen} />
+    <SettingsStack.Screen name="CreatePin" component={CreatePinScreen} />
+    <SettingsStack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
+    <SettingsStack.Screen name="EnterChangePin" component={EnterChangePinScreen} />
+    <SettingsStack.Screen name="ChangePin" component={ChangePinScreen} />
+    <SettingsStack.Screen name="TouchId" component={TouchId} />
+    <SettingsStack.Screen name="FaceId" component={FaceId} />
   </SettingsStack.Navigator>
 );
 
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName="Login">
         {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="VerifyIdentity"
+          component={VerifyIdentity}
+          options={{ headerShown: false }}
+        />
 
         {/* Main App with Layout */}
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
@@ -87,7 +98,11 @@ const StackNavigator = () => {
         </Stack.Screen>
 
         {/* Separate Settings Stack (Not Wrapped by Layout) */}
-        <Stack.Screen name="SettingsStack" component={SettingsNavigator} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="SettingsStack"
+          component={SettingsNavigator}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -10,6 +10,7 @@
     "experiments": {
       "tsconfigPaths": true
     },
+    "userInterfaceStyle": "automatic",
 
     "plugins": [
       [
@@ -41,6 +42,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
       }
     }
   }

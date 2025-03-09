@@ -1,13 +1,8 @@
 import BackAuth from '@/components/auth/BackAuth'
-import SignupCaptureID from '@/components/auth/SignupCaptureID'
-import SignupIDType from '@/components/auth/SignupIDType'
-import SignupMain from '@/components/auth/SignupMain'
 import SignupPersonalInformation from '@/components/auth/SignupPersonalInformation'
 import SignupPhoneNumber from '@/components/auth/SignupPhoneNumber'
-import SignupStatus from '@/components/auth/SignupStatus'
-import SignupVerified from '@/components/auth/SignupVerified'
-import VerifyEmail from '@/components/auth/VerifyEmail'
-import VerifyPhone from '@/components/auth/VerifyPhone'
+import SignupVerifyPhone from '@/components/auth/SignupVerifyPhone'
+import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import { Box } from '@/components/ui/box'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
@@ -15,24 +10,53 @@ import React, { useEffect, useState } from 'react'
 import { BackHandler, ScrollView } from 'react-native'
 import { Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
+import SignupAddress from '@/components/auth/SignupAddress'
+import SignupAlmostThere from '@/components/auth/SignupAlmostThere'
+import { SignupFinalDataType } from '@/types/other'
 
+// const dummyFinalData = {"address": {"city": "נס ציונה", "coords": {"lat": 31.9293254, "lng": 34.7947742}, "country": "ישראל", "postal": "7054112", "street": "עמק השושנים", "subpremise": "Ap12"}, "birthday": "12/11/2007", "fName": "Xhjzus", "lName": "Jdjdis", "pass": "Xhxhsjwiieiei3i322", "phoneNumber": "+1 268 89764646616", "ssn": "7716"};
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("PERSONAL_INFO");
+    const [screenStep , setScreenStep ] = useState("PHONE_NUMBER");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
-    const [finalData, setFinalData] = useState<any>({});
+    const [finalData, setFinalData] = useState<SignupFinalDataType | null>(null);
+    const [ headerStep,  setHeaderStep] = useState<number | null>(null);
+    const [ comeFromEdit, setComeFromEdit] = useState(false);
 
-    const screens = ['MAIN', 'VERIFY_EMAIL', 'STATUS1', 'PHONE_NUMBER', 'VERIFY_PHONE', 'STATUS2', 'PERSONAL_INFO', 'ID_TYPE', 'CAPTURE_ID', 'VERIFIED'];
+    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS', "ALMOST_THERE"];
 
     useEffect(() => {
         console.log("FINAL DATA: ", finalData);
     }, [finalData]);
 
-    const handleScreenChange = (newScreenStep: 'back' | 'next', data?: any) => {
-        const direction = newScreenStep === 'next' ? -1 : 1;
-        setIsGoingBack(direction === 1);
+    const handleScreenChange = (newScreenStep: 'back' | 'next' | string, data?: any, fromEdit = false) => {
+        if (!['back', 'next'].includes(newScreenStep) && !screens.includes(newScreenStep)) {
+            console.log("Invalid screen step");
+            return null;
+        }
+        const isScreenName = typeof newScreenStep === 'string' && !['back', 'next'].includes(newScreenStep);
+
+        let direction = 0; 
+        let isGoingBack = false;
+
+        if (isScreenName) {
+            const currentIndex = screens.indexOf(screenStep);
+            const targetIndex = screens.indexOf(newScreenStep);
+            isGoingBack = targetIndex < currentIndex;
+        } else {
+            isGoingBack = newScreenStep === 'back';
+        }
+
+        setIsGoingBack(isGoingBack);
+        direction = isGoingBack ? 1 : -1;
+
+        if(fromEdit)
+            setComeFromEdit(true);
+        else
+            setComeFromEdit(false);
 
         // Update finalData
         if (data) {
@@ -49,18 +73,25 @@ const Signup: React.FC<Props> = ({ navigation }) => {
             easing: Easing.ease,
             useNativeDriver: true,
         }).start(() => {
-            // After slide-out animation ends, change the screen step
-            
-        const currentIndex = screens.indexOf(screenStep);
 
-        if(newScreenStep === "next")
-            setScreenStep(screens[currentIndex + 1]);
-        else {
-            if(screenStep === "MAIN")
+        // After slide-out animation ends, change the screen step
+        const currentIndex = screens.indexOf(screenStep);
+        if (isScreenName) {
+            setScreenStep(newScreenStep);
+            chooseHeaderStep(newScreenStep)
+
+        } else if(newScreenStep === "next"){
+            setScreenStep(comeFromEdit ? "ALMOST_THERE" : screens[currentIndex + 1]);
+            chooseHeaderStep(newScreenStep)
+            
+
+        } else { // "back"
+            if(screenStep === "PHONE_NUMBER")
                 navigation.navigate("Login");
             else
                 setScreenStep(screens[currentIndex - 1]);
 
+            setHeaderStep(prev => !prev ?  prev : prev === 1 ? null : prev - 1 )          
         }
     
         // Then, trigger the slide-in animation
@@ -74,9 +105,20 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         });
     };
 
+    function chooseHeaderStep(newScreenStep: string) {
+        if(screenStep === "CREATE_PASSWORD")
+            setHeaderStep(1);
+        else if(screenStep === "")
+            setHeaderStep(2);
+        else if(screenStep === "")
+            setHeaderStep(3);
+        else
+            setHeaderStep(null);
+    }
+
     useEffect(() => {
         const backAction = () => {
-        if(screenStep === "MAIN")
+        if(screenStep === "PHONE_NUMBER")
             navigation.navigate("Login");
         else 
             handleScreenChange("back");
@@ -98,42 +140,40 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
         >
-        <Box className={`flex-1 h-full min-h-screen bg-background-${appliedTheme}`}>
-            <BackAuth handleScreenChange={handleScreenChange}/>
-                <Box className={`flex-1 p-10 pt-5`}>
-                    <Animated.View
-                        className="flex-1"
-                        style={{
-                            transform: [
-                                {
-                                translateX: slideAnim.interpolate({
-                                    inputRange: [-1, 0, 1],
-                                    outputRange: [
-                                    isGoingBack ? 350 : -350, 0,
-                                    isGoingBack ? -350 : 350,
-                                    ],
-                                }),
-                                },
-                            ],
-                            opacity: slideAnim.interpolate({
+        <MyLinearGradient type='background' color={appliedTheme === "dark" ? "dark" : 'light-blue'}>
+        <Box className={`flex-1 min-h-screen`}>
+            <BackAuth handleScreenChange={handleScreenChange} headerStep={headerStep}/>
+            <Box className={`flex-1 p-10 pt-5`}>
+                <Animated.View
+                    className="flex-1"
+                    style={{
+                        transform: [
+                            {
+                            translateX: slideAnim.interpolate({
                                 inputRange: [-1, 0, 1],
-                                outputRange: [0, 1, 0],
+                                outputRange: [
+                                isGoingBack ? 350 : -350, 0,
+                                isGoingBack ? -350 : 350,
+                                ],
                             }),
-                        }}
-                    >
-                        { screenStep === 'MAIN' && <SignupMain handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'VERIFY_EMAIL' && <VerifyEmail handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'STATUS1' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
-                        { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'VERIFY_PHONE' && <VerifyPhone handleScreenChange={handleScreenChange}/>}
-                        { screenStep === 'STATUS2' && <SignupStatus handleScreenChange={handleScreenChange} currentStep={screens.indexOf(screenStep)} />}
-                        { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'ID_TYPE' && <SignupIDType handleScreenChange={handleScreenChange} />}
-                        { screenStep === 'CAPTURE_ID' && <SignupCaptureID handleScreenChange={handleScreenChange} type={finalData.idMethod}/>}
-                        { screenStep === 'VERIFIED' && <SignupVerified handleScreenChange={handleScreenChange} />}
-                    </Animated.View>
+                            },
+                        ],
+                        opacity: slideAnim.interpolate({
+                            inputRange: [-1, 0, 1],
+                            outputRange: [0, 1, 0],
+                        }),
+                    }}
+                >
+                    { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
+                    { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData?.phoneNumber || "your phone"}/>}
+                    { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData?.phoneNumber || "your phone"}/>}
+                    { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
+                    { screenStep === 'ADDRESS' && <SignupAddress handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} />}
+                    { screenStep === 'ALMOST_THERE' && <SignupAlmostThere navigation={navigation} handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} finalData={finalData}/>}
+                </Animated.View>
             </Box>
         </Box>
+        </MyLinearGradient>
     </ScrollView>
     </SafeAreaView>
     )

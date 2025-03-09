@@ -1,152 +1,139 @@
-import React, { useState } from "react";
-import { Box } from "@/components/ui/box";
-import { Divider } from "@/components/ui/divider";
-import { useTheme } from "@/utils/Themes/ThemeProvider";
-import SettingItem from "../../components/SettingItems";
+import React, { useState } from 'react';
+import { Box } from '@/components/ui/box';
+import { Divider } from '@/components/ui/divider';
+import SettingItem from '../../components/SettingItems';
 import {
-    IC_DisplaySetting,
-    IC_Envelope,
-    IC_LanguageSetting,
-    IC_NotificationSettings,
-    IC_ProfileSettings,
-    IC_Security,
-    IC_ThemeSettings,
-    IC_UserPreferencesSettings
-} from "@/utils/constants/Icons";
-import { Props } from "@/types/NavigationTypes";
-import { TouchableOpacity } from "react-native";
-import { countryLanguages } from "../../utils/constants/countries";
+  IC_ArrowLeft,
+  IC_Bell_V2,
+  IC_Card_V2,
+  IC_DisplaySetting,
+  IC_Envelope,
+  IC_FaceID_V2,
+  IC_Help_V2,
+  IC_LanguageSetting,
+  IC_Logout_V2,
+  IC_NotificationSettings,
+  IC_Password_V2,
+  IC_PIN_V2,
+  IC_Privacy_V2,
+  IC_Profile,
+  IC_Profile_V2,
+  IC_ProfileSettings,
+  IC_Security,
+  IC_Terms_V2,
+  IC_ThemeSettings,
+  IC_UserPreferencesSettings,
+} from '@/utils/constants/Icons';
+import { Props } from '@/types/NavigationTypes';
+import { ScrollView, TouchableOpacity } from 'react-native';
 
-import {
-  Actionsheet,
-  ActionsheetContent,
-  ActionsheetDragIndicator,
-  ActionsheetDragIndicatorWrapper,
-  ActionsheetBackdrop,
-  ActionsheetScrollView,
-  ActionsheetItem,
-  ActionsheetItemText,
-} from "@/components/ui/actionsheet"
-import { Check } from "lucide-react-native";
-import { Icon } from "@/components/ui/icon";
-import BackHeader from "@/components/BackHeader";
+import BackHeader from '@/components/BackHeader';
+import MyLinearGradient from '@/components/gradient/MyLinearGradient';
+import { Text } from '@/components/ui/text';
+import PurpleSwitch from '@/components/PurpleSwitch';
+import CardUpRounded from '@/components/CardUpRounded';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
-    const { appliedTheme, setTheme } = useTheme();
-    const [selectedLanguage, setSelectedLanguage] = useState("English");
-    const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-    const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const { appliedTheme, setTheme } = useTheme();
+  const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
 
-    // Open & Close Actionsheet
-    const openLanguageSelection = () => setIsLanguageOpen(true);
-    const closeLanguageSelection = () => setIsLanguageOpen(false);
-    const openThemeSelection = () => setIsThemeOpen(true);
-    const closeThemeSelection = () => setIsThemeOpen(false);
+  return (
+    <Box className="h-full">
+        <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[25%]'>
+            <BackHeader />
+            <Box className="h-[45%] justify-end p-4">
+          <Text className={`text-[24px] font-bold text-white`}>Settings</Text>
+            </Box>
+        </MyLinearGradient>
 
-    // Function to switch themes
-    const toggleTheme = (theme: "light" | "dark") => {
-        setTheme(theme);
-        closeThemeSelection();
-    };
+        {/* <ScrollView className={`relative flex h-full w-full gap-3  bg-transparent`}> */}
+              <CardUpRounded className='p-0'>
+          <ScrollView bounces={false}>
+              {/* Personal setting  */}
+              <Box className={`flex gap-2 bg-card-${appliedTheme} mb-2 w-full rounded-t-3xl  p-4`}>
+                <Text className={`text-text-${appliedTheme} flex text-[18px] font-bold`}>
+                  Personal Setting
+                </Text>
+                {/* start of set theme */}
+                <TouchableOpacity
+                  onPress={() => setTheme(appliedTheme === 'dark' ? 'light' : 'dark')}>
+                  <SettingItem
+                  title="Toggle Theme"
+                  IconComponent={IC_ThemeSettings}
+                  badge={appliedTheme}
+                  />
+                </TouchableOpacity>
+                <Divider />
+                <SettingItem title="Personal Information" IconComponent={IC_Profile_V2} />
+                <Divider />
+                <TouchableOpacity onPress={() => navigation.navigate('PaymentMethod')}>
+                  <SettingItem title="Bank & Cards" IconComponent={IC_Card_V2} />
+                </TouchableOpacity>
+                <Divider />
+                <SettingItem title="Notifications" IconComponent={IC_Bell_V2} />
+              </Box>
 
-    return (
-        <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
-          <BackHeader title="Settings" />
-            <TouchableOpacity onPress={() => navigation.navigate("ProfileSettings")} activeOpacity={0.7}>
-                <SettingItem title="Profile Settings" IconComponent={IC_ProfileSettings} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
+              {/* Security */}
+              <Box className={`flex gap-2 bg-card-${appliedTheme} my-2 w-full p-4`}>
+                <Text className={`text-text-${appliedTheme} flex text-[18px] font-bold`}>
+                  Security
+                </Text>
+                <Box className="flex flex-row items-center">
+                  <Box className="flex-1 flex-row items-center gap-3">
+                    <Box className="rounded-full p-2">
+                      <IC_FaceID_V2 className="h-12 w-12" />
+                    </Box>
+                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
+                      Use face ID to sign in
+                    </Text>
+                  </Box>
+                  <Box className="ml-auto"></Box>
+                  <PurpleSwitch
+                    value={isFaceIDEnabled}
+                    onValueChange={(value) => setIsFaceIDEnabled(value)}
+                  />
+                </Box>
+                <Divider />
+                <SettingItem title="Change Password" IconComponent={IC_Password_V2} />
+                <Divider />
+                <TouchableOpacity onPress={() => navigation.navigate('PinSettings')}>
+                  <SettingItem title="Change PIN" IconComponent={IC_PIN_V2} />
+                </TouchableOpacity>
+              </Box>
 
-            {/* Gluestack ActionSheet on Language Setting */}
-            <TouchableOpacity onPress={openLanguageSelection} activeOpacity={0.7}>
-                <SettingItem title={`Language (${selectedLanguage})`} IconComponent={IC_LanguageSetting} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
+              {/* Support */}
+              <Box className={`flex gap-2 bg-card-${appliedTheme} my-2 w-full p-4`}>
+                <Text className={`text-text-${appliedTheme} flex text-[18px] font-bold`}>
+                  Support
+                </Text>
+                <SettingItem title="Terms & Conditions" IconComponent={IC_Terms_V2} />
+                <Divider />
 
-            <TouchableOpacity onPress={openThemeSelection} activeOpacity={0.7}>
-                <SettingItem title="Themes" IconComponent={IC_ThemeSettings} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
+                <SettingItem title="Privacy Policy" IconComponent={IC_Privacy_V2} />
+                <Divider />
 
-            <TouchableOpacity onPress={() => navigation.navigate("NotificationSettings")} activeOpacity={0.7}>
-                <SettingItem title="Notification Settings" IconComponent={IC_NotificationSettings} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
+                <SettingItem title="Help" IconComponent={IC_Help_V2} />
+              </Box>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Preferences")} activeOpacity={0.7}>
-                <SettingItem title="User Preferences" IconComponent={IC_UserPreferencesSettings} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
-
-            <TouchableOpacity onPress={() => navigation.navigate("SecuritySettings")} activeOpacity={0.7}>
-                <SettingItem title="Security" IconComponent={IC_Security} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
-
-            <TouchableOpacity onPress={() => navigation.navigate("Support")} activeOpacity={0.7}>
-                <SettingItem title="Contact Support" IconComponent={IC_Envelope} />
-            </TouchableOpacity>
-            <Divider className="rounded-lg mb-4 mt-4" />
-
-            {/* Gluestack Actionsheet for Language Selection */}
-            <Actionsheet isOpen={isLanguageOpen} onClose={closeLanguageSelection}>
-                <ActionsheetBackdrop />
-                <ActionsheetContent>
-                    <ActionsheetDragIndicatorWrapper>
-                        <ActionsheetDragIndicator />
-                    </ActionsheetDragIndicatorWrapper>
-                    <ActionsheetScrollView className="mt-2">
-                        {countryLanguages.map((country, index) => (
-                            <ActionsheetItem
-                              key={index}
-                              onPress={() => {
-                                setSelectedLanguage(country.language);
-                                closeLanguageSelection();
-                              }}
-                              className="p-4 flex-row justify-between items-center"
-                            >
-                              <ActionsheetItemText className="font-bold text-[14px] text-black">
-                                {country.label} {country.language}
-                              </ActionsheetItemText>
-                              {selectedLanguage === country.language && <Icon as={Check} className="text-indigo-600" />}
-                            </ActionsheetItem>
-                        ))}
-                    </ActionsheetScrollView>
-                </ActionsheetContent>
-            </Actionsheet>
-
-            {/* Gluestack Actionsheet for Theme Selection */}
-            <Actionsheet isOpen={isThemeOpen} onClose={closeThemeSelection}>
-                <ActionsheetBackdrop />
-                <ActionsheetContent>
-                    <ActionsheetDragIndicatorWrapper>
-                        <ActionsheetDragIndicator />
-                    </ActionsheetDragIndicatorWrapper>
-                    <ActionsheetScrollView className="mt-2">
-                        <ActionsheetItem
-                          onPress={() => toggleTheme("light")}
-                          className="p-4 flex-row justify-between items-center"
-                        >
-                          <ActionsheetItemText className={`font-bold text-[14px]`}>
-                            ☀️ Light Mode
-                          </ActionsheetItemText>
-                          {appliedTheme === "light" && <Icon as={Check} className="text-indigo-600" />}
-                        </ActionsheetItem>
-
-                        <ActionsheetItem
-                          onPress={() => toggleTheme("dark")}
-                          className="p-4 flex-row justify-between items-center"
-                        >
-                          <ActionsheetItemText className={`font-bold text-[14px]`}>
-                            🌙 Dark Mode
-                          </ActionsheetItemText>
-                          {appliedTheme === "dark" && <Icon as={Check} className="text-indigo-600" />}
-                        </ActionsheetItem>
-                    </ActionsheetScrollView>
-                </ActionsheetContent>
-            </Actionsheet>
-        </Box>
-    );
+              {/* Logout */}
+              <Box className={`flex gap-2 bg-card-${appliedTheme} mt-2 w-full p-4`}>
+                <Box className="flex flex-row items-center">
+                  <Box className="flex-1 flex-row items-center gap-3">
+                    <Box className="rounded-full p-2">
+                      <IC_Logout_V2 className="h-12 w-12" />
+                    </Box>
+                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
+                      Logout
+                    </Text>
+                  </Box>
+                  <Box className="ml-auto"></Box>
+                </Box>
+              </Box>
+          </ScrollView>
+          </CardUpRounded>
+    </Box>
+  );
 };
 
 export default SettingsScreen;

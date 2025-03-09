@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Text, ScrollView, TouchableOpacity } from "react-native";
 import { Box } from "@/components/ui/box";
-import { Avatar } from "@/components/ui/avatar";
-import { Icon } from "@/components/ui/icon";
-import { User } from "lucide-react-native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Settings, IC_NotificationsInactive } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -21,6 +18,9 @@ import {
     fetchXRPLineData
 } from "../utils/api/external/BinanceAPI";
 import { Props } from "@/types/NavigationTypes";
+import MyLinearGradient from "@/components/gradient/MyLinearGradient";
+import RoundedBox from "@/components/RoundedBox";
+import OptionCard from "@/components/OptionCard";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -92,72 +92,101 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {/* Header Section */}
-            <Box className={`p-4 bg-background-${appliedTheme} h-full flex gap-2`}>
-                <Box className="flex-row justify-between items-center mt-4">
-                    <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Profile" })} activeOpacity={0.7}>
-                        <Avatar className="bg-indigo-600" size="lg">
-                            <Icon as={User} size="xl" className="stroke-white" />
-                        </Avatar>
-                    </TouchableOpacity>
-
-                    <Box className="flex-row items-center gap-2 mt-3">
-                        <TouchableOpacity onPress={() => navigation.navigate("MainApp", { screen: "Notifications" })}>
-                            <Box className="flex-col items-center gap-1">
-                                <IC_NotificationsInactive className="h-7 w-7" />
-                                <Text className="text-2xs font-semibold text-[#969AA0]">Notifications</Text>
-                            </Box>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => navigation.navigate("SettingsStack", { screen: "Settings" })}>
-                            <Box className="flex-col items-center gap-1">
-                                <IC_Settings className="h-7 w-7" />
-                                <Text className="ml-2 text-2xs font-semibold text-[#969AA0]">Settings</Text>
-                            </Box>
-                        </TouchableOpacity>
+            <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
+                <Box className="h-[40%] p-4 gap-4">
+                    <Box className="flex flex-row items-center justify-between">
+                        <IC_Tothor className="w-40 h-16" />
+                        <IC_Bell_White className="w-7 h-7" />
                     </Box>
-                </Box>
-
-                {/* Greetings Section */}
-                <Box className="mb-4">
-                    <Text className="text-[36px] mt-2 text-black font-bold">Hello,</Text>
-                    <Text className="text-[36px] text-black font-bold">{user ? `${user.fName} ${user.lName}` : "User"} 👋</Text>
-                </Box>
-
-                {/* Net Liquid Value (NLVE) Section */}
-                <Box className={`bg-indigo-600 p-2 h-[100px] w-full rounded-3xl flex`}>
-                    <Box className="p-2">
-                        <Text className="text-white text-[18px]">Total Balance:</Text>
-                        <Box>
-                            <Text className="text-white text-[20px] self-end">
-                                ${user?.nlve ? parseFloat(user.nlve).toLocaleString() : "0.00"}
-                            </Text>
+                    <Box className="flex flex-col gap-4 p-4">
+                        <Text className="text-white font-medium text-[17px]">Safe-to-spend</Text>
+                        <Box className="flex-row gap-4 items-center">
+                        <Text className="text-white font-medium text-4xl">$ 2,987.56</Text>
+                        <IC_Info className="w-6 h-6" />
                         </Box>
-                        <Text className="text-[12px] text-white top-0">Cash Available</Text>
+                        <Text className="text-white text-[14px]">Updated 2 mins ago</Text>
+                    </Box>
+
+                    <Box className="items-center h-full mt-2">
+                        <Box className={`bg-card-${appliedTheme} p-2 rounded-full w-[80%] z-10`}>
+                            <Box className={`flex flex-row justify-evenly`}>
+                                <Box className="flex-col items-center text-center">
+                                    <IC_Top_Up className="w-12 h-12"/>
+                                    <Text className={`text-text-${appliedTheme} font-bold`}> Top up</Text>
+                                </Box>
+                                <Box className="p-2">
+                                    <Box className={` border-s-[1px] border-divider-${appliedTheme} h-full justify-center  mx-2`} />
+                                </Box>
+                                <Box className="flex-col items-center text-center">
+                                    <IC_Transaction className="w-12 h-12"/>
+                                    <Text className={`text-text-${appliedTheme} font-bold`}> Transfer </Text>
+                                </Box>
+                                <Box className="p-2">
+                                    <Box className={` border-s-[1px] border-divider-${appliedTheme} h-full justify-center  mx-2`} />
+                                </Box>
+                                <Box className="flex-col items-center text-center">
+                                    <IC_History className="w-12 h-12"/>
+                                    <Text className={`text-text-${appliedTheme} font-bold`}> History </Text>
+                                </Box>
+                            </Box>
+                        </Box>
                     </Box>
                 </Box>
-
-                {/* Crypto Market Section */}
+                </MyLinearGradient>
+            <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
+                <Box className={`p-4 bg-background-${appliedTheme} h-full`}>
+                {/* Recommended Bundles Section */}
                 <Box>
-                    <Box className="flex-row items-center justify-between mt-4">
-                        <Text className="text-[22px] font-semibold">Markets</Text>
-                        <Text className="text-[14px] text-[#0A6CFF]" onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
-                            See All
-                        </Text>
+                    <Box className="flex-row items-center justify-between mt-10">
+                        <Text className={`text-[22px] font-semibold text-text-${appliedTheme}`}>Recommended Bundles</Text>
                     </Box>
+                    <Text className={`mt-2 mb-4 font-medium text-subText-${appliedTheme}`}>There are 4 recommended bundles</Text>
+                    <ScrollView 
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        <Box className="flex-row gap-4">
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Bitcoin className="w-12 h-12" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>MAGA Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+15%</Text>
+                                </Box>
+                            </OptionCard>
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    {appliedTheme === 'dark' ? 
+                                        <IC_Tothor_Logo_Only_White className="w-12 h-12" /> :
+                                        <IC_Tothor_Logo_Only className="w-12 h-12" />
+                                    }
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Tothor Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+24%</Text>
+                                </Box>
+                            </OptionCard>
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Gold className="w-12 h-12" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Earth Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+35%</Text>
+                                </Box>
+                            </OptionCard>
+                            <OptionCard>
+                                <Box className="gap-1">
+                                    <IC_Doge className="w-12 h-12" />
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>DOGE Bundle</Text>
+                                    <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
+                                    <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+4%</Text>
+                                </Box>
+                            </OptionCard>
+                        </Box>
+                    </ScrollView>
                 </Box>
-
-                {/* Crypto Market Cards */}
-                {loading ? (
-                    <Text>Loading...</Text>
-                ) : (
-                    cryptoData.map((crypto, index) => (
-                        <React.Fragment key={crypto.symbol}>
-                            <CryptoMarketCard {...crypto} />
-                            {index < cryptoData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
-                        </React.Fragment>
-                    ))
-                )}
-            </Box>
+                    <Divider className={`bg-divider-${appliedTheme} mt-4`} />
+                </Box>
+            </MyLinearGradient>
         </ScrollView>
     );
 };
