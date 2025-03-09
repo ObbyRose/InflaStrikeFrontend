@@ -36,7 +36,7 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
   return (
     <Box className="flex w-full items-center justify-center">
       <Box className=" flex w-full flex-row justify-between p-2">
-        <Text className={`p-2 text-[15px] font-semibold text-white`}>Things to do</Text>
+        <Text className={`p-2 text-[15px] font-semibold text-white`}>KYC</Text>
         {thingToDo.length > 1 && (
           <Text className={`rounded-full bg-[#ffffff29] p-2 text-white`}>
             {currentIndex + 1} / {thingToDo.length}
