@@ -10,7 +10,6 @@
     "experiments": {
       "tsconfigPaths": true
     },
-
     "plugins": [
       [
         "expo-camera",
@@ -21,7 +20,6 @@
         }
       ]
     ],
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -41,6 +39,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.Client"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e2595af6-671c-4b36-8e0d-c904304a5e61"
       }
     }
   }
