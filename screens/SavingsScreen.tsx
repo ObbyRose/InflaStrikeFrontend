@@ -53,23 +53,15 @@ const SavingsScreen = () => {
                 <IC_Info_Circle className='w-5 h-5' />
               </Box>
               <Text className={`text-[18px] font-bold text-center text-text-${appliedTheme}`}>1 Tothor Token = $0.722</Text>
+                          <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : 'purple'} className='h-[100px]'/>
             </Box>
         </Box>
-        
-        <Box className='p-2' />
-        {/* Token Info Card */}
-          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit`}>
-            <Box>
-              <Text className={`text-[16px] mb-2 font-medium text-text-${appliedTheme}`}>Tothor Token Price Chart (+0.57%)</Text>
-            </Box>
-            <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : 'purple'} className='h-[150px]'/>
-          </Box>
         </Box>
 
         <Box className='p-2' />
 
         <MyLinearGradient type='button' color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-          <Button>
+          <Button className='w-full rounded-full'>
             <ButtonText className='text-[16px]'>Start Saving With Tothor</ButtonText>
           </Button>
         </MyLinearGradient>
