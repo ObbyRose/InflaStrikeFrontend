@@ -7,6 +7,7 @@ import ButtonsTrain from "@/components/ButtonsTrain";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { IC_Swap } from "@/utils/constants/Icons";
 import BackHeader from "@/components/BackHeader";
+import LineChartWagmi from "@/components/LineChartWagmi";
 
 const ExchangeScreen = () => {
     const [activeTab, setActiveTab] = useState("Limit");
@@ -30,7 +31,7 @@ const ExchangeScreen = () => {
     return (
         <Box className="p-4 h-full bg-white">
             <BackHeader title="Exchange" />
-            <Box className="flex-1 items-center">
+            <Box className="flex-1 ">
                 <Box className="flex-row w-full rounded-lg p-1">
                     <ButtonsTrain
                         buttons={['Market', 'Limit', 'Stop-Limit']}
@@ -59,7 +60,7 @@ const ExchangeScreen = () => {
                 {/* Swap Button */}
                 <TouchableOpacity
                     onPress={swapCurrencies}
-                    className={`bg-button-${appliedTheme} p-3 rounded-full mt-4`}
+                    className={`bg-button-${appliedTheme} p-3 rounded-full mt-4 self-center`}
                 >
                     <IC_Swap className="text-white w-7 h-7" />
                 </TouchableOpacity>
@@ -82,6 +83,8 @@ const ExchangeScreen = () => {
                         <Text className="text-white text-lg font-bold">Exchange</Text>
                     </Button>
                 </Box>
+
+                <LineChartWagmi className="h-[100px]" color="purple"/>
             </Box>
         </Box>
     );
