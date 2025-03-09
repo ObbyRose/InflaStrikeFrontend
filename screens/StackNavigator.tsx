@@ -4,7 +4,7 @@ import HomeScreen from './HomeScreen';
 import InvestmentsScreen from './InvestmentsScreen';
 import NotificationsScreen from './NotificationsScreen';
 import ProfileScreen from './Profile/ProfileScreen';
-import SavingsScreen from './SavingsScreen';
+import SavingsScreen from './TothorScreen';
 import SettingsScreen from './settings/SettingsScreen';
 import TokenScreen from './TokenScreen';
 import TransactionsScreen from './transactions/TransactionsScreen';
@@ -35,6 +35,7 @@ import VerifyIdentity from './idVerification/VerifyIdentity';
 import ConfirmGovernmentId from '../components/idVerification/ConfirmGovernmentId';
 import TouchId from './idVerification/TouchId';
 import FaceId from './idVerification/FaceId';
+import TothorScreen from './TothorScreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
@@ -65,7 +66,7 @@ const SettingsNavigator = () => (
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="MainApp">
         {/* Auth Screens */}
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
@@ -79,13 +80,13 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Tothor" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="test" component={testscreen} />
                 <Stack.Screen name="Notifications" component={NotificationsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
-                <Stack.Screen name="Savings" component={SavingsScreen} />
+                <Stack.Screen name="Tothor" component={TothorScreen} />
                 <Stack.Screen name="Markets" component={MarketsScreen} />
                 <Stack.Screen name="Coin" component={CoinScreen} />
                 <Stack.Screen name="Chat" component={ChatScreen} />

@@ -3,6 +3,7 @@ import React from 'react'
 import { Box } from './ui/box'
 import { cn } from './ui/cn'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
+import MyLinearGradient from './gradient/MyLinearGradient'
 
 interface CardUpRoundedProps {
     children: React.ReactNode;
@@ -12,10 +13,10 @@ const CardUpRounded = ({ className, children }: CardUpRoundedProps) => {
     const { appliedTheme } = useTheme();
 
     return (
-        <Box className={cn(`bg-background-${appliedTheme} rounded-t-3xl -mt-10 
+        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className={cn(`bg-background-${appliedTheme} rounded-t-3xl -mt-10 
             flex-1 w-full p-5`, className)}>
             {children}
-        </Box>
+        </MyLinearGradient>
     )
 }
 

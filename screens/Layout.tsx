@@ -5,7 +5,7 @@ import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import Svg, { Defs, G, Path, Rect, Filter, FeOffset, FeGaussianBlur, FeMerge, FeMergeNode } from 'react-native-svg';
-import { IC_Home, IC_Invest, IC_Market, IC_Portfolio, IC_Profile } from '@/utils/constants/Icons';
+import { IC_Home, IC_Invest, IC_Market, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -101,11 +101,11 @@ const Layout = ({ children, navigation }: LayoutProps) => {
 
                     {/* Middle Button - Centered and Independent */}
                     <Box className="w-20 relative">
-                        <TouchableOpacity onPress={() => navigateToScreen('Markets')}>
+                        <TouchableOpacity onPress={() => navigateToScreen('Tothor')}>
                             <Box className={`bg-button-${appliedTheme} bottom-[18px] rounded-full w-16 h-16 items-center self-center justify-center`}>
-                                <IC_Market color={`white`} />
+                                <IC_Tothor_Logo_Only_White className='w-10 h-10' />
                             </Box>
-                            <Text className={`text-sm bottom-4 justify-center text-center ${currentScreen === 'Markets' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}> Markets </Text>
+                            <Text className={`text-sm bottom-4 justify-center text-center ${currentScreen === 'Tothor' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}> Tothor </Text>
                         </TouchableOpacity>
                     </Box>
 
