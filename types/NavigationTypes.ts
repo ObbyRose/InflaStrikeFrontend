@@ -30,4 +30,14 @@ export type SignUpScreensProps = {
         >;
     };
 }
+
+export type idVerifyTypes = {
+    type: "ID Card" | "Driver's License" | 'Passport';
+}
+
+export type idVerifyProps = {
+    handleScreenChange: (newScreenStep: 'back' | 'next' | string, data?: any) => void;
+    finalData? : idVerifyTypes;
+}
+
 export type TTheme = "light" | "dark";

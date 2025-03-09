@@ -1,19 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Text, TouchableOpacity, Image } from "react-native";
 import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
-import { SignUpScreensProps } from "@/types/NavigationTypes";
+import { idVerifyProps } from "@/types/NavigationTypes";
 import { Box } from "../ui/box";
-import { Progress, ProgressFilledTrack } from "../ui/progress";
-import { useTheme } from "@/utils/Themes/ThemeProvider";
-import { IM_ProcessingVerification } from "@/utils/constants/Images";
 import { LinearGradient } from "../ui/linear-gradient";
-import { IC_Camera_Flip, IC_Flash, IC_NoFlash, IC_Tick_Purple, IC_Vi } from "@/utils/constants/Icons";
+import { IC_Camera_Flip, IC_Flash, IC_NoFlash, IC_Vi } from "@/utils/constants/Icons";
 
-interface SignupCaptureIDProps extends SignUpScreensProps {
-    type: "ID Card" | "Driver's License" | 'Passport';
-}
-
-function CaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
+function CaptureID({ handleScreenChange, finalData }: idVerifyProps) {
     const [permission, requestPermission] = useCameraPermissions();
     const [frontPhoto, setFrontPhoto] = useState<string | null>(null);
     const [backPhoto, setBackPhoto] = useState<string | null>(null);
@@ -32,32 +25,36 @@ function CaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
         if (cameraRef.current) {
             try {
                 const photo = await cameraRef.current.takePictureAsync();
+                
                 if (step === 0) {
                     setFrontPhoto(photo.uri);
+                    
+                    // If it's an ID Card, go to back side, otherwise proceed to next screen
+                    if (finalData && finalData.type === "ID Card") {
+                        setStep(1);
+                    } else {
+                        // For Passport or Driver's License, no back photo needed
+                        setTimeout(() => {
+                            handleScreenChange('next', { 
+                                frontIdPhoto: photo.uri, 
+                                backIdPhoto: null 
+                            });
+                        }, 1000);
+                    }
                 } else if (step === 1) {
                     setBackPhoto(photo.uri);
+                    setTimeout(() => {
+                        handleScreenChange('next', { 
+                            frontIdPhoto: frontPhoto, 
+                            backIdPhoto: photo.uri 
+                        });
+                    }, 1000);
                 }
-                confirmAndProceed();
             } catch (error) {
                 console.error("Error taking picture:", error);
             }
         } else {
             console.log("Camera ref not available");
-        }
-    };
-
-
-    const confirmAndProceed = () => {
-        if (step === 0 && type === "ID Card") {
-                setStep(1);
-        } else if (step === 1 || step === 0) {
-            console.log("HERE")
-            setTimeout(() => {
-                handleScreenChange('next', { 
-                    frontIdPhoto: frontPhoto, 
-                    backIdPhoto: backPhoto 
-                });
-            }, 1000)
         }
     };
 

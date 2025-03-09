@@ -7,18 +7,21 @@ import BackHeader from '@/components/BackHeader'
 import { IC_Government_ID, IC_Magnifier } from '@/utils/constants/Icons'
 import { Button, ButtonText } from '@/components/ui/button'
 import { TouchableOpacity } from 'react-native'
+import CardUpRounded from '../CardUpRounded'
+import { idVerifyProps } from '@/types/NavigationTypes'
 
-const ConfirmGovernmentId = () => {
+const dummyPhoto = "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FClient-5e98229b-ebcd-4de6-b37a-117fb05620dd/Camera/250a65d0-7f92-4ad0-887b-2bf4b85a5742.jpg";
+
+const ConfirmQuality = ({handleScreenChange, finalData} : idVerifyProps) => {
     const { appliedTheme } = useTheme()
     
     return (
         <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
             <Box className="h-full w-full">
-                <BackHeader title="Confirm Government ID" />
                 
                 {/* Most Inner Box */}
-                <Box className={`bg-card-${appliedTheme} w-full rounded-t-2xl p-4 items-center justify-center gap-16 absolute bottom-0 h-[75%]`}>
-                    <IC_Government_ID className='-mt-[8rem] border-white' /> {/* Here will go the photo of the ID currently a placeholder */}
+                {/* <CardUpRounded>
+                    <IC_Government_ID className='-mt-[8rem] border-white' />
                     <Box className='flex flex-col items-center gap-6'>
                         <IC_Magnifier className="w-20 h-20" />
                         <Text className={`text-text-${appliedTheme} font-bold text-[24px]`}>Check Quality</Text>
@@ -34,10 +37,10 @@ const ConfirmGovernmentId = () => {
                             <Text className={`text-[17px] text-purple-500 font-medium`}>Take a new photo</Text>
                         </TouchableOpacity>
                     </Box>
+                </CardUpRounded> */}
                 </Box>
-            </Box>
         </MyLinearGradient>
     )
 }
 
-export default ConfirmGovernmentId;
+export default ConfirmQuality;

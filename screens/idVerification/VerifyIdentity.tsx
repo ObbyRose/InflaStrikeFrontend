@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@/components/ui/box';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { Text } from '@/components/ui/text';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import IdVerificationMain from '@/components/idVerification/IdVerificationMain';
+import ConfirmQuality from '@/components/idVerification/ConfirmQuality';
 import BackAuth from '@/components/auth/BackAuth';
-import { Animated, Easing } from 'react-native';
+import { Animated, BackHandler, Easing } from 'react-native';
 import CaptureID from '@/components/idVerification/CaptureID';
 import { IC_Help_V2 } from '@/utils/constants/Icons';
 
 
 const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
-    const { appliedTheme, setTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("CAMERA");
+    const { appliedTheme } = useTheme();
+    const [screenStep , setScreenStep ] = useState("CONFIRM_QUALITY");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
     const [finalData, setFinalData] = useState<any>({});
@@ -24,6 +25,23 @@ const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
     const screens = ['MAIN', 'CAMERA', 'CONFIRM_QUALITY'];
 
     console.log("finalData", finalData)
+
+    useEffect(() => {
+        const backAction = () => {
+        if(screenStep === "MAIN")
+            navigation.goBack();
+        else 
+            handleScreenChange("back");
+        return true; 
+        };
+    
+        BackHandler.addEventListener('hardwareBackPress', backAction);
+    
+        // Cleanup listener on component unmount
+        return () => {
+        BackHandler.removeEventListener('hardwareBackPress', backAction);
+        };
+    }, [screenStep]);
 
     const handleScreenChange = (newScreenStep: 'back' | 'next' | string, data?: any) => {
             if (!['back', 'next'].includes(newScreenStep) && !screens.includes(newScreenStep)) {
@@ -111,10 +129,10 @@ const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
                     }),
                 }}
             >
-                { screenStep === "MAIN" && <IdVerificationMain handleScreenChange={handleScreenChange} 
+                { screenStep === "MAIN" && <IdVerificationMain handleScreenChange={handleScreenChange}
                     isGovernmentIDSubmitted={isGovernmentIDSubmitted} isSelfieSubmitted={isSelfieSubmitted}/>}
-                { screenStep === "CAMERA" && <CaptureID handleScreenChange={handleScreenChange} type={finalData.idMethod}/>}
-                { screenStep === "CONFIRM_QUALITY" && <></>}
+                { screenStep === "CAMERA" && <CaptureID handleScreenChange={handleScreenChange} finalData={finalData}/>}
+                { screenStep === "CONFIRM_QUALITY" && <ConfirmQuality handleScreenChange={handleScreenChange} finalData={finalData}/>}
             </Animated.View>
         </Box>
     </MyLinearGradient>

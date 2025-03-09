@@ -10,9 +10,9 @@ import MyLinearGradient from '../gradient/MyLinearGradient'
 import { Button, ButtonText } from '../ui/button'
 import SettingItem from '../SettingItems'
 import { Divider } from '../ui/divider'
-import { SignUpScreensProps } from '@/types/NavigationTypes'
+import { idVerifyProps } from '@/types/NavigationTypes'
 
-interface IdVerificationMainProps extends SignUpScreensProps{
+interface IdVerificationMainProps extends idVerifyProps {
     isGovernmentIDSubmitted: boolean;
     isSelfieSubmitted: boolean;
 }
