@@ -1,7 +1,9 @@
 import BackHeader from '@/components/BackHeader'
 import CardUpRounded from '@/components/CardUpRounded'
 import MyLinearGradient from '@/components/gradient/MyLinearGradient'
+import LineChartWagmi from '@/components/LineChartWagmi'
 import { Box } from '@/components/ui/box'
+import { Button, ButtonText } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { IC_Help, IC_Info, IC_Info_Circle, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
@@ -26,19 +28,20 @@ const SavingsScreen = () => {
     </MyLinearGradient>
     
     <CardUpRounded className={`h-full bg-background-${appliedTheme} p-4`}>
-      <ScrollView bounces={false}>
+      <ScrollView bounces={false} className='mt-10'>
         <Box>
 
         {/* Description Card */}
-          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit-content`}>
+          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit`}>
             <Box className='items-center justify-center gap-4 p-4'>
               <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>Save Money With Tothor</Text>
               <Text className={`text-[16px] text-center text-text-${appliedTheme}`}>Tothor is a crypto token that computes interest over time. Hold and watch your assets grow effortlessly! 🚀</Text>
             </Box>
         </Box>
-        {/* Token Info Card */}
+
         <Box className='p-2' />
-          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit-content`}>
+        {/* Token Info Card */}
+          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit`}>
             <Box className='items-center justify-center gap-3 p-4'>
               <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>The Tothor Token (TTS$)</Text>
               <Box className='flex-row gap-2'>
@@ -52,11 +55,29 @@ const SavingsScreen = () => {
               <Text className={`text-[18px] font-bold text-center text-text-${appliedTheme}`}>1 Tothor Token = $0.722</Text>
             </Box>
         </Box>
-
+        
+        <Box className='p-2' />
+        {/* Token Info Card */}
+          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit`}>
+            <Box>
+              <Text className={`text-[16px] mb-2 font-medium text-text-${appliedTheme}`}>Tothor Token Price Chart (+0.57%)</Text>
+            </Box>
+            <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : 'purple'} className='h-[150px]'/>
+          </Box>
         </Box>
+
+        <Box className='p-2' />
+
+        <MyLinearGradient type='button' color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
+          <Button>
+            <ButtonText className='text-[16px]'>Start Saving With Tothor</ButtonText>
+          </Button>
+        </MyLinearGradient>
 
       </ScrollView>
     </CardUpRounded>
+
+    <Box className='p-2' />
 
     </Box>
   )
