@@ -58,10 +58,10 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
               <ImageBackground source={require("@assets/images/America.png")} className='h-full w-full rounded-3xl' imageStyle={{ borderRadius: 20 }}>
                 <Text className={`text-white text-[24px] font-bold flex items-center text-center p-4`}>{bundleData.bundleName}</Text>
                 <Box className='absolute top-1/3 gap-4 flex-row p-2 ml-2'>
-                  <Badge variant='solid' action='info' className='rounded-full'>
+                  <Badge variant='solid' action='info' className={`rounded-full bg-card-${appliedTheme}`}>
                     <BadgeText className='text-sm'>{bundleData.ytd}</BadgeText>
                   </Badge>
-                  <Badge variant='solid' action='info' className='rounded-full'>
+                  <Badge variant='solid' action='info' className={`rounded-full bg-card-${appliedTheme}`}>
                     <BadgeText className='text-sm'>{bundleData.risk}</BadgeText>
                   </Badge>
                   <Text className={`text-white text-[18px] font-bold flex items-center text-center`}>{bundleData.additionalInfo}</Text>
