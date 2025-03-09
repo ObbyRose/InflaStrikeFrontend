@@ -7,6 +7,7 @@ import { Box } from '@/components/ui/box';
 import { Divider } from '@/components/ui/divider';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
+import { useUserStore } from '@/context/userStore';
 import { Props } from '@/types/NavigationTypes';
 import {
   IC_Arrow_Right,
@@ -31,12 +32,8 @@ interface ProfileScreenProps extends Props {}
 
 export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   const { appliedTheme } = useTheme();
-  const user = {
-    name: 'John Abraham',
-    username: '$dylanrobinson',
-    image:
-      'https://static.wikia.nocookie.net/spongebob-dictionary/images/0/04/Plankton.jpg/revision/latest?cb=20170910011333',
-  };
+  const { user } = useUserStore()
+
   const thingToDo = [
     {
       icon: IC_Card_V2,
@@ -68,15 +65,11 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
           <BackHeader />
           <Box className='justify-center items-center gap-2 p-4'>
             <Avatar size="xl">
-              <AvatarFallbackText>{user.name}</AvatarFallbackText>
-              <AvatarImage
-                source={{
-                  uri: user.image,
-                }}
-                />
+              <AvatarFallbackText>{user?.fName + ' ' + user?.lName}</AvatarFallbackText>
+              <AvatarImage source={{uri: user?.avatar}} />
             </Avatar> 
-            <Text className={`text-[24px] font-bold text-white`}>{user.name}</Text>
-            <Text className={`text-[14px] text-white`}>{user.username}</Text>
+            <Text className={`text-[24px] font-bold text-white`}>{user?.fName + ' ' + user?.lName}</Text>
+            <Text className={`text-[14px] text-white`}>{user?.email}</Text>
             <Box className='z-10'>
               <ThingToDo thingToDo={thingToDo} />
             </Box>

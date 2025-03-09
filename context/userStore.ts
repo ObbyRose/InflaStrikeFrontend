@@ -8,7 +8,7 @@ export interface User {
     phone: string;
     email: string;
     nlve: string;
-    cryptoCoins: {ownedCoins: string, amount: string}[];
+    cryptoCoins: {ownedCoins: string, amount: string, value: string}[];
     avatar?: string;
 }
 
