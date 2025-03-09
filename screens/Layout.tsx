@@ -101,7 +101,7 @@ const Layout = ({ children, navigation }: LayoutProps) => {
 
                     {/* Middle Button - Centered and Independent */}
                     <Box className="w-20 relative">
-                        <TouchableOpacity onPress={() => navigateToScreen('Savings')}>
+                        <TouchableOpacity onPress={() => navigateToScreen('Tothor')}>
                             <Box className={`bg-button-${appliedTheme} bottom-[18px] rounded-full w-16 h-16 items-center self-center justify-center`}>
                                 <IC_Tothor_Logo_Only_White className='w-10 h-10' />
                             </Box>
