@@ -13,18 +13,12 @@ interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-function SignupPersonalInformation({ handleScreenChange, setHeaderStep }: SignupPersonalInformationProps) {
+function SignupPersonalInformation({ handleScreenChange, setHeaderStep, formHook }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
-    const { values, errors, handleInputChange } = useFormInput({
-        fName: '',
-        lName: '',
-        birthday: '',
-        ssn: '',
-        api: ''
-    });
+    const { values, errors, handleInputChange } =  formHook;
+    const { fName, lName, birthday, ssn } = values
 
-    const { fName, lName, birthday, ssn } = values;
     const isActive = fName.trim() && lName.trim() && birthday.length === 14 && ssn.length === 4;
 
     useEffect(() => setHeaderStep(prev => prev !== 1 ? 1: prev), [])

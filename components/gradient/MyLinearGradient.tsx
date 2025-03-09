@@ -6,7 +6,7 @@ import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 interface MyLinearGradientProps {
   type: "button" | "background" | "text";
-  color: "blue" | "purple" | "blue-purple" | "light-blue" | "disabled-button" | "dark";
+  color: "blue" | "purple" | "blue-purple" | "light-blue" | "disabled-button" | "dark" | "gray";
   children: React.ReactNode;
   className?: string;
 }
@@ -37,6 +37,9 @@ const MyLinearGradient = ({ children, type, color, className}: MyLinearGradientP
         "blue-purple": { colors: ["#091abb", "#007ce6", "#00C3FF", "#00aeee", "#7072f3", "#7971f5"], start: [0, 0], end: [1, 1] },
         "disabled-button": { 
           colors: appliedTheme === "dark" ? ["#161C2C", "#161C2C"] : ["#E8EBEE", "#E8EBEE"],
+          start: [0, 0], end: [1, 1] },
+        "gray": { 
+          colors: appliedTheme === "dark" ? ["#303030", "#303030"] : ["#E0E0E0", "#E0E0E0"],
           start: [0, 0], end: [1, 1] },
         "dark": { colors: ["#090D19", "#090D19"], start: [0, 0], end: [1, 1] },
         "default": { colors: ["#0091FF", "#00C3FF"], start: [0, 0], end: [1, 1] }

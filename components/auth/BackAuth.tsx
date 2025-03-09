@@ -7,7 +7,8 @@ import { SignUpScreensProps } from "@/types/NavigationTypes";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Text } from "../ui/text";
 
-interface BackAuthProps extends SignUpScreensProps{
+interface BackAuthProps{
+    handleScreenChange: (newScreenStep: 'back' | 'next' | string, data?: any, fromEdit?: boolean) => void;
     headerStep?: number | null;
     theme?: string;
     title?: string;

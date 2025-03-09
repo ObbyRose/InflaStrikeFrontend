@@ -23,18 +23,18 @@ const ToastMessage: React.FC<ToastMessageProps> = ({ id, toast, title, desc }) =
     return (
     <Toast
         nativeID={id}
-        className={`relative p-6 gap-3 w-full bg-lightGray-${appliedTheme} shadow-hard-4 flex-row mt-16`}
+        className={`relative p-6 gap-3 w-full bg-card-${appliedTheme} shadow-hard-4 flex-row mt-16`}
         style={{ top: insets.top + 10 }}
     >
         <Pressable className="absolute top-4 right-3" onPress={() => toast.close(id)}>
-            <Icon as={CloseIcon} className="stroke-background-500" />
+            <Icon as={CloseIcon} className="stroke-background-500" color={appliedTheme === "dark" ? "white" : "black"}/>
         </Pressable>
-        <IC_Mail className="w-16 h-16 mr-2" />
+        <IC_Mail className="w-16 h-16 mr-2"/>
         <Box className='gap-1'>
-            <Text size="lg" className="text-typography-950 font-semibold">
+            <Text size="lg" className={`text-text-${appliedTheme} font-semibold`}>
                 {title}
             </Text>
-            <Text size="sm" className={`text-gray-${appliedTheme} max-w-[100px]`}>
+            <Text size="sm" className={`text-subText-${appliedTheme} max-w-[100px]`}>
                 {desc}
             </Text>
         </Box>

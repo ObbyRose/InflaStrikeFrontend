@@ -1,3 +1,4 @@
+import { Address } from "@/types/other";
 import { useState } from "react";
 
 // Custom hook for handling form input and errors
@@ -6,7 +7,7 @@ export function useFormInput<T>(initialValues: T) {
     const [errors, setErrors] = useState<Record<keyof T, string>>({} as Record<keyof T, string>);
 
     // Handle changes to input fields (including checkbox)
-    const handleInputChange = (field: keyof T, val: string | boolean) => {
+    const handleInputChange = (field: keyof T, val: string | boolean | Address | null) => {
         setValues((prevValues) => ({
             ...prevValues,
             [field]: val,

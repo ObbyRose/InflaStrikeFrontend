@@ -1,23 +1,19 @@
 import { Box } from '@/components/ui/box'
-import React, { useState } from 'react'
+import React from 'react'
 import { Text } from '../ui/text';
 import { SignUpScreensProps } from '@/types/NavigationTypes';
 import { Button, ButtonText } from '../ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import InputAuth from './InputAuth';
-import {  Keyboard, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { IM_PhoneHandPassword } from '@/utils/constants/Images';
 import MyLinearGradient from '../gradient/MyLinearGradient';
 import { IC_Vi } from '@/utils/constants/Icons';
 
-interface VerifyPhoneProps extends SignUpScreensProps {
-    phoneEntered: string;
-}
 
-function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhoneProps) {
+function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
-    const [error, setError] = useState('');
-    const [pass, setPass] = useState('');
+    const { values, handleInputChange } =  formHook;
+    const { pass } = values
 
     const isRightLength = pass.length >= 8;
     const hasUppercaseOrSymbol = /[A-Z!@#$%^&*(),.?":{}|<>]/.test(pass);
@@ -25,7 +21,7 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
     const isActive = hasUppercaseOrSymbol && isRightLength && hasNumber
 
     const handlePassSubmit = () => {
-        handleScreenChange('next', { pass })
+        handleScreenChange('next')
     }
 
     return (
@@ -53,7 +49,7 @@ function SignupCreatePassword({ handleScreenChange, phoneEntered } : VerifyPhone
                         placeholder='Password' 
                         type='pass'
                         value={pass}
-                        onChangeText={(val) => setPass(val)}
+                        onChangeText={(val) => handleInputChange("pass", val)}
                     />
 
                     {/* Validation Section */}
