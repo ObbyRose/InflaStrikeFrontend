@@ -68,7 +68,7 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Investment" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="test" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="test" component={testscreen} />
