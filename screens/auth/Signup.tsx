@@ -43,7 +43,8 @@ const Signup: React.FC<Props> = ({ navigation }) => {
     const [ comeFromEdit, setComeFromEdit] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);
 
-    const screens = ['EMAIL', 'VERIFY_EMAIL', 'PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS', "ALMOST_THERE"];
+    const screens = ['EMAIL', 'VERIFY_EMAIL', 'PHONE_NUMBER', 'VERIFY_PHONE', 
+                    'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS', "ALMOST_THERE"];
 
     useEffect(() => {
         console.log("FINAL DATA: ", formHook.values);
@@ -144,6 +145,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         // Choosing screens without scrolling down
+        console.log("screenStep", screenStep);
         if(["PERSONAL_INFO","ADDRESS"].includes(screenStep)) return;
         // Scroll down on all other
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -153,7 +155,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         });
     
         return () => keyboardDidShowListener.remove();
-    }, []);
+    }, [screenStep]);
 
     return (
     <SafeAreaView>

@@ -16,17 +16,26 @@ const MyLinearGradient = ({ children, type, color, className}: MyLinearGradientP
 
   const modifiedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
-      const childWithClassName = child as React.ReactElement<{ className?: string }>;
-
-      // Apply only to the first child
+      const childWithProps = child as React.ReactElement<{ className?: string; style?: React.CSSProperties }>;
+  
       if (index === 0) {
-        return React.cloneElement(childWithClassName, {
-          className: cn(childWithClassName.props.className, "bg-transparent"),
-        });
+        if (type === "button") {
+          return React.cloneElement(childWithProps, {
+            className: cn(childWithProps.props.className, "w-full"),
+            style: { ...childWithProps.props.style, backgroundColor: "initial" },
+          });
+        }
+  
+        if (type === "background") {
+          return React.cloneElement(childWithProps, {
+            className: cn(childWithProps.props.className, "bg-transparent"),
+          });
+        }
       }
     }
     return child;
   });
+  
 
   function getOptions(color: MyLinearGradientProps["color"]) {
     // Define the start and end points for the gradient

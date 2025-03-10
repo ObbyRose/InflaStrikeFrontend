@@ -28,10 +28,7 @@ function SignupPersonalInformation({ handleScreenChange, setHeaderStep, formHook
 
         setTimeout(() => {
             setIsLoading(false);
-            handleScreenChange('next', {
-                birthday: convertBirthday(birthday)?.toLocaleDateString("en-US"), 
-                fName, lName, ssn
-            });
+            handleScreenChange('next');
         }, 1000);
     }
 
@@ -86,11 +83,7 @@ function SignupPersonalInformation({ handleScreenChange, setHeaderStep, formHook
 
         {/* Submit Button */}
         <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
-            <Button 
-                onPress={() => isActive ? handleSubmit() : null} 
-                className='w-full'
-                style={{ backgroundColor: 'initial' }}
-            >
+            <Button onPress={() => isActive ? handleSubmit() : null}>
                 <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                     {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
                     </ButtonText>

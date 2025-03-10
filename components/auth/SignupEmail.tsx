@@ -63,11 +63,7 @@ const SignupEmail = ({ handleScreenChange, formHook } : SignUpScreensProps) => {
                     </Text>
                 </Text>
                 <MyLinearGradient type='button' color='purple'>
-                    <Button 
-                    onPress={() => handlePhoneSubmit()} 
-                    className='w-full'
-                    style={{ backgroundColor: 'initial' }}
-                    >
+                    <Button onPress={() => handlePhoneSubmit()} >
                         <ButtonText className="text-white">
                             Continue
                         </ButtonText>

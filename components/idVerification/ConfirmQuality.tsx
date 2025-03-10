@@ -16,20 +16,22 @@ const ConfirmQuality = ({handleScreenChange, finalData} : idVerifyProps) => {
     const { appliedTheme } = useTheme()
     
     return (
-        <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
-            <Box className="h-full w-full">
-                
-                {/* Most Inner Box */}
-                {/* <CardUpRounded>
+        <MyLinearGradient className='flex-1' type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
+            <Box className="flex-1 justify-between">
+                <Box className='h-[20%]'/>
+                <CardUpRounded className='justify-between items-center'>
+                    {/* Photo Image */}
                     <IC_Government_ID className='-mt-[8rem] border-white' />
+
                     <Box className='flex flex-col items-center gap-6'>
                         <IC_Magnifier className="w-20 h-20" />
                         <Text className={`text-text-${appliedTheme} font-bold text-[24px]`}>Check Quality</Text>
                         <Text className={`text-subText-${appliedTheme} text-center text-[16px]`}>Please make sure your card details are clear to read with no blur or glare</Text>
                     </Box>
+
                     <Box className='flex flex-col items-center gap-6 mb-10'>
                         <MyLinearGradient type='button' color='purple'>
-                            <Button className={`w-full flex justify-center items-center`}>
+                            <Button >
                                 <ButtonText className='text-center w-full font-medium text-[17px]'>All Clear. Continue</ButtonText>
                             </Button>
                         </MyLinearGradient>
@@ -37,7 +39,7 @@ const ConfirmQuality = ({handleScreenChange, finalData} : idVerifyProps) => {
                             <Text className={`text-[17px] text-purple-500 font-medium`}>Take a new photo</Text>
                         </TouchableOpacity>
                     </Box>
-                </CardUpRounded> */}
+                </CardUpRounded>
                 </Box>
         </MyLinearGradient>
     )

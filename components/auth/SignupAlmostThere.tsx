@@ -41,19 +41,19 @@ function SignupAlmostThere({ handleScreenChange, setHeaderStep, formHook, naviga
         { 
             title: 'Full Legal Name', 
             val: [finalData?.fName,finalData?.lName].join(" "), 
-            onclick: () => { handleScreenChange("PERSONAL_INFO", {}, true) }},
+            onclick: () => { handleScreenChange("PERSONAL_INFO",true) }},
         { 
             title: 'Date of Birth', 
             val: finalData?.birthday, 
-            onclick: () => { handleScreenChange("PERSONAL_INFO", {}, true) }},
+            onclick: () => { handleScreenChange("PERSONAL_INFO",true) }},
         { 
             title: 'Social Security Number', 
             val: "*" + finalData?.ssn, 
-            onclick: () => { handleScreenChange("PERSONAL_INFO", {}, true) }},
+            onclick: () => { handleScreenChange("PERSONAL_INFO", true) }},
         { 
             title: 'Residential Address', 
             val: [finalData?.address.street, finalData?.address.subpremise , finalData?.address.city, finalData?.address.country, finalData?.address.postal ].join(", "),
-            onclick: () => { handleScreenChange("ADDRESS", {}, true) }
+            onclick: () => { handleScreenChange("ADDRESS", true) }
         },
     ]
 
@@ -91,11 +91,7 @@ function SignupAlmostThere({ handleScreenChange, setHeaderStep, formHook, naviga
 
         {/* Submit Button */}
         <MyLinearGradient type='button' color={'purple'}>
-            <Button 
-                onPress={() => handleSubmit()} 
-                className='w-full'
-                style={{ backgroundColor: 'initial' }}
-            >
+            <Button onPress={() => handleSubmit()} >
                 <ButtonText className={`text-buttonText-${appliedTheme}`}>
                     {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
                     </ButtonText>

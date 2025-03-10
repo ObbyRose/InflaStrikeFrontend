@@ -84,11 +84,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
                 { errors.api && <Text className="text-red-500 text-sm ps-3 mb-1 -mt-1">{errors.api}</Text>}
                 {/* Login Button & Forgot Pass */}
                 <MyLinearGradient type='button' color='purple'>
-                    <Button 
-                        onPress={handleSubmitLogin}
-                        className='w-full'
-                        style={{ backgroundColor: 'initial' }}
-                    >
+                    <Button onPress={handleSubmitLogin}>
                         <ButtonText className="text-white">
                         {isLoading ? <ButtonSpinner color={"white"} className="h-6" /> : "Sign In"}
                         </ButtonText>

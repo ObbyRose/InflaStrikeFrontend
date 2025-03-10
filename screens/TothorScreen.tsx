@@ -29,7 +29,7 @@ const TothorScreen = () => {
         </Box>
     </MyLinearGradient>
     
-    <CardUpRounded className={`h-full bg-background-${appliedTheme} p-4`}>
+    <CardUpRounded variant='gradient' className='p-4'>
       <ScrollView bounces={false} showsVerticalScrollIndicator={false} className='mt-10'>
         <Box>
 
@@ -63,7 +63,7 @@ const TothorScreen = () => {
         <Box className='p-2' />
 
         <MyLinearGradient type='button' color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-          <Button className='w-full rounded-full' onPress={() => setIsOpen(true)}>
+          <Button onPress={() => setIsOpen(true)}>
             <ButtonText className='text-[16px]'>Start Saving With Tothor</ButtonText>
             {isOpen && <DropdownTothor isOpen={isOpen} setIsOpen={setIsOpen} />}
           </Button>

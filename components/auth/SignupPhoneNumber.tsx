@@ -49,11 +49,7 @@ function SignupPhoneNumber({ handleScreenChange, formHook } : SignUpScreensProps
             {/* Buttons */}
             <Box className='gap-5'>
                 <MyLinearGradient type='button' color='purple'>
-                    <Button 
-                    onPress={() => handlePhoneSubmit()} 
-                    className='w-full'
-                    style={{ backgroundColor: 'initial' }}
-                    >
+                    <Button onPress={() => handlePhoneSubmit()}>
                         <ButtonText className="text-white">
                             Continue
                         </ButtonText>

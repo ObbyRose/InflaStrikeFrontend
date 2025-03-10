@@ -84,20 +84,14 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
             {/* Buttons */}
             <Box className='gap-3'>
                 <MyLinearGradient type='button' color="purple">
-                    <Button
-                    className='w-full'
-                    style={{ backgroundColor: 'initial' }}
-                    onPress={handleCheckInbox}
-                    >
+                    <Button onPress={handleCheckInbox} >
                         <ButtonText className="text-white">
                             Check my inbox
                         </ButtonText>
                     </Button>
                 </MyLinearGradient>
                 <MyLinearGradient type='button' color="gray">
-                    <Button 
-                        className='w-full'
-                        style={{ backgroundColor: 'initial' }}
+                    <Button
                         onPress={handleResendEmail}
                         disabled={isResendDisabled}
                         >

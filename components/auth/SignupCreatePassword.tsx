@@ -78,11 +78,7 @@ function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensPr
                 <MyLinearGradient type='button' 
                     color={ isActive ? 'purple' : "disabled-button"}
                 >
-                    <Button 
-                    onPress={() => isActive ? handlePassSubmit() : null} 
-                    className='w-full'
-                    style={{ backgroundColor: 'initial' }}
-                    >
+                    <Button onPress={() => isActive ? handlePassSubmit() : null}>
                         <ButtonText 
                         className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                             Continue
