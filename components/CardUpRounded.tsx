@@ -7,12 +7,12 @@ import MyLinearGradient from './gradient/MyLinearGradient'
 
 interface CardUpRoundedProps {
     children: React.ReactNode;
-    variant?: 'normal' | 'gradient';
+    variant?: 'background' | "card" | 'gradient';
     className?: string;
 }
-const CardUpRounded = ({ className, children, variant='normal' }: CardUpRoundedProps) => {
+const CardUpRounded = ({ className, children, variant='background' }: CardUpRoundedProps) => {
     const { appliedTheme } = useTheme();
-    const cnClassName = cn(`bg-background-${appliedTheme} rounded-t-3xl -mt-10 flex-1 w-full p-5`, className);
+    const cnClassName = cn(`bg-${variant}-${appliedTheme} rounded-t-3xl -mt-10 flex-1 w-full p-5`, className);
 
     if(variant === 'gradient')
         return (

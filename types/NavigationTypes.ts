@@ -1,9 +1,13 @@
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { Address } from "./other";
 
 export type Props = {
-    navigation: any;
+    navigation: TNavigation;
     route?: any;
 }
+
+export type TNavigation = NavigationProp<ParamListBase>;
+
 
 export type signUpInputs = "fName" | "lName" | "birthday" | "ssn" | "api" |"pass" | "address" | "phoneNumber" | "phonePrefix" | "email";
 
@@ -31,13 +35,17 @@ export type SignUpScreensProps = {
     };
 }
 
-export type idVerifyTypes = {
-    type: "ID Card" | "Driver's License" | 'Passport';
-}
+export type idVerifyTypes = "ID Card" | "Driver's License" | 'Passport' | 'Selfie' | null;
 
 export type idVerifyProps = {
     handleScreenChange: (newScreenStep: 'back' | 'next' | string, data?: any) => void;
-    finalData? : idVerifyTypes;
+    finalData? : {
+        type: idVerifyTypes;
+        frontIdPhoto: string;
+        backIdPhoto: string;
+        isGov: boolean;
+        isSelfie: boolean;
+    };
 }
 
 export type TTheme = "light" | "dark";

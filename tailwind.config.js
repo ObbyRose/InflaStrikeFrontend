@@ -17,6 +17,10 @@ module.exports = {
     },
     {
       pattern:
+      /^(h|w)-\d+%?$/
+    },
+    {
+      pattern:
       /^(bg|text|border|fill)-(background|badge|subTextGray|card|inputPlaceholderText|buttonDisableText|buttonDisable|text|subText|input|icon|divider|button|link|layoutBottom|layoutTop|gray|default|test|iconBottom|iconTop|iconTopActive|iconBottomActive|iconGeneral|buttonText|lightGray)-(light|dark)$/,
     },
     {

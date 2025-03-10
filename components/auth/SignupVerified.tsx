@@ -1,16 +1,12 @@
 import { Box } from '@/components/ui/box'
 import React from 'react'
 import { Text } from '../ui/text';
-import { SignUpScreensProps } from '@/types/NavigationTypes';
+import { SignUpScreensProps, TNavigation } from '@/types/NavigationTypes';
 import { IM_PhoneHand, IM_PhoneHandVerified } from '@/utils/constants/Images';
 import { Button, ButtonText } from '../ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
-
-
-
-type TNavigation = NavigationProp<ParamListBase>;
 
 function SignupVerified({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();

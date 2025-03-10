@@ -43,7 +43,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
       header: 'Verify your identity #1',
       description: 'Take a government ID & selfie photo to get verified ',
       actionText: 'Verify now',
-      actionFunction: () => {},
+      actionFunction: () => { navigation.navigate("VerifyIdentity")},
     },
     {
       icon: IC_Profile_V2,

@@ -3,28 +3,22 @@ import { Box } from '@/components/ui/box';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { Text } from '@/components/ui/text';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import { Props } from '@/types/NavigationTypes';
+import { idVerifyProps, Props } from '@/types/NavigationTypes';
 import IdVerificationMain from '@/components/idVerification/IdVerificationMain';
 import ConfirmQuality from '@/components/idVerification/ConfirmQuality';
 import BackAuth from '@/components/auth/BackAuth';
 import { Animated, BackHandler, Easing } from 'react-native';
 import CaptureID from '@/components/idVerification/CaptureID';
-import { IC_Help_V2 } from '@/utils/constants/Icons';
 
 
 const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("CONFIRM_QUALITY");
+    const [screenStep , setScreenStep ] = useState("MAIN");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
-    const [finalData, setFinalData] = useState<any>({});
-
-    const [isGovernmentIDSubmitted, setIsGovernmentIDSubmitted] = useState(false);
-    const [isSelfieSubmitted, setIsSelfieSubmitted] = useState(false);
+    const [finalData, setFinalData] = useState<idVerifyProps["finalData"]>();
     
     const screens = ['MAIN', 'CAMERA', 'CONFIRM_QUALITY'];
-
-    console.log("finalData", finalData)
 
     useEffect(() => {
         const backAction = () => {
@@ -88,8 +82,8 @@ const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
             } else if(newScreenStep === "next"){
                 setScreenStep(screens[currentIndex + 1]);
             } else { // "back"
-                if(screenStep === "PHONE_NUMBER")
-                    navigation.navigate("Login");
+                if(screenStep === "MAIN")
+                    navigation.goBack();
                 else
                     setScreenStep(screens[currentIndex - 1])
             }
@@ -108,7 +102,7 @@ const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
     return (
     <MyLinearGradient className='flex-1' type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
         <Box className="flex-1 min-h-screen">
-            <BackAuth title={finalData.idMethod} icons={["IC_Help"]} handleScreenChange={handleScreenChange} theme={screenStep === "CAMERA" ? "dark" : ""}/>
+            <BackAuth title={finalData?.type || ""} icons={["IC_Help"]} handleScreenChange={handleScreenChange} theme={screenStep === "CAMERA" ? "dark" : ""}/>
             <Animated.View
                 className="flex-1"
                 style={{
@@ -129,8 +123,7 @@ const VerifyIdentity: React.FC<Props> = ({ navigation }) => {
                     }),
                 }}
             >
-                { screenStep === "MAIN" && <IdVerificationMain handleScreenChange={handleScreenChange}
-                    isGovernmentIDSubmitted={isGovernmentIDSubmitted} isSelfieSubmitted={isSelfieSubmitted}/>}
+                { screenStep === "MAIN" && <IdVerificationMain handleScreenChange={handleScreenChange} finalData={finalData}/>}
                 { screenStep === "CAMERA" && <CaptureID handleScreenChange={handleScreenChange} finalData={finalData}/>}
                 { screenStep === "CONFIRM_QUALITY" && <ConfirmQuality handleScreenChange={handleScreenChange} finalData={finalData}/>}
             </Animated.View>
