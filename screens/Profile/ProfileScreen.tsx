@@ -2,6 +2,7 @@ import BackHeader from '@/components/BackHeader';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import SettingItem from '@/components/SettingItems';
 import ThingToDo from '@/components/ThingToDo';
+import TothorCards from '@/components/TothorCards';
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
 import { Box } from '@/components/ui/box';
 import { Divider } from '@/components/ui/divider';
@@ -63,7 +64,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
       <Box className='h-full'>
         <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[40%]'>
           <BackHeader />
-          <Box className='justify-center items-center gap-2 p-4'>
+          <Box className='justify-center items-center gap-2 p-2'>
             <Avatar size="xl">
               <AvatarFallbackText>{user?.fName + ' ' + user?.lName}</AvatarFallbackText>
               <AvatarImage source={{uri: user?.avatar}} />
@@ -78,9 +79,8 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
 
         <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
             <Box className='gap-4 p-4 justify-center'>
-                <Box className='p-8'></Box>
-              <Box className={`bg-card-${appliedTheme} p-2 rounded-xl`}>
-                <Text className={` text-[18px] font-bold text-text-${appliedTheme} `}>More features</Text>
+                <Box className='p-5'></Box>
+              <TothorCards>
                 <SettingItem title="Saving Goals" IconComponent={IC_Piggy_Bank} badge="+Start" />
                 <Divider />
 
@@ -88,10 +88,10 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
                 <Divider />
 
                 <SettingItem title="Bundles" IconComponent={IC_Subscription} />
-              </Box>
+              </TothorCards>
 
               {/* setting and invite friends box */}
-              <Box className={`bg-card-${appliedTheme} p-2 rounded-xl`}>
+              <TothorCards>
                 {/* invite new friends box */}
                 <SettingItem title="Invite Friends" IconComponent={IC_Invite} badge="Earn $250" />
                 <Divider />
@@ -100,12 +100,11 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
                   onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
                   <SettingItem title="Settings" IconComponent={IC_Setting} />
                 </TouchableOpacity>
-              </Box>
+              </TothorCards>
 
-              <Box className={`bg-card-${appliedTheme} p-2 rounded-xl`}>
+              <TothorCards>
                 <SettingItem title="Logout" IconComponent={IC_Logout_V2} />
-              </Box>
-
+              </TothorCards>
             </Box>
         </MyLinearGradient>
       </Box>

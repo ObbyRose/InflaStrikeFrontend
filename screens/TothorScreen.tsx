@@ -10,6 +10,7 @@ import { IC_Help, IC_Info, IC_Info_Circle, IC_Tothor_Logo_Only, IC_Tothor_Logo_O
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
+import TothorCards from '@/components/TothorCards'
 
 const TothorScreen = () => {
   const { appliedTheme } = useTheme()
@@ -32,32 +33,31 @@ const TothorScreen = () => {
     <CardUpRounded className={`h-full bg-background-${appliedTheme} p-4`}>
       <ScrollView bounces={false} showsVerticalScrollIndicator={false} className='mt-10'>
         <Box>
-
         {/* Description Card */}
-          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit`}>
-            <Box className='items-center justify-center gap-4 p-4'>
-              <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>Save Money With Tothor</Text>
-              <Text className={`text-[16px] text-center text-text-${appliedTheme}`}>Tothor is a crypto token that computes interest over time. Hold and watch your assets grow effortlessly! 🚀</Text>
-            </Box>
-        </Box>
+            <TothorCards>
+              <Box className='items-center justify-center gap-4 p-4'>
+                <Text className={`text-[24px] font-medium text-center text-text-${appliedTheme}`}>Save Money With Tothor</Text>
+                <Text className={`text-[16px] text-center text-text-${appliedTheme}`}>Tothor is a crypto token that computes interest over time. Hold and watch your assets grow effortlessly! 🚀</Text>
+              </Box>
+            </TothorCards>
 
-        <Box className='p-2' />
+        <Box className='p-4' />
         {/* Token Info Card */}
-          <Box className={`bg-card-${appliedTheme} rounded-t-3xl p-4 h-fit`}>
-            <Box className='items-center justify-center gap-3 p-4'>
-              <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>The Tothor Token (TTS$)</Text>
-              <Box className='flex-row gap-2'>
-                <Text className={`text-[24px] font-medium text-center text-text-${appliedTheme}`}>0,722$</Text>
-                <Text className={`text-[12px] font-medium text-center self-end text-text-${appliedTheme}`}>(+0.57%)</Text>
+          <TothorCards>
+              <Box className='items-center justify-center gap-4 p-4'>
+                <Text className={`text-[24px] font-medium text-text-${appliedTheme}`}>The Tothor Token (TTS$)</Text>
+                <Box className='flex-row gap-2'>
+                  <Text className={`text-[24px] font-medium text-center text-text-${appliedTheme}`}>0,722$</Text>
+                  <Text className={`text-[12px] font-medium text-center self-end text-text-${appliedTheme}`}>(+0.57%)</Text>
+                </Box>
+                <Box className='flex-row gap-2'>
+                  <Text className={`text-[12px] font-medium text-center text-text-${appliedTheme}`}>Current Price</Text>
+                  <IC_Info_Circle className='w-5 h-5' />
+                </Box>
+                <Text className={`text-[18px] font-bold text-center text-text-${appliedTheme}`}>1 Tothor Token = $0.722</Text>
+                <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : '#4A3EF6'} className='h-[100px]'/>
               </Box>
-              <Box className='flex-row gap-2'>
-                <Text className={`text-[12px] font-medium text-center text-text-${appliedTheme}`}>Current Price</Text>
-                <IC_Info_Circle className='w-5 h-5' />
-              </Box>
-              <Text className={`text-[18px] font-bold text-center text-text-${appliedTheme}`}>1 Tothor Token = $0.722</Text>
-                          <LineChartWagmi color={appliedTheme === 'dark' ? 'white' : '#4A3EF6'} className='h-[100px]'/>
-            </Box>
-        </Box>
+        </TothorCards>
         </Box>
 
         <Box className='p-2' />
