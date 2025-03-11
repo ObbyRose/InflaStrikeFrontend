@@ -32,53 +32,12 @@ const Layout = ({ children, navigation }: LayoutProps) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-            {/* Status Bar */}
-            <StatusBar barStyle="light-content" backgroundColor="#e8ebf5" />
 
             {/* Main Rendered Screens */}
-            <View style={{ flex: 1 }}>{children}</View>
+            <Box style={{ flex: 1 }}>{children}</Box>
 
             {/* Bottom Navigation Bar */}
             <Box className="relative">
-                <Svg
-                    width={100}
-                    height={60}
-                    viewBox="0 0 100 60"
-                    style={{
-                        position: 'absolute',
-                        left: '50%',
-                        top: -60,
-                        marginLeft: -50,
-                    }}
-                >
-                    {/* Define Shadow Filter */}
-                    <Defs>
-                        <Filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <FeOffset dx="0" dy="2" result="offset" />
-                            <FeGaussianBlur stdDeviation="6" result="blur" />
-                            <FeMerge>
-                                <FeMergeNode in="blur" />
-                                <FeMergeNode in="SourceGraphic" />
-                            </FeMerge>
-                        </Filter>
-                    </Defs>
-
-                    {/* Shadow Effect */}
-                    <G filter="url(#shadow)">
-                        <Path
-                            d="M2 60 C40 25, 60 25, 98 60 V80 H2 Z"
-                            fill="black"
-                            opacity={0.2}
-                        />
-                    </G>
-
-                    {/* Main SVG Path */}
-                    <Path
-                        d="M2 60 C40 25, 60 25, 98 60 V80 H2 Z"
-                        fill="white"
-                    />
-                </Svg>
-
                 <Box
                     className={`flex flex-row items-center h-[62px] bg-layoutBottom-${appliedTheme} p-4`}
                     style={shadowStyle}
@@ -128,12 +87,6 @@ const Layout = ({ children, navigation }: LayoutProps) => {
             </Box>
 
             {/* Bottom Safe Area (Android Navigation Bar) */}
-            <View
-                style={{
-                    height: insets.bottom, 
-                    backgroundColor: "#4A3EF6",
-                }}
-            />
         </SafeAreaView>
     );
 };
