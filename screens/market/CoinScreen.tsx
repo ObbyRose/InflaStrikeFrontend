@@ -56,6 +56,9 @@ function CoinScreen() {
             className={`flex-1`}
             >
             <Box className='flex-1 p-1'>
+                <Box className='p-3'>
+                    <BackHeader title={coin.symbol} colorScheme='themeBased' />
+                </Box>
                 {/* Title */}
                 <Box className='p-5 gap-6'>
                     <Box className='flex-row justify-between'>

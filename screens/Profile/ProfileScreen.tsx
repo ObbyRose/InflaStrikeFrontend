@@ -57,7 +57,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
     <ScrollView>
       <Box className='h-full'>
         <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[40%]'>
-          <BackHeader />
+          <BackHeader title='Profile' colorScheme='alwaysWhite' />
           <Box className='justify-center items-center gap-2 p-2'>
             <Avatar size="xl">
               <AvatarFallbackText>{user?.fName + ' ' + user?.lName}</AvatarFallbackText>

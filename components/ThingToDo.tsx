@@ -55,7 +55,7 @@ export default function ThingToDo({ thingToDo }: ThingToDoProps) {
           </Text>
           <MyLinearGradient type="button" color="purple">
             <TouchableOpacity onPress={thingToDo[currentIndex].actionFunction}>
-              <Text className={`text-[15px] font-medium text-white`}>
+              <Text className={`text-[15px] font-medium text-center text-white`}>
                 {thingToDo[currentIndex].actionText}
               </Text>
             </TouchableOpacity>

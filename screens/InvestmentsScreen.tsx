@@ -43,7 +43,7 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
     <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
       <ScrollView>
         <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className={` h-[70%] p-4`}>
-          <BackHeader title='investments' />
+          <BackHeader title='investments' colorScheme='alwaysWhite' />
           <Box className='gap-4'>
             <Box className='p-4 justify-center gap-2 items-center'>
               <Text className={`text-white font-bold text-[36px] text-center`}>Bundles</Text>

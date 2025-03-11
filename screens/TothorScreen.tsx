@@ -18,7 +18,7 @@ const TothorScreen = () => {
   return (
     <Box className={`bg-background-${appliedTheme} h-full`}>
     <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-1/4 p-4'>
-        <BackHeader title='Tothor' />
+        <BackHeader title='Tothor' colorScheme='alwaysWhite' />
         <Box className='items-center justify-center gap-4'>
             <Box className={`p-4 bg-background-${appliedTheme} mt-4 rounded-full z-10`}>
             {appliedTheme === 'light' ? (

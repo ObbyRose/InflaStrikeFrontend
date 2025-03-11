@@ -12,9 +12,10 @@ interface BackHeaderProps {
     icons?: string[];
     onPressIcons?: Function[];
     bgColor?: "transparent" | "white" | "black";
+    colorScheme?: "alwaysWhite" | "themeBased";
 }
 
-function BackHeader({ title, icons, onPressIcons, bgColor = "transparent" }: BackHeaderProps) {
+function BackHeader({ title, icons, onPressIcons, bgColor = "transparent", colorScheme = "themeBased" }: BackHeaderProps) {
     const navigation = useNavigation();
     const { appliedTheme } = useTheme();
 
@@ -27,6 +28,11 @@ function BackHeader({ title, icons, onPressIcons, bgColor = "transparent" }: Bac
         }
     };
 
+    // Determine the arrow icon and text color based on the colorScheme prop
+    const isWhite = colorScheme === "alwaysWhite";
+    const ArrowIcon = isWhite ? IC_Arrow_Left_White : IC_Arrow_Left;
+    const textColor = isWhite ? "text-white" : `text-text-${appliedTheme}`;
+
     return (
         <SafeAreaView>
             <Box className={`p-4 mb-[1rem] ${getBgClass()} flex-row items-center justify-between relative`}>
@@ -37,16 +43,12 @@ function BackHeader({ title, icons, onPressIcons, bgColor = "transparent" }: Bac
                     onPress={() => navigation.goBack()}
                     activeOpacity={0.7}
                 >
-                    {appliedTheme === "dark" ? (
-                        <IC_Arrow_Left_White className="w-8 h-8" />
-                    ) : (
-                        <IC_Arrow_Left_White className="w-8 h-8" />
-                    )}
+                    <ArrowIcon className="w-8 h-8" />
                 </TouchableOpacity>
 
                 {/* Centered Title */}
                 <Box className="flex-1 items-center justify-center">
-                    <Text className={`font-bold text-white text-xl text-center`}>{title || ""}</Text>
+                    <Text className={`font-bold ${textColor} text-xl text-center`}>{title || ""}</Text>
                 </Box>
                 {/* Right Icons */}
                 <Box className="flex-row items-center absolute gap-2 right-4">

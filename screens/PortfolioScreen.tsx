@@ -163,7 +163,7 @@ const PortfolioScreen = ({navigation}: Props) => {
   return (
     <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
       <Box className={`flex flex-1 px-4 py-6`}>
-        <BackHeader title='History'/>
+        <BackHeader title='Portfolio' colorScheme='themeBased'/>
         <Box className='gap-1 mt-2'>
           <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
           <Text className={`text-subText-${appliedTheme}`}>Total value: {totalValue}$</Text>

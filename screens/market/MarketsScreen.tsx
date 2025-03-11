@@ -89,7 +89,7 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
     return (
         <Box className={`p-4 h-full bg-background-${appliedTheme}`}>
-            <BackHeader title="Markets" />
+            <BackHeader title="Markets" colorScheme="themeBased" />
             <Box className="bg-gray-100 rounded-lg flex-row items-center p-2 mb-4">
                 <Icon as={Search} className="text-gray-500 w-5 h-5 mr-2" />
                 <TextInput

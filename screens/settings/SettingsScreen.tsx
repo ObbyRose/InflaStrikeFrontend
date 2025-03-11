@@ -33,6 +33,7 @@ import { Text } from '@/components/ui/text';
 import PurpleSwitch from '@/components/PurpleSwitch';
 import CardUpRounded from '@/components/CardUpRounded';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
+import TothorCards from '@/components/TothorCards';
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { appliedTheme, setTheme } = useTheme();
@@ -41,7 +42,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Box className="h-full">
         <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[25%]'>
-            <BackHeader />
+            <BackHeader colorScheme='alwaysWhite' />
             <Box className="h-[45%] justify-end p-4">
           <Text className={`text-[24px] font-bold text-white`}>Settings</Text>
             </Box>
@@ -51,7 +52,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               <CardUpRounded className='p-0'>
           <ScrollView bounces={false}>
               {/* Personal setting  */}
-              <Box className={`flex gap-2 bg-card-${appliedTheme} mb-2 w-full rounded-t-3xl  p-4`}>
+              <Box className={`flex gap-2 z-10 mb-2 w-full rounded-t-3xl  p-4`}>
                 <Text className={`text-text-${appliedTheme} flex text-[18px] font-bold`}>
                   Personal Setting
                 </Text>
@@ -75,7 +76,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               </Box>
 
               {/* Security */}
-              <Box className={`flex gap-2 bg-card-${appliedTheme} my-2 w-full p-4`}>
+              <Box className={`flex gap-2 my-2 w-full p-4`}>
                 <Text className={`text-text-${appliedTheme} flex text-[18px] font-bold`}>
                   Security
                 </Text>
@@ -103,7 +104,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               </Box>
 
               {/* Support */}
-              <Box className={`flex gap-2 bg-card-${appliedTheme} my-2 w-full p-4`}>
+              <Box className={`flex gap-2 my-2 w-full p-4`}>
                 <Text className={`text-text-${appliedTheme} flex text-[18px] font-bold`}>
                   Support
                 </Text>
@@ -117,7 +118,8 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               </Box>
 
               {/* Logout */}
-              <Box className={`flex gap-2 bg-card-${appliedTheme} mt-2 w-full p-4`}>
+
+              <Box className={`flex gap-2 mt-2 w-full p-4`}>
                 <Box className="flex flex-row items-center">
                   <Box className="flex-1 flex-row items-center gap-3">
                     <Box className="rounded-full p-2">
