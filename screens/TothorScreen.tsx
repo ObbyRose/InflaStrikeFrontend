@@ -6,7 +6,7 @@ import LineChartWagmi from '@/components/LineChartWagmi'
 import { Box } from '@/components/ui/box'
 import { Button, ButtonText } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
-import { IC_Help, IC_Info, IC_Info_Circle, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons'
+import { IC_Help, IC_Info, IC_Info_Circle, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -24,7 +24,7 @@ const TothorScreen = () => {
             {appliedTheme === 'light' ? (
               <IC_Tothor_Logo_Only className='w-16 h-16' />
             ) : (
-              <IC_Tothor_Logo_Only_White className='w-16 h-16' />
+              <IC_Tothor_Logo_Only_Bold className='w-16 h-16' />
             )}
             </Box>
         </Box>

@@ -1,6 +1,6 @@
 import { Alert, TouchableOpacity } from 'react-native';
 import { Box } from './ui/box';
-import { IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White } from '@/utils/constants/Icons';
+import { IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
 import { Text } from './ui/text';
 import { useState } from 'react';
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from './ui/slider';
@@ -75,7 +75,7 @@ export default function DropdownTothor({ isOpen, setIsOpen }: DropdownTothorProp
             className="w-fit rounded-full p-4">
             {/* <Box
               className={`border border-${appliedTheme === 'dark' ? 'white' : 'black'} w-fit rounded-full p-4`}> */}
-            <IC_Tothor_Logo_Only_White color={'white'} className={`h-14 w-14`} />
+            <IC_Tothor_Logo_Only_Bold color={'white'} className={`h-14 w-14`} />
             {/* </Box> */}
           </MyLinearGradient>
 
@@ -127,7 +127,7 @@ export default function DropdownTothor({ isOpen, setIsOpen }: DropdownTothorProp
           {/* expected interest */}
           <Box
             className={`flex flex-row items-center justify-center gap-5 rounded-xl  p-5 bg-card-${appliedTheme}`}>
-            <IC_Tothor_Logo_Only_White color={logoColor} className="h-8 w-8" />
+            <IC_Tothor_Logo_Only_Bold color={logoColor} className="h-8 w-8" />
             <Text className={textColor}>Expected interest: {expectedValue}%</Text>
           </Box>
 

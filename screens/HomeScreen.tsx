@@ -4,7 +4,7 @@ import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_White, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
+import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -157,7 +157,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                             <OptionCard>
                                 <Box className="gap-1">
                                     {appliedTheme === 'dark' ? 
-                                        <IC_Tothor_Logo_Only_White className="w-12 h-12" /> :
+                                        <IC_Tothor_Logo_Only_Bold className="w-12 h-12" /> :
                                         <IC_Tothor_Logo_Only className="w-12 h-12" />
                                     }
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>Tothor Bundle</Text>
