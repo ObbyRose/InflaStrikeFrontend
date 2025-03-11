@@ -14,11 +14,16 @@ const dummyData = [
 ];
 
 interface LineChartWagmiProps {
+    lineData?: {
+        timestamp: number, 
+        value: number;
+    }[];
+    tooltip?: boolean;
     className?: string;
     color?: string;
 }
 
-const LineChartWagmi = ({className, color}: LineChartWagmiProps) => {
+const LineChartWagmi = ({className, color, lineData=dummyData, tooltip=true}: LineChartWagmiProps) => {
     // Set up state to track the container's dimensions
     const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
     
@@ -27,26 +32,29 @@ const LineChartWagmi = ({className, color}: LineChartWagmiProps) => {
         const { width, height } = e.nativeEvent.layout;
         setContainerDimensions({ width, height });
     };
-    
+
+    const isUp = lineData[lineData.length - 1].value > lineData[0].value;
+    const lineColor = color || (isUp ? "#00FF00" : "#FF0000");
+
     return (
-        <Box 
+        <Box
             className={cn('w-full h-full',className)}
             onLayout={measureContainer}
         >
-            <LineChart.Provider data={dummyData}>
+            <LineChart.Provider data={lineData}>
                 {containerDimensions.width > 0 && containerDimensions.height > 0 && (
                     <LineChart 
                         width={containerDimensions.width} 
                         height={containerDimensions.height}
                     >
-                        <LineChart.Path color={color || "purple"}>
+                        <LineChart.Path color={lineColor}>
                             <LineChart.Gradient />
                         </LineChart.Path>
                         <LineChart.CursorCrosshair color="black" />
-                        <LineChart.Tooltip
+                        { tooltip && <LineChart.Tooltip
                             textStyle={{ color: 'white' }}
                             style={{ backgroundColor: 'black', borderRadius: 5, padding: 5 }}
-                        />
+                        />}
                     </LineChart>
                 )}
             </LineChart.Provider>

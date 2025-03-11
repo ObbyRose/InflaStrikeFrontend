@@ -3,6 +3,7 @@ import { Pressable, Text } from "react-native";
 import { Box } from "@/components/ui/box";
 import LineChartComponent from "@/components/LineChart";
 import { LucideIcon } from "lucide-react-native";
+import LineChartWagmi from "./LineChartWagmi";
 
 interface CryptoMarketCardProps {
     icon: LucideIcon | React.ElementType;
@@ -16,6 +17,12 @@ interface CryptoMarketCardProps {
 }
 
 const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, symbol, price, change, lineData, bgColor, onPress }) => {
+    const dateString = (new Date()).toISOString().split("T")[0];
+    const data = lineData.map(({ price, time }) => {
+        const timestamp = new Date(`${dateString}T${time}Z`).getTime();
+        return { timestamp, value: price };
+    });
+    
     return (
         <Pressable onPress={onPress}>
             <Box className="p-2 flex flex-row gap-2 items-center">
@@ -28,8 +35,11 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, s
                         {change !== null ? `${change > 0 ? '+' : ''}${change.toFixed(2)}%` : "Loading..."}
                     </Text>
                 </Box>
-                <Box className="flex-1 flex-row">
-                    <LineChartComponent title="" lineData={lineData} />
+                <Box className="flex-1 flex-row h-full">
+                    <LineChartWagmi 
+                        lineData={data} 
+                        tooltip={false}
+                    />
                 </Box>
                 <Box className="flex flex-col justify-center items-end">
                     <Text className="text-[16px] font-semibold">
