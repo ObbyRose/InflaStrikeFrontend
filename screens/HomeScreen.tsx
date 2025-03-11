@@ -21,6 +21,8 @@ import { Props } from "@/types/NavigationTypes";
 import MyLinearGradient from "@/components/gradient/MyLinearGradient";
 import RoundedBox from "@/components/RoundedBox";
 import OptionCard from "@/components/OptionCard";
+import { handleSQLiteIInsert } from "@/utils/api/internal/sql/handleSQLite";
+import OverlayLoading from "@/components/OverlayLoading";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -32,53 +34,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         async function fetchData() {
             try {
                 setLoading(true);
-                const [btcLine, ethLine, xrpLine] = await Promise.all([
-                    fetchBitcoinLineData(),
-                    fetchEthereumLineData(),
-                    fetchXRPLineData(),
-                ]);
-
-                const [btcPrice, ethPrice, xrpPrice] = await Promise.all([
-                    fetchBitcoinLivePrice(),
-                    fetchEthereumLivePrice(),
-                    fetchXRPLivePrice(),
-                ]);
-
-                const [btcChange, ethChange, xrpChange] = await Promise.all([
-                    fetchBitcoinPercentageGain(),
-                    fetchEthereumPercentageGain(),
-                    fetchXRPPercentageGain(),
-                ]);
-
-                setCryptoData([
-                    { 
-                        name: "Bitcoin", 
-                        symbol: "BTC", 
-                        icon: IC_Bitcoin, 
-                        price: btcPrice, 
-                        change: btcChange, 
-                        lineData: btcLine, 
-                        bgColor: "bg-[hsl(7_91%_60%/0.1)]" 
-                    },
-                    { 
-                        name: "Ethereum", 
-                        symbol: "ETH", 
-                        icon: IC_Ethereum, 
-                        price: ethPrice, 
-                        change: ethChange, 
-                        lineData: ethLine, 
-                        bgColor: "bg-[hsl(169_44%_58%/0.1)]"
-                    },
-                    { 
-                        name: "XRP", 
-                        symbol: "XRP", 
-                        icon: IC_Xrp, 
-                        price: xrpPrice, 
-                        change: xrpChange, 
-                        lineData: xrpLine, 
-                        bgColor: "bg-[hsl(223_99%_69%/0.1)]"
-                    },
-                ]);
+                await handleSQLiteIInsert();
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching market data:", error);
             } finally {
@@ -88,6 +45,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
         fetchData();
     }, []);
+
+    if(loading)
+      return <OverlayLoading />
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
