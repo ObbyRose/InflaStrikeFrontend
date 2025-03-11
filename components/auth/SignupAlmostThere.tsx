@@ -15,16 +15,16 @@ import MembershipModal from './MembershipModal'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
-    finalData: SignupFinalDataType | null;
     navigation: any;
 }
 
 const dummyAddress = {"address": {"city": "Jerusalem", "coords": {"lat": 9.040974799999999, "lng": 7.494399499999999}, "country": "Israel", "place_id": "EiZFbWVrIFJlZmEnaW0gU3RyZWV0LCBKZXJ1c2FsZW0sIElzcmFlbCIuKiwKFAoSCasOiBsmKAMVEUZVPxWx5J3mEhQKEglL_ME01tcCFRHL4W5FPmJv2Q", "postal": "900103", "street": "Emek Refa'im Street"}}
 
-function SignupAlmostThere({ handleScreenChange, setHeaderStep, finalData, navigation}: SignupPersonalInformationProps) {
+function SignupAlmostThere({ handleScreenChange, setHeaderStep, formHook, navigation}: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const finalData = formHook.values;
 
     useEffect(() => setHeaderStep(prev => prev !== 3 ? 3: prev), [])
     
@@ -41,19 +41,19 @@ function SignupAlmostThere({ handleScreenChange, setHeaderStep, finalData, navig
         { 
             title: 'Full Legal Name', 
             val: [finalData?.fName,finalData?.lName].join(" "), 
-            onclick: () => { handleScreenChange("PERSONAL_INFO", {}, true) }},
+            onclick: () => { handleScreenChange("PERSONAL_INFO",true) }},
         { 
             title: 'Date of Birth', 
             val: finalData?.birthday, 
-            onclick: () => { handleScreenChange("PERSONAL_INFO", {}, true) }},
+            onclick: () => { handleScreenChange("PERSONAL_INFO",true) }},
         { 
             title: 'Social Security Number', 
             val: "*" + finalData?.ssn, 
-            onclick: () => { handleScreenChange("PERSONAL_INFO", {}, true) }},
+            onclick: () => { handleScreenChange("PERSONAL_INFO", true) }},
         { 
             title: 'Residential Address', 
             val: [finalData?.address.street, finalData?.address.subpremise , finalData?.address.city, finalData?.address.country, finalData?.address.postal ].join(", "),
-            onclick: () => { handleScreenChange("ADDRESS", {}, true) }
+            onclick: () => { handleScreenChange("ADDRESS", true) }
         },
     ]
 
@@ -91,11 +91,7 @@ function SignupAlmostThere({ handleScreenChange, setHeaderStep, finalData, navig
 
         {/* Submit Button */}
         <MyLinearGradient type='button' color={'purple'}>
-            <Button 
-                onPress={() => handleSubmit()} 
-                className='w-full'
-                style={{ backgroundColor: 'initial' }}
-            >
+            <Button onPress={() => handleSubmit()} >
                 <ButtonText className={`text-buttonText-${appliedTheme}`}>
                     {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
                     </ButtonText>

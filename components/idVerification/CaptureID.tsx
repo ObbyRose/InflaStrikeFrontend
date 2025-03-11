@@ -1,25 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Text, TouchableOpacity, Image } from "react-native";
 import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
-import { SignUpScreensProps } from "@/types/NavigationTypes";
+import { idVerifyProps } from "@/types/NavigationTypes";
 import { Box } from "../ui/box";
-import { Progress, ProgressFilledTrack } from "../ui/progress";
-import { useTheme } from "@/utils/Themes/ThemeProvider";
-import { IM_ProcessingVerification } from "@/utils/constants/Images";
 import { LinearGradient } from "../ui/linear-gradient";
-import { IC_Camera_Flip, IC_Flash, IC_NoFlash, IC_Tick_Purple, IC_Vi } from "@/utils/constants/Icons";
+import { IC_Camera_Flip, IC_Flash, IC_NoFlash, IC_Vi } from "@/utils/constants/Icons";
+import { IM_FaceScan } from "@/utils/constants/Images";
 
-interface SignupCaptureIDProps extends SignUpScreensProps {
-    type: "ID Card" | "Driver's License" | 'Passport';
-}
-
-function CaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
+function CaptureID({ handleScreenChange, finalData }: idVerifyProps) {
     const [permission, requestPermission] = useCameraPermissions();
     const [frontPhoto, setFrontPhoto] = useState<string | null>(null);
     const [backPhoto, setBackPhoto] = useState<string | null>(null);
     const [step, setStep] = useState(0);
     const cameraRef = useRef<any>(null);
-    const [direction, setDirection] = useState<CameraType>("back");
+    const [direction, setDirection] = useState<CameraType>(finalData?.type === "Selfie" ? "front" : "back");
     const [isFlash, setIsFlash] = useState(false);
 
     useEffect(() => {
@@ -32,32 +26,36 @@ function CaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
         if (cameraRef.current) {
             try {
                 const photo = await cameraRef.current.takePictureAsync();
+                
                 if (step === 0) {
                     setFrontPhoto(photo.uri);
+                    
+                    // If it's an ID Card, go to back side, otherwise proceed to next screen
+                    if (finalData && finalData.type === "ID Card") {
+                        setStep(1);
+                    } else {
+                        // For Passport or Driver's License, no back photo needed
+                        setTimeout(() => {
+                            handleScreenChange('next', { 
+                                frontIdPhoto: photo.uri, 
+                                backIdPhoto: null 
+                            });
+                        }, 1000);
+                    }
                 } else if (step === 1) {
                     setBackPhoto(photo.uri);
+                    setTimeout(() => {
+                        handleScreenChange('next', { 
+                            frontIdPhoto: frontPhoto, 
+                            backIdPhoto: photo.uri 
+                        });
+                    }, 1000);
                 }
-                confirmAndProceed();
             } catch (error) {
                 console.error("Error taking picture:", error);
             }
         } else {
             console.log("Camera ref not available");
-        }
-    };
-
-
-    const confirmAndProceed = () => {
-        if (step === 0 && type === "ID Card") {
-                setStep(1);
-        } else if (step === 1 || step === 0) {
-            console.log("HERE")
-            setTimeout(() => {
-                handleScreenChange('next', { 
-                    frontIdPhoto: frontPhoto, 
-                    backIdPhoto: backPhoto 
-                });
-            }, 1000)
         }
     };
 
@@ -84,7 +82,6 @@ function CaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
     }
 
     // Determine which photo we're currently working with
-    const currentPhoto = step === 0 ? frontPhoto : backPhoto;
     const photoSide = step === 0 ? "Front" : "Back";
 
     return (
@@ -113,17 +110,32 @@ function CaptureID({ handleScreenChange, type }: SignupCaptureIDProps) {
                 </Box>
                 {/* ID Borders */}
                 <Box className="h-[10%]"></Box>
+                { finalData?.type === "Selfie" ?
+                <Box className="h-[40%] bg-transparent rounded-lg relative overflow-hidden w-[90%] mx-auto z-10">
+                    <IM_FaceScan className="w-full h-full"/>
+                </Box>
+                :
                 <Box className="h-[220px] bg-transparent rounded-lg relative overflow-hidden w-[90%] mx-auto z-10">
                     <Box className="absolute w-8 h-8 border-t-4 border-l-4 border-cyan-600 rounded-sm" />
                     <Box className="absolute right-0 w-8 h-8 border-t-4 border-r-4 border-cyan-600 rounded-sm" />
                     <Box className="absolute bottom-0 w-8 h-8 border-b-4 border-l-4 border-cyan-600 rounded-sm" />
                     <Box className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-cyan-600 rounded-sm" />
                 </Box>
+                }
+                
                 {/* Instructions Section */}
                 <Box className="items-center p-4 my-3 gap-5">
-                    <Text className="text-3xl font-bold text-text-dark">{photoSide} of your ID</Text>
+                    <Text className="text-3xl font-bold text-text-dark">
+                        { finalData?.type === "Selfie" ?
+                            "Center your face" : `${photoSide} of your ID`
+                        }
+                    </Text>
                     <Text className="text-subText-dark text-sm text-center w-2/3">
-                        Position all 4 corners of the front clearly in the frame.
+                        { finalData?.type === "Selfie" ?
+                            "Align your face to the center of the selfie area and then take a photo" 
+                            :
+                            `Position all 4 corners of the front clearly in the frame.`
+                        }
                     </Text>
                 </Box>
                 {/* Submit Section */}

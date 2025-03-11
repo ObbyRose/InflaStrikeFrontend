@@ -15,11 +15,11 @@ export const fetchAutocomplete = async (query: string) => {
         if (data.status === 'OK') {
             return data.predictions;
         } else {
-            console.error('Error fetching autocomplete results:', data.error_message);
+            console.log('Error fetching autocomplete results:', data.error_message);
             return [];
         }
     } catch (error) {
-        console.error('Error fetching autocomplete data:', error);
+        console.log('Error fetching autocomplete data:', error);
         return [];
     }
 };

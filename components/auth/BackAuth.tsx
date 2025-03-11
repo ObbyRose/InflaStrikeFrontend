@@ -7,7 +7,8 @@ import { SignUpScreensProps } from "@/types/NavigationTypes";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Text } from "../ui/text";
 
-interface BackAuthProps extends SignUpScreensProps{
+interface BackAuthProps{
+    handleScreenChange: (newScreenStep: 'back' | 'next' | string, data?: any, fromEdit?: boolean) => void;
     headerStep?: number | null;
     theme?: string;
     title?: string;
@@ -16,13 +17,14 @@ interface BackAuthProps extends SignUpScreensProps{
 }
 function BackAuth({ handleScreenChange, headerStep, theme, title, icons, onPressIcons}: BackAuthProps) {
     const { appliedTheme } = useTheme();
+    
     function handleBackPress() {
         handleScreenChange('back');
     }
     console.log(theme)
     return (
         <SafeAreaView className="z-50">
-            <Box className={`flex-row justify-between p-4 items-center relative`}>
+            <Box className={`flex-row justify-between p-6 items-center relative`}>
                 
                 <TouchableOpacity
                     className="absolute left-4"

@@ -10,101 +10,87 @@ import MyLinearGradient from '../gradient/MyLinearGradient'
 import { Button, ButtonText } from '../ui/button'
 import SettingItem from '../SettingItems'
 import { Divider } from '../ui/divider'
-import { SignUpScreensProps } from '@/types/NavigationTypes'
+import { idVerifyProps, TNavigation } from '@/types/NavigationTypes'
+import { useNavigation } from '@react-navigation/native'
 
-interface IdVerificationMainProps extends SignUpScreensProps{
-    isGovernmentIDSubmitted: boolean;
-    isSelfieSubmitted: boolean;
-}
 
-const IdVerificationMain = ({ handleScreenChange, isGovernmentIDSubmitted, isSelfieSubmitted} : IdVerificationMainProps) => {
+const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) => {
     const { appliedTheme } = useTheme();
     const [showActionSheet, setShowActionSheet] = useState(false);
     
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const navigation = useNavigation<TNavigation>();
 
-    const handleVerifyIdentity = () => {
-        if (isGovernmentIDSubmitted && isSelfieSubmitted) {
-            setIsDialogOpen(true);
-        }
-    };
+    const isActive = !!finalData?.isGov && !!finalData?.isSelfie;
 
     return (
-    <Box className='flex-1 p-4'>
-        {/* Government ID Section */}
-        <Box>
-            <RoundedBox>
-                <IC_Passport_Photo />
-                {isGovernmentIDSubmitted && <IC_Tick_Selected className="-mt-14" />}
-                <Box className="flex flex-col items-center">
-                    <Text className={`text-text-${appliedTheme} font-bold text-[20px]`}>Government ID</Text>
-                    <Text className={`text-subTextGray-${appliedTheme} p-4 text-center text-[16px]`}>
-                        Take a driver's license, national identity card or passport photo.
-                    </Text>
-                </Box>
-
-                {/* Open ActionSheet on press */}
-                <TouchableOpacity onPress={() => setShowActionSheet(true)}>
-                    <Box className="flex flex-row items-center gap-2 p-2 justify-center">
-                        {isGovernmentIDSubmitted ? (
-                            <IC_Camera_Orange className="w-8 h-8" />
-                        ) : (
-                            <IC_Camera_Purple className="w-8 h-8" />
-                        )}
-                        <Text className={`font-bold text-[17px] ${isGovernmentIDSubmitted ? 'text-orange' : 'text-purple-500'}`}>
-                            Take a photo
+    <Box className='flex-1 p-4 justify-between'>
+        <Box className='gap-4'>
+            {/* Government ID Section */}
+            <Box>
+                <RoundedBox>
+                    <IC_Passport_Photo />
+                    {finalData?.isGov && <IC_Tick_Selected className="-mt-14" />}
+                    <Box className="flex flex-col items-center">
+                        <Text className={`text-text-${appliedTheme} font-bold text-[20px]`}>Government ID</Text>
+                        <Text className={`text-subTextGray-${appliedTheme} p-4 text-center text-[16px]`}>
+                            Take a driver's license, national identity card or passport photo.
                         </Text>
                     </Box>
-                </TouchableOpacity>
-            </RoundedBox>
-        </Box>
 
-        <Box className="p-3"></Box>
+                    {/* Open ActionSheet on press */}
+                    <TouchableOpacity onPress={() => setShowActionSheet(true)}>
+                        <Box className="flex flex-row items-center gap-2 p-2 justify-center">
+                            {finalData?.isGov ? (
+                                <IC_Camera_Orange className="w-8 h-8" />
+                            ) : (
+                                <IC_Camera_Purple className="w-8 h-8" />
+                            )}
+                            <Text className={`font-bold text-[17px] ${finalData?.isGov ? 'text-orange' : 'text-purple-500'}`}>
+                                Take a photo
+                            </Text>
+                        </Box>
+                    </TouchableOpacity>
+                </RoundedBox>
+            </Box>
 
-        {/* Selfie Photo Section */}
-        <Box>
-            <RoundedBox>
-                <IC_Selfie_Photo />
-                {isSelfieSubmitted && <IC_Tick_Selected className="-mt-14" />}
-                <Box className="flex flex-col items-center">
-                    <Text className={`text-text-${appliedTheme} font-bold text-[20px]`}>Selfie Photo</Text>
-                    <Text className={`text-subTextGray-${appliedTheme} p-4 text-center text-[16px]`}>
-                        Take a selfie to verify your identity.
-                    </Text>
-                </Box>
-
-                {/* Open ActionSheet on press */}
-                <TouchableOpacity onPress={() => console.log('Take a selfie')}>
-                    <Box className="flex flex-row items-center gap-2 p-2 justify-center">
-                        {isSelfieSubmitted ? (
-                            <IC_Scan_Face_Orange className="w-8 h-8" />
-                        ) : (
-                            <IC_Scan_Face_Purple className="w-8 h-8" />
-                        )}
-                        <Text className={`font-bold text-[17px] ${isSelfieSubmitted ? 'text-orange' : 'text-purple-500'}`}>
-                            Take a selfie
+            {/* Selfie Photo Section */}
+            <Box>
+                <RoundedBox>
+                    <IC_Selfie_Photo />
+                    {finalData?.isSelfie && <IC_Tick_Selected className="-mt-14" />}
+                    <Box className="flex flex-col items-center">
+                        <Text className={`text-text-${appliedTheme} font-bold text-[20px]`}>Selfie Photo</Text>
+                        <Text className={`text-subTextGray-${appliedTheme} p-4 text-center text-[16px]`}>
+                            Take a selfie to verify your identity.
                         </Text>
                     </Box>
-                </TouchableOpacity>
-            </RoundedBox>
-        </Box>
 
-        <Box className="p-3"></Box>
+                    {/* Open ActionSheet on press */}
+                    <TouchableOpacity onPress={() => handleScreenChange("CAMERA", { type: "Selfie"})}>
+                        <Box className="flex flex-row items-center gap-2 p-2 justify-center">
+                            {finalData?.isSelfie ? (
+                                <IC_Scan_Face_Orange className="w-8 h-8" />
+                            ) : (
+                                <IC_Scan_Face_Purple className="w-8 h-8" />
+                            )}
+                            <Text className={`font-bold text-[17px] ${finalData?.isSelfie ? 'text-orange' : 'text-purple-500'}`}>
+                                Take a selfie
+                            </Text>
+                        </Box>
+                    </TouchableOpacity>
+                </RoundedBox>
+            </Box>
+        </Box>
 
         {/* Verify Identity Button */}
-        {isGovernmentIDSubmitted && isSelfieSubmitted ? (
-            <MyLinearGradient type="button" color="purple">
-                <Button className="w-full h-12 rounded-full" onPress={handleVerifyIdentity}>
-                    <ButtonText className={`text-buttonText-${appliedTheme}`}>Verify My Identity</ButtonText>
-                </Button>
-            </MyLinearGradient>
-        ) : (
-            <Button className={`w-full h-16 rounded-full bg-buttonDisable-${appliedTheme}`}>
-                <ButtonText className={`text-buttonDisableText-${appliedTheme}`}>Verify My Identity</ButtonText>
+        <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
+            <Button onPress={() => isActive ? setIsDialogOpen(true) : null}>
+                <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
+                    Verify My Identity
+                    </ButtonText>
             </Button>
-        )}
-        
-        {/* </Box> */}
+        </MyLinearGradient>
 
         {/* Gluestack ActionSheet */}
         <Actionsheet isOpen={showActionSheet} onClose={() => setShowActionSheet(false)}>
@@ -114,7 +100,7 @@ const IdVerificationMain = ({ handleScreenChange, isGovernmentIDSubmitted, isSel
                     <ActionsheetDragIndicator />
                 </ActionsheetDragIndicatorWrapper>
 
-                <ActionsheetItem onPress={() => { handleScreenChange("CAMERA", { idMethod: "Driver's License"})}}>
+                <ActionsheetItem onPress={() => { handleScreenChange("CAMERA", { type: "Driver's License"})}}>
                     <ActionsheetItemText>
                         <SettingItem IconComponent={IC_Drivers_License} title="Driver's License" />
                     </ActionsheetItemText>
@@ -122,14 +108,14 @@ const IdVerificationMain = ({ handleScreenChange, isGovernmentIDSubmitted, isSel
 
                 <Divider />
 
-                <ActionsheetItem onPress={() => { handleScreenChange("CAMERA", { idMethod: "ID Card"})}}>
+                <ActionsheetItem onPress={() => { handleScreenChange("CAMERA", { type: "ID Card"})}}>
                     <ActionsheetItemText>
                         <SettingItem IconComponent={IC_ID_Card} title="National Identity Card" />
                     </ActionsheetItemText>
                 </ActionsheetItem>
                 <Divider />
 
-                <ActionsheetItem onPress={() => { handleScreenChange("CAMERA", { idMethod: "Passport"})}}>
+                <ActionsheetItem onPress={() => { handleScreenChange("CAMERA", { type: "Passport"})}}>
                     <ActionsheetItemText>
                         <SettingItem IconComponent={IC_Passport} title="Passport" badge="Recommended" />
                     </ActionsheetItemText>
@@ -153,7 +139,10 @@ const IdVerificationMain = ({ handleScreenChange, isGovernmentIDSubmitted, isSel
                 </AlertDialogBody>
                 <AlertDialogFooter>
                     <MyLinearGradient type='button' color='purple'>
-                        <Button className='w-full' onPress={() => setIsDialogOpen(false)}>
+                        <Button className='w-full' onPress={() => {
+                            setIsDialogOpen(false);
+                            navigation.goBack();
+                        }}>
                             <ButtonText>Got it</ButtonText>
                         </Button>
                     </MyLinearGradient>

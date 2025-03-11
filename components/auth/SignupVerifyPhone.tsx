@@ -14,11 +14,8 @@ import { Clipboard, Keyboard, KeyboardAvoidingView, Pressable, TextInput } from 
 import { IM_PhoneHandConfirm } from '@/utils/constants/Images';
 import OverlayLoading from '../OverlayLoading';
 
-interface VerifyPhoneProps extends SignUpScreensProps {
-    phoneEntered: string;
-}
 
-function SignupVerifyPhone({ handleScreenChange, phoneEntered } : VerifyPhoneProps) {
+function SignupVerifyPhone({ handleScreenChange, formHook } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
     const toast = useToast();
     const [isLoadingResend, setIsLoadingResend] = useState(false);
@@ -135,9 +132,8 @@ function SignupVerifyPhone({ handleScreenChange, phoneEntered } : VerifyPhonePro
 
     return (
     <Box className='flex-1 py-5'>
-        { isLoadingSubmit &&
-            <OverlayLoading/>
-        }
+        { isLoadingSubmit && <OverlayLoading/> }
+        
         {/* Main Image */}
         <Box className='mb-12'>
             <IM_PhoneHandConfirm className='h-[150px] -mt-3'/>
@@ -149,7 +145,7 @@ function SignupVerifyPhone({ handleScreenChange, phoneEntered } : VerifyPhonePro
                 <Box className='mb-7 gap-2'>
                     <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Confirm</Text>
                     <Text className={`text-subText-${appliedTheme} text-lg`}>
-                        {`Please enter the 4-digit code just sent \nto ${phoneEntered}`}
+                        {`Please enter the 4-digit code just sent \nto ${[formHook.values.phonePrefix,formHook.values.phoneNumber].join(" - ") || "your phone"}`}
                     </Text>
                 </Box>
                 {/* Code Input */}

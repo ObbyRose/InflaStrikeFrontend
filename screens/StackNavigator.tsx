@@ -32,7 +32,6 @@ import ConfirmPinScreen from './PinScreen/ConfirmPinScreen';
 import EnterChangePinScreen from './PinScreen/EnterChangePinScreen';
 import testscreen from './testscreen';
 import VerifyIdentity from './idVerification/VerifyIdentity';
-import ConfirmGovernmentId from '../components/idVerification/ConfirmGovernmentId';
 import TouchId from './idVerification/TouchId';
 import FaceId from './idVerification/FaceId';
 import TothorScreen from './TothorScreen';

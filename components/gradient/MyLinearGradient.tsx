@@ -6,7 +6,7 @@ import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 interface MyLinearGradientProps {
   type: "button" | "background" | "text";
-  color: "blue" | "purple" | "blue-purple" | "light-blue" | "disabled-button" | "dark";
+  color: "blue" | "purple" | "blue-purple" | "light-blue" | "disabled-button" | "dark" | "gray";
   children: React.ReactNode;
   className?: string;
 }
@@ -16,17 +16,26 @@ const MyLinearGradient = ({ children, type, color, className}: MyLinearGradientP
 
   const modifiedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
-      const childWithClassName = child as React.ReactElement<{ className?: string }>;
-
-      // Apply only to the first child
+      const childWithProps = child as React.ReactElement<{ className?: string; style?: React.CSSProperties }>;
+  
       if (index === 0) {
-        return React.cloneElement(childWithClassName, {
-          className: cn(childWithClassName.props.className, "bg-transparent"),
-        });
+        if (type === "button") {
+          return React.cloneElement(childWithProps, {
+            className: cn(childWithProps.props.className, "w-full"),
+            style: { ...childWithProps.props.style, backgroundColor: "initial" },
+          });
+        }
+  
+        if (type === "background") {
+          return React.cloneElement(childWithProps, {
+            className: cn(childWithProps.props.className, "bg-transparent"),
+          });
+        }
       }
     }
     return child;
   });
+  
 
   function getOptions(color: MyLinearGradientProps["color"]) {
     // Define the start and end points for the gradient
@@ -37,6 +46,9 @@ const MyLinearGradient = ({ children, type, color, className}: MyLinearGradientP
         "blue-purple": { colors: ["#091abb", "#007ce6", "#00C3FF", "#00aeee", "#7072f3", "#7971f5"], start: [0, 0], end: [1, 1] },
         "disabled-button": { 
           colors: appliedTheme === "dark" ? ["#161C2C", "#161C2C"] : ["#E8EBEE", "#E8EBEE"],
+          start: [0, 0], end: [1, 1] },
+        "gray": { 
+          colors: appliedTheme === "dark" ? ["#303030", "#303030"] : ["#E0E0E0", "#E0E0E0"],
           start: [0, 0], end: [1, 1] },
         "dark": { colors: ["#090D19", "#090D19"], start: [0, 0], end: [1, 1] },
         "default": { colors: ["#0091FF", "#00C3FF"], start: [0, 0], end: [1, 1] }

@@ -2,37 +2,55 @@ import BackAuth from '@/components/auth/BackAuth'
 import SignupPersonalInformation from '@/components/auth/SignupPersonalInformation'
 import SignupPhoneNumber from '@/components/auth/SignupPhoneNumber'
 import SignupVerifyPhone from '@/components/auth/SignupVerifyPhone'
+import SignupVerifyEmail from '@/components/auth/SignupVerifyEmail'
 import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import { Box } from '@/components/ui/box'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
-import React, { useEffect, useState } from 'react'
-import { BackHandler, ScrollView } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
+import { BackHandler, Keyboard, ScrollView } from 'react-native'
 import { Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
 import SignupAddress from '@/components/auth/SignupAddress'
 import SignupAlmostThere from '@/components/auth/SignupAlmostThere'
-import { SignupFinalDataType } from '@/types/other'
+import { Address, SignupFinalDataType } from '@/types/other'
+import { useFormInput } from '@/hooks/useFormInput'
+import SignupEmail from '@/components/auth/SignupEmail'
 
 // const dummyFinalData = {"address": {"city": "נס ציונה", "coords": {"lat": 31.9293254, "lng": 34.7947742}, "country": "ישראל", "postal": "7054112", "street": "עמק השושנים", "subpremise": "Ap12"}, "birthday": "12/11/2007", "fName": "Xhjzus", "lName": "Jdjdis", "pass": "Xhxhsjwiieiei3i322", "phoneNumber": "+1 268 89764646616", "ssn": "7716"};
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
-    const [screenStep , setScreenStep ] = useState("PHONE_NUMBER");
+    const [screenStep , setScreenStep ] = useState("EMAIL");
     const [slideAnim] = useState(new Animated.Value(0));
     const [isGoingBack, setIsGoingBack] = useState(false);
-    const [finalData, setFinalData] = useState<SignupFinalDataType | null>(null);
+    
+    const formHook = useFormInput({
+            phonePrefix: '',
+            phoneNumber: '',
+            email: '',
+            pass: '',
+            address: {} as Address,
+            fName: '',
+            lName: '',
+            birthday: '',
+            ssn: '',
+            api: ''
+    });
+
     const [ headerStep,  setHeaderStep] = useState<number | null>(null);
     const [ comeFromEdit, setComeFromEdit] = useState(false);
+    const scrollViewRef = useRef<ScrollView>(null);
 
-    const screens = ['PHONE_NUMBER', 'VERIFY_PHONE', 'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS', "ALMOST_THERE"];
+    const screens = ['EMAIL', 'VERIFY_EMAIL', 'PHONE_NUMBER', 'VERIFY_PHONE', 
+                    'CREATE_PASSWORD', 'PERSONAL_INFO', 'ADDRESS', "ALMOST_THERE"];
 
     useEffect(() => {
-        console.log("FINAL DATA: ", finalData);
-    }, [finalData]);
+        console.log("FINAL DATA: ", formHook.values);
+    }, [formHook.values]);
 
-    const handleScreenChange = (newScreenStep: 'back' | 'next' | string, data?: any, fromEdit = false) => {
+    const handleScreenChange = (newScreenStep: 'back' | 'next' | string, fromEdit = false) => {
         if (!['back', 'next'].includes(newScreenStep) && !screens.includes(newScreenStep)) {
             console.log("Invalid screen step");
             return null;
@@ -57,15 +75,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
             setComeFromEdit(true);
         else
             setComeFromEdit(false);
-
-        // Update finalData
-        if (data) {
-            setFinalData((prevData:any) => ({
-            ...prevData,
-            ...data
-            }));
-        }
-
+        
         // Trigger the animation when changing the screenStep
         Animated.timing(slideAnim, {
             toValue: -1,
@@ -86,7 +96,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
             
 
         } else { // "back"
-            if(screenStep === "PHONE_NUMBER")
+            if(screenStep === "EMAIL")
                 navigation.navigate("Login");
             else
                 setScreenStep(screens[currentIndex - 1]);
@@ -118,7 +128,7 @@ const Signup: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         const backAction = () => {
-        if(screenStep === "PHONE_NUMBER")
+        if(screenStep === "EMAIL")
             navigation.navigate("Login");
         else 
             handleScreenChange("back");
@@ -133,9 +143,24 @@ const Signup: React.FC<Props> = ({ navigation }) => {
         };
     }, [screenStep]);
 
+    useEffect(() => {
+        // Choosing screens without scrolling down
+        console.log("screenStep", screenStep);
+        if(["PERSONAL_INFO","ADDRESS"].includes(screenStep)) return;
+        // Scroll down on all other
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+            setTimeout(() => {
+                scrollViewRef.current?.scrollToEnd({ animated: true });
+            }, 10); // Delay to make sure scroll works
+        });
+    
+        return () => keyboardDidShowListener.remove();
+    }, [screenStep]);
+
     return (
     <SafeAreaView>
         <ScrollView
+        ref={scrollViewRef}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
@@ -164,12 +189,14 @@ const Signup: React.FC<Props> = ({ navigation }) => {
                         }),
                     }}
                 >
-                    { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber handleScreenChange={handleScreenChange} />}
-                    { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone handleScreenChange={handleScreenChange} phoneEntered={finalData?.phoneNumber || "your phone"}/>}
-                    { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword handleScreenChange={handleScreenChange} phoneEntered={finalData?.phoneNumber || "your phone"}/>}
-                    { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
-                    { screenStep === 'ADDRESS' && <SignupAddress handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} />}
-                    { screenStep === 'ALMOST_THERE' && <SignupAlmostThere navigation={navigation} handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} finalData={finalData}/>}
+                    { screenStep === 'EMAIL' && <SignupEmail formHook={formHook} handleScreenChange={handleScreenChange}/>}
+                    { screenStep === 'VERIFY_EMAIL' && <SignupVerifyEmail formHook={formHook} handleScreenChange={handleScreenChange}/>}
+                    { screenStep === 'PHONE_NUMBER' && <SignupPhoneNumber formHook={formHook} handleScreenChange={handleScreenChange}/>}
+                    { screenStep === 'VERIFY_PHONE' && <SignupVerifyPhone formHook={formHook} handleScreenChange={handleScreenChange}/>}
+                    { screenStep === 'CREATE_PASSWORD' && <SignupCreatePassword formHook={formHook} handleScreenChange={handleScreenChange} />}
+                    { screenStep === 'PERSONAL_INFO' && <SignupPersonalInformation formHook={formHook} handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
+                    { screenStep === 'ADDRESS' && <SignupAddress formHook={formHook} handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep} />}
+                    { screenStep === 'ALMOST_THERE' && <SignupAlmostThere formHook={formHook} navigation={navigation} handleScreenChange={handleScreenChange} setHeaderStep={setHeaderStep}/>}
                 </Animated.View>
             </Box>
         </Box>

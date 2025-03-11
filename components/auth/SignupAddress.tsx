@@ -17,7 +17,7 @@ interface SignupPersonalInformationProps extends SignUpScreensProps {
 
 const dummyAddress = {"address": {"city": "Jerusalem", "coords": {"lat": 9.040974799999999, "lng": 7.494399499999999}, "country": "Israel", "place_id": "EiZFbWVrIFJlZmEnaW0gU3RyZWV0LCBKZXJ1c2FsZW0sIElzcmFlbCIuKiwKFAoSCasOiBsmKAMVEUZVPxWx5J3mEhQKEglL_ME01tcCFRHL4W5FPmJv2Q", "postal": "900103", "street": "Emek Refa'im Street"}}
 
-function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInformationProps) {
+function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const [ address, setAddress] = useState<Address | null>(null);
@@ -32,7 +32,8 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
 
         setTimeout(() => {
             setIsLoading(false);
-            handleScreenChange('next', { address });
+            formHook.handleInputChange("address", address);
+            handleScreenChange('next');
         }, 1000);
     }
 
@@ -96,7 +97,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
                 }
             </Box>
 
-            <AddressSearch 
+            <AddressSearch
                 isOpen={isSheetOpen}
                 onClose={() => setIsSheetOpen(false)}
                 setAddress={setAddress}
@@ -105,11 +106,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep }: SignupPersonalInfo
 
         {/* Submit Button */}
         <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
-            <Button 
-                onPress={() => isActive ? handleSubmit() : null} 
-                className='w-full'
-                style={{ backgroundColor: 'initial' }}
-            >
+            <Button onPress={() => isActive ? handleSubmit() : null}>
                 <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                     {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
                     </ButtonText>

@@ -13,18 +13,12 @@ interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-function SignupPersonalInformation({ handleScreenChange, setHeaderStep }: SignupPersonalInformationProps) {
+function SignupPersonalInformation({ handleScreenChange, setHeaderStep, formHook }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
-    const { values, errors, handleInputChange } = useFormInput({
-        fName: '',
-        lName: '',
-        birthday: '',
-        ssn: '',
-        api: ''
-    });
+    const { values, errors, handleInputChange } =  formHook;
+    const { fName, lName, birthday, ssn } = values
 
-    const { fName, lName, birthday, ssn } = values;
     const isActive = fName.trim() && lName.trim() && birthday.length === 14 && ssn.length === 4;
 
     useEffect(() => setHeaderStep(prev => prev !== 1 ? 1: prev), [])
@@ -34,10 +28,7 @@ function SignupPersonalInformation({ handleScreenChange, setHeaderStep }: Signup
 
         setTimeout(() => {
             setIsLoading(false);
-            handleScreenChange('next', {
-                birthday: convertBirthday(birthday)?.toLocaleDateString("en-US"), 
-                fName, lName, ssn
-            });
+            handleScreenChange('next');
         }, 1000);
     }
 
@@ -92,11 +83,7 @@ function SignupPersonalInformation({ handleScreenChange, setHeaderStep }: Signup
 
         {/* Submit Button */}
         <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
-            <Button 
-                onPress={() => isActive ? handleSubmit() : null} 
-                className='w-full'
-                style={{ backgroundColor: 'initial' }}
-            >
+            <Button onPress={() => isActive ? handleSubmit() : null}>
                 <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                     {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
                     </ButtonText>

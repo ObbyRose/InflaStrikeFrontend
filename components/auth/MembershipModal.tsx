@@ -47,7 +47,6 @@ const MembershipModal = ({ isOpen, onClose, onSuccess }: MembershipModalProps) =
                         <Button 
                             className="w-fit px-10 justify-center items-center"
                             onPress={() => {onClose(); onSuccess()}}
-                            style={{ backgroundColor: 'initial' }}
                         >
                             <ButtonText className={`text-white`}>
                             I'm ready to start

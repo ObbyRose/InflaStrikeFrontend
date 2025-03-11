@@ -9,7 +9,6 @@ const ThemeContext = createContext<{ appliedTheme: "light" | "dark"; theme: "lig
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const systemTheme = useColorScheme();
-    // console.log("systemTheme",systemTheme)
     const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
 
     useEffect(() => {
@@ -28,6 +27,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     let appliedTheme = theme === "system" ? (systemTheme ?? "light") : theme;
+
+    // appliedTheme = "light";
+    // appliedTheme = "dark";
     
     return (
         <ThemeContext.Provider value={{ appliedTheme,theme, setTheme: setThemeMode }}>
