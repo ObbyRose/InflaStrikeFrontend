@@ -26,6 +26,7 @@ interface LineChartWagmiProps {
 const LineChartWagmi = ({className, color, lineData=dummyData, tooltip=true}: LineChartWagmiProps) => {
     // Set up state to track the container's dimensions
     const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
+    const [cursorY, setCursorY] = useState(0);
     
     // Reference to measure the container
     const measureContainer = (e: LayoutChangeEvent) => {
@@ -43,18 +44,31 @@ const LineChartWagmi = ({className, color, lineData=dummyData, tooltip=true}: Li
         >
             <LineChart.Provider data={lineData}>
                 {containerDimensions.width > 0 && containerDimensions.height > 0 && (
-                    <LineChart 
+                    <LineChart
                         width={containerDimensions.width} 
                         height={containerDimensions.height}
                     >
                         <LineChart.Path color={lineColor}>
                             <LineChart.Gradient />
                         </LineChart.Path>
-                        <LineChart.CursorCrosshair color="black" />
-                        { tooltip && <LineChart.Tooltip
-                            textStyle={{ color: 'white' }}
-                            style={{ backgroundColor: 'black', borderRadius: 5, padding: 5 }}
-                        />}
+                        <LineChart.CursorCrosshair 
+                        color="black"
+                        >
+                            {tooltip && (
+                            <LineChart.Tooltip
+                                textStyle={{ color: 'black' }}
+                                style={{
+                                    padding: 0,
+                                    backgroundColor: 'transparent',
+                                    // borderRadius: 5,
+                                    // padding: 5,
+                                }}
+                            />
+                        )}
+
+                        </LineChart.CursorCrosshair>
+
+                        
                     </LineChart>
                 )}
             </LineChart.Provider>

@@ -38,7 +38,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ icon: Icon, name, s
                 <Box className="flex-1 flex-row h-full">
                     <LineChartWagmi 
                         lineData={data} 
-                        tooltip={false}
+                        tooltip={true}
                     />
                 </Box>
                 <Box className="flex flex-col justify-center items-end">
