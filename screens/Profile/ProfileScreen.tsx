@@ -3,15 +3,13 @@ import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import SettingItem from '@/components/SettingItems';
 import ThingToDo from '@/components/ThingToDo';
 import TothorCards from '@/components/TothorCards';
-import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
 import { Box } from '@/components/ui/box';
 import { Divider } from '@/components/ui/divider';
 import { Text } from '@/components/ui/text';
-import { VStack } from '@/components/ui/vstack';
 import { useUserStore } from '@/context/userStore';
 import { Props } from '@/types/NavigationTypes';
 import {
-  IC_Arrow_Right,
   IC_Bell_V2,
   IC_Budget,
   IC_Card_V2,
@@ -20,14 +18,10 @@ import {
   IC_Piggy_Bank,
   IC_Profile_V2,
   IC_Setting,
-  IC_Settings,
   IC_Subscription,
-  IC_ThemeSettings,
 } from '@/utils/constants/Icons';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { Alert, ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 
 interface ProfileScreenProps extends Props {}
 
