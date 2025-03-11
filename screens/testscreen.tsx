@@ -8,6 +8,7 @@ import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { IC_Swap } from "@/utils/constants/Icons";
 import BackHeader from "@/components/BackHeader";
 import LineChartWagmi from "@/components/LineChartWagmi";
+import OverlayLoading from "@/components/OverlayLoading";
 
 const ExchangeScreen = () => {
     const [activeTab, setActiveTab] = useState("Limit");
@@ -31,6 +32,7 @@ const ExchangeScreen = () => {
     return (
         <Box className="p-4 h-full bg-white">
             <BackHeader title="Exchange" />
+            <OverlayLoading />
             <Box className="flex-1">
                 <Box className="flex-row w-full rounded-lg p-1">
                     <ButtonsTrain
