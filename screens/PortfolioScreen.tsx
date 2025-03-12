@@ -16,19 +16,41 @@ interface PortfolioData {
   value: number;
   color: string;
   gradientCenterColor: string;
+  symbol: string,
+  amount: number,
   focused?: boolean;
 }
 
 const pieData: PortfolioData[] = [
   {
-      value: 47,
-      color: '#009FFF',
-      gradientCenterColor: '#FFFFFF',
-      focused: true,
+    value: 47,
+    color: '#453ABD',
+    gradientCenterColor: '#FFFFFF',
+    symbol: 'BTCUSDT',
+    amount: 3000,
+    focused: true,
   },
-  {value: 40, color: '#93FCF8', gradientCenterColor: '#FFFFFF'},
-  {value: 16, color: '#BDB2FA', gradientCenterColor: '#FFFFFF'},
-  {value: 3, color: '#FFA5BA', gradientCenterColor: '#FFFFFF'},
+  {
+    value: 40,
+    color: '#7D8198',
+    gradientCenterColor: '#FFFFFF',
+    symbol: 'ETHUSDT',
+    amount: 2500,
+  },
+  {
+    value: 16,
+    color: '#FFB800',
+    gradientCenterColor: '#FFFFFF',
+    symbol: 'BNBUSDT',
+    amount: 1200,
+  },
+  {
+    value: 3,
+    color: '#1C9ABB',
+    gradientCenterColor: '#FFFFFF',
+    symbol: 'XRPUSDT',
+    amount: 500,
+  },
 ];
 
 const dummyQuickBuy = [
@@ -91,7 +113,7 @@ const PortfolioScreen = ({navigation}: Props) => {
     return currency ? currency.color : 'grey';
   }
 
-  const renderDot = (color:any) => {
+  const renderDot = (color:string) => {
       return (
       <Box 
         className={`h-2.5 w-2.5 rounded-full mr-2.5`} 
@@ -105,25 +127,14 @@ const PortfolioScreen = ({navigation}: Props) => {
   const renderLegendComponent = () => {
       return (
         <>
-        <Box className="flex flex-row justify-center mb-2.5">
-          <Box className="flex flex-row items-center w-30 mr-5">
-            {renderDot('#006DFF')}
-            <Text className="text-black">Excellent: 47%</Text>
+        <Box className="flex flex-row justify-center mb-2.5 flex-wrap gap-5">
+          { pieData.map((item) =>
+          <Box className='flex-row items-center'>
+            {renderDot(item.color)}
+            <Text className="text-black">{item.symbol}: {item.value}%</Text>
           </Box>
-          <Box className="flex flex-row items-center w-30">
-            {renderDot('#8F80F3')}
-            <Text className="text-black">Okay: 16%</Text>
-          </Box>
-        </Box>
-        <Box className="flex flex-row justify-center">
-          <Box className="flex flex-row items-center w-30 mr-5">
-            {renderDot('#3BE9DE')}
-            <Text className="text-black">Good: 40%</Text>
-          </Box>
-          <Box className="flex flex-row items-center w-30">
-            {renderDot('#FF7F97')}
-            <Text className="text-black">Poor: 3%</Text>
-          </Box>
+          )}
+
         </Box>
       </>
       );
@@ -140,34 +151,29 @@ const PortfolioScreen = ({navigation}: Props) => {
         </Box>
 
         {/* Chart Container */}
-        <Box className="items-center">
+        <Box className="flex-row justify-center">
           <PieChart
               data={pieData}
               donut
-              showText
+              // showTooltip
+              // showText
               showValuesAsLabels
               textSize={20}
-              showGradient
+              // showGradient
               sectionAutoFocus
               focusOnPress
-              radius={90}
-              innerRadius={60}
+              radius={120}
+              innerRadius={80}
               innerCircleColor={appliedTheme==="dark" ? '#161C2C' : '#FFFFFF'}
-              externalLabelComponent={(val, index) => (
-                <Text style={{ color: 'black', fontSize: 14 }}>
-                  {pieData[index || 0].value + '%'}
-                </Text>
-              )}
-              showExternalLabels={true}
-              centerLabelComponent={() => {
-                  return (
-                  <Box style={{justifyContent: 'center', alignItems: 'center'}}>
-                      <Text >
-                      47%
-                      </Text>
-                      <Text>Excellent</Text>
-              </Box>
-              );
+              extraRadius={9}
+              centerLabelComponent={(idx: number) => {
+                return (
+                <Box className='justify-center items-center'>
+                    <Text className={`font-bold text-2xl text-text-${appliedTheme}`}>{pieData[idx].symbol}</Text>
+                    <Text className={`font-semibold text-2xl`}>{formatNumber(pieData[idx].amount)}</Text>
+                    <Text className={`font-bold text-subTextGray-${appliedTheme} text-2xl`}>{pieData[idx].value + "%"}</Text>
+                </Box>
+                );
             }}
             />
         </Box>
