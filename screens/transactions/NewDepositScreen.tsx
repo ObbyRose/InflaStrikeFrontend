@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { Input, InputField, InputIcon, InputSlot } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
-import { Feather } from '@expo/vector-icons'
 import { KeyboardAvoidingView, Platform, ScrollView, TextInput } from 'react-native'
 import OutlinedCard from '@/components/OutlinedCard'
 import { SearchIcon } from "@/components/ui/icon"

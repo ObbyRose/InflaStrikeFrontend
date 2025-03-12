@@ -9,7 +9,7 @@ import { Box } from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
-import { IC_FaceID, IC_Fingerprint } from '@/utils/constants/Icons';
+import { IC_Fingerprint } from '@/utils/constants/Icons';
 import BackHeader from '@/components/BackHeader';
 
 const { height } = Dimensions.get('window');

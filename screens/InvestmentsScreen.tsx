@@ -33,8 +33,6 @@ const dummyBundleData: BundleData = {
 };
 
 const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
-  const [currentCategory, setCurrentCategory] = React.useState<string>('Available');
-  const [currentInvestmentID, setCurrentInvestmentID] = React.useState<number | undefined>(undefined);
 
   const { appliedTheme } = useTheme();
   const bundleData = dummyBundleData;

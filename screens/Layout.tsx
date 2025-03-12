@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import { IC_Home, IC_Invest, IC_Market, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
+import { IC_Home, IC_Invest, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
 
 interface LayoutProps {
     children: React.ReactNode;

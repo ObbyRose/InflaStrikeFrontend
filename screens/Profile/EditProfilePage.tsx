@@ -1,12 +1,9 @@
-import BackHeader from '@/components/BackHeader';
-import PasswordVisibilityChangeButton from '@/components/PasswordVisibilityChangeButton';
 import CountryPhoneInput from '@/components/profile/CountryPhoneInput';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Image } from '@/components/ui/image';
 import { Input, InputField } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
 import { getIconByString } from '@/utils/constants/Icons';
-import passwordConvertor from '@/utils/functions/passwordConvertor';
 import { Entypo } from '@expo/vector-icons';
 import { useState } from 'react';
 import { View } from 'react-native';

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList, RefreshControl, BackHandler } from 'react-native'
+import { Text, FlatList, RefreshControl, BackHandler } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Props } from 'types/NavigationTypes'
 import { Box } from '@/components/ui/box'

@@ -1,16 +1,14 @@
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
-import { VStack } from '@/components/ui/vstack';
 import React, { useEffect, useState } from 'react';
-
 import { PieChart } from 'react-native-svg-charts';
-import { Alert, FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, View } from 'react-native';
 import { Button, ButtonText } from '@/components/ui/button';
 import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import CryptoMarketCard from '@/components/CryptoMarketCard';
-import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
+import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
 

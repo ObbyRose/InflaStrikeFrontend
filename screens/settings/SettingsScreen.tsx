@@ -3,26 +3,17 @@ import { Box } from '@/components/ui/box';
 import { Divider } from '@/components/ui/divider';
 import SettingItem from '../../components/SettingItems';
 import {
-  IC_ArrowLeft,
   IC_Bell_V2,
   IC_Card_V2,
-  IC_DisplaySetting,
-  IC_Envelope,
   IC_FaceID_V2,
   IC_Help_V2,
-  IC_LanguageSetting,
   IC_Logout_V2,
-  IC_NotificationSettings,
   IC_Password_V2,
   IC_PIN_V2,
   IC_Privacy_V2,
-  IC_Profile,
   IC_Profile_V2,
-  IC_ProfileSettings,
-  IC_Security,
   IC_Terms_V2,
   IC_ThemeSettings,
-  IC_UserPreferencesSettings,
 } from '@/utils/constants/Icons';
 import { Props } from '@/types/NavigationTypes';
 import { ScrollView, TouchableOpacity } from 'react-native';
@@ -33,7 +24,6 @@ import { Text } from '@/components/ui/text';
 import PurpleSwitch from '@/components/PurpleSwitch';
 import CardUpRounded from '@/components/CardUpRounded';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import TothorCards from '@/components/TothorCards';
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { appliedTheme, setTheme } = useTheme();
