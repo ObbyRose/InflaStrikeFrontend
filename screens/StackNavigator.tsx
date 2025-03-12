@@ -90,7 +90,7 @@ const StackNavigator = () => {
         }
       }
       updateData();
-    }, 6000);
+    }, 60000);
     return () => clearInterval(interval);
   }, [setData, setDataLoaded]);
   if (loading && !isDataLoaded) return <OverlayLoading />;
