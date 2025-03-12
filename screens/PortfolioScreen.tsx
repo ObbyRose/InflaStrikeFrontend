@@ -1,9 +1,7 @@
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import React, { useEffect, useState } from 'react';
-import { PieChart } from 'react-native-svg-charts';
-import { FlatList, Pressable, ScrollView, View } from 'react-native';
-import { Button, ButtonText } from '@/components/ui/button';
+import { FlatList, Pressable, ScrollView } from 'react-native';
 import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
@@ -11,18 +9,25 @@ import CryptoMarketCard from '@/components/CryptoMarketCard';
 import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
+import { PieChart } from 'react-native-gifted-charts';
 
 interface PortfolioData {
-  key: string;
   value: number;
   color: string;
+  gradientCenterColor: string;
+  focused?: boolean;
 }
 
-const dummyPieData: PortfolioData[] = [
-  { key: 'Available Money', value: 1000, color: 'red' },
-  { key: 'Bitcoin', value: 500, color: 'blue' },
-  { key: 'Ethereum', value: 200, color: 'green' },
-  { key: 'XRP', value: 100, color: 'yellow' },
+const pieData: PortfolioData[] = [
+  {
+      value: 47,
+      color: '#009FFF',
+      gradientCenterColor: '#FFFFFF',
+      focused: true,
+  },
+  {value: 40, color: '#93FCF8', gradientCenterColor: '#FFFFFF'},
+  {value: 16, color: '#BDB2FA', gradientCenterColor: '#FFFFFF'},
+  {value: 3, color: '#FFA5BA', gradientCenterColor: '#FFFFFF'},
 ];
 
 const dummyQuickBuy = [
@@ -32,7 +37,6 @@ const dummyQuickBuy = [
   IC_Doge,
   IC_Tothor_Logo_Only,
 ]
-
 
 const PortfolioScreen = ({navigation}: Props) => {
   const { appliedTheme } = useTheme();
@@ -46,7 +50,6 @@ const PortfolioScreen = ({navigation}: Props) => {
               setLoading(true);
 
               const data = await handleSQLiteSelect(['BTCUSDT', 'ETHUSDT', 'XRPUSDT']);
-              console.log("DATA", JSON.stringify(data, null, 2));
               setHistoryData(data);
           } catch (error) {
               console.error("Error fetching market data:", error);
@@ -58,12 +61,6 @@ const PortfolioScreen = ({navigation}: Props) => {
       fetchData();
   }, []);
 
-  function handleSetSelectedSlice(prev: PortfolioData | null, item: PortfolioData) {
-    if (!prev) {
-      return item;
-    }
-    return prev.key === item.key ? null : item;
-  }
 
   function getAppropriateColor(currencyName: string) {
     const topCryptocurrencies = [
@@ -93,28 +90,44 @@ const PortfolioScreen = ({navigation}: Props) => {
     return currency ? currency.color : 'grey';
   }
 
-  const pieData = dummyPieData.map((item) => {
-    const currentColor = getAppropriateColor(item.key);
-    return {
-      value: item.value,
-      svg: {
-        fill: selectedSlice
-          ? selectedSlice.key === item.key
-            ? currentColor
-            : 'grey'
-          : currentColor,
-        onPress: () => {
-          setSelectedSlice((prev) => handleSetSelectedSlice(prev, item));
-        },
-        stroke: '#ffffff',
-        strokeWidth: 1,
-        scale: selectedSlice?.key === item.key ? 1.1 : 1,
-      },
-      key: item.key,
+  const renderDot = (color:any) => {
+      return (
+      <Box 
+        className={`h-2.5 w-2.5 rounded-full mr-2.5`} 
+        style={{
+          backgroundColor: color
+        }}
+      />
+      );
+  };
+    
+  const renderLegendComponent = () => {
+      return (
+        <>
+        <Box className="flex flex-row justify-center mb-2.5">
+          <Box className="flex flex-row items-center w-30 mr-5">
+            {renderDot('#006DFF')}
+            <Text className="text-black">Excellent: 47%</Text>
+          </Box>
+          <Box className="flex flex-row items-center w-30">
+            {renderDot('#8F80F3')}
+            <Text className="text-black">Okay: 16%</Text>
+          </Box>
+        </Box>
+        <Box className="flex flex-row justify-center">
+          <Box className="flex flex-row items-center w-30 mr-5">
+            {renderDot('#3BE9DE')}
+            <Text className="text-black">Good: 40%</Text>
+          </Box>
+          <Box className="flex flex-row items-center w-30">
+            {renderDot('#FF7F97')}
+            <Text className="text-black">Poor: 3%</Text>
+          </Box>
+        </Box>
+      </>
+      );
     };
-  });
 
-  const totalValue = dummyPieData.reduce((acc, item) => acc + item.value, 0);
 
   return (
     <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
@@ -122,55 +135,45 @@ const PortfolioScreen = ({navigation}: Props) => {
         <BackHeader title='Portfolio' colorScheme='themeBased'/>
         <Box className='gap-1 mt-2'>
           <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
-          <Text className={`text-subText-${appliedTheme}`}>Total value: {totalValue}$</Text>
+          <Text className={`text-subText-${appliedTheme}`}>Total value: $</Text>
         </Box>
 
         {/* Chart Container */}
         <Box className="items-center">
           <PieChart
-            style={{ height: 225, width: 225 }}
-            data={pieData}
-            innerRadius="50%"
-            outerRadius="90%"
-            padAngle={0.01}
-            >
-              <View className="flex items-center justify-center">
-                <View className="flex h-1/3 w-1/3 items-center justify-center ">
-                  {selectedSlice ? (
-                    <>
-                      <Text className="text-center ">{selectedSlice.key}</Text>
-                      <Text className="text-center ">{selectedSlice.value}$</Text>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </View>
-              </View>
-          </PieChart>
+              data={pieData}
+              donut
+              showText
+              showValuesAsLabels
+              textSize={20}
+              showGradient
+              sectionAutoFocus
+              focusOnPress
+              radius={90}
+              innerRadius={60}
+              innerCircleColor={appliedTheme==="dark" ? '#161C2C' : '#FFFFFF'}
+              externalLabelComponent={(val, index) => (
+                <Text style={{ color: 'black', fontSize: 14 }}>
+                  {pieData[index || 0].value + '%'}
+                </Text>
+              )}
+              showExternalLabels={true}
+              centerLabelComponent={() => {
+                  return (
+                  <Box style={{justifyContent: 'center', alignItems: 'center'}}>
+                      <Text >
+                      47%
+                      </Text>
+                      <Text>Excellent</Text>
+              </Box>
+              );
+            }}
+            />
         </Box>
 
         {/* Chart Details */}
         <Box>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={dummyPieData}
-            keyExtractor={(item) => item.key}
-            renderItem={({ item }) => (
-              <View className="flex-grow-0 items-center p-2">
-                <Button
-                  variant="outline"
-                  className={`border-none bg-background-${appliedTheme}`}
-                  onPress={() => setSelectedSlice((prev) => handleSetSelectedSlice(prev, item))}>
-                  <Box
-                    className="h-[16px] w-[16px] rounded-full border border-black"
-                    style={{ backgroundColor: getAppropriateColor(item.key) }}
-                  />
-                  <ButtonText className={`text-text-${appliedTheme}`}>{item.key}</ButtonText>
-                </Button>
-              </View>
-            )}
-          />
+          {renderLegendComponent()}
         </Box>
 
         {/* Portfolio Value */}

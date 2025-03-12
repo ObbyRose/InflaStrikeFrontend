@@ -65,15 +65,19 @@ const SettingsNavigator = () => (
 );
 
 const StackNavigator = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const setLoadedData = useDataStore((state) => state.setDataLoaded);
+  const [loading, setLoading] = useState(true);
+  const [isFirst, setIsFirst] = useState(true);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        setLoading(true);
+        if(isFirst) 
+          setLoading(true);
         await handleSQLiteIInsert();
-        setLoadedData(true);
-        setLoading(false);
+        if(isFirst){
+          setLoading(false);
+          setIsFirst(false);
+        }
       } catch (error) {
         console.error("Error fetching market data:", error);
       } finally {
@@ -85,7 +89,7 @@ const StackNavigator = () => {
       fetchData();
     }, 60000); // 1 minute
     return () => clearInterval(interval);
-  }, [setLoadedData]);
+  }, []);
 
   if (loading) return <OverlayLoading />;
   return (
@@ -104,7 +108,7 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Portfolio" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="test" component={testscreen} />
