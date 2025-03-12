@@ -1,11 +1,10 @@
 import React from "react";
 import { Pressable, Text } from "react-native";
 import { Box } from "@/components/ui/box";
-import LineChartComponent from "@/components/LineChart";
-import { LucideIcon } from "lucide-react-native";
 import LineChartWagmi from "./LineChartWagmi";
 import { CryptoData } from "@/utils/api/internal/sql/handleSQLite";
 import { getIconByString, IC_BTCUSDT } from "@/utils/constants/Icons";
+import { formatNumber } from "@/utils/functions/help";
 
 interface CryptoMarketCardProps extends CryptoData {
     onPress?: () => any;
@@ -40,7 +39,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ symbol, price, chan
                 </Box>
                 <Box className="flex flex-col justify-center items-end">
                     <Text className="text-[16px] font-semibold">
-                        {price !== null ? `$${Number(price).toFixed(2)}` : ""}
+                        {price !== null ? `${formatNumber(Number(price))}` : ""}
                     </Text>
                     <Text className="text-[#969AA0]">{symbol}</Text>
                 </Box>
