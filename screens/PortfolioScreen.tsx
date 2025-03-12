@@ -12,7 +12,6 @@ import { Props } from '@/types/NavigationTypes';
 import CryptoMarketCard from '@/components/CryptoMarketCard';
 import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
-import { fetchBitcoinLineData, fetchBitcoinLivePrice, fetchBitcoinPercentageGain, fetchEthereumLineData, fetchEthereumLivePrice, fetchEthereumPercentageGain, fetchXRPLineData, fetchXRPLivePrice, fetchXRPPercentageGain } from '@/utils/api/external/BinanceAPI';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
 
 interface PortfolioData {
