@@ -136,7 +136,7 @@ const PortfolioScreen = ({navigation}: Props) => {
         <BackHeader title='Portfolio' colorScheme='themeBased'/>
         <Box className='gap-1 mt-2'>
           <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
-          <Text className={`text-subText-${appliedTheme}`}>Total value: {formatNumber(totalValue)}</Text>
+          <Text className={`text-subText-${appliedTheme}`}>Total value: {formatNumber(0)}</Text>
         </Box>
 
         {/* Chart Container */}
