@@ -9,6 +9,7 @@ import CryptoMarketCard from '@/components/CryptoMarketCard';
 import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
+import { formatNumber } from '@/utils/functions/help';
 import { PieChart } from 'react-native-gifted-charts';
 
 interface PortfolioData {
@@ -135,7 +136,7 @@ const PortfolioScreen = ({navigation}: Props) => {
         <BackHeader title='Portfolio' colorScheme='themeBased'/>
         <Box className='gap-1 mt-2'>
           <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
-          <Text className={`text-subText-${appliedTheme}`}>Total value: $</Text>
+          <Text className={`text-subText-${appliedTheme}`}>Total value: {formatNumber(totalValue)}</Text>
         </Box>
 
         {/* Chart Container */}

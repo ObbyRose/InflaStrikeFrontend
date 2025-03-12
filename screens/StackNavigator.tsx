@@ -65,33 +65,35 @@ const SettingsNavigator = () => (
 );
 
 const StackNavigator = () => {
+  const { isDataLoaded, setDataLoaded, setData } = useDataStore();
   const [loading, setLoading] = useState(true);
-  const [isFirst, setIsFirst] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        if(isFirst) 
-          setLoading(true);
-        await handleSQLiteIInsert();
-        if(isFirst){
-          setLoading(false);
-          setIsFirst(false);
-        }
+        const newData = await handleSQLiteIInsert();
+        setData(newData); // ✅ Update Zustand store
+        setDataLoaded(true); // ✅ Mark data as loaded
+        setLoading(false); // ✅ Hide loading overlay
       } catch (error) {
         console.error("Error fetching market data:", error);
-      } finally {
-        setLoading(false);
       }
     }
     fetchData();
     const interval = setInterval(() => {
-      fetchData();
-    }, 60000); // 1 minute
+      async function updateData() {
+        try {
+          const newData = await handleSQLiteIInsert();
+          setData(newData);
+        } catch (error) {
+          console.error("Error fetching market data:", error);
+        }
+      }
+      updateData();
+    }, 60000);
     return () => clearInterval(interval);
-  }, []);
-
-  if (loading) return <OverlayLoading />;
+  }, [setData, setDataLoaded]);
+  if (loading && !isDataLoaded) return <OverlayLoading />;
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainApp">
