@@ -1,22 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 import {
   fetchAllCoinsTicker,
-  fetchBitcoinHistory,
-  fetchBitcoinLineData,
-  fetchBitcoinLivePrice,
-  fetchBitcoinPercentageGain,
   fetchCandlestickData,
-  fetchEthereumHistory,
-  fetchEthereumLineData,
-  fetchEthereumLivePrice,
-  fetchEthereumPercentageGain,
   fetchLineData,
-  fetchLivePrice,
-  fetchPercentageGain,
-  fetchXRPHistory,
-  fetchXRPLineData,
-  fetchXRPLivePrice,
-  fetchXRPPercentageGain,
 } from '../../external/BinanceAPI';
 
 export interface CryptoData {

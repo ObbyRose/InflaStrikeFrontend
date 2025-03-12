@@ -60,48 +60,6 @@ export const fetchLineData = async (symbol: string) => {
     }
 };
 
-export const fetchLivePrice = async (symbol: string) => {
-    try {
-        const response = await fetch(
-            `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`
-        );
-        const data = await response.json();
-
-        if (!data?.price) {
-            console.warn(`No live price available for ${symbol}`);
-            return null;
-        }
-
-        return parseFloat(data.price);
-    } catch (error) {
-        console.error(`Error fetching live price for ${symbol}:`, error);
-        return null;
-    }
-};
-
-export const fetchPercentageGain = async (symbol: string) => {
-    try {
-        const candlestickData = await fetchCandlestickData(symbol);
-        if (candlestickData.length < 2) {
-            console.warn(`Not enough data to calculate percentage gain for ${symbol}`);
-            return null;
-        }
-
-        const latestClose = candlestickData[candlestickData.length - 1].close;
-        const previousClose = candlestickData[candlestickData.length - 2].close;
-
-        if (previousClose === 0) {
-            console.warn(`Previous closing price is zero for ${symbol}`);
-            return null;
-        }
-
-        return ((latestClose - previousClose) / previousClose) * 100;
-    } catch (error) {
-        console.error(`Error fetching percentage gain for ${symbol}:`, error);
-        return null;
-    }
-};
-
 export const fetchAllCoinsTicker = async () => {
     try {
         const response = await fetch('https://api.binance.com/api/v3/ticker/24hr');
@@ -123,20 +81,3 @@ export const fetchAllCoinsTicker = async () => {
         return [];
     }
 };
-
-// fetchAllCoinsTicker();
-export const fetchBitcoinHistory = async () => fetchCandlestickData("BTCUSDT");
-export const fetchEthereumHistory = async () => fetchCandlestickData("ETHUSDT");
-export const fetchXRPHistory = async () => fetchCandlestickData("XRPUSDT");
-
-export const fetchBitcoinLineData = async () => fetchLineData("BTCUSDT");
-export const fetchEthereumLineData = async () => fetchLineData("ETHUSDT");
-export const fetchXRPLineData = async () => fetchLineData("XRPUSDT");
-
-export const fetchBitcoinLivePrice = async () => fetchLivePrice("BTCUSDT");
-export const fetchEthereumLivePrice = async () => fetchLivePrice("ETHUSDT");
-export const fetchXRPLivePrice = async () => fetchLivePrice("XRPUSDT");
-
-export const fetchBitcoinPercentageGain = async () => fetchPercentageGain("BTCUSDT");
-export const fetchEthereumPercentageGain = async () => fetchPercentageGain("ETHUSDT");
-export const fetchXRPPercentageGain = async () => fetchPercentageGain("XRPUSDT");
