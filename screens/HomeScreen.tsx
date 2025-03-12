@@ -4,7 +4,7 @@ import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_BTCUSDT, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
+import { IC_BTCUSDT, IC_ETHUSDT, IC_XRPUSDT, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -35,7 +35,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             try {
                 setLoading(true);
                 await handleSQLiteIInsert();
-                getData();
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching market data:", error);
@@ -43,14 +42,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 setLoading(false);
             }
         }
-
         fetchData();
     }, []);
 
-    async function getData() {
-        const res = await handleSQLiteSelect(['BTCUSDT', 'ETHUSDT']);
-        console.log("RES", JSON.stringify(res, null, 2));
-    }
+    
 
     if(loading)
         return <OverlayLoading />

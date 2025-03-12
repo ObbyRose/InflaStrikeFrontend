@@ -10,9 +10,10 @@ import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import CryptoMarketCard from '@/components/CryptoMarketCard';
-import { IC_BTCUSDT, IC_Doge, IC_Ethereum, IC_Tothor, IC_Tothor_Logo_Only, IC_Xrp } from '@/utils/constants/Icons';
+import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { fetchBitcoinLineData, fetchBitcoinLivePrice, fetchBitcoinPercentageGain, fetchEthereumLineData, fetchEthereumLivePrice, fetchEthereumPercentageGain, fetchXRPLineData, fetchXRPLivePrice, fetchXRPPercentageGain } from '@/utils/api/external/BinanceAPI';
+import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
 
 interface PortfolioData {
   key: string;
@@ -29,8 +30,8 @@ const dummyPieData: PortfolioData[] = [
 
 const dummyQuickBuy = [
   IC_BTCUSDT,
-  IC_Ethereum,
-  IC_Xrp,
+  IC_ETHUSDT,
+  IC_XRPUSDT,
   IC_Doge,
   IC_Tothor_Logo_Only,
 ]
@@ -46,53 +47,10 @@ const PortfolioScreen = ({navigation}: Props) => {
       async function fetchData() {
           try {
               setLoading(true);
-              const [btcLine, ethLine, xrpLine] = await Promise.all([
-                  fetchBitcoinLineData(),
-                  fetchEthereumLineData(),
-                  fetchXRPLineData(),
-              ]);
 
-              const [btcPrice, ethPrice, xrpPrice] = await Promise.all([
-                  fetchBitcoinLivePrice(),
-                  fetchEthereumLivePrice(),
-                  fetchXRPLivePrice(),
-              ]);
-
-              const [btcChange, ethChange, xrpChange] = await Promise.all([
-                  fetchBitcoinPercentageGain(),
-                  fetchEthereumPercentageGain(),
-                  fetchXRPPercentageGain(),
-              ]);
-
-              setHistoryData([
-                  { 
-                      name: "Bitcoin", 
-                      symbol: "BTC", 
-                      icon: IC_BTCUSDT, 
-                      price: btcPrice, 
-                      change: btcChange, 
-                      lineData: btcLine, 
-                      bgColor: "bg-[hsl(7_91%_60%/0.1)]" 
-                  },
-                  { 
-                      name: "Ethereum", 
-                      symbol: "ETH", 
-                      icon: IC_Ethereum, 
-                      price: ethPrice, 
-                      change: ethChange, 
-                      lineData: ethLine, 
-                      bgColor: "bg-[hsl(169_44%_58%/0.1)]"
-                  },
-                  { 
-                      name: "XRP", 
-                      symbol: "XRP", 
-                      icon: IC_Xrp, 
-                      price: xrpPrice, 
-                      change: xrpChange, 
-                      lineData: xrpLine, 
-                      bgColor: "bg-[hsl(223_99%_69%/0.1)]"
-                  },
-              ]);
+              const data = await handleSQLiteSelect(['BTCUSDT', 'ETHUSDT', 'XRPUSDT']);
+              console.log("DATA", JSON.stringify(data, null, 2));
+              setHistoryData(data);
           } catch (error) {
               console.error("Error fetching market data:", error);
           } finally {
@@ -160,6 +118,7 @@ const PortfolioScreen = ({navigation}: Props) => {
   });
 
   const totalValue = dummyPieData.reduce((acc, item) => acc + item.value, 0);
+
   return (
     <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
       <Box className={`flex flex-1 px-4 py-6`}>
@@ -251,7 +210,7 @@ const PortfolioScreen = ({navigation}: Props) => {
             {loading ? (
                   <Text>Loading...</Text>
               ) : (
-                  historyData.map((crypto, index) => (
+                  historyData.map((crypto:CryptoData, index) => (
                       <React.Fragment key={crypto.symbol}>
                           <CryptoMarketCard {...crypto} />
                           {index < historyData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}

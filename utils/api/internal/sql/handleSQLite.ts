@@ -18,15 +18,13 @@ import {
   fetchXRPLivePrice,
   fetchXRPPercentageGain,
 } from '../../external/BinanceAPI';
-import { getIconByString, IC_BTCUSDT, IC_Ethereum, IC_Xrp, IconsProps } from '../../../constants/Icons';
 
 export interface CryptoData {
   symbol: string;
   price: string | null;
   change: string | null;
-  lineData: LineData[] | string;
-  historyData: History[] | string;
-  icon?: (({ className, color }: IconsProps) => React.JSX.Element) | null;
+  lineData: LineData[];
+  historyData: History[];
 }
 
 export type tickerData = {
@@ -37,7 +35,7 @@ export type tickerData = {
 
 export interface LineData {
   time: string;
-  price: number;
+  price: string;
 }
 
 export interface History {
@@ -89,7 +87,6 @@ export async function handleSQLiteIInsert() {
   for(let i=0; i< historyArr.length; i++) {
     newData.push({
       symbol: tickerData[i].symbol,
-      icon: getIconByString('IC_'+ tickerData[i].symbol),
       price: tickerData[i].price,
       change: tickerData[i].percentage,
       lineData: lineDataArr[i],
