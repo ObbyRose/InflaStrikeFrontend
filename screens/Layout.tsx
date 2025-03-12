@@ -1,10 +1,9 @@
 import { Box } from '@/components/ui/box';
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import Svg, { Defs, G, Path, Rect, Filter, FeOffset, FeGaussianBlur, FeMerge, FeMergeNode } from 'react-native-svg';
 import { IC_Home, IC_Invest, IC_Market, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
 
 interface LayoutProps {
@@ -14,22 +13,12 @@ interface LayoutProps {
 
 const Layout = ({ children, navigation }: LayoutProps) => {
     const { appliedTheme } = useTheme();
-    const insets = useSafeAreaInsets();
     const [currentScreen, setCurrentScreen] = useState("Home");
 
     function navigateToScreen(screen: string) {
         setCurrentScreen(screen);
         navigation.navigate("MainApp", { screen });
     }
-
-    const shadowStyle = {
-        shadowColor: 'rgba(0,0,0,1)', 
-        shadowOffset: { width: 0, height: -15 }, 
-        shadowOpacity: 1, 
-        shadowRadius: 23, 
-        elevation: 10, 
-    };
-
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
 
@@ -40,7 +29,6 @@ const Layout = ({ children, navigation }: LayoutProps) => {
             <Box className="relative">
                 <Box
                     className={`flex flex-row items-center h-[62px] bg-layoutBottom-${appliedTheme} p-4`}
-                    style={shadowStyle}
                 >
                     {/* Left Icons Container */}
                     <Box className="flex-1 flex flex-row justify-evenly">

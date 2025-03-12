@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Text, ScrollView, TouchableOpacity } from "react-native";
+import React from "react";
+import { Text, ScrollView } from "react-native";
 import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
@@ -8,8 +8,6 @@ import { IC_BTCUSDT, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_Histo
 import { Props } from "@/types/NavigationTypes";
 import MyLinearGradient from "@/components/gradient/MyLinearGradient";
 import OptionCard from "@/components/OptionCard";
-import { handleSQLiteIInsert, handleSQLiteSelect } from "@/utils/api/internal/sql/handleSQLite";
-import OverlayLoading from "@/components/OverlayLoading";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
