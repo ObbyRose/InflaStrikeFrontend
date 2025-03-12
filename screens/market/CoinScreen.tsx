@@ -13,6 +13,7 @@ import CoinOrderHistory from '@/components/market/CoinOrderHistory';
 import DepthChartComponent from '@/components/market/DepthChart';
 import CoinInfo from '@/components/market/CoinInfo';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
+import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
 
 
 type RootStackParamList = {
@@ -23,9 +24,8 @@ type CoinScreenRouteProp = RouteProp<RootStackParamList, 'CoinScreen'>;
 
 function CoinScreen() {
     const route = useRoute<CoinScreenRouteProp>();
-    const coin = route.params?.coin;
+    let coin = route.params?.coin as CryptoData;
     
-    const navigation = useNavigation();
     const { appliedTheme } = useTheme();
     
     const [category, setCategory] = useState("Info");
@@ -47,7 +47,6 @@ function CoinScreen() {
     const handleCategoryPress = (newCategory: string) => {
         setCategory(newCategory);
     };
-    
 
     const CoinContent = () => (
         <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
@@ -65,11 +64,13 @@ function CoinScreen() {
                         <Box className='gap-3'>
                             <Text className={`text-subText-${appliedTheme}`}>{coin.symbol}</Text>
                             <Text className={`text-3xl font-extrabold text-text-${appliedTheme}`}>
-                                {formatNumber(parseFloat(coin.lastPrice), 2)}
+                                {formatNumber(parseFloat(coin.price || ""), 2)}
                             </Text>
                         </Box>
                         <Box className='justify-end'>
-                            <Text className='text-green-500 '>+980.67 (2.16%)</Text>
+                            <Text className={`${Number(coin.change) > 0 ? "text-green-500" : "text-red-500"}`}>
+                                ({Number(coin.change) > 0 ? '+':''} {coin.change}%)
+                            </Text>
                         </Box>
                     </Box>
 

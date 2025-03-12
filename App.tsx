@@ -10,6 +10,8 @@ import { PaperProvider } from 'react-native-paper';
 import { StatusBar } from 'react-native';
 
 export default function App() {
+
+  
   return (
     <SafeAreaProvider>
       <ThemeProvider>

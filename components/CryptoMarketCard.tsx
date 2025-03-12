@@ -5,7 +5,7 @@ import LineChartComponent from "@/components/LineChart";
 import { LucideIcon } from "lucide-react-native";
 import LineChartWagmi from "./LineChartWagmi";
 import { CryptoData } from "@/utils/api/internal/sql/handleSQLite";
-import { getIconByString } from "@/utils/constants/Icons";
+import { getIconByString, IC_BTCUSDT } from "@/utils/constants/Icons";
 
 interface CryptoMarketCardProps extends CryptoData {
     onPress?: () => any;
@@ -18,7 +18,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ symbol, price, chan
         return { timestamp, value: Number(price) };
     });
 
-    const Icon = getIconByString('IC_'+symbol);
+    const Icon = getIconByString('IC_'+symbol) || IC_BTCUSDT;
     
     return (
         <Pressable onPress={onPress}>

@@ -4,22 +4,9 @@ import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_BTCUSDT, IC_ETHUSDT, IC_XRPUSDT, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
-import CryptoMarketCard from "@/components/CryptoMarketCard";
-import {
-    fetchBitcoinLivePrice,
-    fetchEthereumLivePrice,
-    fetchXRPLivePrice,
-    fetchBitcoinPercentageGain,
-    fetchEthereumPercentageGain,
-    fetchXRPPercentageGain,
-    fetchBitcoinLineData,
-    fetchEthereumLineData,
-    fetchXRPLineData
-} from "../utils/api/external/BinanceAPI";
+import { IC_BTCUSDT, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
 import { Props } from "@/types/NavigationTypes";
 import MyLinearGradient from "@/components/gradient/MyLinearGradient";
-import RoundedBox from "@/components/RoundedBox";
 import OptionCard from "@/components/OptionCard";
 import { handleSQLiteIInsert, handleSQLiteSelect } from "@/utils/api/internal/sql/handleSQLite";
 import OverlayLoading from "@/components/OverlayLoading";

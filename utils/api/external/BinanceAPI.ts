@@ -41,7 +41,7 @@ export const fetchCandlestickData = async (symbol: string) => {
 export const fetchLineData = async (symbol: string) => {
     try {
         const response = await fetch(
-            `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=15`
+            `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&limit=15`
         );
         const data = await response.json();
 
