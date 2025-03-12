@@ -35,9 +35,13 @@ import VerifyIdentity from './idVerification/VerifyIdentity';
 import TouchId from './idVerification/TouchId';
 import FaceId from './idVerification/FaceId';
 import TothorScreen from './TothorScreen';
+import { useEffect, useState } from 'react';
+import { handleSQLiteIInsert } from '@/utils/api/internal/sql/handleSQLite';
+import OverlayLoading from '@/components/OverlayLoading';
+import { useDataStore } from '@/context/dataStore';
 
 const Stack = createStackNavigator();
-const SettingsStack = createStackNavigator(); // New Stack for Settings Screens
+const SettingsStack = createStackNavigator();
 
 // 🎯 New Stack for Settings Screens (Not Wrapped by Layout)
 const SettingsNavigator = () => (
@@ -63,6 +67,29 @@ const SettingsNavigator = () => (
 );
 
 const StackNavigator = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const setLoadedData = useDataStore((state) => state.setDataLoaded);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        await handleSQLiteIInsert();
+        setLoadedData(true);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching market data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+    const interval = setInterval(() => {
+      fetchData();
+    }, 60000); // 1 minute
+    return () => clearInterval(interval);
+  }, [setLoadedData]);
+
+  if (loading) return <OverlayLoading />;
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainApp">

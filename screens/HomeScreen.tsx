@@ -14,28 +14,6 @@ import OverlayLoading from "@/components/OverlayLoading";
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
     const { user } = useUserStore();
-    const [cryptoData, setCryptoData] = useState<any[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                setLoading(true);
-                await handleSQLiteIInsert();
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching market data:", error);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchData();
-    }, []);
-
-    
-
-    if(loading)
-        return <OverlayLoading />
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
