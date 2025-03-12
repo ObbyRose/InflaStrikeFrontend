@@ -10,7 +10,7 @@ import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import CryptoMarketCard from '@/components/CryptoMarketCard';
-import { IC_Bitcoin, IC_Doge, IC_Ethereum, IC_Tothor, IC_Tothor_Logo_Only, IC_Xrp } from '@/utils/constants/Icons';
+import { IC_BTCUSDT, IC_Doge, IC_Ethereum, IC_Tothor, IC_Tothor_Logo_Only, IC_Xrp } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { fetchBitcoinLineData, fetchBitcoinLivePrice, fetchBitcoinPercentageGain, fetchEthereumLineData, fetchEthereumLivePrice, fetchEthereumPercentageGain, fetchXRPLineData, fetchXRPLivePrice, fetchXRPPercentageGain } from '@/utils/api/external/BinanceAPI';
 
@@ -28,7 +28,7 @@ const dummyPieData: PortfolioData[] = [
 ];
 
 const dummyQuickBuy = [
-  IC_Bitcoin,
+  IC_BTCUSDT,
   IC_Ethereum,
   IC_Xrp,
   IC_Doge,
@@ -68,7 +68,7 @@ const PortfolioScreen = ({navigation}: Props) => {
                   { 
                       name: "Bitcoin", 
                       symbol: "BTC", 
-                      icon: IC_Bitcoin, 
+                      icon: IC_BTCUSDT, 
                       price: btcPrice, 
                       change: btcChange, 
                       lineData: btcLine, 

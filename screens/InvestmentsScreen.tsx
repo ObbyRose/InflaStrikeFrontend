@@ -5,7 +5,7 @@ import { useTheme } from '@/utils/Themes/ThemeProvider';
 import BackHeader from '@/components/BackHeader';
 import { Badge, BadgeText } from '@/components/ui/badge';
 import { Box } from '@/components/ui/box';
-import { IC_Bitcoin, IC_Ethereum, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
+import { IC_BTCUSDT, IC_Ethereum, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 
 interface BundleData {
@@ -19,7 +19,7 @@ interface BundleData {
   icons: React.ComponentType[];
 }
 
-const icons = [IC_Bitcoin, IC_Ethereum, IC_Tothor_Logo_Only_Bold];
+const icons = [IC_BTCUSDT, IC_Ethereum, IC_Tothor_Logo_Only_Bold];
 
 const dummyBundleData: BundleData = {
   title: 'Make America Great Again',

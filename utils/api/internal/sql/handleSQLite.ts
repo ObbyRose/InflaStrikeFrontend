@@ -1,29 +1,38 @@
 import * as SQLite from 'expo-sqlite';
 import {
+  fetchAllCoinsTicker,
   fetchBitcoinHistory,
   fetchBitcoinLineData,
   fetchBitcoinLivePrice,
   fetchBitcoinPercentageGain,
+  fetchCandlestickData,
   fetchEthereumHistory,
   fetchEthereumLineData,
   fetchEthereumLivePrice,
   fetchEthereumPercentageGain,
+  fetchLineData,
+  fetchLivePrice,
+  fetchPercentageGain,
   fetchXRPHistory,
   fetchXRPLineData,
   fetchXRPLivePrice,
   fetchXRPPercentageGain,
 } from '../../external/BinanceAPI';
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IconsProps } from '../../../constants/Icons';
+import { getIconByString, IC_BTCUSDT, IC_Ethereum, IC_Xrp, IconsProps } from '../../../constants/Icons';
 
 export interface CryptoData {
-  name: string;
   symbol: string;
-  price: number | null;
-  change: number | null;
-  bgColor: string;
+  price: string | null;
+  change: string | null;
   lineData: LineData[] | string;
   historyData: History[] | string;
-  icon?: ({ className }: IconsProps) => React.JSX.Element;
+  icon?: (({ className, color }: IconsProps) => React.JSX.Element) | null;
+}
+
+export type tickerData = {
+  symbol: string,
+  percentage: string,
+  price: string,
 }
 
 export interface LineData {
@@ -39,81 +48,70 @@ export interface History {
   close: number;
 }
 
+let db: Awaited<ReturnType<typeof SQLite.openDatabaseAsync>> | null = null;
+
+async function getDatabase() {
+  if (!db) {
+    db = await SQLite.openDatabaseAsync('cryptoData');
+  }
+  return db;
+}
+
+const popularCurrencies = [
+  'BTCUSDT', // Bitcoin  
+  'ETHUSDT', // Ethereum  
+  'XRPUSDT', // XRP  
+  'BNBUSDT', // Binance Coin  
+  'ADAUSDT', // Cardano  
+  'DOGEUSDT', // Dogecoin  
+  'SOLUSDT', // Solana  
+  'TONUSDT', // Toncoin  
+  'DOTUSDT', // Polkadot  
+  'MATICUSDT' // Polygon  
+];
+
+
 export async function handleSQLiteIInsert() {
   // Fetching all the data
-  const [btcHistory, ethHistory, xrpHistory] = await Promise.all([
-    fetchBitcoinHistory(),
-    fetchEthereumHistory(),
-    fetchXRPHistory(),
-  ]);
+  const historyArr = await Promise.all(
+    popularCurrencies.map((curr) => fetchCandlestickData(curr))
+    );
 
-  const [btcLine, ethLine, xrpLine] = await Promise.all([
-    fetchBitcoinLineData(),
-    fetchEthereumLineData(),
-    fetchXRPLineData(),
-  ]);
-
-  const [btcPrice, ethPrice, xrpPrice] = await Promise.all([
-    fetchBitcoinLivePrice(),
-    fetchEthereumLivePrice(),
-    fetchXRPLivePrice(),
-  ]);
-
-  const [btcChange, ethChange, xrpChange] = await Promise.all([
-    fetchBitcoinPercentageGain(),
-    fetchEthereumPercentageGain(),
-    fetchXRPPercentageGain(),
-  ]);
+  const lineDataArr = await Promise.all(
+    popularCurrencies.map((curr) => fetchLineData(curr))
+  );
+  
+  const tickerData = await fetchAllCoinsTicker();
 
   // Saving all thw data
-  const newData: CryptoData[] = [
-    {
-      name: 'Bitcoin',
-      symbol: 'BTC',
-      icon: IC_Bitcoin,
-      price: btcPrice,
-      change: btcChange,
-      lineData: btcLine,
-      bgColor: 'bg-[hsl(7_91%_60%/0.1)]',
-      historyData: btcHistory,
-    },
-    {
-      name: 'Ethereum',
-      symbol: 'ETH',
-      icon: IC_Ethereum,
-      price: ethPrice,
-      change: ethChange,
-      lineData: ethLine,
-      bgColor: 'bg-[hsl(169_44%_58%/0.1)]',
-      historyData: ethHistory,
-    },
-    {
-      name: 'XRP',
-      symbol: 'XRP',
-      icon: IC_Xrp,
-      price: xrpPrice,
-      change: xrpChange,
-      lineData: xrpLine,
-      bgColor: 'bg-[hsl(223_99%_69%/0.1)]',
-      historyData: xrpHistory,
-    },
-  ];
+  const newData: CryptoData[] = [];
+
+  for(let i=0; i< historyArr.length; i++) {
+    newData.push({
+      symbol: tickerData[i].symbol,
+      icon: getIconByString('IC_'+ tickerData[i].symbol),
+      price: tickerData[i].price,
+      change: tickerData[i].percentage,
+      lineData: lineDataArr[i],
+      historyData: historyArr[i],
+    })
+  }
+
+  
 
   // Creating/Opening the SQLite db server
-  const db = await SQLite.openDatabaseAsync('cryptoData');
+  const db = await getDatabase();
   await db.execAsync(`
         PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS crypto (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  symbol TEXT NOT NULL,
-  price REAL,
-  change REAL,
-  bgColor TEXT,
-  lineData TEXT, -- Store JSON array
-  historyData TEXT -- Store JSON array
-);
-        `);
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        symbol TEXT NOT NULL,
+        price TEXT,
+        change TEXT,
+        lineData TEXT,
+        historyData TEXT
+      );
+      `);
 
   // Clear the table from before to avoid duplicates
   await db.execAsync('DELETE FROM crypto');
@@ -121,13 +119,11 @@ export async function handleSQLiteIInsert() {
   //   Inserting the data
   for (const crypto of newData) {
     await db.runAsync(
-      `INSERT INTO crypto (name, symbol, price, change, bgColor, lineData, historyData) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO crypto (symbol, price, change, lineData, historyData) VALUES (?, ?, ?, ?, ?)`,
       [
-        crypto.name,
         crypto.symbol,
         crypto.price,
         crypto.change,
-        crypto.bgColor,
         JSON.stringify(crypto.lineData),
         JSON.stringify(crypto.historyData),
       ]
@@ -135,22 +131,23 @@ export async function handleSQLiteIInsert() {
   }
 }
 
-export async function handleSQLiteSelect(coinsNames: string[]) {
+export async function handleSQLiteSelect(coinsSymbols: string[]) {
   // Open the SQLite db server
-  const db = await SQLite.openDatabaseAsync('cryptoData');
+  const db = await getDatabase();
 
-  // For each coin, Fetching the row that match the coin name in a promise
-  const promisedResult = coinsNames.map((currentCoin) => {
-    return db.getFirstAsync('SELECT * FROM crypto WHERE name=?', [
-      currentCoin,
-    ]) as Promise<CryptoData>;
-  });
+  let query = 'SELECT * FROM crypto';
+  let params: any[] = [];
 
-  // Fulfilling all the promises
-  const fulfilledResult = await Promise.all(promisedResult);
+  if (coinsSymbols.length > 0) {
+    query += ' WHERE symbol IN (' + coinsSymbols.map(() => '?').join(', ') + ')';
+    params = coinsSymbols;
+  }
 
-  // Parsing all the JSON felids into raw values
-  const finalResult = fulfilledResult.map((currentRow) => {
+  // Execute the query
+  const result = await db.getAllAsync(query, params);
+
+  // Parsing all the JSON fields into raw values
+  const finalResult = result.map((currentRow: any) => {
     return {
       ...currentRow,
       lineData: JSON.parse(currentRow.lineData as string),

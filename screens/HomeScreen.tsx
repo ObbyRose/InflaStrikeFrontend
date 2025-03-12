@@ -4,7 +4,7 @@ import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_Bitcoin, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
+import { IC_BTCUSDT, IC_Ethereum, IC_Xrp, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
 import CryptoMarketCard from "@/components/CryptoMarketCard";
 import {
     fetchBitcoinLivePrice,
@@ -21,7 +21,7 @@ import { Props } from "@/types/NavigationTypes";
 import MyLinearGradient from "@/components/gradient/MyLinearGradient";
 import RoundedBox from "@/components/RoundedBox";
 import OptionCard from "@/components/OptionCard";
-import { handleSQLiteIInsert } from "@/utils/api/internal/sql/handleSQLite";
+import { handleSQLiteIInsert, handleSQLiteSelect } from "@/utils/api/internal/sql/handleSQLite";
 import OverlayLoading from "@/components/OverlayLoading";
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
@@ -35,6 +35,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             try {
                 setLoading(true);
                 await handleSQLiteIInsert();
+                getData();
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching market data:", error);
@@ -46,8 +47,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         fetchData();
     }, []);
 
+    async function getData() {
+        const res = await handleSQLiteSelect(['BTCUSDT', 'ETHUSDT']);
+        console.log("RES", JSON.stringify(res, null, 2));
+    }
+
     if(loading)
-      return <OverlayLoading />
+        return <OverlayLoading />
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -108,7 +114,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         <Box className="flex-row gap-4">
                             <OptionCard>
                                 <Box className="gap-1">
-                                    <IC_Bitcoin className="w-12 h-12" />
+                                    <IC_BTCUSDT className="w-12 h-12" />
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>MAGA Bundle</Text>
                                     <Text className={`text-subText-${appliedTheme} font-medium text-[14px]`}>Past Month</Text>
                                     <Text className={`text-text-${appliedTheme} font-medium text-[17px]`}>+15%</Text>

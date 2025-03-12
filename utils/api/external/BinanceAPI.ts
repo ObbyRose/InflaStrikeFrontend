@@ -1,3 +1,18 @@
+import { tickerData } from "../internal/sql/handleSQLite";
+
+const popularCurrencies = [
+    'BTCUSDT', // Bitcoin  
+    'ETHUSDT', // Ethereum  
+    'XRPUSDT', // XRP  
+    'BNBUSDT', // Binance Coin  
+    'ADAUSDT', // Cardano  
+    'DOGEUSDT', // Dogecoin  
+    'SOLUSDT', // Solana  
+    'TONUSDT', // Toncoin  
+    'DOTUSDT', // Polkadot  
+    'MATICUSDT' // Polygon  
+];  
+
 export const fetchCandlestickData = async (symbol: string) => {
     try {
         const response = await fetch(
@@ -87,6 +102,29 @@ export const fetchPercentageGain = async (symbol: string) => {
     }
 };
 
+export const fetchAllCoinsTicker = async () => {
+    try {
+        const response = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+        const data = await response.json();
+
+        const filteredData = data.filter((crypto: any) => popularCurrencies.includes(crypto.symbol));
+        const sortedData = filteredData.sort(
+            (a: any, b: any) => popularCurrencies.indexOf(a.symbol) - popularCurrencies.indexOf(b.symbol)
+        );
+        const formatted = sortedData.map((curr:any) => ({
+            symbol: curr.symbol,
+            percentage: curr.priceChangePercent,
+            price: curr.lastPrice,
+        }))
+        // console.log("RES", JSON.stringify(formatted, null, 2));
+        return formatted as tickerData[];
+    } catch (error) {
+        console.error('Error fetching Binance data:', error);
+        return [];
+    }
+};
+
+// fetchAllCoinsTicker();
 export const fetchBitcoinHistory = async () => fetchCandlestickData("BTCUSDT");
 export const fetchEthereumHistory = async () => fetchCandlestickData("ETHUSDT");
 export const fetchXRPHistory = async () => fetchCandlestickData("XRPUSDT");
