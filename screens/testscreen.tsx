@@ -1,141 +1,235 @@
 import React, { useEffect, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View, Platform } from "react-native";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonText } from "@/components/ui/button";
 import { Box } from "@/components/ui/box";
-import { ChevronDown, Scroll } from "lucide-react-native";
+import { ChevronDown, PlusCircle, Scroll, Trash2 } from "lucide-react-native";
 import ButtonsTrain from "@/components/ButtonsTrain";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
-import { IC_BTCUSDT, IC_Swap } from "@/utils/constants/Icons";
+import { IC_Swap } from "@/utils/constants/Icons";
 import BackHeader from "@/components/BackHeader";
-import LineChartWagmi from "@/components/LineChartWagmi";
 import { Picker } from "@react-native-picker/picker";
+import LineChartWagmi from "@/components/LineChartWagmi";
 import OverlayLoading from "@/components/OverlayLoading";
 import { PieChart } from "react-native-gifted-charts";
 import calculateCryptoProfitBetweenDates from "@/utils/functions/crypto";
 import CandleChartComponent, { CandlestickData } from "@/components/market/CandleChart";
 import { Input } from "@/components/ui/input";
 import { ScrollView } from "react-native-gesture-handler";
-import { Select, SelectContent, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger } from "@/components/ui/select";
+import { Select, SelectItem } from "@/components/ui/select";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from "@/components/DatePicker";
+import { Accordion, AccordionContent, AccordionHeader, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatNumber } from "@/utils/functions/help";
+import MyLinearGradient from "@/components/gradient/MyLinearGradient";
+import { CandlestickChart } from "react-native-wagmi-charts";
 
+interface Investment {
+    id: number;
+    amount: string;
+    startDate: Date;
+    endDate: Date;
+    showStartPicker?: boolean;
+    showEndPicker?: boolean;
+}
+
+interface ProfitData {
+    profitPercentage: number;
+    profit: number;
+    startPrice: number;
+    endPrice: number;
+    historicalData: any[];
+}
+
+// Crypto Symbols
 const cryptoSymbols = [
-    { name: "Bitcoin", symbol: "BTCUSDT", icon: "🔥" }, 
+    { name: "Bitcoin", symbol: "BTCUSDT", icon: "🔥" },
     { name: "Ethereum", symbol: "ETHUSDT", icon: "💎" },
     { name: "Binance Coin", symbol: "BNBUSDT", icon: "🟡" },
     { name: "Solana", symbol: "SOLUSDT", icon: "🌞" },
     { name: "XRP", symbol: "XRPUSDT", icon: "💰" },
 ];
 
-const ExchangeScreen = () => {
-    const [symbol, setSymbol] = useState("BTCUSDT");
-    const [amount, setAmount] = useState("1000");
-    const [startDate, setStartDate] = useState(new Date("2024-01-01"));
-    const [endDate, setEndDate] = useState(new Date("2025-01-01"));
-    const [showStartPicker, setShowStartPicker] = useState(false);
-    const [showEndPicker, setShowEndPicker] = useState(false);
-    const [result, setResult] = useState<CandlestickData[]>([]);
+const ExchangeScreen: React.FC = () => {
+    const [symbol, setSymbol] = useState<string>("BTCUSDT");
+    const [investments, setInvestments] = useState<Investment[]>([
+        { id: 1, amount: "1000", startDate: new Date("2024-01-01"), endDate: new Date("2025-01-01") }
+    ]);
+    const [results, setResults] = useState<Record<number, ProfitData>>({});
 
-    const [profitData, setProfitData] = useState<{ profitPercentage: number; profit: number } | null>(null);
-
-    const handleCalculate = async () => {
-        const profitData = await calculateCryptoProfitBetweenDates(
-            symbol,
-            parseFloat(amount),
-            startDate.toISOString().split("T")[0],
-            endDate.toISOString().split("T")[0]
+    // Update Investment State
+    const updateInvestment = (id: number, field: keyof Investment, value: any) => {
+        setInvestments((prevInvestments) =>
+            prevInvestments.map((investment) =>
+                investment.id === id ? { ...investment, [field]: value } : investment
+            )
         );
-        setResult(profitData?.historicalData || []);
-        setProfitData(profitData);
+    };
+
+    const getMinStartDate = () => new Date(Math.min(...investments.map(i => i.startDate.getTime())));
+    const getMaxEndDate = () => new Date(Math.max(...investments.map(i => i.endDate.getTime())));
+
+
+    // Add a New Investment Row
+    const addInvestment = () => {
+        setInvestments((prevInvestments) => [
+            ...prevInvestments,
+            { id: Date.now(), amount: "1000", startDate: new Date(), endDate: new Date() }
+        ]);
+    };
+
+    // Remove an Investment Row
+    const removeInvestment = (id: number) => {
+        setInvestments((prevInvestments) => prevInvestments.filter((investment) => investment.id !== id));
+        setResults((prevResults) => {
+            const newResults = { ...prevResults };
+            delete newResults[id];
+            return newResults;
+        });
+    };
+
+    // Calculate Profits
+    const handleCalculate = async () => {
+        const calculatedResults: Record<number, ProfitData> = {};
+
+        for (const investment of investments) {
+            const data = await calculateCryptoProfitBetweenDates(
+                symbol,
+                parseFloat(investment.amount),
+                investment.startDate.toISOString().split("T")[0],
+                investment.endDate.toISOString().split("T")[0]
+            );
+
+            calculatedResults[investment.id] = data
+                ? { 
+                    profitPercentage: data.profitPercentage, 
+                    profit: data.profit, 
+                    startPrice: data.startPrice,
+                    endPrice: data.endPrice,
+                    historicalData: data.historicalData
+                }
+                : { profitPercentage: 0, profit: 0, startPrice: 0, endPrice: 0, historicalData: [] };
+        }
+
+        setResults(calculatedResults);
     };
 
     return (
-        <ScrollView>
+        <ScrollView className="bg-white h-full">
+            <Box className="p-4 h-full bg-white">
+                {/* Crypto Symbol Picker */}
+                <Text className="mb-2 text-lg font-bold">Crypto Symbol:</Text>
+                <Picker
+                    selectedValue={symbol}
+                    onValueChange={setSymbol}
+                    style={{ height: 50, width: "100%", borderWidth: 1, borderColor: "#ccc", borderRadius: 8 }}
+                >
+                    {cryptoSymbols.map((coin) => (
+                        <Picker.Item key={coin.symbol} label={`${coin.icon} ${coin.name}`} value={coin.symbol} />
+                    ))}
+                </Picker>
 
-        <Box className="p-4 h-full bg-white">
-            <BackHeader title="Exchange" />
+                {/* Investment Rows */}
+                <Box className="flex flex-row justify-between items-center">
+                    <Text className="text-lg font-bold"> Investments</Text>
+                    <TouchableOpacity onPress={addInvestment} className="">
+                        <MyLinearGradient type="button" color="purple">
+                            <PlusCircle size={20} color="white" className="" />
+                        </MyLinearGradient>
+                    </TouchableOpacity>
+                </Box>
+                {investments.map((investment) => (
+                    <Box key={investment.id} className="mt-2 mb-2 flex-row items-center justify-between p-2 rounded-lg">
+                        {/* Investment Amount */}
+                        <Box className="flex-col justify-center">
+                        <Text className="font-bold p-2">Investement:</Text>
+                        <TextInput
+                            className="border p-2 rounded flex-1 mx-1 text-center"
+                            value={formatNumber(Number(investment.amount))}
+                            onChangeText={(text) => updateInvestment(investment.id, "amount", text.replace(/[^0-9.]/g, ""))}
+                            keyboardType="numeric"
+                            />
+                            </Box>
 
-            {/* Select for Crypto Symbol */}
-            <Text className="mb-2">Crypto Symbol:</Text>
-            <Picker
-                selectedValue={symbol}
-                onValueChange={(itemValue) => setSymbol(itemValue)}
-                style={{ height: 50, width: "100%", borderWidth: 1, borderColor: "#ccc", borderRadius: 8 }}
-            >
-                {cryptoSymbols.map((coin) => (
-                    <Picker.Item key={coin.symbol} label={`${coin.icon} ${coin.name}`} value={coin.symbol} />
+                        {/* Start Date Picker */}
+                        <Box className="flex-col justify-center">
+                        <Text className="font-bold p-2">Entry Date:</Text>
+                        <TouchableOpacity onPress={() => updateInvestment(investment.id, "showStartPicker", true)} className="flex-1 mx-1 text-center">
+                            <Text className="border p-2 rounded text-center">{investment.startDate.toLocaleDateString("en-GB")}</Text>
+                        </TouchableOpacity>
+                        {investment.showStartPicker && (
+                            <DateTimePicker
+                                value={investment.startDate}
+                                mode="date"
+                                display={Platform.OS === "ios" ? "spinner" : "calendar"}
+                                onChange={(event, selectedDate) => {
+                                    updateInvestment(investment.id, "showStartPicker", false);
+                                    if (selectedDate) updateInvestment(investment.id, "startDate", selectedDate);
+                                }}
+                                />
+                            )}
+                            </Box>
+
+                        {/* End Date Picker */}
+                        <Box className="flex-col justify-center">
+                        <Text className="font-bold p-2">Exit Date:</Text>
+                        <TouchableOpacity onPress={() => updateInvestment(investment.id, "showEndPicker", true)} className="flex-1 mx-1 text-center">
+                            <Text className="border p-2 rounded text-center">{investment.endDate.toLocaleDateString("en-GB")}</Text>
+                        </TouchableOpacity>
+                        {investment.showEndPicker && (
+                            <DateTimePicker
+                                value={investment.endDate}
+                                mode="date"
+                                display={Platform.OS === "ios" ? "spinner" : "calendar"}
+                                onChange={(event, selectedDate) => {
+                                    updateInvestment(investment.id, "showEndPicker", false);
+                                    if (selectedDate) updateInvestment(investment.id, "endDate", selectedDate);
+                                }}
+                            />
+                        )}
+                        </Box>
+
+                        {/* Remove Button */}
+                        <Box className="justify-center mt-6">
+                        <TouchableOpacity onPress={() => removeInvestment(investment.id)} className="text-center">
+                            <Trash2 size={20} color="red" />
+                        </TouchableOpacity>
+                        </Box>
+                    </Box>
                 ))}
-            </Picker>
 
-            {/* Input for Investment Amount */}
-            <Text className="mb-2 mt-4">Investment Amount:</Text>
-            <TextInput
-                className="border p-2 rounded"
-                value={formatNumber(Number(amount))}
-                onChangeText={(text) => {
-                    const parsedAmount = text.replace(/[^0-9.]/g, '');
-                    setAmount(parsedAmount);
-                }}
-                keyboardType="numeric"
-            />
+                {/* Calculate Button */}
+                <MyLinearGradient color="purple" type="button">
+                <Button onPress={handleCalculate}>
+                    <ButtonText>Calculate</ButtonText>
+                </Button>
+                </MyLinearGradient>
 
-            {/* Date Picker for Start Date */}
-            <Text className="mb-2 mt-4">Start Date:</Text>
-            <Button className="border p-2 rounded bg-gray-200" onPress={() => setShowStartPicker(true)}>
-                <Text>{startDate.toISOString().split("T")[0]}</Text>
-            </Button>
-            {showStartPicker && (
-                <DateTimePicker
-                    value={startDate}
-                    mode="date"
-                    display={Platform.OS === "ios" ? "spinner" : "default"}
-                    onChange={(event, selectedDate) => {
-                        setShowStartPicker(false);
-                        if (selectedDate) setStartDate(selectedDate);
-                    }}
-                />
-            )}
+                {/* Results Accordion */}
+                <Accordion type="single">
+                    {Object.entries(results).map(([id, res]) => (
+                        <AccordionItem value={id} key={id}>
+                            <AccordionHeader>
+                                <AccordionTrigger>
+                                    <Text>Investment Yield (Investment Number: {id})</Text>
+                                </AccordionTrigger>
+                            </AccordionHeader>
+                            <AccordionContent>
+                                <Text>ROI: {res.profitPercentage}%</Text>
+                                <Text>Profit: {formatNumber(Number(res.profit.toFixed(2)))}</Text>
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
 
-            {/* Date Picker for End Date */}
-            <Text className="mb-2 mt-4">End Date:</Text>
-            <Button className="border p-2 rounded bg-gray-200" onPress={() => setShowEndPicker(true)}>
-                <Text>{endDate.toISOString().split("T")[0]}</Text>
-            </Button>
-            {showEndPicker && (
-                <DateTimePicker
-                value={endDate}
-                mode="date"
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                onChange={(event, selectedDate) => {
-                    setShowEndPicker(false);
-                    if (selectedDate) setEndDate(selectedDate);
-                    }}
-                />
-            )}
-
-            {/* Calculate Button */}
-            <Button className="mt-4 p-3 bg-blue-500" onPress={handleCalculate}>
-                <Text className="text-white text-center">Calculate</Text>
-            </Button>
-
-            {/* Display Chart */}
-            <Box className="flex-1 items-center mt-4">
-                {result.length > 0 ? (
-                    <>
-                        <CandleChartComponent symbol={symbol} data={result} />
-                        <Text className="mt-4 text-lg font-bold">
-                            ROI: {profitData?.profitPercentage}%
-                        </Text>
-                        <Text className="mt-2 text-lg font-bold">
-                            Profit: ${profitData?.profit.toFixed(2)}
-                        </Text>
-                    </>
-                ) : (
-                    <Text className="text-gray-500">Enter details and press Calculate</Text>
-                )}
+                {/* Candlestick Chart for Investments */}
+                {Object.entries(results).map(([id, res]) => (
+                    <Box key={id} className="mt-4">
+                        <Text className="text-lg font-bold">Candlestick Chart for Investment {id}</Text>
+                        <CandleChartComponent symbol={symbol} data={res.historicalData as CandlestickData[]} />
+                    </Box>
+                ))}
             </Box>
-        </Box>
-    </ScrollView>
+        </ScrollView>
     );
 };
 
@@ -143,7 +237,7 @@ export default ExchangeScreen;
 
 /*
 <Box className="flex-1">
-                <Box className="flex-row w-full</Text> rounded-lg p-1">
+                <Box className="flex-row w-full rounded-lg p-1">
                     <ButtonsTrain
                         buttons={['Market', 'Limit', 'Stop-Limit']}
                         activeButton={activeTab}
