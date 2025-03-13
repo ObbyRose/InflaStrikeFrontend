@@ -1,37 +1,85 @@
 import React, { useEffect, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View, Platform } from "react-native";
-import { Button, ButtonText } from "@/components/ui/button";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Button } from "@/components/ui/button";
 import { Box } from "@/components/ui/box";
-import { ChevronDown, PlusCircle, Scroll, Trash2 } from "lucide-react-native";
+import { ChevronDown } from "lucide-react-native";
 import ButtonsTrain from "@/components/ButtonsTrain";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { IC_Swap } from "@/utils/constants/Icons";
 import BackHeader from "@/components/BackHeader";
-import { Picker } from "@react-native-picker/picker";
 import LineChartWagmi from "@/components/LineChartWagmi";
 import OverlayLoading from "@/components/OverlayLoading";
 import { PieChart } from "react-native-gifted-charts";
 import calculateCryptoProfitBetweenDates, { OverallProfitResult } from "@/utils/functions/crypto";
 import CandleChartComponent, { CandlestickData } from "@/components/market/CandleChart";
-import { Input } from "@/components/ui/input";
-import { ScrollView } from "react-native-gesture-handler";
-import { Select, SelectItem } from "@/components/ui/select";
-import DateTimePicker from '@react-native-community/datetimepicker';
-import DatePicker from "@/components/DatePicker";
-import { Accordion, AccordionContent, AccordionHeader, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { formatNumber } from "@/utils/functions/help";
-import MyLinearGradient from "@/components/gradient/MyLinearGradient";
-import { CandlestickChart } from "react-native-wagmi-charts";
 
 const ExchangeScreen = () => {
-  return (
-    <Box>
-      <Text>testscreen</Text>
-    </Box>
-  )
-}
+    const [activeTab, setActiveTab] = useState("Limit");
+    const [amount, setAmount] = useState("126.00");
+    const [convertedAmount, setConvertedAmount] = useState("56.01");
+    const [fromCurrency, setFromCurrency] = useState("Bitcoin");
+    const [toCurrency, setToCurrency] = useState("Litecoin");
+    const [fromSymbol, setFromSymbol] = useState("₿");
+    const [toSymbol, setToSymbol] = useState("Ł");
+    const { appliedTheme } = useTheme();
+    const [result, setResult] = useState<OverallProfitResult | null>(null);
 
-export default ExchangeScreen
+    const swapCurrencies = () => {
+        setFromCurrency(toCurrency);
+        setToCurrency(fromCurrency);
+        setFromSymbol(toSymbol);
+        setToSymbol(fromSymbol);
+        setAmount(convertedAmount);
+        setConvertedAmount(amount);
+    };
+
+    // Yaniv
+    const handleCalculate = async () => {
+        const profitData = await calculateCryptoProfitBetweenDates(
+            "BTCUSDT",
+            [
+                {
+                    amount: 1000,
+                    startDate: new Date('2024-01-01'),
+                    endDate: new Date('2024-07-01')
+                },
+                {
+                    amount: 8000,
+                    startDate: new Date('2024-011-01'),
+                    endDate: new Date('2025-01-01')
+                },
+                {
+                    amount: 2000,
+                    startDate: new Date('2025-02-01'),
+                    endDate: new Date('2025-03-01')
+                },
+            ]
+        );
+        console.log("profitData", JSON.stringify(profitData,null,1));
+        setResult(profitData);
+    };
+    
+    useEffect(() => {
+        handleCalculate();
+    }, [])
+    // End Yaniv
+
+    return (
+        <Box className="p-4 h-full bg-white">
+            <BackHeader title="Exchange" />
+            <Box className="flex-1 items-center">
+                <CandleChartComponent
+                    data={result?.historicalData}
+                    markerTimestamps={result?.individualResults.map(item => item.endTime)}
+                />
+            </Box>
+        </Box>
+    );
+};
+
+export default ExchangeScreen;
+
+
 /*
 <Box className="flex-1">
                 <Box className="flex-row w-full rounded-lg p-1">
