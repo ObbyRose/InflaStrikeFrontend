@@ -11,6 +11,8 @@ import { Divider } from '@/components/ui/divider';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
 import { formatNumber } from '@/utils/functions/help';
 import { PieChart } from 'react-native-gifted-charts';
+import MyLinearGradient from '@/components/gradient/MyLinearGradient';
+import CardUpRounded from '@/components/CardUpRounded';
 
 interface PortfolioData {
   value: number;
@@ -25,7 +27,7 @@ const pieData: PortfolioData[] = [
   {
     value: 47,
     color: '#453ABD',
-    gradientCenterColor: '#FFFFFF',
+    gradientCenterColor: '#1A0DAB', // Deep blue with a rich contrast
     symbol: 'BTCUSDT',
     amount: 3000,
     focused: true,
@@ -33,26 +35,57 @@ const pieData: PortfolioData[] = [
   {
     value: 40,
     color: '#7D8198',
-    gradientCenterColor: '#FFFFFF',
+    gradientCenterColor: '#2E2F38', // Dark charcoal for a bold metallic look
     symbol: 'ETHUSDT',
     amount: 2500,
   },
   {
     value: 16,
     color: '#FFB800',
-    gradientCenterColor: '#FFFFFF',
+    gradientCenterColor: '#FF4500', // Fiery orange to enhance the gold
     symbol: 'BNBUSDT',
     amount: 1200,
   },
   {
     value: 3,
     color: '#1C9ABB',
-    gradientCenterColor: '#FFFFFF',
+    gradientCenterColor: '#003366', // Deep ocean blue for sharp contrast
     symbol: 'XRPUSDT',
     amount: 500,
   },
 ];
 
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June', 'July',
+  'August', 'September', 'October', 'November', 'December'
+];
+function getAppropriateColor(currencyName: string) {
+  const topCryptocurrencies = [
+    { name: 'Available Money', color: 'purple' },
+    { name: 'Bitcoin', symbol: 'BTC', color: '#f7931a' }, // Bitcoin Orange
+    { name: 'Ethereum', symbol: 'ETH', color: '#3c3c3d' }, // Ethereum Gray
+    { name: 'Tether', symbol: 'USDT', color: '#26a17b' }, // Tether Green
+    { name: 'BNB', symbol: 'BNB', color: '#f3ba2f' }, // BNB Yellow
+    { name: 'USD Coin', symbol: 'USDC', color: '#2775c9' }, // USD Coin Blue
+    { name: 'XRP', symbol: 'XRP', color: '#006097' }, // Ripple Blue
+    { name: 'Cardano', symbol: 'ADA', color: '#0033ad' }, // Cardano Blue
+    { name: 'Solana', symbol: 'SOL', color: '#00ffa3' }, // Solana Green
+    { name: 'Dogecoin', symbol: 'DOGE', color: '#c2a633' }, // Dogecoin Gold
+    { name: 'Polkadot', symbol: 'DOT', color: '#e6007a' }, // Polkadot Pink
+    { name: 'Shiba Inu', symbol: 'SHIB', color: '#fda32b' }, // Shiba Inu Orange
+    { name: 'Litecoin', symbol: 'LTC', color: '#bfbbbb' }, // Litecoin Gray
+    { name: 'Chainlink', symbol: 'LINK', color: '#2a5ada' }, // Chainlink Blue
+    { name: 'Stellar', symbol: 'XLM', color: '#000000' }, // Stellar Black
+    { name: 'USD Coin', symbol: 'USDC', color: '#2775c9' }, // USD Coin Blue
+    { name: 'Avalanche', symbol: 'AVAX', color: '#e84142' }, // Avalanche Red
+    { name: 'TRON', symbol: 'TRX', color: '#eb0029' }, // TRON Red
+    { name: 'Uniswap', symbol: 'UNI', color: '#ff007a' }, // Uniswap Pink
+    { name: 'Wrapped Bitcoin', symbol: 'WBTC', color: '#242d3d' }, // Wrapped Bitcoin Dark Blue
+    { name: 'Dai', symbol: 'DAI', color: '#f4b731' }, // Dai Yellow
+  ];
+  const currency = topCryptocurrencies.find((crypto) => crypto.name === currencyName);
+  return currency ? currency.color : 'grey';
+}
 const dummyQuickBuy = [
   IC_BTCUSDT,
   IC_ETHUSDT,
@@ -63,9 +96,10 @@ const dummyQuickBuy = [
 
 const PortfolioScreen = ({navigation}: Props) => {
   const { appliedTheme } = useTheme();
-  const [selectedSlice, setSelectedSlice] = useState<PortfolioData | null>(null);
+  const [selectedSlice, setSelectedSlice] = useState(pieData[0].symbol);
   const [historyData, setHistoryData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedMonth, setSelectedMonth] = useState(months[0]);
   
   useEffect(() => {
       async function fetchData() {
@@ -85,73 +119,69 @@ const PortfolioScreen = ({navigation}: Props) => {
   }, []);
 
 
-  function getAppropriateColor(currencyName: string) {
-    const topCryptocurrencies = [
-      { name: 'Available Money', color: 'purple' },
-      { name: 'Bitcoin', symbol: 'BTC', color: '#f7931a' }, // Bitcoin Orange
-      { name: 'Ethereum', symbol: 'ETH', color: '#3c3c3d' }, // Ethereum Gray
-      { name: 'Tether', symbol: 'USDT', color: '#26a17b' }, // Tether Green
-      { name: 'BNB', symbol: 'BNB', color: '#f3ba2f' }, // BNB Yellow
-      { name: 'USD Coin', symbol: 'USDC', color: '#2775c9' }, // USD Coin Blue
-      { name: 'XRP', symbol: 'XRP', color: '#006097' }, // Ripple Blue
-      { name: 'Cardano', symbol: 'ADA', color: '#0033ad' }, // Cardano Blue
-      { name: 'Solana', symbol: 'SOL', color: '#00ffa3' }, // Solana Green
-      { name: 'Dogecoin', symbol: 'DOGE', color: '#c2a633' }, // Dogecoin Gold
-      { name: 'Polkadot', symbol: 'DOT', color: '#e6007a' }, // Polkadot Pink
-      { name: 'Shiba Inu', symbol: 'SHIB', color: '#fda32b' }, // Shiba Inu Orange
-      { name: 'Litecoin', symbol: 'LTC', color: '#bfbbbb' }, // Litecoin Gray
-      { name: 'Chainlink', symbol: 'LINK', color: '#2a5ada' }, // Chainlink Blue
-      { name: 'Stellar', symbol: 'XLM', color: '#000000' }, // Stellar Black
-      { name: 'USD Coin', symbol: 'USDC', color: '#2775c9' }, // USD Coin Blue
-      { name: 'Avalanche', symbol: 'AVAX', color: '#e84142' }, // Avalanche Red
-      { name: 'TRON', symbol: 'TRX', color: '#eb0029' }, // TRON Red
-      { name: 'Uniswap', symbol: 'UNI', color: '#ff007a' }, // Uniswap Pink
-      { name: 'Wrapped Bitcoin', symbol: 'WBTC', color: '#242d3d' }, // Wrapped Bitcoin Dark Blue
-      { name: 'Dai', symbol: 'DAI', color: '#f4b731' }, // Dai Yellow
-    ];
-    const currency = topCryptocurrencies.find((crypto) => crypto.name === currencyName);
-    return currency ? currency.color : 'grey';
-  }
-
-  const renderDot = (color:string) => {
-      return (
-      <Box 
-        className={`h-2.5 w-2.5 rounded-full mr-2.5`} 
-        style={{
-          backgroundColor: color
-        }}
-      />
-      );
-  };
-    
   const renderLegendComponent = () => {
-      return (
-        <>
-        <Box className="flex flex-row justify-center mb-2.5 flex-wrap gap-5">
-          { pieData.map((item) =>
-          <Box className='flex-row items-center'>
-            {renderDot(item.color)}
-            <Text className="text-black">{item.symbol}: {item.value}%</Text>
-          </Box>
-          )}
-
-        </Box>
-      </>
-      );
-    };
-
+    return (
+      <FlatList
+        data={pieData}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item, idx) => item.color + idx}
+        contentContainerStyle={{ paddingHorizontal: 10 }}
+        renderItem={({ item }) => (
+          <Pressable 
+            className="flex-row items-center mr-5"
+            onPress={() => setSelectedSlice(item.symbol)}
+          >
+            <Box
+              className="h-2.5 w-2.5 rounded-full mr-2.5"
+              style={{ backgroundColor: item.color }}
+            />
+            <Text className={`text-text-${appliedTheme}`}>{item.symbol}: {item.value}%</Text>
+          </Pressable>
+        )}
+      />
+    );
+  };
+  
 
   return (
     <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
-      <Box className={`flex flex-1 px-4 py-6`}>
-        <BackHeader title='Portfolio' colorScheme='themeBased'/>
+      <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[18%] p-4'>
+        <BackHeader title='Portfolio' colorScheme='alwaysWhite'/>
+        <Box className='mt-2'>
+          <FlatList
+          data={months}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
+          renderItem={({ item }) => {
+            const isSelected = item === selectedMonth;
+            return (
+              <Pressable onPress={() => setSelectedMonth(item)} style={{ marginHorizontal: 10 }}>
+                <Text 
+                style={{
+                  fontSize: isSelected ? 22 : 17,
+                  fontWeight: isSelected ? 'bold' : 'normal',
+                  color: isSelected ? 'white' : '#a9afc2',
+                }}>
+                  {item}
+                </Text>
+              </Pressable>
+            );
+          }}
+          />
+      </Box>
+      </MyLinearGradient>
+
+      <CardUpRounded className={`flex flex-1 px-4 py-6`}>
         <Box className='gap-1 mt-2'>
-          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Spending & history</Text>
-          <Text className={`text-subText-${appliedTheme}`}>Total value: {formatNumber(0)}</Text>
+          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Expenses Details</Text>
+          <Text className={`text-subText-${appliedTheme}`}>You've spent $289.23 more than last month</Text>
         </Box>
 
         {/* Chart Container */}
-        <Box className="flex-row justify-center">
+        <Box className="flex-row justify-center m-3">
           <PieChart
               data={pieData}
               donut
@@ -159,9 +189,10 @@ const PortfolioScreen = ({navigation}: Props) => {
               // showText
               showValuesAsLabels
               textSize={20}
-              // showGradient
+              showGradient
               sectionAutoFocus
               focusOnPress
+              focusedPieIndex={pieData.findIndex((item) => item.symbol === selectedSlice)}
               radius={120}
               innerRadius={80}
               innerCircleColor={appliedTheme==="dark" ? '#161C2C' : '#FFFFFF'}
@@ -170,8 +201,8 @@ const PortfolioScreen = ({navigation}: Props) => {
                 return (
                 <Box className='justify-center items-center'>
                     <Text className={`font-bold text-2xl text-text-${appliedTheme}`}>{pieData[idx].symbol}</Text>
-                    <Text className={`font-semibold text-2xl`}>{formatNumber(pieData[idx].amount)}</Text>
-                    <Text className={`font-bold text-subTextGray-${appliedTheme} text-2xl`}>{pieData[idx].value + "%"}</Text>
+                    <Text className={`font-bold text-2xl text-subText-${appliedTheme}`}>{formatNumber(pieData[idx].amount)}</Text>
+                    <Text className={`font-semibold text-subTextGray-${appliedTheme} text-2xl`}>{pieData[idx].value + "%"}</Text>
                 </Box>
                 );
             }}
@@ -179,7 +210,7 @@ const PortfolioScreen = ({navigation}: Props) => {
         </Box>
 
         {/* Chart Details */}
-        <Box>
+        <Box className='my-2'>
           {renderLegendComponent()}
         </Box>
 
@@ -226,7 +257,7 @@ const PortfolioScreen = ({navigation}: Props) => {
               )}
         </Box>
 
-      </Box>
+      </CardUpRounded>
     </ScrollView>
   );
 };
