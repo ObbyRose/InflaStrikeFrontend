@@ -103,14 +103,17 @@ const SimulatorScreen: React.FC = () => {
                     <Box key={investment.id} className="mt-2 mb-2 flex-row items-center justify-between p-2 rounded-lg">
                         {/* Investment Amount */}
                         <Box className="flex-col justify-center">
-                            <Text className="font-bold p-2">Investement:</Text>
+                            <Text className="font-bold p-2">Investment:</Text>
                             <TextInput
                                 className="border p-2 rounded flex-1 mx-1 text-center"
-                                value={formatNumber(Number(investment.amount))}
-                                onChangeText={(text) => updateInvestment(investment.id, "amount", text.replace(/[^0-9.]/g, ""))}
+                                value={String(investment.amount)}
+                                onChangeText={(text) => {
+                                    const numericValue = text.replace(/[^0-9.]/g, "");
+                                    updateInvestment(investment.id, "amount", Number(numericValue));
+                                }}
                                 keyboardType="numeric"
                             />
-                            </Box>
+                        </Box>
 
                         {/* Start Date Picker */}
                         <Box className="flex-col justify-center">
@@ -183,12 +186,11 @@ const SimulatorScreen: React.FC = () => {
             ))}
                 </Accordion>
                 {results &&
-
                     <Box className="mt-4">
-                        <Text>{results?.totalInvested}</Text>
-                        <Text>{results?.roiPercentage}</Text>
-                        <Text>{results?.totalProfit}</Text>
-                        <CandleChartComponent data={results?.historicalData} markerTimestamps={results?.individualResults.map(item => item.endTime)} />
+                        <Text>{formatNumber(results.totalInvested)}</Text>
+                        <Text>{results?.roiPercentage}%</Text>
+                        <Text>{formatNumber(results.totalProfit)}</Text>
+                        <CandleChartComponent data={results.historicalData} markerTimestamps={results?.individualResults.map(item => item.endTime)} />
                     </Box>
         }
             </Box>
