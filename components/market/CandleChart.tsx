@@ -16,12 +16,17 @@ export interface CandlestickData {
     volume: number; // Added volume
 }
 
-interface CandleChartComponentProps {
-    symbol: string;
-    data?: CandlestickData[];
+export interface CandleMarker {
+    x: number;
 }
 
-const CandleChartComponent = ({ symbol, data }: CandleChartComponentProps) => {
+interface CandleChartComponentProps {
+    symbol?: string;
+    data?: CandlestickData[];
+    markerTimestamps?: number[];
+}
+
+const CandleChartComponent = ({ symbol="BTCUSDT", data, markerTimestamps }: CandleChartComponentProps) => {
     const { appliedTheme } = useTheme();
     const { width } = Dimensions.get('window');
     const intervals = ["1m", "5m", "15m", "30m", "1h", "1d", "1w", "1M"];
@@ -76,24 +81,48 @@ const CandleChartComponent = ({ symbol, data }: CandleChartComponentProps) => {
     // Find the maximum volume for scaling bars
     const maxVolume = Math.max(...chartData.map((item) => item.volume), 1);
 
+    // Find Markers Spots
+    let markers: CandleMarker[] = [];
+    const timestamps = chartData.map(d => d.timestamp);
+    const minTimestamp = Math.min(...timestamps);
+    const maxTimestamp = Math.max(...timestamps);
+
+    // Prevent division by zero
+    if (maxTimestamp !== minTimestamp) {
+        markerTimestamps?.map(stamp =>
+            markers.push({x :((stamp - minTimestamp) / (maxTimestamp - minTimestamp)) * width * 0.95})
+        )
+    }
+
     return (
     <Box>
         {chartData?.length ?
         <CandlestickChart.Provider data={chartData}>
             <Box className={`mx-auto h-fit bg-card-${appliedTheme} p-1 rounded-xl`}>
                 {/* Candlestick Chart */}
-                <CandlestickChart width={width * 0.95} height={200}>
-                    <CandlestickChart.Candles />
-                    <CandlestickChart.Crosshair color="#3949AB">
-                        <CandlestickChart.Tooltip 
-                            textStyle={{ color: "white" }}
-                            style={{ 
-                                backgroundColor: "#4A3EF6", 
-                                borderRadius: 10,
-                                }}
-                            />
-                    </CandlestickChart.Crosshair>
-                </CandlestickChart>
+                <Box className='relative'>
+                    {/* Chart */}
+                    <CandlestickChart width={width * 0.95} height={200}>
+                        <CandlestickChart.Candles />
+                        <CandlestickChart.Crosshair color="#3949AB">
+                            <CandlestickChart.Tooltip 
+                                textStyle={{ color: "white" }}
+                                style={{ 
+                                    backgroundColor: "#4A3EF6", 
+                                    borderRadius: 10,
+                                    }}
+                                />
+                        </CandlestickChart.Crosshair>
+                    </CandlestickChart>
+                    {/* Markers */}
+                    {markers.map((item) => 
+                        <Box
+                            key={item.x}
+                            className='absolute top-0 h-[200px] w-[2px] bg-red-500' 
+                            style={{ left: item.x}} 
+                        />
+                    )}
+                </Box>
 
                 {/* Volume Bars */}
                 <View className='h-[50px] flex-row items-end '>
@@ -115,11 +144,11 @@ const CandleChartComponent = ({ symbol, data }: CandleChartComponentProps) => {
                 <Box style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 5, marginTop: 5 }}>
                     {chartData.map((item, index) => (
                         index % Math.floor(chartData.length / 5) === 0 ? ( // Show date every few bars
-                            <Text key={index} style={{ fontSize: 10, color: 'gray' }}>
-                                {new Date(item.timestamp).toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+                            <Text key={index} className={`text-subText-${appliedTheme} text-[10px]`}>
+                                {new Date(item.timestamp).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: '2-digit' })}
                             </Text>
                         ) : (
-                            <Text key={index} style={{ fontSize: 10, color: 'gray' }}> </Text>
+                            <Text key={index} className={`text-subText-${appliedTheme} text-[10px]`}> </Text>
                         )
                     ))}
                 </Box>

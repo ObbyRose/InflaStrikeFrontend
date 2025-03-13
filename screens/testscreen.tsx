@@ -10,7 +10,7 @@ import BackHeader from "@/components/BackHeader";
 import LineChartWagmi from "@/components/LineChartWagmi";
 import OverlayLoading from "@/components/OverlayLoading";
 import { PieChart } from "react-native-gifted-charts";
-import calculateCryptoProfitBetweenDates from "@/utils/functions/crypto";
+import calculateCryptoProfitBetweenDates, { OverallProfitResult } from "@/utils/functions/crypto";
 import CandleChartComponent, { CandlestickData } from "@/components/market/CandleChart";
 
 const ExchangeScreen = () => {
@@ -22,7 +22,7 @@ const ExchangeScreen = () => {
     const [fromSymbol, setFromSymbol] = useState("₿");
     const [toSymbol, setToSymbol] = useState("Ł");
     const { appliedTheme } = useTheme();
-    const [result, setResult] = useState<CandlestickData[]>([]);
+    const [result, setResult] = useState<OverallProfitResult | null>(null);
 
     const swapCurrencies = () => {
         setFromCurrency(toCurrency);
@@ -37,11 +37,26 @@ const ExchangeScreen = () => {
     const handleCalculate = async () => {
         const profitData = await calculateCryptoProfitBetweenDates(
             "BTCUSDT",
-            1000,
-            '2024-01-01',
-            '2025-01-01'
+            [
+                {
+                    amount: 1000,
+                    startDate: '2024-01-01',
+                    endDate: '2024-07-01'
+                },
+                {
+                    amount: 8000,
+                    startDate: '2024-011-01',
+                    endDate: '2025-01-01'
+                },
+                {
+                    amount: 2000,
+                    startDate: '2025-02-01',
+                    endDate: '2025-03-01'
+                },
+            ]
         );
-        setResult(profitData?.historicalData || []);
+        console.log("profitData", JSON.stringify(profitData,null,1));
+        setResult(profitData);
     };
     
     useEffect(() => {
@@ -53,12 +68,10 @@ const ExchangeScreen = () => {
         <Box className="p-4 h-full bg-white">
             <BackHeader title="Exchange" />
             <Box className="flex-1 items-center">
-                {result &&
                 <CandleChartComponent
-                    symbol=""
-                    data={result}
+                    data={result?.historicalData}
+                    markerTimestamps={result?.individualResults.map(item => item.endTime)}
                 />
-                }
             </Box>
         </Box>
     );

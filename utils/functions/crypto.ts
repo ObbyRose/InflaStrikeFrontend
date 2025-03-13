@@ -3,19 +3,35 @@ import axios from "axios";
 
 const BINANCE_API_URL = "https://api.binance.com/api/v3";
 
+interface InvestmentItem {
+    amount: number;
+    startDate: string;
+    endDate: string;
+}
+
 interface ProfitResult {
-    symbol: string;
     investedAmount: number;
     startDate: string;
     endDate: string;
+    startTime: number;
+    endTime: number;
     startPrice: number;
     endPrice: number;
     cryptoAmount: number;
     endValue: number;
     profit: number;
     profitPercentage: string;
-    historicalData: CandlestickData[];
 }
+
+export interface OverallProfitResult {
+    symbol: string;
+    totalInvested: number;
+    totalProfit: number;
+    roiPercentage: string;
+    historicalData: CandlestickData[];
+    individualResults: ProfitResult[];
+}
+
 
 /**
  * Determines the best interval based on the date range.
@@ -37,56 +53,71 @@ const getBestInterval = (startTime: number, endTime: number): string => {
     return "1M"; // More than 1 year → 1-month interval
 };
 
-/**
- * Calculates profit and retrieves historical candlestick data.
- * @param {string} symbol - The trading pair (e.g., "BTCUSDT").
- * @param {number} amount - The amount in USD invested.
- * @param {string} startDate - The investment start date (YYYY-MM-DD).
- * @param {string} endDate - The investment end date (YYYY-MM-DD).
- * @returns {Promise<ProfitResult | null>} - Profit details and historical data.
- */
-const calculateCryptoProfitBetweenDates = async (
+
+const calculateMultipleInvestmentsProfit = async (
     symbol: string,
-    amount: number,
-    startDate: string,
-    endDate: string
-    ): Promise<ProfitResult | null> => {
+    investments: InvestmentItem[]
+): Promise<OverallProfitResult | null> => {
     try {
-        // Convert dates to UNIX timestamps (milliseconds)
-        const startTime = new Date(startDate).getTime();
-        const endTime = new Date(endDate).getTime();
+        if (investments.length === 0) return null;
 
-        // Fetch start price
-        const startResponse = await axios.get(`${BINANCE_API_URL}/klines`, {
-        params: { symbol, interval: "1d", limit: 1, startTime },
-        });
-        if (startResponse.data.length === 0) throw new Error("No data for start date.");
-        const startPrice = parseFloat(startResponse.data[0][4]);
+        const startTimes = investments.map(item => new Date(item.startDate).getTime());
+        const endTimes = investments.map(item => new Date(item.endDate).getTime());
+        const earliestStart = Math.min(...startTimes);
+        const latestEnd = Math.max(...endTimes);
 
-        // Fetch end price
-        const endResponse = await axios.get(`${BINANCE_API_URL}/klines`, {
-        params: { symbol, interval: "1d", limit: 1, startTime: endTime },
-        });
-        if (endResponse.data.length === 0) throw new Error("No data for end date.");
-        const endPrice = parseFloat(endResponse.data[0][4]);
+        let totalInvested = 0;
+        let totalProfit = 0;
+        let individualResults: ProfitResult[] = [];
 
-        // Calculate profit details
-        const cryptoAmount = amount / startPrice;
-        const endValue = cryptoAmount * endPrice;
-        const profit = endValue - amount;
-        const profitPercentage = ((profit / amount) * 100).toFixed(2);
+        for (const investment of investments) {
+            const { amount, startDate, endDate } = investment;
+            const startTime = new Date(startDate).getTime();
+            const endTime = new Date(endDate).getTime();
 
-        // Get the best interval for historical data
-        const interval = getBestInterval(startTime, endTime);
+            const startResponse = await axios.get(`${BINANCE_API_URL}/klines`, {
+                params: { symbol, interval: "1d", limit: 1, startTime }
+            });
+            if (startResponse.data.length === 0) continue;
+            const startPrice = parseFloat(startResponse.data[0][4]);
 
-        // Fetch historical candlestick data
+            const endResponse = await axios.get(`${BINANCE_API_URL}/klines`, {
+                params: { symbol, interval: "1d", limit: 1, startTime: endTime }
+            });
+            if (endResponse.data.length === 0) continue;
+            const endPrice = parseFloat(endResponse.data[0][4]);
+
+            const cryptoAmount = amount / startPrice;
+            const endValue = cryptoAmount * endPrice;
+            const profit = endValue - amount;
+            const profitPercentage = ((profit / amount) * 100).toFixed(2);
+
+            totalInvested += amount;
+            totalProfit += profit;
+
+            individualResults.push({
+                investedAmount: amount,
+                startDate,
+                endDate,
+                startTime,
+                endTime,
+                startPrice,
+                endPrice,
+                cryptoAmount,
+                endValue,
+                profit,
+                profitPercentage,
+            });
+        }
+
+        const roiPercentage = ((totalProfit / totalInvested) * 100).toFixed(2);
+        const interval = getBestInterval(earliestStart, latestEnd);
+
         const historyResponse = await axios.get(`${BINANCE_API_URL}/klines`, {
-        params: { symbol, interval, startTime, endTime },
+            params: { symbol, interval, startTime: earliestStart, endTime: latestEnd }
         });
-
-        // Format historical data for the chart
         const historicalData: CandlestickData[] = historyResponse.data.map((candle: any) => ({
-            time: candle[0],
+            timestamp: candle[0],
             open: parseFloat(candle[1]),
             high: parseFloat(candle[2]),
             low: parseFloat(candle[3]),
@@ -95,17 +126,12 @@ const calculateCryptoProfitBetweenDates = async (
         }));
 
         return {
-        symbol,
-        investedAmount: amount,
-        startDate,
-        endDate,
-        startPrice,
-        endPrice,
-        cryptoAmount,
-        endValue,
-        profit,
-        profitPercentage,
-        historicalData,
+            symbol,
+            totalInvested,
+            totalProfit,
+            roiPercentage,
+            historicalData,
+            individualResults,
         };
     } catch (error: any) {
         console.error("Error fetching data:", error.message);
@@ -113,4 +139,4 @@ const calculateCryptoProfitBetweenDates = async (
     }
 };
 
-export default calculateCryptoProfitBetweenDates;
+export default calculateMultipleInvestmentsProfit;
