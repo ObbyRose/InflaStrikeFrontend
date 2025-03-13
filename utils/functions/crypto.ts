@@ -5,14 +5,14 @@ const BINANCE_API_URL = "https://api.binance.com/api/v3";
 
 interface InvestmentItem {
     amount: number;
-    startDate: string;
-    endDate: string;
+    startDate: Date;
+    endDate: Date;
 }
 
 interface ProfitResult {
     investedAmount: number;
-    startDate: string;
-    endDate: string;
+    startDate: Date;
+    endDate: Date;
     startTime: number;
     endTime: number;
     startPrice: number;

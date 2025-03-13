@@ -37,6 +37,7 @@ import { useEffect, useState } from 'react';
 import { handleSQLiteIInsert } from '@/utils/api/internal/sql/handleSQLite';
 import OverlayLoading from '@/components/OverlayLoading';
 import { useDataStore } from '@/context/dataStore';
+import SimulatorScreen from './SimulatorScreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator();
@@ -110,8 +111,9 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="test" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Simulator" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Simulator" component={SimulatorScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
                 <Stack.Screen name="test" component={testscreen} />
                 <Stack.Screen name="Notifications" component={NotificationsScreen} />
