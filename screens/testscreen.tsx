@@ -11,7 +11,7 @@ import { Picker } from "@react-native-picker/picker";
 import LineChartWagmi from "@/components/LineChartWagmi";
 import OverlayLoading from "@/components/OverlayLoading";
 import { PieChart } from "react-native-gifted-charts";
-import calculateCryptoProfitBetweenDates from "@/utils/functions/crypto";
+import calculateCryptoProfitBetweenDates, { OverallProfitResult } from "@/utils/functions/crypto";
 import CandleChartComponent, { CandlestickData } from "@/components/market/CandleChart";
 import { Input } from "@/components/ui/input";
 import { ScrollView } from "react-native-gesture-handler";
