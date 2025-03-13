@@ -7,7 +7,7 @@ import { Text } from '../ui/text';
 import { Svg, Rect } from 'react-native-svg';
 import { Spinner } from '../ui/spinner';
 
-interface CandlestickData {
+export interface CandlestickData {
     timestamp: number;
     open: number;
     high: number;
@@ -18,15 +18,16 @@ interface CandlestickData {
 
 interface CandleChartComponentProps {
     symbol: string;
+    data?: CandlestickData[];
 }
 
-const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
+const CandleChartComponent = ({ symbol, data }: CandleChartComponentProps) => {
     const { appliedTheme } = useTheme();
     const { width } = Dimensions.get('window');
     const intervals = ["1m", "5m", "15m", "30m", "1h", "1d", "1w", "1M"];
     const [selectedInterval, setSelectedInterval] = useState("1d");
 
-    const [chartData, setChartData] = useState<CandlestickData[]>([]);
+    const [chartData, setChartData] = useState<CandlestickData[]>(data || []);
 
     async function fetchHistoricalData(symbol: string, interval: string) {
         try {
@@ -54,17 +55,22 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
     }
 
     useEffect(() => {
-        fetchHistoricalData(symbol, selectedInterval);
+        if(data)
+            setChartData(data);
+    }, [data]);
 
-        // Refresh data every minute
-        const interval = setInterval(() => fetchHistoricalData(symbol, selectedInterval), 60000);
-
-        return () => clearInterval(interval);
-    }, [symbol, selectedInterval]);
+    useEffect(() => {
+        if (!data) {
+            fetchHistoricalData(symbol, selectedInterval);
+            // Refresh data every minute
+            const interval = setInterval(() => fetchHistoricalData(symbol, selectedInterval), 60000);
+            return () => clearInterval(interval);
+        }
+    }, [symbol, selectedInterval, data]);
 
     const handleIntervalChange = (interval: string) => {
         setSelectedInterval(interval);
-        fetchHistoricalData(symbol, interval);
+        if(!data) fetchHistoricalData(symbol, interval);
     };
 
     // Find the maximum volume for scaling bars
@@ -124,6 +130,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
         }
 
         {/* Interval Buttons */}
+        { !data &&
         <Box className="flex-row justify-center p-3">
                 {intervals.map(interval => (
                     <TouchableOpacity
@@ -139,6 +146,7 @@ const CandleChartComponent = ({ symbol }: CandleChartComponentProps) => {
                     </TouchableOpacity>
                 ))}
         </Box>
+        }
     </Box>
     );
 };
