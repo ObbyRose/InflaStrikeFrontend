@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Button } from "@/components/ui/button";
 import { Box } from "@/components/ui/box";
@@ -10,6 +10,8 @@ import BackHeader from "@/components/BackHeader";
 import LineChartWagmi from "@/components/LineChartWagmi";
 import OverlayLoading from "@/components/OverlayLoading";
 import { PieChart } from "react-native-gifted-charts";
+import calculateCryptoProfitBetweenDates from "@/utils/functions/crypto";
+import CandleChartComponent, { CandlestickData } from "@/components/market/CandleChart";
 
 const ExchangeScreen = () => {
     const [activeTab, setActiveTab] = useState("Limit");
@@ -20,6 +22,7 @@ const ExchangeScreen = () => {
     const [fromSymbol, setFromSymbol] = useState("₿");
     const [toSymbol, setToSymbol] = useState("Ł");
     const { appliedTheme } = useTheme();
+    const [result, setResult] = useState<CandlestickData[]>([]);
 
     const swapCurrencies = () => {
         setFromCurrency(toCurrency);
@@ -30,106 +33,32 @@ const ExchangeScreen = () => {
         setConvertedAmount(amount);
     };
 
-    // PIE CHART
-    const pieData = [
-        {
-            value: 47,
-            color: '#009FFF',
-            gradientCenterColor: '#006DFF',
-            focused: true,
-        },
-        {value: 40, color: '#93FCF8', gradientCenterColor: '#3BE9DE'},
-        {value: 16, color: '#BDB2FA', gradientCenterColor: '#8F80F3'},
-        {value: 3, color: '#FFA5BA', gradientCenterColor: '#FF7F97'},
-    ];
-
-
-
-    const renderDot = (color:any) => {
-        return (
-        <View
-            style={{
-            height: 10,
-            width: 10,
-            borderRadius: 5,
-            backgroundColor: color,
-            marginRight: 10,
-            }}
-        />
+    // Yaniv
+    const handleCalculate = async () => {
+        const profitData = await calculateCryptoProfitBetweenDates(
+            "BTCUSDT",
+            1000,
+            '2024-01-01',
+            '2025-01-01'
         );
+        setResult(profitData?.historicalData || []);
     };
     
-    const renderLegendComponent = () => {
-        return (
-        <>
-            <View
-            style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                marginBottom: 10,
-            }}>
-            <View
-                style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                width: 120,
-                marginRight: 20,
-                }}>
-                {renderDot('#006DFF')}
-                <Text style={{color: 'black'}}>Excellent: 47%</Text>
-            </View>
-            <View
-                style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
-                {renderDot('#8F80F3')}
-                <Text style={{color: 'black'}}>Okay: 16%</Text>
-            </View>
-            </View>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <View
-                style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                width: 120,
-                marginRight: 20,
-                }}>
-                {renderDot('#3BE9DE')}
-                <Text style={{color: 'black'}}>Good: 40%</Text>
-            </View>
-            <View
-                style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
-                {renderDot('#FF7F97')}
-                <Text style={{color: 'black'}}>Poor: 3%</Text>
-            </View>
-            </View>
-        </>
-        );
-    };
+    useEffect(() => {
+        handleCalculate();
+    }, [])
+    // End Yaniv
 
     return (
         <Box className="p-4 h-full bg-white">
             <BackHeader title="Exchange" />
             <Box className="flex-1 items-center">
-                <PieChart
-                data={pieData}
-                donut
-                showGradient
-                sectionAutoFocus
-                focusOnPress
-                radius={90}
-                innerRadius={60}
-                innerCircleColor={appliedTheme==="dark" ? '#161C2C' : '#FFFFFF'}
-                centerLabelComponent={() => {
-                    return (
-                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                        <Text >
-                        47%
-                        </Text>
-                        <Text>Excellent</Text>
-                    </View>
-                    );
-                }}
+                {result &&
+                <CandleChartComponent
+                    symbol=""
+                    data={result}
                 />
-            {/* {renderLegendComponent()} */}
+                }
             </Box>
         </Box>
     );
