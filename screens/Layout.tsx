@@ -1,7 +1,7 @@
 import { Box } from '@/components/ui/box';
 import { Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { NavigationProp, ParamListBase, useNavigationState } from '@react-navigation/native';
 import { useState } from 'react';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { IC_Home, IC_Invest, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
@@ -13,10 +13,16 @@ interface LayoutProps {
 
 const Layout = ({ children, navigation }: LayoutProps) => {
     const { appliedTheme } = useTheme();
-    const [currentScreen, setCurrentScreen] = useState("Home");
+
+    const currentScreen = useNavigationState(state => {
+        const mainAppRoute = state.routes.find(route => route.name === "MainApp");
+        if (mainAppRoute && mainAppRoute.state) {
+            return mainAppRoute.state.routes[mainAppRoute.state.index || 0].name || "Home";
+        }
+        return "Home"; // Default
+    });
 
     function navigateToScreen(screen: string) {
-        setCurrentScreen(screen);
         navigation.navigate("MainApp", { screen });
     }
     return (
