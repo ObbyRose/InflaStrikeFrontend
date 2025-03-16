@@ -24,3 +24,15 @@ export const formatNumber = (num: number, decimals = 2) => {
     const roundedNum = parseFloat(num.toFixed(decimals));
     return '$' + new Intl.NumberFormat('en-US').format(roundedNum);
 };
+
+export const formatSymbol = (symbol: string) => {
+    const quoteCurrencies = ["USDT", "USD", "BTC", "ETH", "BNB", "EUR"];
+
+    for (let quote of quoteCurrencies) {
+        if (symbol.endsWith(quote)) {
+            const base = symbol.slice(0, -quote.length);
+            return `${base}/${quote}`;
+        }
+    }
+    return symbol;
+};
