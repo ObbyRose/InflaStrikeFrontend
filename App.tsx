@@ -8,22 +8,25 @@ import { ToastProvider } from '@gluestack-ui/toast';
 import 'react-native-get-random-values';
 import { PaperProvider } from 'react-native-paper';
 import { StatusBar } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 export default function App() {
 
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <PaperProvider>
-          <GluestackUIProvider>
-            <ToastProvider>
-              <StackNavigator />
-              <StatusBar backgroundColor="#5506FD" barStyle="light-content" />
-            </ToastProvider>
-          </GluestackUIProvider>
-        </PaperProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <PaperProvider>
+            <GluestackUIProvider>
+              <ToastProvider>
+                <StackNavigator />
+                <StatusBar backgroundColor="#5506FD" barStyle="light-content" />
+              </ToastProvider>
+            </GluestackUIProvider>
+          </PaperProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
