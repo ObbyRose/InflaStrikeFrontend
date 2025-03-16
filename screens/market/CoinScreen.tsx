@@ -14,6 +14,7 @@ import DepthChartComponent from '@/components/market/DepthChart';
 import CoinInfo from '@/components/market/CoinInfo';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
+import BuySellSheet from './BuySellSheet';
 
 
 type RootStackParamList = {
@@ -24,9 +25,10 @@ type CoinScreenRouteProp = RouteProp<RootStackParamList, 'CoinScreen'>;
 
 function CoinScreen() {
     const route = useRoute<CoinScreenRouteProp>();
-    let coin = route.params?.coin as CryptoData;
+    const coin = route.params?.coin as CryptoData;
     
     const { appliedTheme } = useTheme();
+    const [ isSheetOpen, setIsSheetOpen ] = useState(false);
     
     const [category, setCategory] = useState("Info");
 
@@ -92,7 +94,7 @@ function CoinScreen() {
                 }
                 <Divider />
                 <Box className='p-2'> 
-                    <CoinOrderHistory />
+                    <CoinOrderHistory onPress={() => setIsSheetOpen(true)}/>
                 </Box>
             </Box>
         </ScrollView>
@@ -100,7 +102,15 @@ function CoinScreen() {
     );
 
     try {
-        return <CoinContent />;
+        return (
+        <>
+        <BuySellSheet 
+            coinData={coin}
+            isOpen={isSheetOpen} 
+            onClose={() => setIsSheetOpen(false)}/>
+        <CoinContent />
+        </>
+        );
     } catch (error) {
         console.log("Render error:", error);
         return <ErrorContext err="Something went wrong please try again later..." />

@@ -21,7 +21,11 @@ const orderBookData = {
     ],
 };
 
-function CoinOrderHistory() {
+interface CoinOrderHistoryProps {
+    onPress: () => void;
+}
+
+function CoinOrderHistory({ onPress }: CoinOrderHistoryProps) {
     const { appliedTheme } = useTheme();
     const [selectedCategory, setSelectedCategory] = useState("Order Book");
     const categories = ["Order Book", "Trade History"];
@@ -56,10 +60,10 @@ function CoinOrderHistory() {
 
         {/* Buy & Sell Buttons */}
         <Box className="flex-row mt-3 gap-3">
-            <Button className="bg-green-500 px-6 py-3 rounded-full flex-1 h-fit">
+            <Button className="bg-green-500 px-6 py-3 rounded-full flex-1 h-fit" onPress={onPress}>
                 <ButtonText className="text-white font-semibold">Buy</ButtonText>
             </Button>
-            <Button className="bg-red-500 px-6 py-3 rounded-full flex-1 h-fit">
+            <Button className="bg-red-500 px-6 py-3 rounded-full flex-1 h-fit" onPress={onPress}>
                 <ButtonText className="text-white font-semibold">Sell</ButtonText>
             </Button>
         </Box>
