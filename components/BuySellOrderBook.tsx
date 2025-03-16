@@ -57,15 +57,21 @@ const BuySellOrderBook: React.FC = () => {
 
         return updatedOrders
             .sort((a, b) => (type === "bids" ? b.price - a.price : a.price - b.price)) 
-            .slice(0, 10);
+            .slice(0, 6);
     };
 
     return (
-        <Box className="p-4 bg-black rounded-md w-full">
+        <Box className="p-4 bg-gray-700 rounded-md h-[100%] w-full">
             {/* Header */}
-            <Box className="flex-row justify-between pb-2 border-b border-gray-700">
-                <Text className="text-gray-400 text-sm">Price (USDT)</Text>
-                <Text className="text-gray-400 text-sm">Amount (BTC)</Text>
+            <Box className="flex-row justify-between pb-2 gap-4 border-b border-gray-700">
+                <Box>
+                <Text className="text-gray-400 text-sm">Price</Text>
+                <Text className="text-gray-400 text-sm">(USDT)</Text>
+                </Box>
+                <Box>
+                <Text className="text-gray-400 text-sm">Amount</Text>
+                <Text className="text-gray-400 text-sm self-end">(BTC)</Text>
+                </Box>
             </Box>
 
             <ScrollView className="h-48">
@@ -79,9 +85,9 @@ const BuySellOrderBook: React.FC = () => {
 
                 {/* MARKET PRICE - Green Highlight */}
                 {orderBook.bids.length > 0 && orderBook.asks.length > 0 && (
-                    <Box className="flex-row justify-between py-1 border-t border-b border-gray-700">
-                        <Text className="text-green-500 font-bold">{orderBook.bids[0].price.toFixed(2)}</Text>
-                        <Text className="text-green-500 font-bold">≈ {orderBook.bids[0].price.toFixed(2)}</Text>
+                    <Box className="flex-col justify-center items-center py-1 border-t border-b border-gray-700">
+                        <Text className="text-green-500 text-xl font-bold">{orderBook.bids[0].price.toFixed(2)}</Text>
+                        <Text className="text-gray-500 font-medium text-lg">≈ ${orderBook.bids[0].price.toFixed(2)}</Text>
                     </Box>
                 )}
 

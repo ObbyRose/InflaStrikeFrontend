@@ -8,6 +8,7 @@ import CardUpRounded from '@/components/CardUpRounded';
 import { IC_BTCUSDT, IC_Options } from '@/utils/constants/Icons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { formatSymbol } from '@/utils/functions/help';
+import BuySellOrderBook from '@/components/BuySellOrderBook';
 
 interface BuySellSheetProps {
     isOpen: boolean;
@@ -47,15 +48,15 @@ const BuySellSheet = ({ isOpen, onClose, coinData }: BuySellSheetProps) => {
             </Box>
             
 
-            <CardUpRounded className='mt-0 rounded-[40px]' variant='card'>
+            <CardUpRounded className='mt-0 rounded-2xl' variant='card'>
                 
-                <Box className="flex-1 p-1">
+                <Box className="flex-1">
                     {/* Top Section */}
-                    <Box className='flex-row h-1/2'>
-                        <Box className='w-[40%] bg-gray-700'>
-                            
+                    <Box className='flex-row h-3/4'>
+                        <Box className='w-[50%] rounded-l-lg h-full bg-gray-700'>
+                            <BuySellOrderBook />
                         </Box>
-                        <Box className='w-[60%] bg-gray-800'>
+                        <Box className='w-[50%] rounded-r-lg bg-gray-800'>
                         
                         </Box>
                     </Box>
