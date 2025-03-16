@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box } from "../ui/box";
 import { Input, InputField } from "../ui/input";
-import { getIconByString, IC_Eye, IC_EyeOff } from "@/utils/constants/Icons";
+import { getIconByString, IC_Eye, IC_EyeOff, IC_Minus, IC_Plus } from "@/utils/constants/Icons";
 import { KeyboardTypeOptions, Pressable, Animated, TextInput } from "react-native";
 import { Text } from "../ui/text";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
@@ -10,7 +10,7 @@ import { cn } from "../ui/cn";
 interface InputAuthProps {
     icon?: string;
     placeholder?: string;
-    type?: "birthday" | "card date" | "card number" | "pass";
+    type?: "birthday" | "card date" | "card number" | "pass" | "numeric" | "numeric-control";
     value: string;
     onChangeText: (text: string) => void;
     error?: string;
@@ -18,7 +18,10 @@ interface InputAuthProps {
     keyboardType?: KeyboardTypeOptions;
     className?: string;
     classNameInput?: string;
+    classNameInputField?: string;
     isReadOnly?: boolean;
+    onIncrement?: () => void;
+    onDecrement?: () => void;
 }
 
 function InputAuth({
@@ -32,14 +35,18 @@ function InputAuth({
     keyboardType,
     className,
     classNameInput,
-    isReadOnly = false
+    classNameInputField,
+    isReadOnly = false,
+    onIncrement,
+    onDecrement,
 }: InputAuthProps) {
     const [showPass, setShowPass] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const IconComponent = getIconByString(icon || "");
     const { appliedTheme } = useTheme();
     const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
-    
+
+    // Animations
     useEffect(() => {
         Animated.timing(animatedValue, {
             toValue: (isFocused || value.length > 0) ? 1 : 0,
@@ -52,12 +59,10 @@ function InputAuth({
         inputRange: [0, 1],
         outputRange: [20, 6]
     });
-    
     const labelLeft = animatedValue.interpolate({
         inputRange: [0, 1],
         outputRange: [16, 13]
     });
-    
     const labelSize = animatedValue.interpolate({
         inputRange: [0, 1],
         outputRange: [16, 12]
@@ -169,6 +174,14 @@ function InputAuth({
         onChangeText(formatted);
     };
 
+    const handleNumericInput = (text: string) => {
+        const cleaned = text.replace(/[^0-9.]/g, "");
+        const parts = cleaned.split('.');
+        if (parts.length > 2) return;
+        
+        onChangeText(cleaned);
+    };
+
     const getInputHandler = () => {
         switch(type) {
             case "birthday":
@@ -177,6 +190,8 @@ function InputAuth({
                 return handleCardDateInput;
             case "card number":
                 return handleCardNumberInput;
+            case "numeric-control":
+                return handleNumericInput;
             default:
                 return onChangeText;
         }
@@ -197,7 +212,7 @@ function InputAuth({
     
     const getInputKeyboard = () => {
         switch(type) {
-            case "birthday": case "card date": case "card number":
+            case "birthday": case "card date": case "card number": case "numeric-control":
                 return "numeric";
             default:
                 return keyboardType;
@@ -215,6 +230,7 @@ function InputAuth({
                 isReadOnly={isReadOnly}
             >
                 {/* Animated floating label */}
+                { !["numeric-control",'numeric'].includes(type || "none") &&
                 <Animated.View
                 pointerEvents="none"
                     style={{
@@ -234,9 +250,41 @@ function InputAuth({
                         {placeholder}
                     </Animated.Text>
                 </Animated.View>
+                }
                 
+                {["numeric-control",'numeric'].includes(type || "none") ? (
+                    <Box className="flex-1 flex-row items-center justify-between">
+                        {type !== 'numeric' && 
+                        <Pressable 
+                            onPress={onDecrement} 
+                            className="px-3"
+                        >
+                            <IC_Minus className="w-6 h-6"/>
+                        </Pressable>
+                        }
+                        
+                        <InputField
+                            className={`text-center text-lg text-text-${appliedTheme}`}
+                            keyboardType="numeric"
+                            value={value}
+                            onChangeText={getInputHandler()}
+                            onFocus={handleFocus}
+                            onBlur={handleBlur}
+                            placeholder={placeholder}
+                            
+                        />
+                        {type !== 'numeric' && 
+                        <Pressable 
+                            onPress={onIncrement} 
+                            className="px-3"
+                        >
+                            <IC_Plus className="w-6 h-6"/>
+                        </Pressable>
+                        }
+                    </Box>
+                ) : (
                 <InputField
-                    className={`h-full w-full pl-5 pr-12 text-lg text-text-${appliedTheme}`}
+                    className={cn(`h-full w-full pl-5 pr-12 text-lg text-text-${appliedTheme}`, classNameInputField )}
                     keyboardType={getInputKeyboard()}
                     secureTextEntry={type === "pass" && !showPass}
                     value={value}
@@ -248,6 +296,7 @@ function InputAuth({
                         paddingTop: 15,
                     }}
                 />
+                )}
 
                 {type === "pass" ?
                     <Pressable onPress={togglePasswordVisibility} className="absolute right-3">
@@ -257,7 +306,8 @@ function InputAuth({
                         <IC_EyeOff className="w-7 h-7" color={appliedTheme === "dark" ? "white": ""}/>}
                     </Pressable>
                 :
-                <>{IconComponent && <IconComponent className="absolute right-4 w-7 h-7"
+                <>{type !== "numeric-control" && IconComponent && 
+                    <IconComponent className="absolute right-4 w-7 h-7"
                     color={appliedTheme === "dark" ? "white": ""} />}</>
                 }
 

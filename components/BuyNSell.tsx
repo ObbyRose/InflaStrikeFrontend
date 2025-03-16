@@ -24,30 +24,68 @@ import {
 import { ChevronDownIcon } from './ui/icon';
 import { IC_Minus, IC_Plus } from '@/utils/constants/Icons';
 import ButtonsTrain from './ButtonsTrain';
+import InputAuth from './auth/InputAuth';
+import { symbol } from 'd3-shape';
+import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
+import { formatSymbol } from '@/utils/functions/help';
+import { Button, ButtonText } from './ui/button';
 
 interface BuyNSellProps {
-  currentCurrencyValue: string;
-  currentCurrencySymbol: string;
+  coinData: CryptoData;
   onClose: () => void;
 }
 
 export default function BuyNSell({
-  currentCurrencyValue,
-  currentCurrencySymbol,
+  coinData,
   onClose,
 }: BuyNSellProps) {
   const [buyOrSell, setBuyOrSell] = useState('Buy');
-  const [transactionType, setTransactionType] = useState<string>('');
   const [USDTamount, setUSDTamount] = useState<string>('');
-  const numericCurrencyValue = parseFloat(currentCurrencyValue);
+  const numericCurrencyValue = parseFloat(coinData.price || "0");
   const newCurrencyAmount = USDTamount
     ? (parseFloat(USDTamount) / numericCurrencyValue).toFixed(6)
-    : ''; // derived from the USDT amount state
+    : '';
 
   const { appliedTheme } = useTheme();
 
+  const selectOptions = [
+    "Market",
+    "Select transaction type",
+    "Stop Limit",
+    "Stop Market",
+  ]
+  const [selectedType, setSelectedType] = useState(selectOptions[0]);
+
   const userCurrentCurrency = 24; //! need to be fetch from the user
   const userCurrentUSDT = 2000000; //! need to be fetch from the user
+  
+
+  function handleBuying() {
+    if (selectedType === '') {
+      Alert.alert('Please select a transaction type');
+      return;
+    }
+    if (USDTamount === '' || USDTamount === '0') {
+      Alert.alert('Please enter the amount');
+      return;
+    }
+    if (buyOrSell === 'buy') {
+      Alert.alert(
+        `congratulations! You have successfully bought ${newCurrencyAmount} ${coinData.symbol}`
+      );
+    } else {
+      Alert.alert(
+        `congratulations! You have successfully sold ${newCurrencyAmount} ${coinData.symbol}`
+      );
+    }
+    onClose();
+  }
+
+  function handleSetBuyOrSell(value: string) {
+    setSelectedType('');
+    setUSDTamount('');
+    setBuyOrSell(value);
+  }
 
   function handleUSDTamountChange(value: string) {
     const limit =
@@ -83,193 +121,170 @@ export default function BuyNSell({
     }
   }
 
+  function handleUSDTIncrement() {
+    const currentValue = parseFloat(USDTamount) || 0;
+    const newValue = currentValue + 1;
+    handleUSDTamountChange(newValue.toString());
+  }
+
+  // Function for USDT decrement
+  function handleUSDTDecrement() {
+    const currentValue = parseFloat(USDTamount) || 0;
+    const newValue = Math.max(0, currentValue - 1);
+    handleUSDTamountChange(newValue.toString());
+  }
+
+  function handleCurrencyIncrement() {
+    const currentValue = parseFloat(newCurrencyAmount) || 0;
+    const newValue = currentValue + 1;
+    handleCurrentCurrencyAmountChange(newValue.toString());
+  }
+
+  function handleCurrencyDecrement() {
+    const currentValue = parseFloat(newCurrencyAmount) || 0;
+    const newValue = Math.max(0, currentValue - 1);
+    handleCurrentCurrencyAmountChange(newValue.toString());
+  }
+
   function handleCurrentCurrencyAmountChange(value: string) {
     const limit =
       buyOrSell === 'Buy'
-        ? userCurrentUSDT / numericCurrencyValue // Buying: Maximum USDT available
-        : userCurrentCurrency; // Selling: Maximum BTC converted to USDT
-
+        ? userCurrentUSDT / numericCurrencyValue
+        : userCurrentCurrency;
+  
     const alertMessage = `Invalid amount. Please enter a valid amount from 0 to ${limit}`;
-
-    // if trying to go to minus - reset to 0
+  
+    if (value === '') {
+      setUSDTamount(''); // ✅ Allow empty input
+      return;
+    }
+  
+    value = value.replace(/[^\d.]/g, '').replace(/\.(?=.*\.)/g, ''); // Only numbers
+  
     if (value[0] === '-') {
       Alert.alert(alertMessage);
-      setUSDTamount('');
       return;
     }
-    value = value.replace(/[^\d.]/g, '').replace(/\.(?=.*\.)/g, ''); // remove all non numeric characters
-
-    // if empty or 0 - reset to 0
-    if (value === '' || value === '0') {
-      setUSDTamount('');
-      return;
-    }
-
+  
     const numericValue = parseFloat(value);
-
+  
     if (!isNaN(numericValue)) {
-      let calculatedUSDT = '';
       if (numericValue <= limit) {
-        calculatedUSDT = (numericValue * numericCurrencyValue).toFixed(2); // Keeping 2 decimal places
+        setUSDTamount((numericValue * numericCurrencyValue).toFixed(2));
       } else {
-        calculatedUSDT = (limit * numericCurrencyValue).toFixed(2); // Keeping 2 decimal places
+        setUSDTamount((limit * numericCurrencyValue).toFixed(2));
         Alert.alert(alertMessage);
       }
-      //   console.log(`baba is : ${value}`);
-      //   console.log('calculatedUSDT', calculatedUSDT);
-
-      // } numericValue >= 0 && numericValue <= maxCurrencyPossibleForBuying) {
-      // Convert currency back to USDT
-      //   const calculatedUSDT = (numericValue * numericCurrencyValue).toFixed(2); // Keeping 2 decimal places
-
-      setUSDTamount(calculatedUSDT);
-    } else {
-      Alert.alert(alertMessage);
     }
   }
-
-  function handleBuying() {
-    if (transactionType === '') {
-      Alert.alert('Please select a transaction type');
-      return;
-    }
-    if (USDTamount === '' || USDTamount === '0') {
-      Alert.alert('Please enter the amount');
-      return;
-    }
-    if (buyOrSell === 'buy') {
-      Alert.alert(
-        `congratulations! You have successfully bought ${newCurrencyAmount} ${currentCurrencySymbol}`
-      );
-    } else {
-      Alert.alert(
-        `congratulations! You have successfully sold ${newCurrencyAmount} ${currentCurrencySymbol}`
-      );
-    }
-    onClose();
-  }
-
-  function handleSetBuyOrSell(value: string) {
-    setTransactionType('');
-    setUSDTamount('');
-    setBuyOrSell(value);
-  }
-
-  console.log(transactionType);
+  
+  
 
   return (
-    <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <Box className="h-full justify-around gap-4 p-2">
-          {/* Buy and Sell buttons */}
-          <Box className="h-fit w-full flex-row justify-around p-2">
-            <TouchableOpacity
-              className={`${buyOrSell === 'Buy' ? 'bg-green-500' : `bg-card-${appliedTheme}`} w-1/2 items-center rounded-l-xl p-4`}
-              onPress={() => handleSetBuyOrSell('Buy')}>
-              <Text className={buyOrSell === 'Buy' ? 'text-white' : `text-text-${appliedTheme}`}>
-                Buy
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              className={`${buyOrSell === 'Buy' ? `bg-card-${appliedTheme}` : 'bg-red-500'} w-1/2 items-center rounded-r-xl p-4`}
-              onPress={() => handleSetBuyOrSell('Sell')}>
-              <Text className={buyOrSell === 'Buy' ? `text-text-${appliedTheme}` : 'text-white'}>
-                Sell
-              </Text>
-            </TouchableOpacity>
-          </Box>
-
-          {/* transaction type input choosing */}
-          <Select
-            selectedValue={transactionType ? transactionType : ''}
-            onValueChange={(value) => setTransactionType(value)}
-            className={`bg-card-${appliedTheme}`}>
-            <SelectTrigger variant="outline" size="md">
-              <SelectInput
-                placeholder="Select transaction type"
-                className={`text-text-${appliedTheme} `}
-              />
-              <SelectIcon className="mr-3" as={ChevronDownIcon} />
-            </SelectTrigger>
-            <SelectPortal>
-              <SelectBackdrop />
-              <SelectContent>
-                <SelectDragIndicatorWrapper>
-                  <SelectDragIndicator />
-                </SelectDragIndicatorWrapper>
-                <SelectItem label="Select transaction type" value="" isDisabled={true} />
-                <SelectItem label="FOK" value="FOK" />
-              </SelectContent>
-            </SelectPortal>
-          </Select>
-
-          {/* USDT amount input  */}
-          <Box>
-            <Text className={` text-subText-${appliedTheme} mb-2`}>
-              How much USDT you want to {buyOrSell === 'Buy' ? 'sell' : 'buy'}:
-            </Text>
-            <Box className={`flex-row items-center justify-around gap-2 rounded-lg  border`}>
-              <TouchableOpacity
-                onPress={() =>
-                  handleUSDTamountChange((+(USDTamount ? USDTamount : 0) - 1).toString())
-                }>
-                <IC_Minus className="h-4 w-4" color={appliedTheme === 'dark' ? '#ffffff' : ''} />
-              </TouchableOpacity>
-              <TextInput
-                className={`text-text-${appliedTheme} `}
-                value={USDTamount}
-                keyboardType="numeric"
-                placeholder="USDT"
-                onChangeText={handleUSDTamountChange}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  handleUSDTamountChange((+(USDTamount ? USDTamount : 0) + 1).toString())
-                }>
-                <IC_Plus className="h-4 w-4" color={appliedTheme === 'dark' ? '#ffffff' : ''} />
-              </TouchableOpacity>
+        <Box className="h-full justify-between p-2" >
+          <Box className='gap-4'>
+            {/* Buy and Sell buttons */}
+            <Box className="h-[50px] w-full flex-row justify-around p-2">
+              {['Buy', 'Sell'].map((type, index) => (
+                <TouchableOpacity
+                  key={type}
+                  className={`${buyOrSell === type 
+                    ? type === 'Buy' ? 'bg-green-500' : 'bg-red-500' 
+                    : `bg-background-${appliedTheme}`} 
+                    w-1/2 items-center justify-center ${index === 0 ? 'rounded-l-md' : 'rounded-r-md'}`}
+                  onPress={() => handleSetBuyOrSell(type)}
+                >
+                  <Text className={buyOrSell === type ? 'text-white' : `text-text-${appliedTheme}`}>
+                    {type}
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </Box>
+
+
+            {/* transaction type input choosing */}
+            <Select
+              selectedValue={selectedType ? selectedType : ''}
+              
+              onValueChange={(value) => setSelectedType(value)}
+              className={`bg-background-${appliedTheme}`}>
+              <SelectTrigger variant="underlined" size="md" className='w-full justify-between px-2 h-fit'>
+                <SelectInput
+                  placeholder="Select transaction type"
+                  className={`text-text-${appliedTheme}`}
+                />
+                <SelectIcon className="" as={ChevronDownIcon} />
+              </SelectTrigger>
+              <SelectPortal>
+                <SelectBackdrop />
+                <SelectContent className={`max-h-[400px] bg-card-${appliedTheme}`}>
+                  <SelectDragIndicatorWrapper>
+                    <SelectDragIndicator />
+                  </SelectDragIndicatorWrapper>
+                  { selectOptions.map((option,idx) =>
+                  <SelectItem
+                    key={option}
+                    label={option}
+                    value={option}
+                    isDisabled={idx === 0}
+                    textStyle={{ className: `text-subTextGray-${appliedTheme}` }}
+                    style= { { backgroundColor: "transparent"} }
+                    />
+                  )}
+                </SelectContent>
+              </SelectPortal>
+            </Select>
+
+            {/* Price Input  */}
+            <InputAuth
+              classNameInput={`bg-background-${appliedTheme} mb-0 h-[50px] rounded-md`}
+              type="numeric-control"
+              placeholder={formatSymbol(coinData.symbol).split("/")[1]}
+              value={USDTamount}
+              onChangeText={handleUSDTamountChange}
+              onIncrement={handleUSDTIncrement}
+              onDecrement={handleUSDTDecrement}
+            />
+            {/* Amount Input */}
+            <InputAuth
+              classNameInput={`bg-background-${appliedTheme} mb-0 h-[50px] rounded-md`}
+              type="numeric-control"
+              placeholder={formatSymbol(coinData.symbol)}
+              value={newCurrencyAmount}
+              onChangeText={() => {}}
+              onIncrement={handleCurrencyIncrement}
+              onDecrement={handleCurrencyDecrement}
+              isReadOnly={true}
+            />
+
+            <InputAuth
+              classNameInput={`bg-background-${appliedTheme} mb-0 h-[50px] rounded-md`}
+              classNameInputField='text-center'
+              type='numeric'
+              placeholder={`Total (${formatSymbol(coinData.symbol).split("/")[1]})`}
+              value={newCurrencyAmount ? (parseFloat(newCurrencyAmount) * numericCurrencyValue).toFixed(2) : ''}
+              onChangeText={() => {}}
+              isReadOnly={true}
+            />
           </Box>
 
-          {/* current currency amount input  */}
-          <Box className="">
-            <Text className={` text-subText-${appliedTheme} mb-2`}>
-              How much {currentCurrencySymbol} you want to {buyOrSell === 'Buy' ? 'buy' : 'sell'}:
-            </Text>
-            <Box className={`flex-row items-center justify-around gap-2  rounded-lg border`}>
-              <TouchableOpacity
-                onPress={() =>
-                  handleCurrentCurrencyAmountChange(
-                    (+(newCurrencyAmount ? newCurrencyAmount : 0) - 1).toString()
-                  )
-                }>
-                <IC_Minus className="h-4 w-4" color={appliedTheme === 'dark' ? '#ffffff' : ''} />
-              </TouchableOpacity>
-              <TextInput
-                className={`text-text-${appliedTheme} `}
-                value={newCurrencyAmount}
-                keyboardType="numeric"
-                placeholder={currentCurrencySymbol}
-                onChangeText={handleCurrentCurrencyAmountChange}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  handleCurrentCurrencyAmountChange(
-                    (+(newCurrencyAmount ? newCurrencyAmount : 0) + 1).toString()
-                  )
-                }>
-                <IC_Plus className="h-4 w-4" color={appliedTheme === 'dark' ? '#ffffff' : ''} />
-              </TouchableOpacity>
+          <Box className='gap-2'>
+            <Box className='flex-row justify-between'>
+              <Text className={`text-inputPlaceholderText-${appliedTheme}`}>Avbl</Text>
+              <Box className='flex-row gap-2 items-center'>
+                <Text className={`text-inputPlaceholderText-${appliedTheme}`}>{formatSymbol(coinData.symbol).split("/")[1]}</Text>
+                <IC_Plus className='h-4 w-4' color='yellow'/>
+              </Box>
             </Box>
+            <Button
+            className={`items-center rounded-lg p-4 h-fit ${buyOrSell === 'Buy' ? 'bg-green-500':'bg-red-500'}`}
+            onPress={handleBuying}
+            >
+              <ButtonText className="text-white">{buyOrSell}</ButtonText>
+            </Button>
           </Box>
-
-          <TouchableOpacity
-            className="items-center rounded-lg bg-green-500 p-2"
-            onPress={handleBuying}>
-            <Text className="text-white">{buyOrSell}</Text>
-          </TouchableOpacity>
         </Box>
       </TouchableWithoutFeedback>
-    </>
   );
 }
