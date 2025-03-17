@@ -14,10 +14,10 @@ export interface CryptoData {
 }
 
 export type tickerData = {
-  symbol: string,
-  percentage: string,
-  price: string,
-}
+  symbol: string;
+  percentage: string;
+  price: string;
+};
 
 export interface LineData {
   time: string;
@@ -36,51 +36,44 @@ let db: Awaited<ReturnType<typeof SQLite.openDatabaseAsync>> | null = null;
 
 async function getDatabase() {
   if (!db) {
-    db = await SQLite.openDatabaseAsync('cryptoData');
+    db = await SQLite.openDatabaseAsync('cryptoData.db');
   }
   return db;
 }
 
 const popularCurrencies = [
-  'BTCUSDT', // Bitcoin  
-  'ETHUSDT', // Ethereum  
-  'XRPUSDT', // XRP  
-  'BNBUSDT', // Binance Coin  
-  'ADAUSDT', // Cardano  
-  'DOGEUSDT', // Dogecoin  
-  'SOLUSDT', // Solana  
-  'TONUSDT', // Toncoin  
-  'DOTUSDT', // Polkadot  
-  'MATICUSDT' // Polygon  
+  'BTCUSDT', // Bitcoin
+  'ETHUSDT', // Ethereum
+  'XRPUSDT', // XRP
+  'BNBUSDT', // Binance Coin
+  'ADAUSDT', // Cardano
+  'DOGEUSDT', // Dogecoin
+  'SOLUSDT', // Solana
+  'TONUSDT', // Toncoin
+  'DOTUSDT', // Polkadot
+  'MATICUSDT', // Polygon
 ];
-
 
 export async function handleSQLiteIInsert() {
   // Fetching all the data
-  const historyArr = await Promise.all(
-    popularCurrencies.map((curr) => fetchCandlestickData(curr))
-    );
+  const historyArr = await Promise.all(popularCurrencies.map((curr) => fetchCandlestickData(curr)));
 
-  const lineDataArr = await Promise.all(
-    popularCurrencies.map((curr) => fetchLineData(curr))
-  );
-  
+  const lineDataArr = await Promise.all(popularCurrencies.map((curr) => fetchLineData(curr)));
+
   const tickerData = await fetchAllCoinsTicker();
 
   // Saving all thw data
   const newData: CryptoData[] = [];
 
-  for(let i=0; i< historyArr.length; i++) {
+  for (let i = 0; i < historyArr.length; i++) {
     newData.push({
       symbol: tickerData[i].symbol,
       price: tickerData[i].price,
       change: tickerData[i].percentage,
       lineData: lineDataArr[i],
       historyData: historyArr[i],
-    })
+    });
   }
-
-  
 
   // Creating/Opening the SQLite db server
   const db = await getDatabase();

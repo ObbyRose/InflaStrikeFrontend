@@ -61,7 +61,7 @@ const BuySellOrderBook: React.FC = () => {
     };
 
     return (
-        <Box className="p-4 bg-gray-700 rounded-md h-[100%] w-full">
+        <Box className="px-4 h-full">
             {/* Header */}
             <Box className="flex-row justify-between pb-2 gap-4 border-b border-gray-700">
                 <Box>
@@ -74,31 +74,40 @@ const BuySellOrderBook: React.FC = () => {
                 </Box>
             </Box>
 
-            <ScrollView className="h-48">
-                {/* SELL ORDERS - Red (Top) */}
-                {orderBook.asks.map((ask, index) => (
-                    <Box key={`ask-${index}`} className="flex-row justify-between py-1">
-                        <Text className="text-red-500">{ask.price.toFixed(2)}</Text>
-                        <Text className="text-gray-400">{ask.amount.toFixed(5)}</Text>
+            {/* <ScrollView className="bg-black"> */}
+                <Box className="flex-1 justify-between">
+                    {/* SELL ORDERS - Red (Top) */}
+                    <Box className="gap-1">
+                    {orderBook.asks.map((ask, index) => (
+                        <Box key={`ask-${index}`} className="flex-row justify-between">
+                            <Text className="text-red-500">{ask.price.toFixed(2)}</Text>
+                            <Text className="text-gray-400">{ask.amount.toFixed(5)}</Text>
+                        </Box>
+                    ))}
                     </Box>
-                ))}
 
-                {/* MARKET PRICE - Green Highlight */}
-                {orderBook.bids.length > 0 && orderBook.asks.length > 0 && (
-                    <Box className="flex-col justify-center items-center py-1 border-t border-b border-gray-700">
-                        <Text className="text-green-500 text-xl font-bold">{orderBook.bids[0].price.toFixed(2)}</Text>
-                        <Text className="text-gray-500 font-medium text-lg">≈ ${orderBook.bids[0].price.toFixed(2)}</Text>
+                    <Box className="gap-[1px]">
+                    {/* MARKET PRICE - Green Highlight */}
+                    {orderBook.bids.length > 0 && orderBook.asks.length > 0 && (
+                        <Box className="flex-col justify-center items-center py-1 border-t border-b border-gray-700">
+                            <Text className="text-green-500 text-xl font-bold">{orderBook.bids[0].price.toFixed(2)}</Text>
+                            <Text className="text-gray-500 font-medium text-lg">≈ ${orderBook.bids[0].price.toFixed(2)}</Text>
+                        </Box>
+                    )}
                     </Box>
-                )}
 
-                {/* BUY ORDERS - Green (Bottom) */}
-                {orderBook.bids.map((bid, index) => (
-                    <Box key={`bid-${index}`} className="flex-row justify-between py-1">
-                        <Text className="text-green-500">{bid.price.toFixed(2)}</Text>
-                        <Text className="text-gray-400">{bid.amount.toFixed(5)}</Text>
+                    <Box className="gap-1">
+                    {/* BUY ORDERS - Green (Bottom) */}
+                    {orderBook.bids.map((bid, index) => (
+                        <Box key={`bid-${index}`} className="flex-row justify-between">
+                            <Text className="text-green-500">{bid.price.toFixed(2)}</Text>
+                            <Text className="text-gray-400">{bid.amount.toFixed(5)}</Text>
+                        </Box>
+                    ))}
                     </Box>
-                ))}
-            </ScrollView>
+                </Box>
+            {/* </ScrollView> */}
+            {/* </Box> */}
         </Box>
     );
 };
