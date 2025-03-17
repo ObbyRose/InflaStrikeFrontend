@@ -16,7 +16,6 @@ import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
 import BuySellSheet from './BuySellSheet';
 
-
 type RootStackParamList = {
     CoinScreen: { coin: any };
 };
