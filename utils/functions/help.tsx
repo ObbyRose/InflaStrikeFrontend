@@ -31,7 +31,7 @@ export const formatSymbol = (symbol: string) => {
     for (let quote of quoteCurrencies) {
         if (symbol.endsWith(quote)) {
             const base = symbol.slice(0, -quote.length);
-            return `${base}/${quote}`;
+            return `${base}-${quote}`;
         }
     }
     return symbol;

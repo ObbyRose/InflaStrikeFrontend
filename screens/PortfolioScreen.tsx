@@ -6,13 +6,14 @@ import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import CryptoMarketCard from '@/components/CryptoMarketCard';
-import { IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
+import { getIconByString, IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
 import { formatNumber } from '@/utils/functions/help';
 import { PieChart } from 'react-native-gifted-charts';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import CardUpRounded from '@/components/CardUpRounded';
+import { dummyTrades } from '@/utils/constants/data';
 
 interface PortfolioData {
   value: number;
@@ -97,27 +98,6 @@ const dummyQuickBuy = [
 const PortfolioScreen = ({navigation}: Props) => {
   const { appliedTheme } = useTheme();
   const [selectedSlice, setSelectedSlice] = useState(pieData[0].symbol);
-  const [historyData, setHistoryData] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [selectedMonth, setSelectedMonth] = useState(months[0]);
-  
-  useEffect(() => {
-      async function fetchData() {
-          try {
-              setLoading(true);
-
-              const data = await handleSQLiteSelect(['BTCUSDT', 'ETHUSDT', 'XRPUSDT']);
-              setHistoryData(data);
-          } catch (error) {
-              console.error("Error fetching market data:", error);
-          } finally {
-              setLoading(false);
-          }
-      }
-
-      fetchData();
-  }, []);
-
 
   const renderLegendComponent = () => {
     return (
@@ -142,41 +122,16 @@ const PortfolioScreen = ({navigation}: Props) => {
       />
     );
   };
-  
 
   return (
     <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
-      <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[18%] p-4'>
+      <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[120px] p-4'>
         <BackHeader title='Portfolio' colorScheme='alwaysWhite'/>
-        <Box className='mt-2'>
-          <FlatList
-          data={months}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item}
-          contentContainerStyle={{ paddingHorizontal: 20 }}
-          renderItem={({ item }) => {
-            const isSelected = item === selectedMonth;
-            return (
-              <Pressable onPress={() => setSelectedMonth(item)} style={{ marginHorizontal: 10 }}>
-                <Text 
-                style={{
-                  fontSize: isSelected ? 22 : 17,
-                  fontWeight: isSelected ? 'bold' : 'normal',
-                  color: isSelected ? 'white' : '#a9afc2',
-                }}>
-                  {item}
-                </Text>
-              </Pressable>
-            );
-          }}
-          />
-      </Box>
       </MyLinearGradient>
 
       <CardUpRounded className={`flex flex-1 px-4 py-6`}>
         <Box className='gap-1 mt-2'>
-          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Expenses Details</Text>
+          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Values</Text>
           <Text className={`text-subText-${appliedTheme}`}>You've spent $289.23 more than last month</Text>
         </Box>
 
@@ -217,8 +172,8 @@ const PortfolioScreen = ({navigation}: Props) => {
         {/* Portfolio Value */}
         <Box className='gap-3 my-3'>
           <Box className='flex-row justify-between'>
-            <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Portfolio Value</Text>
-            <Text className={`text-subTextGray-${appliedTheme}`} onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
+            <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Market</Text>
+            <Text className={`text-[#0A6CFF]`} onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
                 See All
             </Text>
           </Box>
@@ -237,24 +192,45 @@ const PortfolioScreen = ({navigation}: Props) => {
 
         {/* Transactions History */}
         <Box>
-            <Box className="flex-row items-center justify-between mt-4">
+            <Box className="flex-row items-center justify-between my-4">
                 <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Transactions History</Text>
-                <Text className="text-[#0A6CFF]" onPress={() => {}}>
+                <Text className="text-[#0A6CFF]" onPress={() => {  navigation.navigate("MainApp", { screen: 'TradingHistory'})}}>
                     See All
                 </Text>
             </Box>
 
             {/* Transactions History */}
-            {loading ? (
-                  <Text>Loading...</Text>
-              ) : (
-                  historyData.map((crypto:CryptoData, index) => (
-                      <React.Fragment key={crypto.symbol}>
-                          <CryptoMarketCard {...crypto} />
-                          {index < historyData.length - 1 && <Divider className={`bg-divider-${appliedTheme}`} />}
-                      </React.Fragment>
-                  ))
+            <Box className="p-y-4 flex-1 rounded-lg bg-gray-900">
+              <Box className="flex-row p-2">
+                <Text className="w-8 text-center text-white"> </Text>
+                <Text className="flex-1 self-center text-center text-white">Price</Text>
+                <Box className="items-between flex-1">
+                  <Text className="text-center text-white">Amount</Text>
+                </Box>
+                <Text className="flex-1 self-center text-center text-white">time</Text>
+              </Box>
+      
+              {dummyTrades.slice(0, 3).map((item) => (
+                <Box
+                  key={item.id.toString()}
+                  className={`flex-row items-center border-b p-3 
+                    ${item.type === 'Buy' ? 'bg-green-900' : 'bg-red-900'}`}
+                >
+                  <Box className="h-8 w-8">
+                    {React.createElement(getIconByString(`IC_${item.symbol.toUpperCase()}`) || IC_BTCUSDT)}
+                  </Box>
+                  <Text className="flex-1 text-center text-white">${item.price.toFixed(2)}</Text>
+                  <Text className="flex-1 text-center text-white">{item.quantity}</Text>
+                  <Text className="flex-1 text-center text-white">{item.time}</Text>
+                </Box>
+              ))}
+
+              {dummyTrades.length === 0 && (
+                <Box className="py-10">
+                  <Text className="text-center text-gray-400">No trades found</Text>
+                </Box>
               )}
+            </Box>
         </Box>
 
       </CardUpRounded>
@@ -263,3 +239,31 @@ const PortfolioScreen = ({navigation}: Props) => {
 };
 
 export default PortfolioScreen;
+
+
+/* Months
+<Box className='mt-2'>
+  <FlatList
+  data={months}
+  horizontal
+  showsHorizontalScrollIndicator={false}
+  keyExtractor={(item) => item}
+  contentContainerStyle={{ paddingHorizontal: 20 }}
+  renderItem={({ item }) => {
+    const isSelected = item === selectedMonth;
+    return (
+      <Pressable onPress={() => setSelectedMonth(item)} style={{ marginHorizontal: 10 }}>
+        <Text 
+        style={{
+          fontSize: isSelected ? 22 : 17,
+          fontWeight: isSelected ? 'bold' : 'normal',
+          color: isSelected ? 'white' : '#a9afc2',
+        }}>
+          {item}
+        </Text>
+      </Pressable>
+    );
+  }}
+  />
+</Box> 
+*/

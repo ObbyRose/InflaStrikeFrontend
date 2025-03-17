@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import InvestmentsScreen from './InvestmentsScreen';
@@ -112,7 +112,11 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="test" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Simulator" 
+                screenOptions={{ 
+                  headerShown: false,
+                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+                }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Simulator" component={SimulatorScreen} />
                 <Stack.Screen name="Investment" component={InvestmentsScreen} />
@@ -126,7 +130,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />
                 <Stack.Screen name="Portfolio" component={PortfolioScreen} />
-                <Stack.Screen name="Exchanges" component={ExchangeScreen} />
+                <Stack.Screen name="TradingHistory" component={ExchangeScreen} />
               </Stack.Navigator>
             </Layout>
           )}
