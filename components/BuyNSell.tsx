@@ -49,8 +49,9 @@ export default function BuyNSell({
   const { appliedTheme } = useTheme();
 
   const selectOptions = [
-    "Market",
     "Select transaction type",
+    "Market",
+    "Limit",
     "Stop Limit",
     "Stop Market",
   ]
@@ -209,12 +210,12 @@ export default function BuyNSell({
               
               onValueChange={(value) => setSelectedType(value)}
               className={`bg-background-${appliedTheme}`}>
-              <SelectTrigger variant="underlined" size="md" className='w-full justify-between px-2 h-fit'>
+              <SelectTrigger variant="underlined" size="md" className='w-full justify-center px-2 h-fit'>
                 <SelectInput
                   placeholder="Select transaction type"
                   className={`text-text-${appliedTheme}`}
                 />
-                <SelectIcon className="" as={ChevronDownIcon} />
+                <SelectIcon className="items-end" as={ChevronDownIcon} />
               </SelectTrigger>
               <SelectPortal>
                 <SelectBackdrop />
@@ -274,7 +275,9 @@ export default function BuyNSell({
               <Text className={`text-inputPlaceholderText-${appliedTheme}`}>Avbl</Text>
               <Box className='flex-row gap-2 items-center'>
                 <Text className={`text-inputPlaceholderText-${appliedTheme}`}>{formatSymbol(coinData.symbol).split("/")[1]}</Text>
-                <IC_Plus className='h-4 w-4' color='yellow'/>
+                <Box className='bg-yellow-500 rounded-full p-1'>
+                  <IC_Plus className='h-4 w-4' color='black'/>
+                </Box>
               </Box>
             </Box>
             <Button
