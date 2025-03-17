@@ -33,7 +33,7 @@ const NotificationsScreen = () => {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <Box className={`bg-background-${appliedTheme} h-full p-4 gap-2 space-y-4`}>
-        <BackHeader title="Notifications" />
+        <BackHeader title="Notifications" colorScheme="themeBased" />
         {notifications.map((notification, index) => (
           <NotificationCard
             key={index}

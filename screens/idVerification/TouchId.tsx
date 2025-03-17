@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, Platform, Alert } from 'react-native';
+import { TouchableOpacity, Platform, Alert, Touchable } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { useNavigation } from '@react-navigation/native';
 import usePinStore from '../../context/pinStore';
@@ -71,11 +71,11 @@ const TouchId: React.FC<Props> = ({ navigation }) => {
                         Enable Touch ID to let you login & proceed your transactions faster.
                     </Text>
 
-                    <Box className="mt-10 gap-6">
+                    <Box className="mt-10 gap-6 px-6">
                         <MyLinearGradient type='button' color='purple'>
-                        <Button onPress={handleSetupTouchID} className="w-64 h-14 rounded-full">
-                            <ButtonText className="text-lg">Enable Touch ID</ButtonText>
-                        </Button>
+                            <Button onPress={handleSetupTouchID}>
+                                <ButtonText className='w-full flex text-center text-lg items-center justify-center'>Enable Touch ID</ButtonText>
+                            </Button>
                         </MyLinearGradient>
                         <TouchableOpacity onPress={() => {
                             if (Platform.OS === 'ios') {

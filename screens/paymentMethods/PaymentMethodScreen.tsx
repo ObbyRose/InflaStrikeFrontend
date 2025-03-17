@@ -17,14 +17,14 @@ const PaymentMethodScreen: React.FC<Props> = ({ navigation }) => {
             <BackHeader title='Payment Methods' />
                 {/* Credit / Debit Card */}
                 <TouchableOpacity onPress={() => navigation.navigate("LinkYourCard")} activeOpacity={0.7}>
-                    <Box className="p-4 bg-[#F2F2F7] rounded-2xl mb-4">
+                    <Box className={`p-4 bg-card-${appliedTheme} rounded-2xl mb-4`}>
                         <Box className="flex gap-2 mt-4 mb-4 flex-row items-center">
                             <Icon as={IC_AddCard} className="w-6 h-6" />
                             <Box className="flex-1 flex-col">
-                                <Text className="font-extrabold text-black text-[14px]">
+                                <Text className={`font-extrabold text-text-${appliedTheme} text-[14px]`}>
                                     Credit / Debit Card
                                 </Text>
-                                <Text className="text-[#828A99] text-[12px]">
+                                <Text className={`text-subText-${appliedTheme} text-[12px]`}>
                                     Use any Visa or Mastercard to make small investments
                                 </Text>
                             </Box>
@@ -34,14 +34,14 @@ const PaymentMethodScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Wire Transfer / SEPA */}
                 <TouchableOpacity onPress={() => navigation.navigate("WireTransfer")} activeOpacity={0.7}>
-                    <Box className="p-4 bg-[#F2F2F7] rounded-2xl">
+                    <Box className={`p-4 bg-card-${appliedTheme} rounded-2xl mb-4`}>
                         <Box className="flex gap-2 mt-4 mb-4 flex-row items-center">
                             <Icon as={IC_AddCard} className="w-6 h-6" />
                             <Box className="flex-1 flex-col">
-                                <Text className="font-extrabold text-black text-[14px]">
+                                <Text className={`font-extrabold text-text-${appliedTheme} text-[14px]`}>
                                     Wire Transfer / SEPA
                                 </Text>
-                                <Text className="text-[#828A99] text-[12px]">
+                                <Text className={`text-subText-${appliedTheme} text-[12px]`}>
                                     Send funds via bank wire transfer or SEPA transactions.
                                 </Text>
                             </Box>
