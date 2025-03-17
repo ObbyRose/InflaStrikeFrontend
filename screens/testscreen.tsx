@@ -16,6 +16,19 @@ interface Trade {
     timestamp: number;
 }
 
+
+function getDateRange(date: string | Date) {
+    const start = new Date(date); // e.g., '2023-03-01'
+    start.setHours(0, 0, 0, 0); // Set to midnight UTC
+    const startOfDay = start.getTime(); // Start of the date (timestamp)
+
+    const end = new Date(start); // Start with the same date
+    end.setHours(23, 59, 59, 999); // Set to the last moment of the day
+    const endOfDay = end.getTime(); // End of the date (timestamp)
+
+    return { startOfDay, endOfDay };
+}
+
 const ExchangeScreen = () => {
     const { appliedTheme } = useTheme();
     const [trades, setTrades] = useState<Trade[]>([]);
@@ -23,7 +36,6 @@ const ExchangeScreen = () => {
     const [sortField, setSortField] = useState<"time" | "price" | "quantity">("time");
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
     const [streaming, setStreaming] = useState<boolean>(true);
-    const [filterDate, setFilterDate] = useState<number | null>(null);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedSymbol, setSelectedSymbol] = useState<string>("btcusdt");
@@ -72,7 +84,6 @@ const ExchangeScreen = () => {
             console.log("WebSocket connection closed");
         };
     };
-
     // Start or stop streaming based on the button
     const toggleStreaming = () => {
         if (streaming) {
@@ -90,34 +101,11 @@ const ExchangeScreen = () => {
         setStreaming(!streaming);
     };
 
-    // Generate mock historical data for a specific date
-    const generateMockHistoricalData = (date: Date) => {
-        const mockTrades: Trade[] = [];
-        const baseTimestamp = new Date(date).setHours(9, 0, 0, 0); // Start at 9 AM on selected date
-        
-        // Generate 50 random trades for the selected date
-        for (let i = 0; i < 50; i++) {
-            const tradeTime = baseTimestamp + (i * 60000); // Add minutes
-            mockTrades.push({
-                id: `mock_${i}_${date.toISOString()}_${Math.random()}`,
-                symbol: "BTCUSDT",
-                price: 30000 + Math.random() * 5000,
-                quantity: Math.random() * 2,
-                time: new Date(tradeTime).toLocaleTimeString(),
-                type: Math.random() > 0.5 ? "Buy" : "Sell",
-                timestamp: tradeTime,
-            });
-        }
-        
-        return mockTrades;
-    };
-    
     // Handle Date Picker change
-    const handleDateChange = (event: any, selectedDate: Date | undefined) => {
+    const handleDateChange = (e: any, selectedDate: Date | undefined) => {
         setShowDatePicker(false);
         if (selectedDate) {
             setSelectedDate(selectedDate);
-            setFilterDate(selectedDate.getTime());
             
             // Check if selected date is today
             const today = new Date();
@@ -132,47 +120,144 @@ const ExchangeScreen = () => {
                     startStreaming();
                 }
             } else {
-                // For other dates, generate mock historical data
+                // For other days fetch old data
                 // Stop any current streaming
                 if (wsRef.current) {
                     wsRef.current.close();
                     wsRef.current = null;
                 }
                 setStreaming(false);
-                
-                // Generate and load mock data
-                const mockData = generateMockHistoricalData(selectedDate);
-                setTrades(mockData);
+
+                console.log("selectedDate", selectedDate);
+
+                fetchTradesForDate("BTCUSDT", selectedDate);
             }
         }
     };
 
-    // Handle Date Picker toggle
-    const showDatePickerModal = () => setShowDatePicker(true);
-
-    // Filter trades based on the selected date and type
-    const filteredTrades = trades.filter((trade) => {
-        let dateMatches = true;
-
-        // If a specific date is selected, check if the trade's timestamp matches the selected date
-        if (selectedDate) {
-            const tradeDate = new Date(trade.timestamp);
-            dateMatches = tradeDate.toDateString() === selectedDate.toDateString();
+    const fetchTradesForDate = async (symbol: string, date: string | Date) => {
+        try {
+            const { startOfDay, endOfDay } = getDateRange(date);
+            
+            console.log(`Fetching trades for ${symbol} from ${new Date(startOfDay).toISOString()} to ${new Date(endOfDay).toISOString()}`);
+            
+            let allTrades: any[] = [];
+            let hasMoreTrades = true;
+            let fromId: number | null = null;
+            
+            // First request without fromId
+            let url = `https://api.binance.com/api/v3/aggTrades?symbol=${symbol.toUpperCase()}&startTime=${startOfDay}&endTime=${endOfDay}&limit=1000`;
+            
+            console.log("Initial URL:", url);
+            
+            // Fetch the first batch
+            const initialResponse = await fetch(url);
+            
+            // Check if the response is OK
+            if (!initialResponse.ok) {
+                const errorText = await initialResponse.text();
+                console.error("API Error:", initialResponse.status, errorText);
+                throw new Error(`API Error: ${errorText}`);
+            }
+            
+            const initialTrades = await initialResponse.json();
+            console.log(`Received ${initialTrades.length} trades in first batch`);
+            
+            // If API returns an error object
+            if (initialTrades.code && initialTrades.msg) {
+                console.error("API Error:", initialTrades.msg);
+                throw new Error(`API Error: ${initialTrades.msg}`);
+            }
+            
+            if (initialTrades.length === 0) {
+                console.log("No trades found for this date");
+                setTrades([]); // Set empty array if no trades
+                return;
+            }
+            
+            allTrades = [...initialTrades];
+            
+            // Only continue if we got a full batch (indicating there might be more)
+            if (initialTrades.length === 1000) {
+                // Get the last trade ID for pagination
+                fromId = initialTrades[initialTrades.length - 1].a + 1;
+                
+                // Loop until we've fetched all trades
+                while (hasMoreTrades && allTrades.length < 5000) { // Add an upper limit for safety
+                    url = `https://api.binance.com/api/v3/aggTrades?symbol=${symbol.toUpperCase()}&startTime=${startOfDay}&endTime=${endOfDay}&limit=1000&fromId=${fromId}`;
+                    
+                    console.log("Pagination URL:", url);
+                    
+                    const response = await fetch(url);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error("API Error during pagination:", response.status, errorText);
+                        break;
+                    }
+                    
+                    const trades = await response.json();
+                    
+                    if (trades.code && trades.msg) {
+                        console.error("API Error during pagination:", trades.msg);
+                        break;
+                    }
+                    
+                    console.log(`Received ${trades.length} more trades`);
+                    
+                    if (trades.length === 0) {
+                        hasMoreTrades = false;
+                    } else {
+                        allTrades = [...allTrades, ...trades];
+                        fromId = trades[trades.length - 1].a + 1;
+                        
+                        if (trades.length < 1000) {
+                            hasMoreTrades = false;
+                        }
+                    }
+                    
+                    // Add a small delay to avoid rate limiting
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+            }
+            
+            console.log(`Total trades fetched: ${allTrades.length}`);
+            
+            // Sort the trades based on quantity
+            allTrades.sort((a, b) => parseFloat(b.q) - parseFloat(a.q));
+            
+            // Take the top trades
+            const topTrades = allTrades.slice(0, 1000);
+            
+            let counter = 0;
+            
+            // Map trades to our format
+            const newTrades = topTrades.map((data) => {
+                counter++;
+                return {
+                    id: `historical_${data.a}_${counter}`,
+                    symbol: symbol.toUpperCase(),
+                    price: parseFloat(data.p),
+                    quantity: parseFloat(data.q),
+                    time: new Date(data.T).toLocaleTimeString(),
+                    type: data.m ? "Sell" : "Buy",
+                    timestamp: data.T,
+                } as Trade;
+            });
+            
+            console.log(`Prepared ${newTrades.length} trades for display`);
+            
+            // Update state with new trades
+            setTrades(newTrades);
+            
+        } catch (error) {
+            console.error("Error fetching trades:", error);
+            // Show a fallback if the API fails - use mock data instead
+            console.log("Using mock data instead");
         }
+    };
 
-        return (filterType === "All" || trade.type === filterType) && dateMatches;
-    });
-
-    // Sort trades based on selected field
-    const sortedTrades = [...filteredTrades].sort((a, b) => {
-        if (sortField === "time") {
-            return sortDirection === "asc" ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
-        }
-        return sortDirection === "asc"
-            ? (a as any)[sortField] - (b as any)[sortField]
-            : (b as any)[sortField] - (a as any)[sortField];
-    });
-
+    // Starts listening
     useEffect(() => {
         if (streaming) {
             startStreaming();
@@ -186,6 +271,21 @@ const ExchangeScreen = () => {
         };
     }, [selectedSymbol]);
 
+    // Filter trades based on the selected date and type
+    const filteredTrades = trades.filter(trade => 
+        filterType === "All" || trade.type === filterType
+    );
+
+    // Sort trades based on selected field
+    const sortedTrades = [...filteredTrades].sort((a, b) => {
+        if (sortField === "time") {
+            return sortDirection === "asc" ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
+        }
+        return sortDirection === "asc"
+            ? (a as any)[sortField] - (b as any)[sortField]
+            : (b as any)[sortField] - (a as any)[sortField];
+    });
+
     return (
         <View className="flex-1 p-4 bg-gray-900">
             <Text className="text-lg font-bold text-white text-center mb-4">Live Trading Blotter</Text>
@@ -194,7 +294,7 @@ const ExchangeScreen = () => {
             <View className="mb-2">
                 <TouchableOpacity
                     className="px-3 py-1 rounded bg-blue-500"
-                    onPress={showDatePickerModal}
+                    onPress={() => setShowDatePicker(true)}
                 >
                     <Text className="text-white">Select Date {selectedDate ? `(${selectedDate.toLocaleDateString()})` : ''}</Text>
                 </TouchableOpacity>
@@ -260,8 +360,8 @@ const ExchangeScreen = () => {
                 renderItem={({ item }) => (
                     <View className={`flex-row p-3 border-b border-gray-700 ${item.type === "Buy" ? "bg-green-900" : "bg-red-900"}`}>
                         <Text className="flex-1 text-white text-center">{item.symbol}</Text>
-                        <Text className="flex-1 text-white text-center">{item.price.toFixed(2)}</Text>
-                        <Text className="flex-1 text-white text-center">{item.quantity.toFixed(4)}</Text>
+                        <Text className="flex-1 text-white text-center">{Number(item.price).toFixed(2)}</Text>
+                        <Text className="flex-1 text-white text-center">{Number(item.quantity).toFixed(4)}</Text>
                         <Text className="flex-1 text-white text-center">{item.time}</Text>
                         <Text className={`flex-1 text-center font-bold ${item.type === "Buy" ? "text-green-400" : "text-red-400"}`}>
                             {item.type}
