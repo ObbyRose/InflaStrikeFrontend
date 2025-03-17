@@ -38,6 +38,7 @@ import { handleSQLiteIInsert } from '@/utils/api/internal/sql/handleSQLite';
 import OverlayLoading from '@/components/OverlayLoading';
 import { useDataStore } from '@/context/dataStore';
 import SimulatorScreen from './SimulatorScreen';
+import ExchangeScreen from './ExchangeScreen';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator();
@@ -77,7 +78,7 @@ const StackNavigator = () => {
         setDataLoaded(true); // ✅ Mark data as loaded
         setLoading(false); // ✅ Hide loading overlay
       } catch (error) {
-        console.error("Error fetching market data:", error);
+        console.error('Error fetching market data:', error);
       }
     }
     fetchData();
@@ -87,7 +88,7 @@ const StackNavigator = () => {
           const newData = await handleSQLiteIInsert();
           setData(newData);
         } catch (error) {
-          console.error("Error fetching market data:", error);
+          console.error('Error fetching market data:', error);
         }
       }
       updateData();
@@ -125,6 +126,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />
                 <Stack.Screen name="Portfolio" component={PortfolioScreen} />
+                <Stack.Screen name="Exchanges" component={ExchangeScreen} />
               </Stack.Navigator>
             </Layout>
           )}
