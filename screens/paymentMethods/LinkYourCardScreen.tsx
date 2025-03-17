@@ -7,6 +7,7 @@ import InputAuth from '@/components/auth/InputAuth'
 import { Button } from '@/components/ui/button'
 import { Props } from '@/types/NavigationTypes'
 import BackHeader from '@/components/BackHeader'
+import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 
 const LinkYourCardScreen:React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -85,7 +86,7 @@ if (!formattedDate) {
         <Box className={`bg-background-${appliedTheme} h-full flex-1`}>
             <Box className="p-4 flex-1">
                 <BackHeader title='Add Credit / Debit Card' />
-                <Text className="text-black text-[24px] font-extrabold mb-2">Link your card</Text>
+                <Text className={`text-text-${appliedTheme} text-[24px] font-extrabold mb-2`}>Link your card</Text>
                 <Text className="text-[#828A99] text-[16px]">By adding a new card, you agree to the</Text>
                 <Text className="text-[#6666FF] text-[16px] underline mb-4">credit/debit card terms.</Text>
 
@@ -106,11 +107,11 @@ if (!formattedDate) {
                 <InputAuth placeholder="Postal Code" value={postalCode} error={errors.postalCode} maxLength={10} onChangeText={(val) => handleInputChange("postalCode", val)} />
             </Box>
 
-            <Box className="absolute bottom-4 left-4 right-4">
-                <Button onPress={handleSubmitAddCard} className={`bg-button-${appliedTheme} rounded-full h-[4rem]`}>
+            <MyLinearGradient type='button' color='purple' className='w-[90%] self-center mb-4'>
+                <Button onPress={handleSubmitAddCard}>
                     <Text className="text-white text-[16px] font-extrabold">{isLoading ? "Processing..." : "Add Card"}</Text>
                 </Button>
-            </Box>
+            </MyLinearGradient>
         </Box>
     );
 }
