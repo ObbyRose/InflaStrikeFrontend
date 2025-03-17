@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box } from '@/components/ui/box';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import BackHeader from '@/components/BackHeader';
@@ -18,14 +18,16 @@ import {
 } from '@/components/ui/select';
 import { getIconByString, IC_BTCUSDT } from '@/utils/constants/Icons';
 import { ChevronDownIcon } from '@/components/ui/icon';
+import { TouchableOpacity } from 'react-native';
 
 interface Trade {
-  id: number;
+  id: string;
   symbol: string;
   price: number;
   quantity: number;
   time: string;
-  type: 'Buy' | 'Sell';
+  type: "Buy" | "Sell";
+  timestamp: number;
 }
 
 const ExchangeScreen = () => {
@@ -33,35 +35,113 @@ const ExchangeScreen = () => {
 
   const [trades, setTrades] = useState<Trade[]>([]);
   const [currentCoin, setCurrentCoin] = useState<string>('btcusdt');
-
-  const Icon = getIconByString(`IC_${currentCoin.toUpperCase()}`) || IC_BTCUSDT;
+  const [filterType, setFilterType] = useState<"All" | "Buy" | "Sell">("All");
+  const [sortField, setSortField] = useState<"time" | "price" | "quantity">("time");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [streaming, setStreaming] = useState<boolean>(true);
+  const [filterDate, setFilterDate] = useState<number | null>(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const getCurrentIcon = (symbol: string) => {
     return React.createElement(getIconByString(`IC_${symbol.toUpperCase()}`) || IC_BTCUSDT);
   };
 
-  useEffect(() => {
-    let ws = new WebSocket(`wss://stream.binance.com:9443/ws/${currentCoin}@trade`);
-
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-
-      const newTrade: Trade = {
-        id: data.t,
-        symbol: data.s,
-        price: parseFloat(data.p),
-        quantity: parseFloat(data.q),
-        time: new Date(data.T).toLocaleTimeString(),
-        type: data.m ? 'Sell' : 'Buy',
+  const wsRef = useRef<WebSocket | null>(null);
+  
+  const startStreaming = () => {
+      // Close any existing connection first
+      if (wsRef.current && (wsRef.current.readyState === WebSocket.OPEN || wsRef.current.readyState === WebSocket.CONNECTING)) {
+          wsRef.current.close();
+      }
+      
+      // Create new WebSocket
+      wsRef.current = new WebSocket(`wss://stream.binance.com:9443/ws/${currentCoin.toLowerCase()}@trade`);
+      
+      // Counter for unique IDs within this session
+      let counter = 0;
+      
+      wsRef.current.onopen = () => {
+          console.log("WebSocket connection opened");
       };
+      
+      wsRef.current.onmessage = (event) => {
+          counter++;
+          const data = JSON.parse(event.data);
+          const newTrade: Trade = {
+              // Create truly unique ID
+              id: `${data.t}_${Date.now()}_${Math.random().toString(36).substring(2, 9)}_${counter}`,
+              symbol: data.s,
+              price: parseFloat(data.p),
+              quantity: parseFloat(data.q),
+              time: new Date(data.T).toLocaleTimeString(),
+              type: data.m ? "Sell" : "Buy",
+              timestamp: data.T,
+          };
 
-      setTrades((prevTrades) => [newTrade, ...prevTrades.slice(0, 9)]); // Keep latest 10 trades
-    };
+          setTrades((prevTrades) => [newTrade, ...prevTrades]);
+      };
+      
+      wsRef.current.onerror = (error: any) => {
+          console.error("WebSocket error:", error);
+      };
+      
+      wsRef.current.onclose = () => {
+          console.log("WebSocket connection closed");
+      };
+  };
 
-    return () => {
-      ws.close();
-    };
-  }, [currentCoin]); // Re-run effect when `currentCoin` changes
+  // Start or stop streaming based on the button
+  const toggleStreaming = () => {
+    if (streaming) {
+        // If currently streaming, stop it
+        if (wsRef.current) {
+            wsRef.current.close();
+            wsRef.current = null;
+            console.log("Streaming stopped");
+        }
+    } else {
+        // If not streaming, start it
+        startStreaming();
+        console.log("Streaming started");
+    }
+    setStreaming(!streaming);
+  };
+
+  const filteredTrades = trades.filter((trade) => {
+        let dateMatches = true;
+
+        // If a specific date is selected, check if the trade's timestamp matches the selected date
+        if (selectedDate) {
+            const tradeDate = new Date(trade.timestamp);
+            dateMatches = tradeDate.toDateString() === selectedDate.toDateString();
+        }
+
+        return (filterType === "All" || trade.type === filterType) && dateMatches;
+    });
+
+    // Sort trades based on selected field
+    const sortedTrades = [...filteredTrades].sort((a, b) => {
+        if (sortField === "time") {
+            return sortDirection === "asc" ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
+        }
+        return sortDirection === "asc"
+            ? (a as any)[sortField] - (b as any)[sortField]
+            : (b as any)[sortField] - (a as any)[sortField];
+    });
+
+    useEffect(() => {
+        if (streaming) {
+            startStreaming();
+        }
+    
+        return () => {
+            if (wsRef.current) {
+                wsRef.current.close();
+                wsRef.current = null;
+            }
+        };
+    }, [currentCoin]);
 
   return (
     <Box className="h-full bg-white p-4">
@@ -93,22 +173,66 @@ const ExchangeScreen = () => {
           </SelectPortal>
         </Select>
       </Box>
+
+      {/* FILTER BUTTONS */}
+      <Box className="flex-row justify-center space-x-2 mb-2">
+          {["All", "Buy", "Sell"].map((type) => (
+              <TouchableOpacity
+                  key={type}
+                  className={`px-3 py-1 rounded ${filterType === type ? "bg-blue-500" : "bg-gray-700"}`}
+                  onPress={() => setFilterType(type as "All" | "Buy" | "Sell")}
+              >
+                  <Text className="text-white">{type}</Text>
+              </TouchableOpacity>
+          ))}
+      </Box>
+
+      {/* SORTING BUTTONS */}
+      <Box className="flex-row justify-center space-x-2 mb-4">
+          {["time", "price", "quantity"].map((field) => (
+              <TouchableOpacity
+                  key={field}
+                  className={`px-3 py-1 rounded ${sortField === field ? "bg-green-500" : "bg-gray-700"}`}
+                  onPress={() => {
+                      setSortField(field as "time" | "price" | "quantity");
+                      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+                  }}
+              >
+                  <Text className="text-white">{field.toUpperCase()}</Text>
+              </TouchableOpacity>
+          ))}
+      </Box>
+
+      {/* Toggle WebSocket Streaming */}
+      <TouchableOpacity
+          className={`px-3 py-1 rounded ${streaming ? "bg-red-500" : "bg-green-500"} mb-4`}
+          onPress={toggleStreaming}
+          disabled={selectedDate && selectedDate.toDateString() !== new Date().toDateString() || false}
+      >
+          <Text className="text-white">{streaming ? "Pause Streaming" : "Resume Streaming"}</Text>
+      </TouchableOpacity>
+
+      {/* Status and count indicator */}
+      <Box className="mb-4 flex-row justify-between">
+          <Text className="">Status: {streaming ? "Live" : "Paused"}</Text>
+          <Text className="">Trades: {sortedTrades.length}</Text>
+      </Box>
+
+      {/* Table */}
       <Box className="p-y-4 flex-1 rounded-lg bg-gray-900">
-        {/* <Text className="mb-4 text-center text-lg font-bold text-white">
-          Live Trading Blotter for {trades[0].symbol}
-        </Text> */}
         <Box className="flex-row p-2">
           <Text className="w-8 text-center text-white"> </Text>
           <Text className="flex-1 self-center text-center text-white">Price {`(in $)`}</Text>
           <Box className="items-between flex-1">
             <Text className="text-center text-white">Amount</Text>
-            {/* <Text className="text-center text-white">{`(in ${trades[0].symbol})`}</Text> */}
           </Box>
 
           <Text className="flex-1 self-center text-center text-white">time</Text>
         </Box>
+
+
         <FlatList
-          data={trades}
+          data={sortedTrades}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Box
@@ -120,6 +244,11 @@ const ExchangeScreen = () => {
               </Text>
               <Text className="flex-1 text-center text-white">{item.time}</Text>
             </Box>
+          )}
+          ListEmptyComponent={() => (
+              <Box className="py-10">
+                  <Text className="text-gray-400 text-center">No trades found</Text>
+              </Box>
           )}
         />
       </Box>
