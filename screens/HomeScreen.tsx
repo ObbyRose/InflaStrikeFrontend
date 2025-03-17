@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, TouchableOpacity } from "react-native";
 import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "@/components/ui/divider";
 import { useUserStore } from "@/context/userStore"; // Import the Zustand store
-import { IC_BTCUSDT, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge } from "@/utils/constants/Icons";
+import { IC_BTCUSDT, IC_Bell_White, IC_Info, IC_Top_Up, IC_Transaction, IC_History, IC_Tothor, IC_Tothor_Logo_Only, IC_Tothor_Logo_Only_Bold, IC_Gold, IC_Doge, IC_PieGraph } from "@/utils/constants/Icons";
 import { Props } from "@/types/NavigationTypes";
 import MyLinearGradient from "@/components/gradient/MyLinearGradient";
 import OptionCard from "@/components/OptionCard";
@@ -20,7 +20,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 <Box className="h-[40%] p-4 gap-4">
                     <Box className="flex flex-row items-center justify-between">
                         <IC_Tothor className="w-40 h-16" />
-                        <IC_Bell_White className="w-7 h-7" />
+                        <Box className="flex-row gap-4">
+                            <TouchableOpacity onPress={() => navigation.navigate('Portfolio')}>
+                                <IC_PieGraph color="#ffff" className="w-7 h-7" />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+                                <IC_Bell_White className="w-7 h-7" />
+                            </TouchableOpacity>
+                        </Box>
                     </Box>
                     <Box className="flex flex-col gap-4 p-4">
                         <Text className="text-white font-medium text-[17px]">Safe-to-spend</Text>

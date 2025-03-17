@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationProp, ParamListBase, useNavigationState } from '@react-navigation/native';
 import { useState } from 'react';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import { IC_Home, IC_Invest, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
+import { IC_Home, IC_Invest, IC_Market, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -44,10 +44,10 @@ const Layout = ({ children, navigation }: LayoutProps) => {
                                 <Text className={`text-sm ${currentScreen === 'Home' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Home</Text>
                             </Box>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigateToScreen('Portfolio')}>
+                        <TouchableOpacity onPress={() => navigateToScreen('Markets')}>
                             <Box className='flex-col items-center text-center'>
-                                <IC_Portfolio className='w-7 h-7 mb-1' color={currentScreen === 'Portfolio' ? `#4A3EF6` : '#B0B9C1'} />
-                                <Text className={`text-sm ${currentScreen === 'Portfolio' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Portfolio</Text>
+                                <IC_Market className='w-7 h-7 mb-1' color={currentScreen === 'Markets' ? `#4A3EF6` : '#B0B9C1'} />
+                                <Text className={`text-sm ${currentScreen === 'Markets' ? 'text-[#1761C5]' : 'text-[#5C616F]'}`}>Markets</Text>
                             </Box>
                         </TouchableOpacity>
                     </Box>

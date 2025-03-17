@@ -220,17 +220,17 @@ export const IC_ETHUSDT = ({ className }: IconsProps) => {
   );
 };
 
-export const IC_PieGraph = ({ className }: IconsProps) => {
+export const IC_PieGraph = ({ className, color = "#969AA0" }: IconsProps) => {
   return (
     <Box className={cn(className)}>
-      <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill="none">
+      <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill={color}>
         <Path
           d="M16 11.499c1.105 0 2.022.906 1.779 1.983a8.999 8.999 0 01-17.606-.227A9 9 0 017.016 2.72C8.094 2.477 9 3.394 9 4.5v2a5 5 0 005 5h2z"
-          fill="#969AA0"
+          fill={color}
         />
         <Path
           d="M12 3.033c0-1.952 1.64-3.596 3.444-2.85a9.001 9.001 0 014.87 4.872c.748 1.803-.896 3.444-2.848 3.444H16.5a4.5 4.5 0 01-4.5-4.5v-.966z"
-          fill="#969AA0"
+          fill={color}
         />
       </Svg>
     </Box>
@@ -944,19 +944,45 @@ export const IC_CardAdded = ({ className }: IconsProps) => {
 export const IC_Market = ({ className, color = '#ffffff' }: IconsProps) => {
   return (
     <Box className={cn(className)}>
-      <Svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={21}
-        height={26}
-        viewBox="0 0 21 26"
-        fill="none">
-        <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M0 13.828s2.67-2.952 5.29-4.186 6.316-1.013 6.316-1.013v2.433l6.605-4.717a1 1 0 000-1.628L11.606 0v2.766s-4.93 0-8.114 2.765C.306 8.297 0 13.828 0 13.828zM21 12.168s-2.67 2.953-5.29 4.187c-2.62 1.234-6.316 1.013-6.316 1.013v-2.434l-6.605 4.717a1 1 0 000 1.628l6.605 4.717v-2.765s4.93 0 8.114-2.766C20.694 17.7 21 12.17 21 12.17z"
-          fill={color}
-        />
-      </Svg>
+    <Svg
+      width={28}
+      height={28}
+      viewBox="0 0 28 28"
+      fill={color}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Circle
+        cx={9.99977}
+        cy={18}
+        r={9}
+        transform="rotate(-16 10 18)"
+        fill={color}
+        fillOpacity={0.56}
+        stroke={color}
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M9.494 14.424l-.254-.887-.961.275.256.894c-1.274.532-1.957 1.568-1.654 2.622.284.991 1.064 1.384 2.48 1.302l.294-.018.538 1.878c-.572.051-.997-.132-1.248-.495l-1.38.395c.415 1.035 1.508 1.466 2.94 1.188l.254.886.962-.276-.256-.89c1.37-.555 2.134-1.63 1.81-2.757-.28-.98-1.06-1.345-2.473-1.258l-.48.03-.515-1.798c.544-.047.952.133 1.163.488l1.323-.38c-.423-1.019-1.455-1.448-2.799-1.2zM8.85 15.8c-.48.262-.743.662-.628 1.063.101.351.444.51 1.078.505l-.45-1.569zm1.828 2.748l.48 1.67c.578-.281.885-.719.762-1.15-.113-.394-.509-.558-1.242-.52z"
+        fill="#fff"
+      />
+      <Path
+        d="M18.507 14.84a7 7 0 10-5.383-5.52"
+        stroke={color}
+        strokeWidth={1.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21.14 5.433l.198-.69-.747-.215-.2.695c-1.059-.173-1.936.229-2.171 1.048-.221.771.131 1.352 1.098 1.881l.202.11-.418 1.46c-.4-.202-.604-.498-.62-.841l-1.074-.308c-.152.854.391 1.588 1.45 1.996l-.197.688.748.215.199-.693c1.131.2 2.078-.195 2.33-1.072.218-.762-.145-1.324-1.113-1.85l-.329-.177.401-1.398c.378.193.573.48.566.8l1.03.296c.14-.847-.363-1.555-1.352-1.945zm-.993.642c-.425-.025-.762.13-.852.443-.078.273.083.519.502.777l.35-1.22zm.074 2.566l-.373 1.3c.498.052.881-.11.977-.445.088-.307-.105-.578-.604-.855z"
+        fill="#fff"
+      />
+    </Svg>
     </Box>
   );
 };
