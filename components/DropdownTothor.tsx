@@ -24,8 +24,8 @@ interface DropdownTothorProps {
 }
 
 export default function DropdownTothor({ isOpen, setIsOpen }: DropdownTothorProps) {
-  const { appliedTheme } = useTheme();
-  //   let appliedTheme = 'light';
+  // const { appliedTheme } = useTheme();
+  let appliedTheme = 'light';
   const [exitTimeMonths, setExitTimeMonths] = useState(0);
   const [value, setValue] = useState(0);
 
@@ -105,11 +105,8 @@ export default function DropdownTothor({ isOpen, setIsOpen }: DropdownTothorProp
                 <SliderFilledTrack />
               </SliderTrack>
               <SliderThumb shape="circle">
-                <Box
-                  className={`absolute bottom-[100%] mb-1 h-fit w-fit border border-${appliedTheme === 'dark' ? 'white' : 'dark'} p-2`}>
-                  <Text className={`h-fit w-full text-center text-sm font-semibold ${textColor}`}>
-                    {value}
-                  </Text>
+                <Box className={`relative bottom-10 h-10 w-40 justify-center `}>
+                  <Text className={`${textColor} w-full text-start`}>{value}</Text>
                 </Box>
               </SliderThumb>
             </Slider>
