@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
 import { ScrollView } from "react-native-gesture-handler";
+import { formatNumber } from "@/utils/functions/help";
 
 interface Order {
     price: number;
@@ -70,8 +71,8 @@ const OrderBook: React.FC = () => {
                     orderBook.bids.map((bid, index) => (
                         <Box key={`bid-${index}`} className="flex-row justify-between py-1 items-center">
                             <Text className="text-gray-500">{orderBook.asks[index]?.amount?.toFixed(5) || "-"}</Text>
-                            <Text className="text-red-500">{orderBook.asks[index]?.price?.toFixed(2) || "-"}</Text>
-                            <Text className="text-green-500">{bid.price.toFixed(2)}</Text>
+                            <Text className="text-red-500">{formatNumber(Number(orderBook.asks[index]?.price?.toFixed(2))) || "-"}</Text>
+                            <Text className="text-green-500">{formatNumber(Number(bid.price.toFixed(2)))}</Text>
                             <Text className="text-gray-500">{bid.amount.toFixed(5)}</Text>
                         </Box>
                     ))

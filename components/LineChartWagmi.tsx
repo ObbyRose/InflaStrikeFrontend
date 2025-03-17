@@ -3,6 +3,7 @@ import { LineChart } from 'react-native-wagmi-charts';
 import { Box } from './ui/box';
 import { LayoutChangeEvent } from 'react-native';
 import { cn } from './ui/cn';
+import { useTheme } from '@/utils/Themes/ThemeProvider';
 
 const dummyData = [
     { timestamp: 1, value: 10 },
@@ -27,7 +28,7 @@ const LineChartWagmi = ({className, color, lineData=dummyData, tooltip=true}: Li
     // Set up state to track the container's dimensions
     const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
     const [cursorY, setCursorY] = useState(0);
-    
+    const { appliedTheme } = useTheme();
     // Reference to measure the container
     const measureContainer = (e: LayoutChangeEvent) => {
         const { width, height } = e.nativeEvent.layout;
@@ -52,11 +53,11 @@ const LineChartWagmi = ({className, color, lineData=dummyData, tooltip=true}: Li
                             <LineChart.Gradient />
                         </LineChart.Path>
                         <LineChart.CursorCrosshair 
-                        color="black"
+                        color={appliedTheme === 'light' ? 'black' : 'white' }
                         >
                             {tooltip && (
                             <LineChart.Tooltip
-                                textStyle={{ color: 'black' }}
+                                textStyle={{ color: appliedTheme === 'light' ? 'black' : 'white' }}
                                 style={{
                                     padding: 0,
                                     backgroundColor: 'transparent',

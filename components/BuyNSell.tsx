@@ -51,9 +51,7 @@ export default function BuyNSell({
   const selectOptions = [
     "Select transaction type",
     "Market",
-    "Limit",
-    "Stop Limit",
-    "Stop Market",
+    "FOK",
   ]
   const [selectedType, setSelectedType] = useState(selectOptions[0]);
 
@@ -183,7 +181,7 @@ export default function BuyNSell({
 
   return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <Box className="h-full justify-between p-2" >
+        <Box className="h-full p-2" >
           <Box className='gap-4'>
             {/* Buy and Sell buttons */}
             <Box className="h-[50px] w-full flex-row justify-around p-2">
@@ -258,19 +256,9 @@ export default function BuyNSell({
               onDecrement={handleCurrencyDecrement}
               isReadOnly={true}
             />
-
-            <InputAuth
-              classNameInput={`bg-background-${appliedTheme} mb-0 h-[50px] rounded-md`}
-              classNameInputField='text-center'
-              type='numeric'
-              placeholder={`Total (${formatSymbol(coinData.symbol).split("/")[1]})`}
-              value={newCurrencyAmount ? (parseFloat(newCurrencyAmount) * numericCurrencyValue).toFixed(2) : ''}
-              onChangeText={() => {}}
-              isReadOnly={true}
-            />
           </Box>
 
-          <Box className='gap-2'>
+          <Box className='gap-2 mt-4'>
             <Box className='flex-row justify-between'>
               <Text className={`text-inputPlaceholderText-${appliedTheme}`}>Avbl</Text>
               <Box className='flex-row gap-2 items-center'>

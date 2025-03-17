@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
 import { ScrollView } from "react-native-gesture-handler";
+import { formatNumber } from "@/utils/functions/help";
 
 interface Order {
     price: number;
@@ -80,7 +81,7 @@ const BuySellOrderBook: React.FC = () => {
                     <Box className="gap-1">
                     {orderBook.asks.map((ask, index) => (
                         <Box key={`ask-${index}`} className="flex-row justify-between">
-                            <Text className="text-red-500">{ask.price.toFixed(2)}</Text>
+                            <Text className="text-red-500">{formatNumber(Number(ask.price.toFixed(2)))}</Text>
                             <Text className="text-gray-400">{ask.amount.toFixed(5)}</Text>
                         </Box>
                     ))}
@@ -90,7 +91,7 @@ const BuySellOrderBook: React.FC = () => {
                     {/* MARKET PRICE - Green Highlight */}
                     {orderBook.bids.length > 0 && orderBook.asks.length > 0 && (
                         <Box className="flex-col justify-center items-center py-1 border-t border-b border-gray-700">
-                            <Text className="text-green-500 text-xl font-bold">{orderBook.bids[0].price.toFixed(2)}</Text>
+                            <Text className="text-green-500 text-xl font-bold">{(orderBook.bids[0].price.toFixed(2))}</Text>
                             <Text className="text-gray-500 font-medium text-lg">≈ ${orderBook.bids[0].price.toFixed(2)}</Text>
                         </Box>
                     )}
@@ -100,7 +101,7 @@ const BuySellOrderBook: React.FC = () => {
                     {/* BUY ORDERS - Green (Bottom) */}
                     {orderBook.bids.map((bid, index) => (
                         <Box key={`bid-${index}`} className="flex-row justify-between">
-                            <Text className="text-green-500">{bid.price.toFixed(2)}</Text>
+                            <Text className="text-green-500">{formatNumber(Number(bid.price.toFixed(2)))}</Text>
                             <Text className="text-gray-400">{bid.amount.toFixed(5)}</Text>
                         </Box>
                     ))}

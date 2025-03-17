@@ -4,13 +4,15 @@ import { Box } from "@/components/ui/box";
 import LineChartWagmi from "./LineChartWagmi";
 import { CryptoData } from "@/utils/api/internal/sql/handleSQLite";
 import { getIconByString, IC_BTCUSDT } from "@/utils/constants/Icons";
-import { formatNumber } from "@/utils/functions/help";
+import { formatNumber, formatSymbol } from "@/utils/functions/help";
+import { useTheme } from "@/utils/Themes/ThemeProvider";
 
 interface CryptoMarketCardProps extends CryptoData {
     onPress?: () => any;
 }
 
 const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ symbol, price, change, lineData, onPress }) => {
+    const { appliedTheme } = useTheme();
     const dateString = (new Date()).toISOString().split("T")[0];
     const data = lineData.map(({ price, time }) => {
         const timestamp = new Date(`${dateString}T${time}Z`).getTime();
@@ -26,7 +28,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ symbol, price, chan
                     {Icon && <Icon className="w-8 h-8" />}
                 </Box>
                 <Box className="flex flex-col justify-center z-10">
-                    <Text className="text-[16px] font-bold">{symbol}</Text>
+                    <Text className={`text-text-${appliedTheme} text-[16px] font-bold`}>{formatSymbol(symbol)}</Text>
                     <Text className="text-[13px] text-[#969AA0]">
                         {change !== null ? `${Number(change) > 0 ? '+' : ''}${Number(change).toFixed(2)}%` : "Loading..."}
                     </Text>
@@ -38,7 +40,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ symbol, price, chan
                     />
                 </Box>
                 <Box className="flex flex-col justify-center items-end">
-                    <Text className="text-[16px] font-semibold">
+                    <Text className={`text-text-${appliedTheme} text-[16px] font-semibold`}>
                         {price !== null ? `${formatNumber(Number(price))}` : ""}
                     </Text>
                     <Text className="text-[#969AA0]">{symbol}</Text>
