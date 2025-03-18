@@ -6,7 +6,14 @@ import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { Props } from '@/types/NavigationTypes';
 import CryptoMarketCard from '@/components/CryptoMarketCard';
-import { getIconByString, IC_BTCUSDT, IC_Doge, IC_ETHUSDT, IC_Tothor_Logo_Only, IC_XRPUSDT } from '@/utils/constants/Icons';
+import {
+  getIconByString,
+  IC_BTCUSDT,
+  IC_DOGEUSDT,
+  IC_ETHUSDT,
+  IC_Tothor_Logo_Only,
+  IC_XRPUSDT,
+} from '@/utils/constants/Icons';
 import { Divider } from '@/components/ui/divider';
 import { CryptoData, handleSQLiteSelect } from '@/utils/api/internal/sql/handleSQLite';
 import { formatNumber } from '@/utils/functions/help';
@@ -19,8 +26,8 @@ interface PortfolioData {
   value: number;
   color: string;
   gradientCenterColor: string;
-  symbol: string,
-  amount: number,
+  symbol: string;
+  amount: number;
   focused?: boolean;
 }
 
@@ -57,8 +64,18 @@ const pieData: PortfolioData[] = [
 ];
 
 const months = [
-  'January', 'February', 'March', 'April', 'May', 'June', 'July',
-  'August', 'September', 'October', 'November', 'December'
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 function getAppropriateColor(currencyName: string) {
   const topCryptocurrencies = [
@@ -87,15 +104,9 @@ function getAppropriateColor(currencyName: string) {
   const currency = topCryptocurrencies.find((crypto) => crypto.name === currencyName);
   return currency ? currency.color : 'grey';
 }
-const dummyQuickBuy = [
-  IC_BTCUSDT,
-  IC_ETHUSDT,
-  IC_XRPUSDT,
-  IC_Doge,
-  IC_Tothor_Logo_Only,
-]
+const dummyQuickBuy = [IC_BTCUSDT, IC_ETHUSDT, IC_XRPUSDT, IC_DOGEUSDT, IC_Tothor_Logo_Only];
 
-const PortfolioScreen = ({navigation}: Props) => {
+const PortfolioScreen = ({ navigation }: Props) => {
   const { appliedTheme } = useTheme();
   const [selectedSlice, setSelectedSlice] = useState(pieData[0].symbol);
 
@@ -108,15 +119,16 @@ const PortfolioScreen = ({navigation}: Props) => {
         keyExtractor={(item, idx) => item.color + idx}
         contentContainerStyle={{ paddingHorizontal: 10 }}
         renderItem={({ item }) => (
-          <Pressable 
-            className="flex-row items-center mr-5"
-            onPress={() => setSelectedSlice(item.symbol)}
-          >
+          <Pressable
+            className="mr-5 flex-row items-center"
+            onPress={() => setSelectedSlice(item.symbol)}>
             <Box
-              className="h-2.5 w-2.5 rounded-full mr-2.5"
+              className="mr-2.5 h-2.5 w-2.5 rounded-full"
               style={{ backgroundColor: item.color }}
             />
-            <Text className={`text-text-${appliedTheme}`}>{item.symbol}: {item.value}%</Text>
+            <Text className={`text-text-${appliedTheme}`}>
+              {item.symbol}: {item.value}%
+            </Text>
           </Pressable>
         )}
       />
@@ -125,66 +137,77 @@ const PortfolioScreen = ({navigation}: Props) => {
 
   return (
     <ScrollView className={`flex-1 bg-background-${appliedTheme}`}>
-      <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-[120px] p-4'>
-        <BackHeader title='Portfolio' colorScheme='alwaysWhite'/>
+      <MyLinearGradient
+        type="background"
+        color={appliedTheme === 'dark' ? 'blue' : 'purple'}
+        className="h-[120px] p-4">
+        <BackHeader title="Portfolio" colorScheme="alwaysWhite" />
       </MyLinearGradient>
 
       <CardUpRounded className={`flex flex-1 px-4 py-6`}>
-        <Box className='gap-1 mt-2'>
+        <Box className="mt-2 gap-1">
           <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Values</Text>
-          <Text className={`text-subText-${appliedTheme}`}>You've spent $289.23 more than last month</Text>
+          <Text className={`text-subText-${appliedTheme}`}>
+            You've spent $289.23 more than last month
+          </Text>
         </Box>
 
         {/* Chart Container */}
-        <Box className="flex-row justify-center m-3">
+        <Box className="m-3 flex-row justify-center">
           <PieChart
-              data={pieData}
-              donut
-              // showTooltip
-              // showText
-              showValuesAsLabels
-              textSize={20}
-              showGradient
-              sectionAutoFocus
-              focusOnPress
-              focusedPieIndex={pieData.findIndex((item) => item.symbol === selectedSlice)}
-              radius={120}
-              innerRadius={80}
-              innerCircleColor={appliedTheme==="dark" ? '#161C2C' : '#FFFFFF'}
-              extraRadius={9}
-              centerLabelComponent={(idx: number) => {
-                return (
-                <Box className='justify-center items-center'>
-                    <Text className={`font-bold text-2xl text-text-${appliedTheme}`}>{pieData[idx].symbol}</Text>
-                    <Text className={`font-bold text-2xl text-subText-${appliedTheme}`}>{formatNumber(pieData[idx].amount)}</Text>
-                    <Text className={`font-semibold text-subTextGray-${appliedTheme} text-2xl`}>{pieData[idx].value + "%"}</Text>
+            data={pieData}
+            donut
+            // showTooltip
+            // showText
+            showValuesAsLabels
+            textSize={20}
+            showGradient
+            sectionAutoFocus
+            focusOnPress
+            focusedPieIndex={pieData.findIndex((item) => item.symbol === selectedSlice)}
+            radius={120}
+            innerRadius={80}
+            innerCircleColor={appliedTheme === 'dark' ? '#161C2C' : '#FFFFFF'}
+            extraRadius={9}
+            centerLabelComponent={(idx: number) => {
+              return (
+                <Box className="items-center justify-center">
+                  <Text className={`text-2xl font-bold text-text-${appliedTheme}`}>
+                    {pieData[idx].symbol}
+                  </Text>
+                  <Text className={`text-2xl font-bold text-subText-${appliedTheme}`}>
+                    {formatNumber(pieData[idx].amount)}
+                  </Text>
+                  <Text className={`font-semibold text-subTextGray-${appliedTheme} text-2xl`}>
+                    {pieData[idx].value + '%'}
+                  </Text>
                 </Box>
-                );
+              );
             }}
-            />
+          />
         </Box>
 
         {/* Chart Details */}
-        <Box className='my-2'>
-          {renderLegendComponent()}
-        </Box>
+        <Box className="my-2">{renderLegendComponent()}</Box>
 
         {/* Portfolio Value */}
-        <Box className='gap-3 my-3'>
-          <Box className='flex-row justify-between'>
+        <Box className="my-3 gap-3">
+          <Box className="flex-row justify-between">
             <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Market</Text>
-            <Text className={`text-[#0A6CFF]`} onPress={() => navigation.navigate("MainApp", { screen: "Markets" })}>
-                See All
+            <Text
+              className={`text-[#0A6CFF]`}
+              onPress={() => navigation.navigate('MainApp', { screen: 'Markets' })}>
+              See All
             </Text>
           </Box>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
             data={dummyQuickBuy}
-            keyExtractor={(item,idx) => String(idx)}
+            keyExtractor={(item, idx) => String(idx)}
             renderItem={({ item: Icon }) => (
-              <Pressable className="flex-grow-0 items-center p-4 mx-3 bg-gray-200 rounded-2xl">
-                <Icon className='w-12 h-12'/>
+              <Pressable className="mx-3 flex-grow-0 items-center rounded-2xl bg-gray-200 p-4">
+                <Icon className="h-12 w-12" />
               </Pressable>
             )}
           />
@@ -192,54 +215,59 @@ const PortfolioScreen = ({navigation}: Props) => {
 
         {/* Transactions History */}
         <Box>
-            <Box className="flex-row items-center justify-between my-4">
-                <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Transactions History</Text>
-                <Text className="text-[#0A6CFF]" onPress={() => {  navigation.navigate("MainApp", { screen: 'TradingHistory'})}}>
-                    See All
-                </Text>
-            </Box>
+          <Box className="my-4 flex-row items-center justify-between">
+            <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>
+              Transactions History
+            </Text>
+            <Text
+              className="text-[#0A6CFF]"
+              onPress={() => {
+                navigation.navigate('MainApp', { screen: 'TradingHistory' });
+              }}>
+              See All
+            </Text>
+          </Box>
 
-            {/* Transactions History */}
-            <Box className="p-y-4 flex-1 rounded-lg bg-gray-900">
-              <Box className="flex-row p-2">
-                <Text className="w-8 text-center text-white"> </Text>
-                <Text className="flex-1 self-center text-center text-white">Price</Text>
-                <Box className="items-between flex-1">
-                  <Text className="text-center text-white">Amount</Text>
-                </Box>
-                <Text className="flex-1 self-center text-center text-white">time</Text>
+          {/* Transactions History */}
+          <Box className="p-y-4 flex-1 rounded-lg bg-gray-900">
+            <Box className="flex-row p-2">
+              <Text className="w-8 text-center text-white"> </Text>
+              <Text className="flex-1 self-center text-center text-white">Price</Text>
+              <Box className="items-between flex-1">
+                <Text className="text-center text-white">Amount</Text>
               </Box>
-      
-              {dummyTrades.slice(0, 3).map((item) => (
-                <Box
-                  key={item.id.toString()}
-                  className={`flex-row items-center border-b p-3 
-                    ${item.type === 'Buy' ? 'bg-green-900' : 'bg-red-900'}`}
-                >
-                  <Box className="h-8 w-8">
-                    {React.createElement(getIconByString(`IC_${item.symbol.toUpperCase()}`) || IC_BTCUSDT)}
-                  </Box>
-                  <Text className="flex-1 text-center text-white">${item.price.toFixed(2)}</Text>
-                  <Text className="flex-1 text-center text-white">{item.quantity}</Text>
-                  <Text className="flex-1 text-center text-white">{item.time}</Text>
-                </Box>
-              ))}
-
-              {dummyTrades.length === 0 && (
-                <Box className="py-10">
-                  <Text className="text-center text-gray-400">No trades found</Text>
-                </Box>
-              )}
+              <Text className="flex-1 self-center text-center text-white">time</Text>
             </Box>
-        </Box>
 
+            {dummyTrades.slice(0, 3).map((item) => (
+              <Box
+                key={item.id.toString()}
+                className={`flex-row items-center border-b p-3 
+                    ${item.type === 'Buy' ? 'bg-green-900' : 'bg-red-900'}`}>
+                <Box className="h-8 w-8">
+                  {React.createElement(
+                    getIconByString(`IC_${item.symbol.toUpperCase()}`) || IC_BTCUSDT
+                  )}
+                </Box>
+                <Text className="flex-1 text-center text-white">${item.price.toFixed(2)}</Text>
+                <Text className="flex-1 text-center text-white">{item.quantity}</Text>
+                <Text className="flex-1 text-center text-white">{item.time}</Text>
+              </Box>
+            ))}
+
+            {dummyTrades.length === 0 && (
+              <Box className="py-10">
+                <Text className="text-center text-gray-400">No trades found</Text>
+              </Box>
+            )}
+          </Box>
+        </Box>
       </CardUpRounded>
     </ScrollView>
   );
 };
 
 export default PortfolioScreen;
-
 
 /* Months
 <Box className='mt-2'>
