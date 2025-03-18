@@ -1,4 +1,3 @@
-
 module.exports = function (api) {
   api.cache(true);
 
@@ -8,13 +7,18 @@ module.exports = function (api) {
       'nativewind/babel',
     ],
     plugins: [
-    'module:react-native-dotenv', ["module-resolver", {
-      root: ["./"],
-
-      alias: {
-        "@": "./",
-        "tailwind.config": "./tailwind.config.js"
-      }
-    }]],
+      'module:react-native-dotenv', 
+      ["module-resolver", {
+        root: ["./"],
+        alias: {
+          "@": "./",
+          "tailwind.config": "./tailwind.config.js"
+        }
+      }],
+      ['react-native-reanimated/plugin', {
+        enableDebug: false, // Disable debug logging
+        strict: false,      // Disable strict mode
+      }],
+    ],
   };
 };

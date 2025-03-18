@@ -20,7 +20,8 @@
           "recordAudioAndroid": true
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-router"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",

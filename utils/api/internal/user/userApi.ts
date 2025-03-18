@@ -3,8 +3,8 @@ import axios from 'axios';
 
 //@ts-ignore
 import { BASE_API_URL } from '@env';
-import { GooglePlaceData } from 'react-native-google-places-autocomplete';
 import { User } from '@/context/userStore';
+import { Address } from '@/types/other';
 
 interface loginUserReq {
     email: string,
@@ -77,7 +77,7 @@ export const addPhoneNumber = async ({ userId, phoneNumber } : addPhoneNumberUse
 interface addBirthdayAddressReq {
     userId: string;
     birthday: string,
-    address: GooglePlaceData,
+    address: Address,
 }
 
 export const addBirthdayAddress = async ({ userId, birthday, address } : addBirthdayAddressReq) => {

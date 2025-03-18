@@ -21,11 +21,7 @@ const TothorScreen = () => {
         <BackHeader title='Tothor' colorScheme='alwaysWhite' />
         <Box className='items-center justify-center gap-4'>
             <Box className={`p-4 bg-background-${appliedTheme} mt-4 rounded-full z-10`}>
-            {appliedTheme === 'light' ? (
-              <IC_Tothor_Logo_Only className='w-16 h-16' />
-            ) : (
-              <IC_Tothor_Logo_Only_Bold className='w-16 h-16' />
-            )}
+              {<IC_Tothor_Logo_Only className='w-16 h-16' color={appliedTheme === 'dark' ? "white":"black"}/>}
             </Box>
         </Box>
     </MyLinearGradient>
