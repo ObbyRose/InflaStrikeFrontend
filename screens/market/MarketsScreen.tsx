@@ -7,6 +7,8 @@ import { Search } from "lucide-react-native";
 import { Icon } from "@/components/ui/icon";
 import BackHeader from "@/components/BackHeader";
 import { CryptoData, handleSQLiteSelect } from "@/utils/api/internal/sql/handleSQLite";
+import { FlashList } from '@shopify/flash-list';
+
 
 const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -49,7 +51,7 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             {loading ? (
                 <ActivityIndicator size="large" color="#4A90E2" />
             ) : (
-                <FlatList
+                <FlashList
                     data={filteredData}
                     keyExtractor={(item) => item.symbol}
                     renderItem={({ item }) => {
@@ -64,6 +66,7 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                             />
                         );
                     }}
+                    estimatedItemSize={10}
                 />
             )}
         </Box>

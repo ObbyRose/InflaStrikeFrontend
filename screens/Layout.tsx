@@ -2,7 +2,7 @@ import { Box } from '@/components/ui/box';
 import { Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationProp, ParamListBase, useNavigationState } from '@react-navigation/native';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import { IC_Home, IC_Invest, IC_Market, IC_Portfolio, IC_Profile, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
 
@@ -11,7 +11,7 @@ interface LayoutProps {
     navigation: NavigationProp<ParamListBase>;
 }
 
-const Layout = ({ children, navigation }: LayoutProps) => {
+const Layout = React.memo(({ children, navigation }: LayoutProps) => {
     const { appliedTheme } = useTheme();
 
     const currentScreen = useNavigationState(state => {
@@ -83,6 +83,6 @@ const Layout = ({ children, navigation }: LayoutProps) => {
             {/* Bottom Safe Area (Android Navigation Bar) */}
         </SafeAreaView>
     );
-};
+});
 
 export default Layout;

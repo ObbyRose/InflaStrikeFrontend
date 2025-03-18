@@ -21,10 +21,56 @@ import {
 import { Props } from '@/types/NavigationTypes';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import OptionCard from '@/components/OptionCard';
+import { FlashList } from '@shopify/flash-list';
+
+type BundleItem = {
+  id: string;
+  icon: React.ReactNode;
+  name: string;
+  timeframe: string;
+  performance: string;
+};
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const { appliedTheme } = useTheme();
   const { user } = useUserStore();
+
+  const getBundleData = () => {
+    return [
+      {
+        id: '1',
+        icon: <IC_BTCUSDT className="h-12 w-12" />,
+        name: 'MAGA Bundle',
+        timeframe: 'Past Month',
+        performance: '+15%',
+      },
+      {
+        id: '2',
+        icon: appliedTheme === 'dark' ? (
+          <IC_Tothor_Logo_Only_Bold className="h-12 w-12" />
+        ) : (
+          <IC_Tothor_Logo_Only className="h-12 w-12" />
+        ),
+        name: 'Tothor Bundle',
+        timeframe: 'Past Month',
+        performance: '+24%',
+      },
+      {
+        id: '3',
+        icon: <IC_Gold className="h-12 w-12" />,
+        name: 'Earth Bundle',
+        timeframe: 'Past Month',
+        performance: '+35%',
+      },
+      {
+        id: '4',
+        icon: <IC_DOGEUSDT className="h-12 w-12" />,
+        name: 'DOGE Bundle',
+        timeframe: 'Past Month',
+        performance: '+4%',
+      },
+    ] as BundleItem[];
+  };
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -93,68 +139,30 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             <Text className={`mb-4 mt-2 font-medium text-subText-${appliedTheme}`}>
               There are 4 recommended bundles
             </Text>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <Box className="flex-row gap-4">
-                <OptionCard>
-                  <Box className="gap-1">
-                    <IC_BTCUSDT className="h-12 w-12" />
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      MAGA Bundle
-                    </Text>
-                    <Text className={`text-subText-${appliedTheme} text-[14px] font-medium`}>
-                      Past Month
-                    </Text>
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      +15%
-                    </Text>
-                  </Box>
-                </OptionCard>
-                <OptionCard>
-                  <Box className="gap-1">
-                    {appliedTheme === 'dark' ? (
-                      <IC_Tothor_Logo_Only_Bold className="h-12 w-12" />
-                    ) : (
-                      <IC_Tothor_Logo_Only className="h-12 w-12" />
-                    )}
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      Tothor Bundle
-                    </Text>
-                    <Text className={`text-subText-${appliedTheme} text-[14px] font-medium`}>
-                      Past Month
-                    </Text>
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      +24%
-                    </Text>
-                  </Box>
-                </OptionCard>
-                <OptionCard>
-                  <Box className="gap-1">
-                    <IC_Gold className="h-12 w-12" />
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      Earth Bundle
-                    </Text>
-                    <Text className={`text-subText-${appliedTheme} text-[14px] font-medium`}>
-                      Past Month
-                    </Text>
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      +35%
-                    </Text>
-                  </Box>
-                </OptionCard>
-                <OptionCard>
-                  <Box className="gap-1">
-                    <IC_DOGEUSDT className="h-12 w-12" />
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-                      DOGE Bundle
-                    </Text>
-                    <Text className={`text-subText-${appliedTheme} text-[14px] font-medium`}>
-                      Past Month
-                    </Text>
-                    <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>+4%</Text>
-                  </Box>
-                </OptionCard>
-              </Box>
-            </ScrollView>
+            <FlashList
+                data={getBundleData()}
+                renderItem={({ item }) =>
+                  <OptionCard>
+                    <Box className="gap-1">
+                      {item.icon}
+                      <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
+                        {item.name}
+                      </Text>
+                      <Text className={`text-subText-${appliedTheme} text-[14px] font-medium`}>
+                        {item.timeframe}
+                      </Text>
+                      <Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
+                        {item.performance}
+                      </Text>
+                    </Box>
+                  </OptionCard>
+                }
+                estimatedItemSize={150}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item) => item.id}
+                ItemSeparatorComponent={() => <Box className="w-4" />}
+              />
           </Box>
           <Divider className={`bg-divider-${appliedTheme} mt-4`} />
         </Box>

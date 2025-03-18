@@ -114,26 +114,10 @@ const StackNavigator = () => {
           {({ navigation }) => (
             <Layout navigation={navigation}>
               <Stack.Navigator initialRouteName="Home" 
-                screenOptions={{ 
+                screenOptions={{
                   headerShown: false,
                   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                   presentation: 'transparentModal',
-                  transitionSpec: {
-                    open: {
-                      animation: 'timing',
-                      config: {
-                        duration: 10,
-                        easing: Easing.linear,
-                      },
-                    },
-                    close: {
-                      animation: 'timing',
-                      config: {
-                        duration: 10,
-                        easing: Easing.linear,
-                      },
-                    },
-                  },
                 }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Simulator" component={SimulatorScreen} />

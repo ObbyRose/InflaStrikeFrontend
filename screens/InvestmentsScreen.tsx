@@ -40,9 +40,10 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
       <ScrollView>
-        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className={` h-[70%] p-4`}>
+        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className={`h-[70%] p-4`}>
           <BackHeader title='investments' colorScheme='alwaysWhite' />
-          <Box className='gap-4'>
+          <Box className='relative gap-4 z-[50]'
+          >
             <Box className='p-4 justify-center gap-2 items-center'>
               <Text className={`text-white font-bold text-[36px] text-center`}>Bundles</Text>
               <Text className={`text-white text-[16px] text-center`}>Diversify your portfolio by investing in the most promising crypto themes</Text>
@@ -52,7 +53,8 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
               <Text className={`text-white text-[24px] font-bold flex self-start text-center`}>Best Bundles</Text>
             </Box>
 
-            <Box className='relative z-50 bottom-0 p-4 w-full h-60 rounded-3xl'>
+            <Box className='relative z-[50] bottom-0 p-4 w-full h-60 rounded-3xl'
+            >
               <ImageBackground source={require("@assets/images/America.png")} className='h-full w-full rounded-3xl' imageStyle={{ borderRadius: 20 }}>
                 <Text className={`text-white text-[24px] font-bold flex items-center text-center p-4`}>{bundleData.bundleName}</Text>
                 <Box className='absolute top-1/3 gap-4 flex-row p-2 ml-2'>

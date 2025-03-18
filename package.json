@@ -1,6 +1,7 @@
 {
   "name": "Client",
   "version": "1.0.0",
+  "jsEngine": "hermes",
   "scripts": {
     "android": "DARK_MODE=media expo start --android",
     "ios": "DARK_MODE=media expo start --ios",
@@ -47,6 +48,7 @@
     "@react-native-picker/picker": "2.9.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
+    "@shopify/flash-list": "1.7.3",
     "@types/react-navigation": "^3.0.8",
     "ajv": "^8.17.1",
     "axios": "^1.8.3",
