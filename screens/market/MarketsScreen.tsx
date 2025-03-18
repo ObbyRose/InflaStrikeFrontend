@@ -21,7 +21,6 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             try {
                 setLoading(true);
                 const data = await handleSQLiteSelect([]);
-                console.log("DATA", JSON.stringify(data, null, 2));
                 setCryptoData(data);
             } catch (error) {
                 console.error("Error fetching market data:", error);

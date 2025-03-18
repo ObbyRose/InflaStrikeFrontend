@@ -21,7 +21,6 @@ const EnterChangePinScreen: React.FC<Props> = ({ navigation }) => {
     const storedPin = '1234'; // Replace with actual stored PIN from secure storage
 
     const handlePinVerification = (updatedPin: string) => {
-        console.log('Checking PIN:', updatedPin); // Debugging to verify the correct PIN is being checked
         if (updatedPin === storedPin) {
             setMessage('PIN Verified!');
             setTimeout(() => {
