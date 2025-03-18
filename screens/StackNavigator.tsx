@@ -39,6 +39,7 @@ import OverlayLoading from '@/components/OverlayLoading';
 import { useDataStore } from '@/context/dataStore';
 import SimulatorScreen from './SimulatorScreen';
 import ExchangeScreen from './ExchangeScreen';
+import { Easing } from 'react-native';
 
 const Stack = createStackNavigator();
 const SettingsStack = createStackNavigator();
@@ -112,10 +113,27 @@ const StackNavigator = () => {
         <Stack.Screen name="MainApp" options={{ headerShown: false }}>
           {({ navigation }) => (
             <Layout navigation={navigation}>
-              <Stack.Navigator initialRouteName="Simulator" 
+              <Stack.Navigator initialRouteName="Home" 
                 screenOptions={{ 
                   headerShown: false,
-                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                  presentation: 'transparentModal',
+                  transitionSpec: {
+                    open: {
+                      animation: 'timing',
+                      config: {
+                        duration: 10,
+                        easing: Easing.linear,
+                      },
+                    },
+                    close: {
+                      animation: 'timing',
+                      config: {
+                        duration: 10,
+                        easing: Easing.linear,
+                      },
+                    },
+                  },
                 }}>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Simulator" component={SimulatorScreen} />

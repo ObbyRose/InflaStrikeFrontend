@@ -27,7 +27,6 @@ interface LineChartWagmiProps {
 const LineChartWagmi = ({className, color, lineData=dummyData, tooltip=true}: LineChartWagmiProps) => {
     // Set up state to track the container's dimensions
     const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
-    const [cursorY, setCursorY] = useState(0);
     const { appliedTheme } = useTheme();
     // Reference to measure the container
     const measureContainer = (e: LayoutChangeEvent) => {
