@@ -91,7 +91,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
                 <Divider />
                 {/* setting box */}
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('SettingsStack', { screen: 'Settings' })}>
+                  onPress={() => navigation.navigate('Settings', { screen: 'Settings' })}>
                   <SettingItem title="Settings" IconComponent={IC_Setting} />
                 </TouchableOpacity>
               </TothorCards>

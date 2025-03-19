@@ -1,20 +1,24 @@
-import { Box } from '@/components/ui/box'
-import { Text } from '@/components/ui/text'
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import { CommonActions, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { ScrollView } from 'react-native';
+import { Box } from '@/components/ui/box';
+import { Text } from '@/components/ui/text';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import ButtonsTrain from '@/components/ButtonsTrain';
 import { formatNumber } from '@/utils/functions/help';
 import CandleChartComponent from '@/components/market/CandleChart';
 import { Divider } from '@/components/ui/divider';
-import { ScrollView } from 'react-native';
 import CoinOrderHistory from '@/components/market/CoinOrderHistory';
 import DepthChartComponent from '@/components/market/DepthChart';
 import CoinInfo from '@/components/market/CoinInfo';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
-import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
 import BuySellSheet from './BuySellSheet';
+import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
+
+const getWebSocketUrl = (symbol: string) =>
+    `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@depth@1000ms`;
+
 
 type RootStackParamList = {
     CoinScreen: { coin: any };
@@ -25,95 +29,125 @@ type CoinScreenRouteProp = RouteProp<RootStackParamList, 'CoinScreen'>;
 function CoinScreen() {
     const route = useRoute<CoinScreenRouteProp>();
     const coin = route.params?.coin as CryptoData;
-    
+
     const { appliedTheme } = useTheme();
-    const [ isSheetOpen, setIsSheetOpen ] = useState(false);
-    
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
     const [category, setCategory] = useState("Price");
 
-    const ErrorContext = ({ err } : {err : string}) => (
-        <Box className="flex-1 items-center justify-center">
-                <BackHeader 
-                    title={coin.symbol} 
-                    icons={["icon1","icon2"]}
-                />
-                <Text className="text-lg">{err}</Text>
-        </Box>
-    )
+    const [orderBook, setOrderBook] = useState<{ bids: any[]; asks: any[] }>({ bids: [], asks: [] });
+    const ws = useRef<WebSocket | null>(null);
+    const isMounted = useRef<boolean>(true);
 
-    // Safe early return with navigation
-    if (!coin)
-        return <ErrorContext err="Symbol Not Found" />
+    useEffect(() => {
+        if (!coin || !coin.symbol) return;
+        
+        const symbol = coin.symbol.toLowerCase(); // ✅ Ensure correct symbol format
+        const wsUrl = getWebSocketUrl(symbol);
+        ws.current = new WebSocket(wsUrl);
+    
+        ws.current.onopen = () => console.log(`✅ Connected to Binance WebSocket for ${symbol}`);
+        ws.current.onmessage = (event) => {
+            if (!isMounted.current) return;
+    
+            const data = JSON.parse(event.data);
+            if (data.b && data.a) {
+                const updatedBids = mergeOrderBook(data.b, "bids");
+                const updatedAsks = mergeOrderBook(data.a, "asks");
+    
+                // ✅ Validate asks before updating state
+                const hasInvalidAsks = updatedAsks.some(order => !Number.isFinite(order.price));
+                if (hasInvalidAsks) {
+                    console.warn(`⚠ Skipping update: Invalid ask prices for ${symbol}`);
+                    return;
+                }
+    
+                setOrderBook(prev => {
+                    if (
+                        JSON.stringify(prev.bids) === JSON.stringify(updatedBids) &&
+                        JSON.stringify(prev.asks) === JSON.stringify(updatedAsks)
+                    ) {
+                        return prev; // ✅ Prevent unnecessary re-renders
+                    }
+                    return { bids: updatedBids, asks: updatedAsks };
+                });
+            }
+        };
+    
+        ws.current.onerror = (error) => console.error(`🚨 WebSocket Error for ${symbol}:`, error);
+        ws.current.onclose = () => console.log(`🔴 WebSocket Disconnected for ${symbol}`);
+    
+        return () => {
+            isMounted.current = false;
+            ws.current?.close();
+        };
+    }, [coin]); // ✅ Re-run WebSocket setup when `coin` changes
+    
 
-    const handleCategoryPress = (newCategory: string) => {
-        setCategory(newCategory);
+    const mergeOrderBook = (updates: [string, string][], type: "bids" | "asks") => {
+        if (!Array.isArray(updates) || updates.length === 0) return []; // ✅ Prevent undefined or empty data
+    
+        return updates
+            .map(([price, amount]) => {
+                const cleanPrice = typeof price === "string" ? price.trim() : "0";
+                const cleanAmount = typeof amount === "string" ? amount.trim() : "0";
+    
+                // ✅ Ensure price and amount are valid numbers
+                const parsedPrice = parseFloat(cleanPrice);
+                const parsedAmount = parseFloat(cleanAmount);
+    
+                // ✅ If price is NaN, set a temporary fallback of the last valid price or 0
+                const validPrice = Number.isFinite(parsedPrice) ? parsedPrice : 0;
+                const validAmount = Number.isFinite(parsedAmount) ? parsedAmount : 0;
+    
+                return { price: validPrice, amount: validAmount };
+            })
+            .filter(order => order.price > 0 && order.amount > 0) // ✅ Remove NaN or zero values
+            .sort((a, b) => (type === "bids" ? b.price - a.price : a.price - b.price)) // ✅ Sort properly
+            .slice(0, 10);
     };
+    
 
-    const CoinContent = () => (
-        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
-
-        <ScrollView
-            className={`flex-1`}
-            >
-            <Box className='flex-1 p-1'>
-                <Box className='p-3'>
-                    <BackHeader title={coin.symbol} colorScheme='themeBased' />
-                </Box>
-                {/* Title */}
-                <Box className='p-5 gap-6'>
-                    <Box className='flex-row justify-between'>
-                        <Box className='gap-3'>
-                            <Text className={`text-subText-${appliedTheme}`}>{coin.symbol}</Text>
-                            <Text className={`text-3xl font-extrabold text-text-${appliedTheme}`}>
-                                {formatNumber(parseFloat(coin.price || ""), 2)}
-                            </Text>
+    return (
+        <>
+            <BuySellSheet coinData={coin} orderBook={orderBook} isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)}/>
+            <MyLinearGradient type="background" color={appliedTheme === "dark" ? "dark" : "light-blue"} className="h-full">
+                <ScrollView className="flex-1">
+                    <Box className="flex-1 p-1">
+                        <Box className="p-3">
+                            <BackHeader title={coin.symbol} colorScheme="themeBased" />
                         </Box>
-                        <Box className='justify-end'>
-                            <Text className={`${Number(coin.change) > 0 ? "text-green-500" : "text-red-500"}`}>
-                                ({Number(coin.change) > 0 ? '+':''} {coin.change}%)
-                            </Text>
+                        <Box className="p-5 gap-6">
+                            <Box className="flex-row justify-between">
+                                <Box className="gap-3">
+                                    <Text className={`text-subText-${appliedTheme}`}>{coin.symbol}</Text>
+                                    <Text className={`text-3xl font-extrabold text-text-${appliedTheme}`}>
+                                        {formatNumber(parseFloat(coin.price || ""), 2)}
+                                    </Text>
+                                </Box>
+                                <Box className="justify-end">
+                                    <Text className={`${Number(coin.change) > 0 ? "text-green-500" : "text-red-500"}`}>
+                                        ({Number(coin.change) > 0 ? "+" : ""} {coin.change}%)
+                                    </Text>
+                                </Box>
+                            </Box>
+
+                            <ButtonsTrain activeButton={category} buttons={["Price", "Depth", "Info"]} handlePress={setCategory} />
+                        </Box>
+
+                        {category === "Price" && <CandleChartComponent symbol={coin.symbol} />}
+                        {category === "Depth" && <DepthChartComponent symbol={coin.symbol} />}
+                        {category === "Info" && <CoinInfo symbol={coin.symbol} />}
+
+                        <Divider />
+
+                        <Box className="p-2">
+                            <CoinOrderHistory orderBook={orderBook} onPress={() => setIsSheetOpen(true)} />
                         </Box>
                     </Box>
-
-                    <ButtonsTrain
-                    activeButton={category}
-                    buttons={["Price", "Depth", "Info"]}
-                    handlePress={handleCategoryPress}
-                    />
-                </Box>
-
-                { category === "Price" &&
-                    <CandleChartComponent symbol={coin.symbol}/>
-                }
-                { category === "Depth" &&
-                    <DepthChartComponent symbol={coin.symbol}/>
-                }
-                { category === "Info" &&
-                    <CoinInfo symbol={coin.symbol}/>
-                }
-                <Divider />
-                <Box className='p-2'> 
-                    <CoinOrderHistory onPress={() => setIsSheetOpen(true)}/>
-                </Box>
-            </Box>
-        </ScrollView>
-    </MyLinearGradient>
-    );
-
-    try {
-        return (
-        <>
-        <BuySellSheet 
-            coinData={coin}
-            isOpen={isSheetOpen} 
-            onClose={() => setIsSheetOpen(false)}/>
-        <CoinContent />
+                </ScrollView>
+            </MyLinearGradient>
         </>
-        );
-    } catch (error) {
-        console.log("Render error:", error);
-        return <ErrorContext err="Something went wrong please try again later..." />
-    }
+    );
 }
 
-export default CoinScreen;
+export default React.memo(CoinScreen);

@@ -61,7 +61,7 @@ const MarketsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                             {...item}
                                 onPress={() => navigation.navigate("MainApp", { 
                                     screen: "Coin", 
-                                    params: { coin: item} 
+                                    params: { coin: { ...item, symbol: item.symbol.toUpperCase() } }
                                 })}
                             />
                         );

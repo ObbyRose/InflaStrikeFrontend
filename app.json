@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Client",
-    "slug": "Client",
+    "name": "ClientV2",
+    "slug": "ClientV2",
     "version": "1.0.0",
     "newArchEnabled": true,
     "web": {
@@ -46,7 +46,21 @@
         "googleMaps": {
           "apiKey": ""
         }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.Client"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "dd0563b7-99f4-43c8-9cb9-65b94eb6d659"
       }
-    }
+    },
+    "owner": "talmaman"
   }
 }

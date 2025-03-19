@@ -22,10 +22,8 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { ChevronDownIcon } from './ui/icon';
-import { IC_Minus, IC_Plus } from '@/utils/constants/Icons';
-import ButtonsTrain from './ButtonsTrain';
+import { IC_Plus } from '@/utils/constants/Icons';
 import InputAuth from './auth/InputAuth';
-import { symbol } from 'd3-shape';
 import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
 import { formatSymbol } from '@/utils/functions/help';
 import { Button, ButtonText } from './ui/button';

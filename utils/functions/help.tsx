@@ -21,8 +21,8 @@ export const convertBirthday = (birthday: string) => {
 };
 
 export const formatNumber = (num: number, decimals = 2) => {
-    const roundedNum = parseFloat(num.toFixed(decimals));
-    return '$' + new Intl.NumberFormat('en-US').format(roundedNum);
+    const roundedNum = num.toFixed(decimals);
+    return '$' + new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(parseFloat(roundedNum));
 };
 
 export const formatSymbol = (symbol: string) => {
