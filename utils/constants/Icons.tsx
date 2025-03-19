@@ -1619,13 +1619,13 @@ export const IC_Profile_Inactive = ({ className }: IconsProps) => {
   );
 };
 
-export const IC_Arrow_Down = ({ className }: IconsProps) => {
+export const IC_Arrow_Down = ({ className, color='#363D4E' }: IconsProps) => {
   return (
     <Box className={cn(className)}>
       <Svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <Path
           d="M4 9l8 8 8-8"
-          stroke="#363D4E"
+          stroke={color}
           strokeWidth={2.4}
           strokeLinecap="round"
           strokeLinejoin="round"

@@ -4,10 +4,10 @@ import { Button, ButtonText } from "../ui/button";
 import { Text } from "../ui/text";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Divider } from "../ui/divider";
-import OrderBook from "../OrderBook"; // ✅ Import the OrderBook component
+import OrderBook from "../OrderBook";
 
 interface CoinOrderHistoryProps {
-    orderBook: { bids: any[]; asks: any[] }; // ✅ Use WebSocket data from `CoinScreen`
+    orderBook: { bids: any[]; asks: any[] };
     onPress: () => void;
 }
 
@@ -17,17 +17,18 @@ const CoinOrderHistory: React.FC<CoinOrderHistoryProps> = ({ orderBook, onPress 
     const categories: ("Order Book" | "Trade History")[] = ["Order Book", "Trade History"];
 
     return (
-        <Box className={`relative rounded-lg p-3 bg-card-${appliedTheme} w-full`}>
+        
+        <Box className={`relative rounded-lg bg-card-${appliedTheme} p-3 w-full`}>
             <Box className="relative flex-row pt-2 gap-4">
                 {categories.map((category) => (
                     <Text
-                        key={category}
+                    key={category}
                         onPress={() => setSelectedCategory(category)}
                         className={`${
                             category === selectedCategory
-                                ? `text-text-${appliedTheme} font-semibold border-b-4 border-indigo-500 z-10`
+                            ? `text-text-${appliedTheme} font-semibold border-b-4 border-indigo-500 z-10`
                                 : `text-gray-${appliedTheme}`
-                        }`}
+                            }`}
                     >
                         {category}
                     </Text>
@@ -35,7 +36,6 @@ const CoinOrderHistory: React.FC<CoinOrderHistoryProps> = ({ orderBook, onPress 
                 <Divider className="absolute bottom-[0.1px]" />
             </Box>
 
-            {/* ✅ Use WebSocket Data Directly */}
             <OrderBook orderBook={orderBook} />
 
             <Box className="flex-row mt-3 gap-3">

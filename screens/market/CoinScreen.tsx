@@ -41,7 +41,7 @@ function CoinScreen() {
     useEffect(() => {
         if (!coin || !coin.symbol) return;
         
-        const symbol = coin.symbol.toLowerCase(); // ✅ Ensure correct symbol format
+        const symbol = coin.symbol.toLowerCase();
         const wsUrl = getWebSocketUrl(symbol);
         ws.current = new WebSocket(wsUrl);
     
@@ -53,8 +53,7 @@ function CoinScreen() {
             if (data.b && data.a) {
                 const updatedBids = mergeOrderBook(data.b, "bids");
                 const updatedAsks = mergeOrderBook(data.a, "asks");
-    
-                // ✅ Validate asks before updating state
+
                 const hasInvalidAsks = updatedAsks.some(order => !Number.isFinite(order.price));
                 if (hasInvalidAsks) {
                     console.warn(`⚠ Skipping update: Invalid ask prices for ${symbol}`);
@@ -66,7 +65,7 @@ function CoinScreen() {
                         JSON.stringify(prev.bids) === JSON.stringify(updatedBids) &&
                         JSON.stringify(prev.asks) === JSON.stringify(updatedAsks)
                     ) {
-                        return prev; // ✅ Prevent unnecessary re-renders
+                        return prev;
                     }
                     return { bids: updatedBids, asks: updatedAsks };
                 });
@@ -80,29 +79,26 @@ function CoinScreen() {
             isMounted.current = false;
             ws.current?.close();
         };
-    }, [coin]); // ✅ Re-run WebSocket setup when `coin` changes
+    }, [coin]); 
     
-
     const mergeOrderBook = (updates: [string, string][], type: "bids" | "asks") => {
-        if (!Array.isArray(updates) || updates.length === 0) return []; // ✅ Prevent undefined or empty data
+        if (!Array.isArray(updates) || updates.length === 0) return []; 
     
         return updates
             .map(([price, amount]) => {
                 const cleanPrice = typeof price === "string" ? price.trim() : "0";
                 const cleanAmount = typeof amount === "string" ? amount.trim() : "0";
-    
-                // ✅ Ensure price and amount are valid numbers
+
                 const parsedPrice = parseFloat(cleanPrice);
                 const parsedAmount = parseFloat(cleanAmount);
-    
-                // ✅ If price is NaN, set a temporary fallback of the last valid price or 0
+
                 const validPrice = Number.isFinite(parsedPrice) ? parsedPrice : 0;
                 const validAmount = Number.isFinite(parsedAmount) ? parsedAmount : 0;
     
                 return { price: validPrice, amount: validAmount };
             })
-            .filter(order => order.price > 0 && order.amount > 0) // ✅ Remove NaN or zero values
-            .sort((a, b) => (type === "bids" ? b.price - a.price : a.price - b.price)) // ✅ Sort properly
+            .filter(order => order.price > 0 && order.amount > 0)
+            .sort((a, b) => (type === "bids" ? b.price - a.price : a.price - b.price))
             .slice(0, 10);
     };
     
@@ -138,9 +134,7 @@ function CoinScreen() {
                         {category === "Depth" && <DepthChartComponent symbol={coin.symbol} />}
                         {category === "Info" && <CoinInfo symbol={coin.symbol} />}
 
-                        <Divider />
-
-                        <Box className="p-2">
+                        <Box className="p-1">
                             <CoinOrderHistory orderBook={orderBook} onPress={() => setIsSheetOpen(true)} />
                         </Box>
                     </Box>

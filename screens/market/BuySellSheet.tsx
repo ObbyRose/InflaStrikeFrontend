@@ -23,7 +23,7 @@ interface BuySellSheetProps {
     isOpen: boolean;
     onClose: () => void;
     coinData: CryptoData;
-    orderBook: { bids: any[]; asks: any[] };  // ✅ Accept WebSocket data as a prop
+    orderBook: { bids: any[]; asks: any[] };
 }
 
 const BuySellSheet = ({ isOpen, onClose, coinData, orderBook }: BuySellSheetProps) => {
