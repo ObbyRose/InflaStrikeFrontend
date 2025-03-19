@@ -39,68 +39,49 @@ function CoinScreen() {
     const isMounted = useRef<boolean>(true);
 
     useEffect(() => {
-        if (!coin || !coin.symbol) return;
-        
-        const symbol = coin.symbol.toLowerCase();
-        const wsUrl = getWebSocketUrl(symbol);
-        ws.current = new WebSocket(wsUrl);
-    
-        ws.current.onopen = () => console.log(`✅ Connected to Binance WebSocket for ${symbol}`);
-        ws.current.onmessage = (event) => {
+        isMounted.current = true;
+        ws.current = new WebSocket(getWebSocketUrl(coin.symbol));
+
+        ws.current.onopen = () => {
+            console.log("✅ Connected to Binance WebSocket");
+        };
+
+        ws.current.onmessage = (event: MessageEvent) => {
             if (!isMounted.current) return;
-    
+
             const data = JSON.parse(event.data);
             if (data.b && data.a) {
                 const updatedBids = mergeOrderBook(data.b, "bids");
                 const updatedAsks = mergeOrderBook(data.a, "asks");
 
-                const hasInvalidAsks = updatedAsks.some(order => !Number.isFinite(order.price));
-                if (hasInvalidAsks) {
-                    console.warn(`⚠ Skipping update: Invalid ask prices for ${symbol}`);
-                    return;
-                }
-    
-                setOrderBook(prev => {
-                    if (
-                        JSON.stringify(prev.bids) === JSON.stringify(updatedBids) &&
-                        JSON.stringify(prev.asks) === JSON.stringify(updatedAsks)
-                    ) {
-                        return prev;
-                    }
-                    return { bids: updatedBids, asks: updatedAsks };
-                });
+                setOrderBook({ bids: updatedBids, asks: updatedAsks });
             }
         };
-    
-        ws.current.onerror = (error) => console.error(`🚨 WebSocket Error for ${symbol}:`, error);
-        ws.current.onclose = () => console.log(`🔴 WebSocket Disconnected for ${symbol}`);
-    
+
+        ws.current.onerror = (error) => {
+            console.error("🚨 WebSocket Error:", error);
+        };
+
+        ws.current.onclose = () => {
+            console.log("🔴 WebSocket Disconnected.");
+        };
+
         return () => {
             isMounted.current = false;
             ws.current?.close();
         };
-    }, [coin]); 
-    
+    }, []);
+
     const mergeOrderBook = (updates: [string, string][], type: "bids" | "asks") => {
-        if (!Array.isArray(updates) || updates.length === 0) return []; 
-    
-        return updates
-            .map(([price, amount]) => {
-                const cleanPrice = typeof price === "string" ? price.trim() : "0";
-                const cleanAmount = typeof amount === "string" ? amount.trim() : "0";
+        const updatedOrders = updates
+            .map(([price, amount]) => ({ price: parseFloat(price), amount: parseFloat(amount) }))
+            .filter(order => order.amount > 0);
 
-                const parsedPrice = parseFloat(cleanPrice);
-                const parsedAmount = parseFloat(cleanAmount);
-
-                const validPrice = Number.isFinite(parsedPrice) ? parsedPrice : 0;
-                const validAmount = Number.isFinite(parsedAmount) ? parsedAmount : 0;
-    
-                return { price: validPrice, amount: validAmount };
-            })
-            .filter(order => order.price > 0 && order.amount > 0)
-            .sort((a, b) => (type === "bids" ? b.price - a.price : a.price - b.price))
-            .slice(0, 10);
+        return updatedOrders
+            .sort((a, b) => (type === "bids" ? b.price - a.price : a.price - b.price)) 
+            .slice(0, 6);
     };
+
     
 
     return (
