@@ -6,7 +6,7 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import BackHeader from '@/components/BackHeader';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import ButtonsTrain from '@/components/ButtonsTrain';
-import { formatNumber } from '@/utils/functions/help';
+import { formatNumber, formatSymbol } from '@/utils/functions/help';
 import CandleChartComponent from '@/components/market/CandleChart';
 import { Divider } from '@/components/ui/divider';
 import CoinOrderHistory from '@/components/market/CoinOrderHistory';
@@ -40,7 +40,7 @@ function CoinScreen() {
 
     useEffect(() => {
         isMounted.current = true;
-        ws.current = new WebSocket(getWebSocketUrl(coin.symbol));
+        ws.current = new WebSocket(getWebSocketUrl( coin.symbol));
 
         ws.current.onopen = () => {
             console.log("✅ Connected to Binance WebSocket");
@@ -91,12 +91,12 @@ function CoinScreen() {
                 <ScrollView className="flex-1">
                     <Box className="flex-1 p-1">
                         <Box className="p-3">
-                            <BackHeader title={coin.symbol} colorScheme="themeBased" />
+                            <BackHeader title={formatSymbol(coin.symbol)} colorScheme="themeBased" />
                         </Box>
                         <Box className="p-5 gap-6">
                             <Box className="flex-row justify-between">
                                 <Box className="gap-3">
-                                    <Text className={`text-subText-${appliedTheme}`}>{coin.symbol}</Text>
+                                    <Text className={`text-subText-${appliedTheme}`}>{formatSymbol(coin.symbol)}</Text>
                                     <Text className={`text-3xl font-extrabold text-text-${appliedTheme}`}>
                                         {formatNumber(parseFloat(coin.price || ""), 2)}
                                     </Text>

@@ -53,23 +53,23 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
               <Text className={`text-white text-[24px] font-bold flex self-start text-center`}>Best Bundles</Text>
             </Box>
 
-            <Box className='relative z-[50] bottom-0 p-4 w-full h-60 rounded-3xl'
+            <Box className='relative z-[50] bottom-0 py-2 w-full h-60 rounded-3xl'
             >
               <ImageBackground source={require("@assets/images/America.png")} className='h-full w-full rounded-3xl' imageStyle={{ borderRadius: 20 }}>
                 <Text className={`text-white text-[24px] font-bold flex items-center text-center p-4`}>{bundleData.bundleName}</Text>
-                <Box className='absolute top-1/3 gap-4 flex-row p-2 ml-2'>
+                <Box className='absolute top-1/3 gap-2 flex-row p-2 ml-2'>
                   <Badge variant='solid' action='info' className={`rounded-full bg-card-${appliedTheme}`}>
                     <BadgeText className='text-sm'>{bundleData.ytd}</BadgeText>
                   </Badge>
                   <Badge variant='solid' action='info' className={`rounded-full bg-card-${appliedTheme}`}>
                     <BadgeText className='text-sm'>{bundleData.risk}</BadgeText>
                   </Badge>
-                  <Text className={`text-white text-[18px] font-bold flex items-center text-center`}>{bundleData.additionalInfo}</Text>
+                  <Text className={`text-white text-[18px] font-bold flex self-center text-center`}>{bundleData.additionalInfo}</Text>
                   <ScrollView horizontal showsHorizontalScrollIndicator={false} className='overflow-x'>
                     {bundleData.icons.map((Icon, index) => (
-                      <View key={index} style={{ width: 32, height: 32 }}>
+                      <Box key={index} style={{ width: 32, height: 32 }}>
                         <Icon />
-                      </View>
+                      </Box>
                     ))}
                   </ScrollView>
                 </Box>

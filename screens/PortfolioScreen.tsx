@@ -146,7 +146,7 @@ const PortfolioScreen = ({ navigation }: Props) => {
 
       <CardUpRounded className={`flex flex-1 px-4 py-6`}>
         <Box className="mt-2 gap-1">
-          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Values</Text>
+          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Value</Text>
           <Text className={`text-subText-${appliedTheme}`}>
             You've spent $289.23 more than last month
           </Text>
