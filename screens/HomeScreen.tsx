@@ -73,10 +73,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView>
       {/* Header Section */}
       <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-        <Box className="h-[40%] gap-4 p-4">
+        <Box className=" h-[40%] p-4">
           <Box className="flex flex-row items-center justify-between">
             <IC_Tothor className="h-16 w-40" />
             <Box className="flex-row gap-4">
@@ -97,8 +97,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             <Text className="text-[14px] text-white">Updated 2 mins ago</Text>
           </Box>
 
-          <Box className="mt-2 h-full items-center">
-            <Box className={`bg-card-${appliedTheme} z-10 w-[80%] rounded-full p-2`}>
+          <Box className=" h-full items-center">
+            <Box className={`bg-card-${appliedTheme} z-10 w-full rounded-full p-2`}>
               <Box className={`flex flex-row justify-evenly`}>
                 <Box className="flex-col items-center text-center">
                   <IC_Top_Up className="h-12 w-12" />
