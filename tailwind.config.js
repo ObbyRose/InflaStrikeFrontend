@@ -100,7 +100,7 @@ module.exports = {
 
         // Backgrounds
         card: {
-          light: '#FFFFFF',
+          light: '#f5f5ff',
           dark: '#161C2C',
         },
         badge: {

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Client",
-    "slug": "Client",
+    "name": "Tothor",
+    "slug": "Tothor",
     "version": "1.0.0",
     "newArchEnabled": true,
     "web": {
@@ -24,7 +24,7 @@
       "expo-router"
     ],
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon1.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -39,7 +39,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon1.png",
         "backgroundColor": "#ffffff"
       },
       "config": {
@@ -49,11 +49,18 @@
       },
       "permissions": [
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO",
-        "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.anonymous.Client"
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6b0c3f5a-3dbb-4af2-b74b-81e04f193e7c"
+      }
+    },
+    "owner": "talmaman"
   }
 }

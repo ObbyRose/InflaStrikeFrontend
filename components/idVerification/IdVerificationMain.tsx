@@ -84,7 +84,7 @@ const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) =
         </Box>
 
         {/* Verify Identity Button */}
-        <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
+        <MyLinearGradient className='bottom-8' type='button' color={ isActive ? 'purple' : "disabled-button"}>
             <Button onPress={() => isActive ? setIsDialogOpen(true) : null}>
                 <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                     Verify My Identity

@@ -146,7 +146,7 @@ const PortfolioScreen = ({ navigation }: Props) => {
 
       <CardUpRounded className={`flex flex-1 px-4 py-6`}>
         <Box className="mt-2 gap-1">
-          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Values</Text>
+          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Value</Text>
           <Text className={`text-subText-${appliedTheme}`}>
             You've spent $289.23 more than last month
           </Text>
@@ -229,29 +229,31 @@ const PortfolioScreen = ({ navigation }: Props) => {
           </Box>
 
           {/* Transactions History */}
-          <Box className="p-y-4 flex-1 rounded-lg bg-gray-900">
+          <Box className={`p-y-4 flex-1 rounded-lg bg-card-${appliedTheme}`}>
             <Box className="flex-row p-2">
-              <Text className="w-8 text-center text-white"> </Text>
-              <Text className="flex-1 self-center text-center text-white">Price</Text>
+              <Text className={`w-8 text-center text-text-${appliedTheme}`}> </Text>
+              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>Price</Text>
               <Box className="items-between flex-1">
-                <Text className="text-center text-white">Amount</Text>
+                <Text className={`text-center text-text-${appliedTheme}`}>Amount</Text>
               </Box>
-              <Text className="flex-1 self-center text-center text-white">time</Text>
+              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>Time</Text>
+              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>Transaction</Text>
             </Box>
 
             {dummyTrades.slice(0, 3).map((item) => (
               <Box
                 key={item.id.toString()}
-                className={`flex-row items-center border-b p-3 
-                    ${item.type === 'Buy' ? 'bg-green-900' : 'bg-red-900'}`}>
+                className={`flex-row items-center border-b p-3 ${
+                  item.type === 'Buy' ? 'bg-green-900' : 'bg-red-900'}`}>
                 <Box className="h-8 w-8">
                   {React.createElement(
                     getIconByString(`IC_${item.symbol.toUpperCase()}`) || IC_BTCUSDT
                   )}
                 </Box>
-                <Text className="flex-1 text-center text-white">${item.price.toFixed(2)}</Text>
-                <Text className="flex-1 text-center text-white">{item.quantity}</Text>
-                <Text className="flex-1 text-center text-white">{item.time}</Text>
+                <Text className={`flex-1 text-center text-white`}>${item.price.toFixed(2)}</Text>
+                <Text className={`flex-1 text-center text-white`}>{item.quantity}</Text>
+                <Text className={`flex-1 text-center text-white`}>{item.time}</Text>
+                <Text className={`flex-1 text-center text-white`}>{item.type}</Text>
               </Box>
             ))}
 

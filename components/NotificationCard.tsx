@@ -19,7 +19,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
 }) => {
     const { appliedTheme } = useTheme();
     return (
-        <Box className={`p-4 bg-card-${appliedTheme} rounded-lg shadow-md gap-2 flex-row items-start space-x-3`}>
+        <Box className={`p-4 bg-card-${appliedTheme} rounded-lg gap-2 flex-row items-start space-x-3`}>
             <Icon as={BellRing} size="lg" color={appliedTheme === 'light' ? 'black' : 'white'} className="mt-1" />
             <Box className="flex-1">
                 <Text className={`text-text-${appliedTheme} font-semibold`}>{title}</Text>

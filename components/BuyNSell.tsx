@@ -1,31 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box } from './ui/box';
 import { Text } from './ui/text';
 import {
   Alert,
-  Keyboard,
-  TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import {
-  Select,
-  SelectTrigger,
-  SelectInput,
-  SelectIcon,
-  SelectPortal,
-  SelectBackdrop,
-  SelectContent,
-  SelectDragIndicator,
-  SelectDragIndicatorWrapper,
-  SelectItem,
-} from '@/components/ui/select';
-import { ChevronDownIcon } from './ui/icon';
-import { IC_Minus, IC_Plus } from '@/utils/constants/Icons';
-import ButtonsTrain from './ButtonsTrain';
+import { IC_Arrow_Down, IC_Plus } from '@/utils/constants/Icons';
 import InputAuth from './auth/InputAuth';
-import { symbol } from 'd3-shape';
 import { CryptoData } from '@/utils/api/internal/sql/handleSQLite';
 import { formatSymbol } from '@/utils/functions/help';
 import { Button, ButtonText } from './ui/button';
@@ -39,6 +22,8 @@ export default function BuyNSell({
   coinData,
   onClose,
 }: BuyNSellProps) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const [buyOrSell, setBuyOrSell] = useState('Buy');
   const [USDTamount, setUSDTamount] = useState<string>('');
   const numericCurrencyValue = parseFloat(coinData.price || "0");
@@ -180,20 +165,21 @@ export default function BuyNSell({
   
 
   return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <Box className="h-full p-2" >
+    
+    <TouchableWithoutFeedback accessible={false}>
+        <Box className="h-full justify-between p-2" >
           <Box className='gap-4'>
             {/* Buy and Sell buttons */}
             <Box className="h-[50px] w-full flex-row justify-around p-2">
               {['Buy', 'Sell'].map((type, index) => (
                 <TouchableOpacity
-                  key={type}
-                  className={`${buyOrSell === type 
+                key={type}
+                className={`${buyOrSell === type 
                     ? type === 'Buy' ? 'bg-green-500' : 'bg-red-500' 
                     : `bg-background-${appliedTheme}`} 
                     w-1/2 items-center justify-center ${index === 0 ? 'rounded-l-md' : 'rounded-r-md'}`}
-                  onPress={() => handleSetBuyOrSell(type)}
-                >
+                    onPress={() => handleSetBuyOrSell(type)}
+                    >
                   <Text className={buyOrSell === type ? 'text-white' : `text-text-${appliedTheme}`}>
                     {type}
                   </Text>
@@ -203,37 +189,46 @@ export default function BuyNSell({
 
 
             {/* transaction type input choosing */}
-            <Select
-              selectedValue={selectedType ? selectedType : ''}
-              
-              onValueChange={(value) => setSelectedType(value)}
-              className={`bg-background-${appliedTheme}`}>
-              <SelectTrigger variant="underlined" size="md" className='w-full justify-center px-2 h-fit'>
-                <SelectInput
-                  placeholder="Select transaction type"
-                  className={`text-text-${appliedTheme}`}
-                />
-                <SelectIcon className="items-end" as={ChevronDownIcon} />
-              </SelectTrigger>
-              <SelectPortal>
-                <SelectBackdrop />
-                <SelectContent className={`max-h-[400px] bg-card-${appliedTheme}`}>
-                  <SelectDragIndicatorWrapper>
-                    <SelectDragIndicator />
-                  </SelectDragIndicatorWrapper>
-                  { selectOptions.map((option,idx) =>
-                  <SelectItem
-                    key={option}
-                    label={option}
-                    value={option}
-                    isDisabled={idx === 0}
-                    textStyle={{ className: `text-subTextGray-${appliedTheme}` }}
-                    style= { { backgroundColor: "transparent"} }
-                    />
-                  )}
-                </SelectContent>
-              </SelectPortal>
-            </Select>
+            <Box className="relative w-full z-10">
+              <TouchableOpacity
+              className={`flex-row items-center justify-between border border-gray-300 rounded-md px-2 h-[50px] bg-background-${appliedTheme}`}
+              onPress={() => setDropdownOpen(!dropdownOpen)}
+              >
+              <Text className={`text-text-${appliedTheme}`}>
+                {selectedType || "Select transaction type"}
+              </Text>
+              <IC_Arrow_Down color={appliedTheme === 'light' ? 'black' : 'white'} className='w-5 h-5' />
+              </TouchableOpacity>
+              {dropdownOpen && (
+              <Box
+              className={`absolute top-full left-0 w-full bg-card-${appliedTheme} border border-gray-300 rounded-md mt-1 max-h-[400px] overflow-hidden`}
+              >
+                {selectOptions.map((option: string, idx: number) => (
+                <TouchableOpacity
+                key={option}
+                  className={`p-2 ${
+                  idx === 0
+                    ? "bg-gray-200"
+                    : "bg-transparent"
+                  }`}
+                  disabled={idx === 0}
+                  onPress={() => {
+                  setSelectedType(option);
+                  setDropdownOpen(false);
+                  }}
+                  >
+                  <Text
+                  className={`text-subTextGray-${appliedTheme} ${
+                    idx === 0 ? "text-gray-400" : ""
+                  }`}
+                  >
+                  {option}
+                  </Text>
+                </TouchableOpacity>
+                ))}
+              </Box>
+              )}
+            </Box>
 
             {/* Price Input  */}
             <InputAuth

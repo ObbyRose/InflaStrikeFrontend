@@ -1,0 +1,11 @@
+{
+    "build": {
+      "preview": {
+        "android": {
+          "distribution": "internal",
+          "withoutCredentials": true
+        }
+      }
+    }
+  }
+  
