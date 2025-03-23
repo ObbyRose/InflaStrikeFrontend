@@ -1,6 +1,7 @@
 import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
+from selenium.webdriver.support.ui import WebDriverWait
 
 @pytest.fixture(scope="session")
 def driver():
@@ -17,3 +18,9 @@ def driver():
     driver = webdriver.Remote("http://localhost:4723", options=options)
     yield driver
     driver.quit()
+
+
+@pytest.fixture
+def wait(driver):
+    # Default timeout is 10 seconds, but you can adjust this if needed
+    return WebDriverWait(driver, 10)
