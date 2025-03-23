@@ -48,12 +48,10 @@ import SettingsScreen from './settings/SettingsScreen';
 import { useNavigation as useReactNavigation } from '@react-navigation/native';
 import { TNavigation } from '../types/NavigationTypes';
 
-// ✅ Memoized Layout to prevent re-renders
 const MemoizedLayout = React.memo(Layout);
 
 const Stack = createStackNavigator();
 
-// ✅ Fetches SQLite Data Once and Prevents Memory Leaks
 const useFetchMarketData = () => {
   const { isDataLoaded, setDataLoaded, setData } = useDataStore();
   const [loading, setLoading] = useState(true);
@@ -89,7 +87,6 @@ const useFetchMarketData = () => {
   return { loading, isDataLoaded };
 };
 
-// ✅ Manually Unmount Certain Screens Using `useFocusEffect`
 const InvestmentsScreenWrapper = () => {
   const [data, setData] = useState([]);
 
@@ -122,7 +119,7 @@ const StackNavigator = () => {
       <Stack.Navigator
         initialRouteName="MainApp"
         screenOptions={{
-          detachPreviousScreen: true, // ✅ Prevents stacking of old screens in memory
+          detachPreviousScreen: true,
           headerShown: false,
         }}
       >
