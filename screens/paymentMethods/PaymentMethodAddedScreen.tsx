@@ -7,6 +7,7 @@ import { Button, ButtonText } from '@/components/ui/button'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import { Props } from '@/types/NavigationTypes'
 import MyLinearGradient from '@/components/gradient/MyLinearGradient'
+import { S } from '@expo/html-elements'
 
 const PaymentMethodAddedScreen: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme()
@@ -20,7 +21,7 @@ const PaymentMethodAddedScreen: React.FC<Props> = ({ navigation }) => {
                 </Box>
             </Box>
             <MyLinearGradient type='button' color='purple' className='mb-4 w-[90%]'>
-            <Button onPress={() => {navigation.navigate('Home')}}>
+            <Button onPress={() => {navigation.navigate('MainApp', {screen: 'Home'})}}>
                 <ButtonText> Done </ButtonText>
             </Button>
             </MyLinearGradient>
