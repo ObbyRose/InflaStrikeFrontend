@@ -89,7 +89,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                 <SettingItem title="Change Password" IconComponent={IC_Password_V2} />
                 <Divider />
                 <TouchableOpacity onPress={() => navigation.navigate('PinSettings')}>
-                  <SettingItem title="Change PIN" IconComponent={IC_PIN_V2} />
+                  <SettingItem title="PIN Settings" IconComponent={IC_PIN_V2} />
                 </TouchableOpacity>
               </Box>
 

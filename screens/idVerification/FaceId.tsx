@@ -66,10 +66,10 @@ const FaceId: React.FC<Props> = ({ navigation }) => {
                         Use your Face ID to unlock your account securely and proceed faster.
                     </Text>
 
-                    <Box className="mt-10 gap-6">
+                    <Box className="mt-6 gap-6 px-6">
                         <MyLinearGradient type="button" color="purple">
-                            <Button onPress={handleSetupFaceID} className="w-64 h-14 rounded-full">
-                                <ButtonText className="text-lg">Enable Face ID</ButtonText>
+                            <Button onPress={handleSetupFaceID}>
+                                <ButtonText className="w-full flex text-center text-lg items-center justify-center">Enable Face ID</ButtonText>
                             </Button>
                         </MyLinearGradient>
 

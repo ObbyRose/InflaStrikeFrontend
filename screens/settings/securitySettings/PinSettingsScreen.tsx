@@ -16,7 +16,7 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <Box className="h-full">
-            <MyLinearGradient type="background" color="blue" className='h-[25%]'>
+            <MyLinearGradient type="background" color={appliedTheme === 'light' ? 'purple' : 'blue'} className='h-[25%]'>
                 <BackHeader />
                 <Box className="h-[45%] justify-end p-4">
                     <Text className={`text-[24px] font-bold text-white`}>Pin Settings</Text>
