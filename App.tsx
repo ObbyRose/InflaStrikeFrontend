@@ -9,8 +9,17 @@ import 'react-native-get-random-values';
 import { PaperProvider } from 'react-native-paper';
 import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { I18nManager } from 'react-native';
+import { useEffect } from 'react';
 
 export default function App() {
+
+  useEffect(() => {
+    if (I18nManager.isRTL) {
+      I18nManager.allowRTL(false);
+      I18nManager.forceRTL(false);
+    }
+  }, []);
 
   return (
     <GestureHandlerRootView>
