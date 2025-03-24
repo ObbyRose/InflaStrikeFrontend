@@ -1,4 +1,4 @@
-import { Trade } from "@/screens/ExchangeScreen";
+import { Trade } from "@/screens/TradingHistoryScreen";
 
 export const dummyTrades: Trade[] = [
   {

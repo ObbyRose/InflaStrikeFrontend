@@ -2,12 +2,15 @@ import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from selenium.webdriver.support.ui import WebDriverWait
+from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 @pytest.fixture(scope="session")
 def driver():
     options = UiAutomator2Options()
     options.platform_name = "Android"
-    options.platform_version = "15"  # or "15" depending on the exact version
+    options.platform_version = "16"  # or "15" depending on the exact version
     options.device_name = "Android Emulator"
     options.app_package = "com.anonymous.Client"
     options.app_activity = ".MainActivity"
@@ -24,3 +27,6 @@ def driver():
 def wait(driver):
     # Default timeout is 10 seconds, but you can adjust this if needed
     return WebDriverWait(driver, 10)
+
+def navigate(wait, text):
+    wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, f'//android.view.ViewGroup[@content-desc="{text}"]'))).click()

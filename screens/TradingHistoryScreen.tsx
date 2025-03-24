@@ -33,7 +33,7 @@ export interface Trade {
   timestamp: number;
 }
 
-const ExchangeScreen = () => {
+const TradingHistoryScreen = () => {
   const { appliedTheme } = useTheme();
 
   const [trades, setTrades] = useState<Trade[]>([]);
@@ -200,4 +200,4 @@ const ExchangeScreen = () => {
   );
 };
 
-export default ExchangeScreen;
+export default TradingHistoryScreen;
