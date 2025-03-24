@@ -43,14 +43,21 @@ def test_face_id(driver):
     ok_button.click()
     time.sleep(1)
 
-def test_navigate_to_profile(driver):
+
+def test_skip_face_id(driver):
+    skip_button = driver.find_element(AppiumBy.XPATH, """//android.widget.TextView[@text="Skip, I'll do this later"]""")
+    skip_button.click()
+    time.sleep(5)
+
+def test_navigate_to_profile2(driver):
     profile_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="Profile"]')
     profile_button.click()
 
     profile_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Profile"]')
     assert profile_title.is_displayed()
+    time.sleep(1)
     
-def test_navigate_to_settings(driver):
+def test_navigate_to_settings2(driver):
     settings_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="Settings"]')
     settings_button.click()
     time.sleep(1)
@@ -58,18 +65,13 @@ def test_navigate_to_settings(driver):
     settings_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Settings"]')
     assert settings_title.is_displayed()
 
-def test_navigate_to_change_pin(driver):
+def test_navigate_to_change_pin2(driver):
     change_pin_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="Change PIN"]')
     change_pin_button.click()
     time.sleep(1)
 
     change_pin_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Pin Settings"]')
     assert change_pin_title.is_displayed()
-
-def test_skip_face_id(driver):
-    skip_button = driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Skip, I\'ll do this later']")
-    skip_button.click()
-    time.sleep(1)
 
 def test_touch_id(driver):
     touch_id_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="Add / Change Touch ID"]')
@@ -83,5 +85,10 @@ def test_touch_id(driver):
     assert no_touch_id_found.is_displayed()
     ok_button = driver.find_element(AppiumBy.XPATH, '//android.widget.Button[@resource-id="android:id/button1"]')
     ok_button.click()
+    time.sleep(1)
+
+def test_skip_touch_id(driver):
+    skip_button = driver.find_element(AppiumBy.XPATH, """//android.widget.TextView[@text="Skip, I'll do this later"]""")
+    skip_button.click()
     time.sleep(1)
 

@@ -4,6 +4,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 def test_app_launches(driver):
     assert driver.is_app_installed("com.anonymous.Client")
     driver.activate_app("com.anonymous.Client")
+    time.sleep(5)
 
 
 def test_navigate_to_markets(driver):
