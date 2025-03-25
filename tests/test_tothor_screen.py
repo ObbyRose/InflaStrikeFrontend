@@ -75,5 +75,28 @@ def test_lock_time(driver):
     lock_time_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="3 months"]')
     lock_time_button.click()
 
-    lock_time_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Lock Time"]')
+    lock_time_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Expected interest: 6.7%"]')
     assert lock_time_title.is_displayed()
+
+    lock_time_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="6 months"]')
+    lock_time_button.click()
+
+    lock_time_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Expected interest: 7.8%"]')
+    assert lock_time_title.is_displayed()
+
+    lock_time_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="12 months"]')
+    lock_time_button.click()
+
+    lock_time_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Expected interest: 8.9%"]')
+    assert lock_time_title.is_displayed()
+
+def test_buy_now(driver):
+    buy_now_button = driver.find_element(AppiumBy.XPATH, '//android.view.ViewGroup[@content-desc="Buy now!"]')
+    buy_now_button.click()
+
+    time.sleep(1)
+    buy_now_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@resource-id="com.anonymous.Client:id/alertTitle"]')
+    assert buy_now_title.is_displayed()
+
+    click_ok = driver.find_element(AppiumBy.XPATH, '//android.widget.Button[@resource-id="android:id/button1"]')
+    click_ok.click()
