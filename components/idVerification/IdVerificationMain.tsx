@@ -81,16 +81,15 @@ const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) =
                     </TouchableOpacity>
                 </RoundedBox>
             </Box>
+            {/* Verify Identity Button */}
+            <MyLinearGradient className='mb-4' type='button' color={ isActive ? 'purple' : "disabled-button"}>
+                <Button onPress={() => isActive ? setIsDialogOpen(true) : null}>
+                    <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
+                        Verify My Identity
+                        </ButtonText>
+                </Button>
+            </MyLinearGradient>
         </Box>
-
-        {/* Verify Identity Button */}
-        <MyLinearGradient className='bottom-8' type='button' color={ isActive ? 'purple' : "disabled-button"}>
-            <Button onPress={() => isActive ? setIsDialogOpen(true) : null}>
-                <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
-                    Verify My Identity
-                    </ButtonText>
-            </Button>
-        </MyLinearGradient>
 
         {/* Gluestack ActionSheet */}
         <Actionsheet isOpen={showActionSheet} onClose={() => setShowActionSheet(false)}>
