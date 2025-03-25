@@ -11,7 +11,7 @@ import { useFocusEffect } from '@react-navigation/native';
 const ChatScreen = lazy(() => import('./ChatScreen'));
 const CoinScreen = lazy(() => import('./market/CoinScreen'));
 const PortfolioScreen = lazy(() => import('./PortfolioScreen'));
-const ExchangeScreen = lazy(() => import('./ExchangeScreen'));
+const TradingHistoryScreen = lazy(() => import('./TradingHistoryScreen'));
 
 // 📌 Regular Imports (SettingsScreen Now Loads Instantly)
 import HomeScreen from './HomeScreen';
@@ -171,7 +171,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="TradingHistory">
                   {() => (
                     <Suspense fallback={<OverlayLoading />}>
-                      <ExchangeScreen />
+                      <TradingHistoryScreen />
                     </Suspense>
                   )}
                 </Stack.Screen>
