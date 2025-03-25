@@ -241,5 +241,6 @@ def test_empty_state(driver, wait):
     no_trades_message = wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, '//android.widget.TextView[contains(@text, "No trades found")]')))
     assert no_trades_message.is_displayed(), "Empty state message not shown!"
     driver.back()
+    navigate(wait, "Home")
 
 
