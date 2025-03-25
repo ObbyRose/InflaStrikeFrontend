@@ -1,7 +1,5 @@
 import time
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 def test_kyc_presence(driver):
     kyc_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Verify your identity #1"]')
