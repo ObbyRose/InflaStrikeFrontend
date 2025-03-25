@@ -117,7 +117,7 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MainApp"
+        initialRouteName="Login"
         screenOptions={{
           detachPreviousScreen: true,
           headerShown: false,
@@ -133,7 +133,7 @@ const StackNavigator = () => {
           {({ navigation }) => (
             <MemoizedLayout navigation={navigation}>
               <Stack.Navigator
-                initialRouteName="Login"
+                initialRouteName="Home"
                 screenOptions={{
                   headerShown: false,
                   detachPreviousScreen: true,
