@@ -74,7 +74,6 @@ export const fetchAllCoinsTicker = async () => {
             percentage: curr.priceChangePercent,
             price: curr.lastPrice,
         }))
-        // console.log("RES", JSON.stringify(formatted, null, 2));
         return formatted as tickerData[];
     } catch (error) {
         console.error('Error fetching Binance data:', error);

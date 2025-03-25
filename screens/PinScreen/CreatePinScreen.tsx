@@ -23,8 +23,6 @@ const CreatePinScreen: React.FC<Props> = ({ navigation }) => {
             Vibration.vibrate(50);
             const enteredPin = pin; 
 
-            console.log('✅ Navigating with PIN:', enteredPin);
-
             setTimeout(() => {
                 navigation.navigate('ConfirmPin', { createdPin: enteredPin });
             }, 300);
