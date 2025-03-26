@@ -12,6 +12,7 @@ import SettingItem from '../SettingItems'
 import { Divider } from '../ui/divider'
 import { idVerifyProps, TNavigation } from '@/types/NavigationTypes'
 import { useNavigation } from '@react-navigation/native'
+import { ScrollView } from 'react-native-gesture-handler'
 
 
 const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) => {
@@ -24,7 +25,8 @@ const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) =
     const isActive = !!finalData?.isGov && !!finalData?.isSelfie;
 
     return (
-    <Box className='flex-1 p-4 justify-between'>
+        <ScrollView>
+    <Box className='flex-1 p-4 h-full justify-between'>
         <Box className='gap-4'>
             {/* Government ID Section */}
             <Box>
@@ -86,9 +88,10 @@ const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) =
                 <Button onPress={() => isActive ? setIsDialogOpen(true) : null}>
                     <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
                         Verify My Identity
-                        </ButtonText>
+                    </ButtonText>
                 </Button>
             </MyLinearGradient>
+            <Box className='p-2'></Box>
         </Box>
 
         {/* Gluestack ActionSheet */}
@@ -150,6 +153,7 @@ const IdVerificationMain = ({ handleScreenChange, finalData } : idVerifyProps) =
             </AlertDialogContent>
         </AlertDialog>
     </Box>
+    </ScrollView>
     )
 }
 

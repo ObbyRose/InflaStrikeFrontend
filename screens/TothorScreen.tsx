@@ -17,12 +17,14 @@ const TothorScreen = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <Box className={`bg-background-${appliedTheme} h-full`}>
-    <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className='h-1/4 p-4'>
+    <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
         <BackHeader title='Tothor' colorScheme='alwaysWhite' />
-        <Box className='items-center justify-center gap-4'>
-            <Box className={`p-4 bg-background-${appliedTheme} mt-4 rounded-full z-10`}>
+        <Box className='items-center justify-center'>
+          <Box className='items-center justify-center'>
+            <Box className={`p-4 bg-background-${appliedTheme} rounded-full z-10`}>
               {<IC_Tothor_Logo_Only className='w-16 h-16' color={appliedTheme === 'dark' ? "white":"black"}/>}
             </Box>
+          </Box>
         </Box>
     </MyLinearGradient>
     
