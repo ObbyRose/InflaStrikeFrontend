@@ -23,17 +23,12 @@ import TransactionsScreen from './transactions/TransactionsScreen';
 import Layout from './Layout';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
-import PreferencesScreen from './settings/PreferencesScreen';
 import SupportScreen from './SupportScreen';
-import NotificationSettingsScreen from './settings/NotificationSettingsScreen';
 import MarketsScreen from './market/MarketsScreen';
-import ProfileSettingsScreen from './settings/ProfileSettingsScreen';
 import PaymentMethodScreen from './paymentMethods/PaymentMethodScreen';
 import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
 import PaymentMethodAddedScreen from './paymentMethods/PaymentMethodAddedScreen';
-import SecuritySettingsScreen from './settings/securitySettings/SecuritySettingsScreen';
 import PinSettingsScreen from './settings/securitySettings/PinSettingsScreen';
-import PasswordSettingsScreen from './settings/securitySettings/PasswordSettingsScreen';
 import ChangePinScreen from './PinScreen/ChangePinScreen';
 import CreatePinScreen from './PinScreen/CreatePinScreen';
 import ConfirmPinScreen from './PinScreen/ConfirmPinScreen';
@@ -182,16 +177,11 @@ const StackNavigator = () => {
 
         {/* 🏆 Settings Screens (Instant Load) */}
         <Stack.Screen name="Settings" component={SettingsScreen} />
-        <Stack.Screen name="Preferences" component={PreferencesScreen} />
         <Stack.Screen name="Support" component={SupportScreen} />
-        <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
-        <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
         <Stack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
         <Stack.Screen name="LinkYourCard" component={LinkYourCardScreen} />
         <Stack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />
-        <Stack.Screen name="SecuritySettings" component={SecuritySettingsScreen} />
         <Stack.Screen name="PinSettings" component={PinSettingsScreen} />
-        <Stack.Screen name="PasswordSettings" component={PasswordSettingsScreen} />
         <Stack.Screen name="CreatePin" component={CreatePinScreen} />
         <Stack.Screen name="ConfirmPin" component={ConfirmPinScreen} />
         <Stack.Screen name="EnterChangePin" component={EnterChangePinScreen} />

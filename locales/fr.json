@@ -1,5 +1,1310 @@
 {
     "settings": {
-        "change_language": "Changer de langue"
-    }    
+        "title": "Paramètres",
+		"toggle_theme": "Changer le thème",
+		"change_language": "Changer de langue",
+		"personal_info": "Informations personnelles",
+		"bank_cards": "Banque & Cartes",
+		"notifications": "Notifications",
+		"use_faceid": "Utiliser Face ID pour se connecter",
+		"change_password": "Changer le mot de passe",
+		"pin_settings": "Paramètres du code PIN",
+		"terms": "Conditions d'utilisation",
+		"privacy": "Politique de confidentialité",
+		"help": "Aide",
+		"logout": "Se déconnecter",
+		"sections": {
+			"personal": "Paramètres personnels",
+			"security": "Sécurité",
+			"support": "Assistance"
+		}
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "camera": {
+        "requestingPermission": "Demande d'autorisation de la caméra...",
+        "noAccess": "Pas d'accès à la caméra.",
+        "grantPermission": "Accorder l'autorisation"
+    },
+    "id": {
+        "front": "Avant",
+        "back": "Arrière",
+        "ofYourId": "de votre pièce d'identité",
+        "centerYourFace": "Centre ton visage",
+        "alignFace": "Alignez votre visage au centre de la zone selfie puis prenez une photo",
+        "positionId": "Placez les 4 coins du recto clairement dans le cadre."
+    },
+    "confirm": {
+        "processing": "Traitement de l'image...",
+        "title": "Vérifiez la qualité",
+        "selfieInstruction": "Veuillez vous assurer que votre visage est entièrement visible sans flou ni reflet",
+        "idInstruction": "Veuillez vous assurer que les détails de votre carte sont clairement lisibles sans flou ni reflet",
+        "continue": "Continuer",
+        "retake": "Prendre une nouvelle photo"
+      },
+      "verify": {
+		"govTitle": "Pièce d'identité",
+		"govSubtitle": "Prenez une photo de votre permis, carte d'identité ou passeport.",
+		"takePhoto": "Prendre une photo",
+		"selfieTitle": "Photo selfie",
+		"selfieSubtitle": "Prenez un selfie pour vérifier votre identité.",
+		"takeSelfie": "Prendre un selfie",
+		"verifyButton": "Vérifier mon identité",
+		"driverLicense": "Permis de conduire",
+		"idCard": "Carte d'identité nationale",
+		"passport": "Passeport",
+		"recommended": "Recommandé",
+		"dialogTitle": "Merci ! Nous examinerons vos documents sous 10 minutes",
+		"dialogBody": "Préparez-vous à utiliser Tothor comme application financière quotidienne.",
+		"gotIt": "Compris"
+	},
+    "cardForm": {
+		"headerTitle": "Ajouter une carte de crédit / débit",
+		"title": "Lier votre carte",
+		"agreement": "En ajoutant une nouvelle carte, vous acceptez les",
+		"terms": "conditions de la carte de crédit/débit.",
+		"submit": "Ajouter la carte",
+		"processing": "Traitement en cours...",
+		"placeholders": {
+			"name": "Nom sur la carte",
+			"number": "Numéro de carte",
+			"expiry": "MM/AA",
+			"postal": "Code postal"
+		},
+		"errors": {
+			"nameRequired": "Le nom est requis.",
+			"cardRequired": "Le numéro de carte est requis.",
+			"cardLength": "Le numéro de carte doit contenir exactement 16 chiffres.",
+			"cardInvalid": "Numéro de carte invalide. Seules les cartes Visa et Mastercard sont acceptées.",
+			"postalRequired": "Veuillez entrer un code postal.",
+			"postalInvalid": "Format de code postal invalide.",
+			"expiryRequired": "La date d’expiration est requise.",
+			"expiryFormat": "Format de date invalide (MM/AA).",
+			"expired": "La carte est expirée."
+		}
+	},
+    "cardAdded": {
+		"title": "C’est fait !",
+		"description": "Félicitations ! Votre carte a été ajoutée avec succès",
+		"done": "Terminé"
+	},	
+    "paymentMethods": {
+		"title": "Méthodes de paiement",
+		"cardTitle": "Carte de crédit / débit",
+		"cardSubtitle": "Utilisez une carte Visa ou Mastercard pour effectuer de petits investissements",
+		"wireTitle": "Virement bancaire / SEPA",
+		"wireSubtitle": "Envoyez des fonds via un virement bancaire ou une transaction SEPA."
+	},
+    "pin": {
+		"confirmTitle": "Confirmer le changement de code",
+		"setNew": "Définir un nouveau code PIN",
+		"instruction": "Entrez un code PIN à 4 chiffres ou utilisez l'empreinte",
+		"success": "Code PIN modifié avec succès !",
+		"invalidLength": "Veuillez entrer un code PIN à 4 chiffres.",
+		"fingerprintPrompt": "Confirmer par empreinte",
+		"fingerprintFallback": "Utiliser le code PIN",
+		"fingerprintSuccess": "Empreinte confirmée !",
+		"fingerprintFail": "Échec de l'authentification par empreinte.",
+		"fingerprintUnavailable": "Empreinte digitale non disponible."
+	},
+    "confirmPin": {
+		"header": "Confirmer le code PIN",
+		"title": "Confirmer le code PIN",
+		"subtitle": "Saisissez à nouveau votre code PIN",
+		"success": "✅ Code PIN confirmé !",
+		"failure": "❌ Les codes PIN ne correspondent pas. Réessayez.",
+		"noPinError": "❌ Erreur : aucun code PIN reçu. Veuillez réessayer."
+	},
+    "createPin": {
+		"header": "Créer un code PIN",
+		"title": "Créez votre code PIN",
+		"subtitle": "Créez un code PIN à quatre chiffres pour sécuriser votre compte"
+	},
+    "profile": {
+		"header": "Profil",
+		"todo": {
+			"idStep1Title": "Vérifiez votre identité #1",
+			"idStep2Title": "Vérifiez votre identité #2",
+			"idStep3Title": "Vérifiez votre identité #3",
+			"idStepDescription": "Prenez une photo d'identité et un selfie pour être vérifié",
+			"verifyNow": "Vérifier maintenant"
+		},
+		"settings": {
+			"savingGoals": "Objectifs d'épargne",
+			"start": "+Commencer",
+			"budgets": "Budgets",
+			"bundles": "Abonnements",
+			"invite": "Inviter des amis",
+			"earn": "Gagnez 250 $",
+			"settings": "Paramètres",
+			"logout": "Déconnexion"
+		}
+	},
+    "faceId": {
+		"header": "Configurer Face ID",
+		"title": "Activez Face ID pour un accès rapide",
+		"subtitle": "Utilisez Face ID pour sécuriser votre compte et y accéder plus rapidement.",
+		"enable": "Activer Face ID",
+		"skip": "Passer, je ferai cela plus tard",
+		"alertTitle": "Authentification biométrique",
+		"notSupported": "Votre appareil ne prend pas en charge la biométrie.",
+		"notEnrolled": "Aucun Face ID trouvé. Veuillez d'abord configurer Face ID.",
+		"prompt": "Configurer Face ID",
+		"fallback": "Utiliser le code PIN à la place",
+		"successTitle": "Succès",
+		"successMessage": "Configuration de Face ID terminée.",
+		"failTitle": "Échec de l'authentification",
+		"failMessage": "Veuillez réessayer."
+	},
+    "touchId": {
+		"header": "Configurer Touch ID",
+		"title": "Touch ID pour un paiement plus rapide",
+		"subtitle": "Activez Touch ID pour vous connecter et effectuer vos transactions plus rapidement.",
+		"enable": "Activer Touch ID",
+		"skip": "Passer, je le ferai plus tard",
+		"alertTitle": "Authentification biométrique",
+		"notSupported": "Votre appareil ne prend pas en charge la biométrie.",
+		"notEnrolled": "Aucune empreinte trouvée. Veuillez d'abord en enregistrer une.",
+		"prompt": "Configurer Touch ID",
+		"fallback": "Utiliser le code PIN",
+		"successTitle": "Succès",
+		"successMessage": "Touch ID configuré avec succès.",
+		"failTitle": "Échec de l'authentification",
+		"failMessage": "Veuillez réessayer."
+	},
+    "pinSettings": {
+		"title": "Paramètres du code PIN",
+		"changePin": "Changer le code PIN",
+		"createPin": "Créer un code PIN",
+		"faceId": "Ajouter / Modifier Face ID",
+		"touchId": "Ajouter / Modifier Touch ID"
+	},
+    "home": {
+		"safeToSpend": "Disponible à dépenser",
+		"lastUpdated": "Mis à jour il y a 2 minutes",
+		"actions": {
+			"topup": "Recharger",
+			"transfer": "Transférer",
+			"history": "Historique"
+		},
+		"recommended": "Portefeuilles recommandés",
+		"bundleNote": "Il y a 4 portefeuilles recommandés",
+		"timeframe": "Le mois dernier",
+		"bundles": {
+			"maga": "Portefeuille MAGA",
+			"tothor": "Portefeuille Tothor",
+			"earth": "Portefeuille Terre",
+			"doge": "Portefeuille DOGE"
+		}
+	}
 }
