@@ -1,85 +1,125 @@
-import { View, Text, ScrollView, ImageBackground } from 'react-native';
-import React from 'react';
-import { Props } from 'types/NavigationTypes';
-import { useTheme } from '@/utils/Themes/ThemeProvider';
-import BackHeader from '@/components/BackHeader';
-import { Badge, BadgeText } from '@/components/ui/badge';
-import { Box } from '@/components/ui/box';
-import { IC_BTCUSDT, IC_ETHUSDT, IC_Tothor_Logo_Only_Bold } from '@/utils/constants/Icons';
-import MyLinearGradient from '@/components/gradient/MyLinearGradient';
+import { ScrollView, ImageBackground } from 'react-native'
+import React from 'react'
+import { Props } from 'types/NavigationTypes'
+import { useTheme } from '@/utils/Themes/ThemeProvider'
+import BackHeader from '@/components/BackHeader'
+import { Badge, BadgeText } from '@/components/ui/badge'
+import { Box } from '@/components/ui/box'
+import {
+	IC_BTCUSDT,
+	IC_ETHUSDT,
+	IC_Tothor_Logo_Only_Bold
+} from '@/utils/constants/Icons'
+import MyLinearGradient from '@/components/gradient/MyLinearGradient'
+import { Text } from '@/components/ui/text'
+import { useTranslation } from 'react-i18next'
 
 interface BundleData {
-  title: string;
-  description: string;
-  bestBundleTitle: string;
-  bundleName: string;
-  ytd: string;
-  risk: string;
-  additionalInfo: string;
-  icons: React.ComponentType[];
+	title: string
+	description: string
+	bestBundleTitle: string
+	bundleName: string
+	ytd: string
+	risk: string
+	additionalInfo: string
+	icons: React.ComponentType[]
 }
 
-const icons = [IC_BTCUSDT, IC_ETHUSDT, IC_Tothor_Logo_Only_Bold];
-
-const dummyBundleData: BundleData = {
-  title: 'Make America Great Again',
-  description: 'Invest in the future of America with our exclusive bundle.',
-  bestBundleTitle: 'Top Performing Bundle',
-  bundleName: 'Make America Great Again',
-  ytd: '10% YTD',
-  risk: 'Medium Risk',
-  additionalInfo: `+ ${icons.length.toString()}`,
-  icons: icons,
-};
+const icons = [IC_BTCUSDT, IC_ETHUSDT, IC_Tothor_Logo_Only_Bold]
 
 const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
+	const { appliedTheme } = useTheme()
+	const { t } = useTranslation()
 
-  const { appliedTheme } = useTheme();
-  const bundleData = dummyBundleData;
+	const bundleData: BundleData = {
+		title: t('investments.bundleTitle'),
+		description: t('investments.bundleDescription'),
+		bestBundleTitle: t('investments.bestBundles'),
+		bundleName:'Make America Great Again!',
+		ytd: t('investments.ytd'),
+		risk: t('investments.risk'),
+		additionalInfo: `+ ${icons.length.toString()}`,
+		icons
+	}
 
-  return (
-    <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className='h-full'>
-      <ScrollView>
-        <MyLinearGradient type='background' color={appliedTheme === 'dark' ? 'blue' : 'purple'} className={`h-[70%] p-4`}>
-          <BackHeader title='investments' colorScheme='alwaysWhite' />
-          <Box className='relative gap-4 z-[50]'
-          >
-            <Box className='p-4 justify-center gap-2 items-center'>
-              <Text className={`text-white font-bold text-[36px] text-center`}>Bundles</Text>
-              <Text className={`text-white text-[16px] text-center`}>Diversify your portfolio by investing in the most promising crypto themes</Text>
-            </Box>
+	return (
+		<MyLinearGradient
+			type="background"
+			color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}
+			className="h-full"
+		>
+			<ScrollView>
+				<MyLinearGradient
+					type="background"
+					color={appliedTheme === 'dark' ? 'blue' : 'purple'}
+					className="h-[70%] p-4"
+				>
+					<BackHeader title={t('investments.header')} colorScheme="alwaysWhite" />
 
-            <Box>
-              <Text className={`text-white text-[24px] font-bold flex self-start text-center`}>Best Bundles</Text>
-            </Box>
+					<Box className="relative gap-4 z-[50]">
+						<Box className="p-4 justify-center gap-2 items-center">
+							<Text className="text-white font-bold text-[36px] text-center">
+								{t('investments.bundlesTitle')}
+							</Text>
+							<Text className="text-white text-[16px] text-center">
+								{t('investments.bundlesSubtitle')}
+							</Text>
+						</Box>
 
-            <Box className='relative z-[50] bottom-0 py-2 w-full h-60 rounded-3xl'
-            >
-              <ImageBackground source={require("@assets/images/America.png")} className='h-full w-full rounded-3xl' imageStyle={{ borderRadius: 20 }}>
-                <Text className={`text-white text-[24px] font-bold flex items-center text-center p-4`}>{bundleData.bundleName}</Text>
-                <Box className='absolute top-1/3 gap-2 flex-row p-2 ml-2'>
-                  <Badge variant='solid' action='info' className={`rounded-full bg-card-${appliedTheme}`}>
-                    <BadgeText className='text-sm'>{bundleData.ytd}</BadgeText>
-                  </Badge>
-                  <Badge variant='solid' action='info' className={`rounded-full bg-card-${appliedTheme}`}>
-                    <BadgeText className='text-sm'>{bundleData.risk}</BadgeText>
-                  </Badge>
-                  <Text className={`text-white text-[18px] font-bold flex self-center text-center`}>{bundleData.additionalInfo}</Text>
-                  <ScrollView horizontal showsHorizontalScrollIndicator={false} className='overflow-x'>
-                    {bundleData.icons.map((Icon, index) => (
-                      <Box key={index} style={{ width: 32, height: 32 }}>
-                        <Icon />
-                      </Box>
-                    ))}
-                  </ScrollView>
-                </Box>
-              </ImageBackground>
-            </Box>
-          </Box>
-        </MyLinearGradient>
-      </ScrollView>
-    </MyLinearGradient>
-  );
-};
+						<Box>
+							<Text className="text-white text-[24px] font-bold self-start text-center">
+								{bundleData.bestBundleTitle}
+							</Text>
+						</Box>
 
-export default InvestmentsScreen;
+						<Box className="relative z-[50] bottom-0 py-2 w-full h-60 rounded-3xl">
+							<ImageBackground
+								source={require('@assets/images/America.png')}
+								className="h-full w-full rounded-3xl"
+								imageStyle={{ borderRadius: 20 }}
+							>
+								<Text className="text-white text-[24px] font-bold items-center text-center p-4">
+									{bundleData.bundleName}
+								</Text>
+								<Box className="absolute top-1/3 gap-2 flex-row p-2 ml-2 items-center">
+									<Badge
+										variant="solid"
+										action="info"
+										className={`rounded-full bg-card-${appliedTheme}`}
+									>
+										<BadgeText className="text-sm">{bundleData.ytd}</BadgeText>
+									</Badge>
+									<Badge
+										variant="solid"
+										action="info"
+										className={`rounded-full bg-card-${appliedTheme}`}
+									>
+										<BadgeText className="text-sm">{bundleData.risk}</BadgeText>
+									</Badge>
+
+									<Text className="text-white text-[18px] font-bold self-center">
+										{bundleData.additionalInfo}
+									</Text>
+
+									<ScrollView
+										horizontal
+										showsHorizontalScrollIndicator={false}
+										className="overflow-x"
+									>
+										{bundleData.icons.map((Icon, index) => (
+											<Box key={index} style={{ width: 32, height: 32 }}>
+												<Icon />
+											</Box>
+										))}
+									</ScrollView>
+								</Box>
+							</ImageBackground>
+						</Box>
+					</Box>
+				</MyLinearGradient>
+			</ScrollView>
+		</MyLinearGradient>
+	)
+}
+
+export default InvestmentsScreen

@@ -18,12 +18,10 @@ import HomeScreen from './HomeScreen';
 import InvestmentsScreen from './InvestmentsScreen';
 import NotificationsScreen from './NotificationsScreen';
 import ProfileScreen from './Profile/ProfileScreen';
-import TokenScreen from './TokenScreen';
 import TransactionsScreen from './transactions/TransactionsScreen';
 import Layout from './Layout';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
-import SupportScreen from './SupportScreen';
 import MarketsScreen from './market/MarketsScreen';
 import PaymentMethodScreen from './paymentMethods/PaymentMethodScreen';
 import LinkYourCardScreen from './paymentMethods/LinkYourCardScreen';
@@ -140,7 +138,6 @@ const StackNavigator = () => {
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Tothor" component={TothorScreen} />
                 <Stack.Screen name="Markets" component={MarketsScreen} />
-                <Stack.Screen name="Token" component={TokenScreen} />
                 <Stack.Screen name="Transactions" component={TransactionsScreen} />
                 <Stack.Screen name="Portfolio" component={PortfolioScreen} />
                 <Stack.Screen name="Simulator" component={SimulatorScreen} />
@@ -177,7 +174,6 @@ const StackNavigator = () => {
 
         {/* 🏆 Settings Screens (Instant Load) */}
         <Stack.Screen name="Settings" component={SettingsScreen} />
-        <Stack.Screen name="Support" component={SupportScreen} />
         <Stack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
         <Stack.Screen name="LinkYourCard" component={LinkYourCardScreen} />
         <Stack.Screen name="PaymentMethodAdded" component={PaymentMethodAddedScreen} />

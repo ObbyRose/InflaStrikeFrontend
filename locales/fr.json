@@ -1306,5 +1306,120 @@
 			"earth": "Portefeuille Terre",
 			"doge": "Portefeuille DOGE"
 		}
-	}
+	},
+    "investments": {
+		"header": "investissements",
+		"bundleTitle": "Rendre l'Amérique Grande à Nouveau",
+		"bundleDescription": "Investissez dans l'avenir de l'Amérique avec notre bundle exclusif.",
+		"bestBundles": "Portefeuille le plus performant",
+		"ytd": "10% Annuel",
+		"risk": "Risque moyen",
+		"bundlesTitle": "Portefeuilles",
+		"bundlesSubtitle": "Diversifiez votre portefeuille avec les thèmes crypto les plus prometteurs"
+	},
+    "layout": {
+		"tabs": {
+			"home": "Accueil",
+			"markets": "Marchés",
+			"tothor": "Tothor",
+			"investment": "Investir",
+			"profile": "Profil"
+		}
+	},
+    "notifications": {
+		"title": "Notifications",
+		"remove": "Supprimer",
+		"items": {
+			"waiting": {
+				"title": "Commande en attente d'approbation",
+				"message": "Votre commande a été reçue et sera bientôt vérifiée par notre équipe",
+				"timeAgo": "il y a 5 minutes"
+			},
+			"shipped": {
+				"title": "Commande expédiée",
+				"message": "Votre commande est en route !",
+				"timeAgo": "il y a 10 minutes"
+			},
+			"success": {
+				"title": "Paiement réussi",
+				"message": "Votre paiement a été reçu avec succès.",
+				"timeAgo": "il y a 5 heures"
+			}
+		}
+	},
+    "tothor": {
+		"heading": "Économisez avec Tothor",
+		"description": "Tothor est un jeton crypto qui génère des intérêts au fil du temps. Gardez-le et regardez vos actifs croître sans effort ! 🚀",
+		"tokenTitle": "Le jeton Tothor (TTS$)",
+		"currentPrice": "Prix actuel",
+		"tokenEquation": "1 Jeton Tothor = 0,722 $",
+		"cta": "Commencer à épargner avec Tothor"
+	},
+    "dropdown": {
+		"entry_date": "Date d'entrée",
+		"exit_date": "Date de sortie",
+		"lock_for": "Bloquer pendant :",
+		"months": "mois",
+		"months_3": "3 mois",
+		"months_6": "6 mois",
+		"months_12": "12 mois",
+		"expected_interest": "Intérêt attendu",
+		"buy_now": "Acheter maintenant !",
+		"alert": {
+			"soon_title": "Bientôt disponible",
+			"soon_msg": "L'option d'achat sera ajoutée bientôt, veuillez patienter :)",
+			"missing_title": "Champs manquants",
+			"missing_msg": "Veuillez choisir une valeur et une durée de verrouillage"
+		}
+	},
+    "coinScreen": {
+		"tabs": {
+			"price": "Prix",
+			"depth": "Profondeur",
+			"info": "Infos"
+		}
+	},
+    "markets": {
+		"title": "Marchés",
+		"search_placeholder": "Rechercher une crypto..."
+	},
+    "coinInfo": {
+		"about": "À propos de",
+		"read_more": "Lire plus",
+		"description": "Description",
+		"market_cap": "Capitalisation boursière",
+		"circulating_supply": "Offre en circulation",
+		"total_supply": "Offre totale",
+		"max_supply": "Offre maximale",
+		"website": "Site Web",
+		"loading": "Chargement des données de la cryptomonnaie..."
+	},
+    "coinOrderHistory": {
+		"order_book": "Carnet d'ordres",
+		"trade_history": "Historique des transactions",
+		"buy": "Acheter",
+		"sell": "Vendre"
+	},
+    "orderBook": {
+        "price": "Prix",
+        "amount": "Quantité",
+        "usdt": "USDT",
+        "coin": "Pièce"
+    },
+        "trade": {
+            "buy": "Acheter",
+            "sell": "Vendre",
+            "selectType": "Sélectionner le type de transaction",
+            "available": "Disponible",
+            "error": {
+                "selectType": "Veuillez sélectionner un type de transaction",
+                "enterAmount": "Veuillez entrer un montant",
+                "invalidAmount": "Montant invalide. Veuillez entrer une valeur entre 0 et {{limit}}"
+                },
+                "success": {
+                    "title": "Félicitations ! Vous avez {{action}} {{amount}} {{symbol}} avec succès",
+                    "buy": "acheté",
+                    "sell": "vendu"
+            }
+    }
 }

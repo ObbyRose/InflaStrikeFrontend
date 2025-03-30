@@ -861,5 +861,120 @@
                 "earth": "Earth Bundle",
                 "doge": "DOGE Bundle"
             }
+        },
+        "investments": {
+            "header": "investments",
+            "bundleTitle": "Make America Great Again",
+            "bundleDescription": "Invest in the future of America with our exclusive bundle.",
+            "bestBundles": "Top Performing Bundle",
+            "ytd": "10% YTD",
+            "risk": "Medium Risk",
+            "bundlesTitle": "Bundles",
+            "bundlesSubtitle": "Diversify your portfolio by investing in the most promising crypto themes"
+        },
+        "layout": {
+            "tabs": {
+                "home": "Home",
+                "markets": "Markets",
+                "tothor": "Tothor",
+                "investment": "Investment",
+                "profile": "Profile"
+            }
+        },
+        "notifications": {
+            "title": "Notifications",
+            "remove": "Remove",
+            "items": {
+                "waiting": {
+                    "title": "Order Waiting for approval",
+                    "message": "Your order has been received and will be checked soon by our team",
+                    "timeAgo": "5 mins ago"
+                },
+                "shipped": {
+                    "title": "Order Shipped",
+                    "message": "Your order is on the way!",
+                    "timeAgo": "10 mins ago"
+                },
+                "success": {
+                    "title": "Payment Successful",
+                    "message": "Your payment was received successfully.",
+                    "timeAgo": "5 hours ago"
+                }
+            }
+        },
+        "tothor": {
+            "heading": "Save Money With Tothor",
+            "description": "Tothor is a crypto token that computes interest over time. Hold and watch your assets grow effortlessly! 🚀",
+            "tokenTitle": "The Tothor Token (TTS$)",
+            "currentPrice": "Current Price",
+            "tokenEquation": "1 Tothor Token = $0.722",
+            "cta": "Start Saving With Tothor"
+        },
+        "dropdown": {
+            "entry_date": "Entry date",
+            "exit_date": "Exit date",
+            "lock_for": "Lock for:",
+            "months": "months",
+            "months_3": "3 months",
+            "months_6": "6 months",
+            "months_12": "12 months",
+            "expected_interest": "Expected interest",
+            "buy_now": "Buy now!",
+            "alert": {
+                "soon_title": "Coming Soon",
+                "soon_msg": "Buying option will be added soon, please wait :)",
+                "missing_title": "Missing Fields",
+                "missing_msg": "Please make sure you chose both a value and a time you want to lock it for"
+            }
+        },
+        "coinScreen": {
+            "tabs": {
+                "price": "Price",
+                "depth": "Depth",
+                "info": "Info"
+            }
+        },
+        "markets": {
+            "title": "Markets",
+            "search_placeholder": "Search Crypto..."
+        },
+        "coinInfo": {
+            "about": "About",
+            "read_more": "Read More",
+            "description": "Description",
+            "market_cap": "Market Cap",
+            "circulating_supply": "Circulating Supply",
+            "total_supply": "Total Supply",
+            "max_supply": "Max Supply",
+            "website": "Website",
+            "loading": "Loading Coin Data..."
+        },
+        "coinOrderHistory": {
+            "order_book": "Order Book",
+            "trade_history": "Trade History",
+            "buy": "Buy",
+            "sell": "Sell"
+        },
+        "orderBook": {
+            "price": "Price",
+            "amount": "Amount",
+            "usdt": "USDT",
+            "coin": "Coin"
+        },
+        "trade": {
+            "buy": "Buy",
+            "sell": "Sell",
+            "selectType": "Select transaction type",
+            "available": "Avbl",
+            "error": {
+                "selectType": "Please select a transaction type",
+                "enterAmount": "Please enter the amount",
+                "invalidAmount": "Invalid amount. Please enter a valid amount from 0 to {{limit}}"
+            },
+            "success": {
+                "title": "Congratulations! You have successfully {{action}} {{amount}} {{symbol}}",
+                "buy": "bought",
+                "sell": "sold"
+            }
         }
     }

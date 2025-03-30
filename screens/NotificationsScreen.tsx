@@ -1,77 +1,81 @@
-import React, { useState } from "react";
-import { ScrollView, Animated, Text, TouchableOpacity } from "react-native";
-import { Swipeable } from "react-native-gesture-handler";
-import NotificationCard from "@/components/NotificationCard";
-import { Box } from "@/components/ui/box";
-import { useTheme } from "@/utils/Themes/ThemeProvider";
-import BackHeader from "@/components/BackHeader";
-import MyLinearGradient from "@/components/gradient/MyLinearGradient";
-import CardUpRounded from "@/components/CardUpRounded";
-
-const initialNotifications = [
-  {
-    id: 1,
-    title: "Order Waiting for approval",
-    message: "Your order has been received and will be checked soon by our team",
-    timeAgo: "5 mins ago",
-  },
-  {
-    id: 2,
-    title: "Order Shipped",
-    message: "Your order is on the way!",
-    timeAgo: "10 mins ago",
-  },
-  {
-    id: 3,
-    title: "Payment Successful",
-    message: "Your payment was received successfully.",
-    timeAgo: "5 hours ago",
-  },
-];
+import React, { useState } from "react"
+import { ScrollView, Animated, Text, TouchableOpacity } from "react-native"
+import { Swipeable } from "react-native-gesture-handler"
+import NotificationCard from "@/components/NotificationCard"
+import { Box } from "@/components/ui/box"
+import { useTheme } from "@/utils/Themes/ThemeProvider"
+import BackHeader from "@/components/BackHeader"
+import MyLinearGradient from "@/components/gradient/MyLinearGradient"
+import CardUpRounded from "@/components/CardUpRounded"
+import { useTranslation } from "react-i18next"
 
 const NotificationsScreen = () => {
-  const { appliedTheme } = useTheme();
-  const [notifications, setNotifications] = useState(initialNotifications);
+	const { appliedTheme } = useTheme()
+	const { t } = useTranslation()
 
-  // ✅ Remove notification function
-  const handleRemoveNotification = (id: number) => {
-    setNotifications((prev) => prev.filter((notification) => notification.id !== id));
-  };
+	const [notifications, setNotifications] = useState([
+		{
+			id: 1,
+			title: t("notifications.items.waiting.title"),
+			message: t("notifications.items.waiting.message"),
+			timeAgo: t("notifications.items.waiting.timeAgo")
+		},
+		{
+			id: 2,
+			title: t("notifications.items.shipped.title"),
+			message: t("notifications.items.shipped.message"),
+			timeAgo: t("notifications.items.shipped.timeAgo")
+		},
+		{
+			id: 3,
+			title: t("notifications.items.success.title"),
+			message: t("notifications.items.success.message"),
+			timeAgo: t("notifications.items.success.timeAgo")
+		}
+	])
 
-  // ✅ Render delete button behind the notification
-  const renderRightActions = (progress: Animated.AnimatedInterpolation<number>, id: number) => (
-    <TouchableOpacity
-      onPress={() => handleRemoveNotification(id)}
-      className="bg-red-600 justify-center items-center w-20 rounded-lg"
-    >
-      <Text className="text-white font-semibold">Remove</Text>
-    </TouchableOpacity>
-  );
+	const handleRemoveNotification = (id: number) => {
+		setNotifications(prev => prev.filter(notification => notification.id !== id))
+	}
 
-  return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      {/* Header with Gradient */}
-      <MyLinearGradient type="background" color={appliedTheme === "dark" ? "blue" : "purple"} className="h-1/6 p-4">
-        <BackHeader title="Notifications" colorScheme="alwaysWhite" />
-      </MyLinearGradient>
+	const renderRightActions = (
+		progress: Animated.AnimatedInterpolation<number>,
+		id: number
+	) => (
+		<TouchableOpacity
+			onPress={() => handleRemoveNotification(id)}
+			className="bg-red-600 justify-center items-center w-20 rounded-lg"
+		>
+			<Text className="text-white font-semibold">{t("notifications.remove")}</Text>
+		</TouchableOpacity>
+	)
 
-      {/* Notification List inside Styled Card */}
-      <CardUpRounded className={`bg-background-${appliedTheme} h-full p-4 gap-2 space-y-4`}>
-        {notifications.map((notification) => (
-          <Swipeable
-            key={notification.id}
-            renderRightActions={(progress) => renderRightActions(progress, notification.id)}
-          >
-            <NotificationCard
-              title={notification.title}
-              message={notification.message}
-              timeAgo={notification.timeAgo}
-            />
-          </Swipeable>
-        ))}
-      </CardUpRounded>
-    </ScrollView>
-  );
-};
+	return (
+		<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+			<MyLinearGradient
+				type="background"
+				color={appliedTheme === "dark" ? "blue" : "purple"}
+				className="h-1/6 p-4"
+			>
+				<BackHeader title={t("notifications.title")} colorScheme="alwaysWhite" />
+			</MyLinearGradient>
 
-export default NotificationsScreen;
+			<CardUpRounded className={`bg-background-${appliedTheme} h-full p-4 gap-2 space-y-4`}>
+				{notifications.map(notification => (
+					<Swipeable
+						key={notification.id}
+						renderRightActions={progress => renderRightActions(progress, notification.id)}
+					>
+						<NotificationCard
+							title={notification.title}
+							message={notification.message}
+							timeAgo={notification.timeAgo}
+						/>
+					</Swipeable>
+				))}
+			</CardUpRounded>
+		</ScrollView>
+	)
+}
+
+export default NotificationsScreen
