@@ -28,7 +28,7 @@ const PinSettingsScreen: React.FC<Props> = ({ navigation }) => {
 				color={appliedTheme === 'light' ? 'purple' : 'blue'}
 				className="h-[25%]"
 			>
-				<BackHeader />
+				<BackHeader colorScheme='alwaysWhite' />
 				<Box className="h-[45%] justify-end p-4">
 					<Text className="text-[24px] font-bold text-white">
 						{t('pinSettings.title')}
