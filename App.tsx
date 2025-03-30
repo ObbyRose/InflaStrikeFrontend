@@ -11,6 +11,8 @@ import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { I18nManager } from 'react-native';
 import { useEffect } from 'react';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 
 export default function App() {
 
@@ -24,16 +26,18 @@ export default function App() {
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>
-        <ThemeProvider>
-          <PaperProvider>
-            <GluestackUIProvider>
-              <ToastProvider>
-                <StackNavigator />
-                <StatusBar backgroundColor="#5506FD" barStyle="light-content" />
-              </ToastProvider>
-            </GluestackUIProvider>
-          </PaperProvider>
-        </ThemeProvider>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider>
+            <PaperProvider>
+              <GluestackUIProvider>
+                <ToastProvider>
+                  <StackNavigator />
+                  <StatusBar backgroundColor="#5506FD" barStyle="light-content" />
+                </ToastProvider>
+              </GluestackUIProvider>
+            </PaperProvider>
+          </ThemeProvider>
+        </I18nextProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

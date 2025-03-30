@@ -5,6 +5,7 @@ import SettingItem from '../../components/SettingItems';
 import {
   IC_Bell_V2,
   IC_Card_V2,
+  IC_CurrentLocation,
   IC_FaceID_V2,
   IC_Help_V2,
   IC_Logout_V2,
@@ -24,10 +25,22 @@ import { Text } from '@/components/ui/text';
 import PurpleSwitch from '@/components/PurpleSwitch';
 import CardUpRounded from '@/components/CardUpRounded';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
+import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { appliedTheme, setTheme } = useTheme();
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
+
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState(i18n.language);
+
+  const changeLanguage = async () => {
+    const newLang = language === 'en' ? 'fr' : 'en';
+    await AsyncStorage.setItem('language', newLang);
+    i18n.changeLanguage(newLang);
+    setLanguage(newLang);
+  };
 
   return (
     <Box className="h-full">
@@ -39,7 +52,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         </MyLinearGradient>
 
         {/* <ScrollView className={`relative flex h-full w-full gap-3  bg-transparent`}> */}
-              <CardUpRounded className='p-0'>
+        <CardUpRounded className='p-0'>
           <ScrollView bounces={false}>
               {/* Personal setting  */}
               <Box className={`flex gap-2 z-10 mb-2 w-full rounded-t-3xl  p-4`}>
@@ -53,6 +66,14 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                   title="Toggle Theme"
                   IconComponent={IC_ThemeSettings}
                   badge={appliedTheme}
+                  />
+                </TouchableOpacity>
+                <Divider />
+                <TouchableOpacity
+                  onPress={() => changeLanguage()}>
+                  <SettingItem
+                  title={t("settings.change_language")}
+                  IconComponent={IC_CurrentLocation}
                   />
                 </TouchableOpacity>
                 <Divider />
@@ -123,7 +144,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                 </Box>
               </Box>
           </ScrollView>
-          </CardUpRounded>
+        </CardUpRounded>
     </Box>
   );
 };
