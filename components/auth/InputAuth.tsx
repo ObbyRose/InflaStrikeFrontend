@@ -307,7 +307,7 @@ function InputAuth({
                     </Pressable>
                 :
                 <>{type !== "numeric-control" && IconComponent && 
-                    <IconComponent className="absolute right-4 w-7 h-7"
+                    <IconComponent className="absolute right-0 h-7 z-[9999] bg-white w-[50px]"
                     color={appliedTheme === "dark" ? "white": ""} />}</>
                 }
 

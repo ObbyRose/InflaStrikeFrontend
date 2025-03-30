@@ -7,17 +7,19 @@ import { Button, ButtonText } from '../ui/button';
 import CountryPhoneInput from '../profile/CountryPhoneInput';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import MyLinearGradient from '../gradient/MyLinearGradient';
+import { useTranslation } from 'react-i18next';
 
 function SignupPhoneNumber({ handleScreenChange, formHook } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const { values, errors, handleInputChange, setErrorByFields } =  formHook;
     const { phoneNumber, phonePrefix } = values
 
     const handlePhoneSubmit = () => {
         if(!phoneNumber?.trim())
-            setErrorByFields({ phoneNumber: "Phone number is required"})
+            setErrorByFields({ phoneNumber: t('signupPhoneNumber.phoneNumberRequired')})
         else if(phoneNumber.length < 9)
-            setErrorByFields({ phoneNumber: "Phone number is too short"})
+            setErrorByFields({ phoneNumber: t('signupPhoneNumber.phoneNumberTooShort')})
         else
             handleScreenChange('next')
     }
@@ -32,9 +34,9 @@ function SignupPhoneNumber({ handleScreenChange, formHook } : SignUpScreensProps
             <Box>
                 {/* Titles */}
                 <Box className='mb-7 gap-2'>
-                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Phone Number</Text>
+                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>{t('signupPhoneNumber.phoneNumber')}</Text>
                     <Text className={`text-subText-${appliedTheme} text-lg`}>
-                        {"Simply enter your phone number."}
+                        {t('signupPhoneNumber.enterPhoneNumber')}
                     </Text>
                 </Box>
             
@@ -51,7 +53,7 @@ function SignupPhoneNumber({ handleScreenChange, formHook } : SignUpScreensProps
                 <MyLinearGradient type='button' color='purple'>
                     <Button onPress={() => handlePhoneSubmit()}>
                         <ButtonText className="text-white">
-                            Continue
+                            {t('signupPhoneNumber.continueButton')}
                         </ButtonText>
                     </Button>
                 </MyLinearGradient>

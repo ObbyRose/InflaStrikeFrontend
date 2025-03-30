@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native";
 import { SignUpScreensProps } from "@/types/NavigationTypes";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Text } from "../ui/text";
+import { useTranslation } from "react-i18next";
 
 interface BackAuthProps{
     handleScreenChange: (newScreenStep: 'back' | 'next' | string, data?: any, fromEdit?: boolean) => void;
@@ -17,11 +18,12 @@ interface BackAuthProps{
 }
 function BackAuth({ handleScreenChange, headerStep, theme, title, icons, onPressIcons}: BackAuthProps) {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     
     function handleBackPress() {
         handleScreenChange('back');
     }
-    console.log(theme)
+
     return (
         <SafeAreaView className="z-50">
             <Box className={`flex-row justify-between p-6 items-center relative`}>
@@ -44,7 +46,7 @@ function BackAuth({ handleScreenChange, headerStep, theme, title, icons, onPress
                 {headerStep && 
                 <Box className={`items-center justify-center rounded-full p-3 bg-card-${appliedTheme}`}>
                     <Text className={`font-semibold text-text-${appliedTheme}`}>
-                        {`Step ${headerStep} of 3`}
+                        {t('backAuth.step', { step: headerStep, totalSteps: 3 })}
                     </Text>
                 </Box>
                 }

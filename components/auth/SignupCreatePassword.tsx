@@ -8,10 +8,12 @@ import InputAuth from './InputAuth';
 import { IM_PhoneHandPassword } from '@/utils/constants/Images';
 import MyLinearGradient from '../gradient/MyLinearGradient';
 import { IC_Vi } from '@/utils/constants/Icons';
+import { useTranslation } from 'react-i18next';
 
 
 function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const { values, handleInputChange } =  formHook;
     const { pass } = values
 
@@ -36,9 +38,9 @@ function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensPr
             <Box className='flex-1 justify-between gap-5'>  
                 {/* Titles */}
                 <Box className='gap-2'>
-                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Create Password</Text>
+                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>{t('signupCreatePassword.createPassword')}</Text>
                     <Text className={`text-subText-${appliedTheme} text-lg`}>
-                        {`Choose a secure password that will be easy for you to remember.`}
+                        {t('signupCreatePassword.chooseSecurePassword')}
                     </Text>
                 </Box>
 
@@ -46,7 +48,7 @@ function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensPr
                 <Box className="flex-1 gap-2">
                     <InputAuth 
                         icon="IC_Lock" 
-                        placeholder='Password' 
+                        placeholder={t('signupCreatePassword.passwordPlaceholder')}
                         type='pass'
                         value={pass}
                         onChangeText={(val) => handleInputChange("pass", val)}
@@ -57,17 +59,17 @@ function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensPr
                         <Box className='flex-row gap-3 items-center'>
                             <IC_Vi className='w-5 h-5 justify-center items-center' 
                                 color={isRightLength ? "green" : ""} />
-                            <Text className={`text-subText-${appliedTheme}`}>Has at least 8 characters</Text>
+                            <Text className={`text-subText-${appliedTheme}`}>{t('signupCreatePassword.hasAtLeast8Chars')}</Text>
                         </Box>
                         <Box className='flex-row gap-3 items-center'>
                             <IC_Vi className='w-5 h-5 justify-center items-center' 
                                 color={hasUppercaseOrSymbol ? 'green' : ''} />
-                            <Text className={`text-subText-${appliedTheme}`}>Has an uppercase letter or symbol</Text>
+                            <Text className={`text-subText-${appliedTheme}`}>{t('signupCreatePassword.hasUppercaseOrSymbol')}</Text>
                         </Box>
                         <Box className='flex-row gap-3 items-center'>
                             <IC_Vi className='w-5 h-5 justify-center items-center' 
                                 color={hasNumber ? 'green' : ''} />
-                            <Text className={`text-subText-${appliedTheme}`}>Has a number</Text>
+                            <Text className={`text-subText-${appliedTheme}`}>{t('signupCreatePassword.hasNumber')}</Text>
                         </Box>
                     </Box>
                 </Box>
@@ -81,7 +83,7 @@ function SignupCreatePassword({ handleScreenChange, formHook } : SignUpScreensPr
                     <Button onPress={() => isActive ? handlePassSubmit() : null}>
                         <ButtonText 
                         className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
-                            Continue
+                            {t('signupCreatePassword.continueButton')}
                         </ButtonText>
                     </Button>
                 </MyLinearGradient>

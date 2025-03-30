@@ -14,11 +14,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import SignupCreatePassword from '@/components/auth/SignupCreatePassword'
 import SignupAddress from '@/components/auth/SignupAddress'
 import SignupAlmostThere from '@/components/auth/SignupAlmostThere'
-import { Address, SignupFinalDataType } from '@/types/other'
+import { Address } from '@/types/other'
 import { useFormInput } from '@/hooks/useFormInput'
 import SignupEmail from '@/components/auth/SignupEmail'
-
-// const dummyFinalData = {"address": {"city": "נס ציונה", "coords": {"lat": 31.9293254, "lng": 34.7947742}, "country": "ישראל", "postal": "7054112", "street": "עמק השושנים", "subpremise": "Ap12"}, "birthday": "12/11/2007", "fName": "Xhjzus", "lName": "Jdjdis", "pass": "Xhxhsjwiieiei3i322", "phoneNumber": "+1 268 89764646616", "ssn": "7716"};
 
 const Signup: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();

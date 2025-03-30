@@ -21,6 +21,7 @@ import { PieChart } from 'react-native-gifted-charts';
 import MyLinearGradient from '@/components/gradient/MyLinearGradient';
 import CardUpRounded from '@/components/CardUpRounded';
 import { dummyTrades } from '@/utils/constants/data';
+import { useTranslation } from 'react-i18next';
 
 interface PortfolioData {
   value: number;
@@ -63,20 +64,7 @@ const pieData: PortfolioData[] = [
   },
 ];
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+
 function getAppropriateColor(currencyName: string) {
   const topCryptocurrencies = [
     { name: 'Available Money', color: 'purple' },
@@ -108,6 +96,7 @@ const dummyQuickBuy = [IC_BTCUSDT, IC_ETHUSDT, IC_XRPUSDT, IC_DOGEUSDT, IC_Totho
 
 const PortfolioScreen = ({ navigation }: Props) => {
   const { appliedTheme } = useTheme();
+  const { t } = useTranslation();
   const [selectedSlice, setSelectedSlice] = useState(pieData[0].symbol);
 
   const renderLegendComponent = () => {
@@ -141,14 +130,14 @@ const PortfolioScreen = ({ navigation }: Props) => {
         type="background"
         color={appliedTheme === 'dark' ? 'blue' : 'purple'}
         className="h-[120px] p-4">
-        <BackHeader title="Portfolio" colorScheme="alwaysWhite" />
+        <BackHeader title={t('portfolioScreen.portfolio')} colorScheme="alwaysWhite" />
       </MyLinearGradient>
 
       <CardUpRounded className={`flex flex-1 px-4 py-6`}>
         <Box className="mt-2 gap-1">
-          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>Portfolio Value</Text>
+          <Text className={`text-3xl font-bold text-text-${appliedTheme}`}>{t('portfolioScreen.portfolioValue')}</Text>
           <Text className={`text-subText-${appliedTheme}`}>
-            You've spent $289.23 more than last month
+              {t('portfolioScreen.spentMoreThanLastMonth', { amount: "$289.23" })}
           </Text>
         </Box>
 
@@ -157,8 +146,6 @@ const PortfolioScreen = ({ navigation }: Props) => {
           <PieChart
             data={pieData}
             donut
-            // showTooltip
-            // showText
             showValuesAsLabels
             textSize={20}
             showGradient
@@ -193,11 +180,11 @@ const PortfolioScreen = ({ navigation }: Props) => {
         {/* Portfolio Value */}
         <Box className="my-3 gap-3">
           <Box className="flex-row justify-between">
-            <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>Market</Text>
+            <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>{t('portfolioScreen.market')}</Text>
             <Text
-              className={`text-[#0A6CFF]`}
-              onPress={() => navigation.navigate('MainApp', { screen: 'Markets' })}>
-              See All
+                className={`text-[#0A6CFF]`}
+                onPress={() => navigation.navigate('MainApp', { screen: 'Markets' })}>
+                {t('portfolioScreen.seeAll')}
             </Text>
           </Box>
           <FlatList
@@ -217,14 +204,14 @@ const PortfolioScreen = ({ navigation }: Props) => {
         <Box>
           <Box className="my-4 flex-row items-center justify-between">
             <Text className={`text-xl font-semibold text-text-${appliedTheme}`}>
-              Transactions History
+                {t('portfolioScreen.transactionsHistory')}
             </Text>
             <Text
-              className="text-[#0A6CFF]"
-              onPress={() => {
-                navigation.navigate('MainApp', { screen: 'TradingHistory' });
-              }}>
-              See All
+                className="text-[#0A6CFF]"
+                onPress={() => {
+                    navigation.navigate('MainApp', { screen: 'TradingHistory' });
+                }}>
+                {t('portfolioScreen.seeAll')}
             </Text>
           </Box>
 
@@ -232,12 +219,12 @@ const PortfolioScreen = ({ navigation }: Props) => {
           <Box className={`p-y-4 flex-1 rounded-lg bg-card-${appliedTheme}`}>
             <Box className="flex-row p-2">
               <Text className={`w-8 text-center text-text-${appliedTheme}`}> </Text>
-              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>Price</Text>
+              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>{t('portfolioScreen.price')}</Text>
               <Box className="items-between flex-1">
-                <Text className={`text-center text-text-${appliedTheme}`}>Amount</Text>
+                  <Text className={`text-center text-text-${appliedTheme}`}>{t('portfolioScreen.amount')}</Text>
               </Box>
-              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>Time</Text>
-              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>Transaction</Text>
+              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>{t('portfolioScreen.time')}</Text>
+              <Text className={`flex-1 self-center text-center text-text-${appliedTheme}`}>{t('portfolioScreen.transaction')}</Text>
             </Box>
 
             {dummyTrades.slice(0, 3).map((item) => (
@@ -259,7 +246,7 @@ const PortfolioScreen = ({ navigation }: Props) => {
 
             {dummyTrades.length === 0 && (
               <Box className="py-10">
-                <Text className="text-center text-gray-400">No trades found</Text>
+                <Text className="text-center text-gray-400">{t('portfolioScreen.noTradesFound')}</Text>
               </Box>
             )}
           </Box>

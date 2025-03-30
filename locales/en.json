@@ -1,4 +1,146 @@
 {
+    "login": {
+        "welcome": "Welcome",
+        "signInToAccount": "Sign in to your account",
+        "emailPlaceholder": "Email",
+        "passwordPlaceholder": "Password",
+        "signInButton": "Sign In",
+        "forgotPassword": "Forgot password ?",
+        "dontHaveAccount": "Don't have an account?",
+        "signUpLink": "Sign Up",
+        "emailRequired": "Email is required.",
+        "invalidEmailFormat": "Invalid email format.",
+        "passwordRequired": "Password is required.",
+        "passwordMinLength": "Password must be at least 6 characters."
+    },
+    "signupEmail": {
+        "signIn": "Sign In",
+        "enterEmailToLoginOrCreate": "Simply enter your email to login or\ncreate an account.",
+        "emailPlaceholder": "Email",
+        "agreeToTerms": "By using our mobile app, you agree to our ",
+        "termsOfUse": "Terms of Use",
+        "and": " and ",
+        "privacyPolicy": "Privacy Policy",
+        "continueButton": "Continue",
+        "emailRequired": "Email is required",
+        "invalidEmailFormat": "Invalid email format"
+    },
+    "verifyEmail": {
+        "verifyYourEmail": "Verify your email",
+        "emailSentInstructions": "We sent a verification email to. Please tap the link inside that email to continue.",
+        "checkInboxButton": "Check my inbox",
+        "resendEmailButton": "Resend email",
+        "resendInTimer": "Resend in {{timer}}s",
+        "successToastTitle": "Success",
+        "successToastMessage": "Email has been sent to \nyour inbox"
+    },
+    "signupPhoneNumber": {
+        "phoneNumber": "Phone Number",
+        "enterPhoneNumber": "Simply enter your phone number.",
+        "continueButton": "Continue",
+        "phoneNumberRequired": "Phone number is required",
+        "phoneNumberTooShort": "Phone number is too short"
+    },
+    "signupVerifyPhone": {
+        "confirm": "Confirm",
+        "enterCodeSentTo": "Please enter the 4-digit code just sent to {{phoneNumber}}",
+        "resendCode": "Resend code",
+        "resendCodeIn": "Resend code in 00:{{timer}}",
+        "successToastTitle": "Success",
+        "successToastMessage": "Code has been sent to your \nphone number"
+    },
+    "signupCreatePassword": {
+        "createPassword": "Create Password",
+        "chooseSecurePassword": "Choose a secure password that will be easy for you to remember.",
+        "passwordPlaceholder": "Password",
+        "hasAtLeast8Chars": "Has at least 8 characters",
+        "hasUppercaseOrSymbol": "Has an uppercase letter or symbol",
+        "hasNumber": "Has a number",
+        "continueButton": "Continue"
+    },
+    "signupPersonalInformation": {
+        "personalInfo": "Personal info",
+        "verifyApplicationDetails": "We ask for your personal information to verify your application details.",
+        "firstNamePlaceholder": "First Name",
+        "lastNamePlaceholder": "Last Name",
+        "dateOfBirthPlaceholder": "Date of birth (MM / DD / YYYY)",
+        "ssnPlaceholder": "Social security number (last 4 digits)",
+        "encryptionInfo": "We use 128-bit encryption for security, and this is only used for identity verification purpose.",
+        "continueButton": "Continue"
+    },
+    "backAuth": {
+        "step": "Step {{step}} of {{totalSteps}}"
+    },
+    "signupAddress": {
+        "homeAddress": "Home address",
+        "sendDebitCard": "Let us know where we should send your\nJuta Mastercard® Debit Card.",
+        "streetAddressPlaceholder": "Street address",
+        "cityPlaceholder": "City",
+        "statePlaceholder": "State",
+        "zipCodePlaceholder": "Zip Code",
+        "selectAnotherAddress": "Select Another Address",
+        "continueButton": "Continue"
+    },
+    "addressSearch": {
+        "searchAddress": "Search address",
+        "streetNameOnly": "Street name only (no city or country)",
+        "currentLocation": "Current location",
+        "address": "Address",
+        "loading": "Loading...",
+        "startSearching": "Start searching...",
+        "noResultsFound": "No results found",
+        "addressDetail": "Address Detail",
+        "aptSuiteNumber": "Please let us know if you have an apartment or unit number.",
+        "streetAddress": "Street address",
+        "aptSuiteNumberPlaceholder": "Apt / Suite number",
+        "continueButton": "Continue"
+    },
+    "signupAlmostThere": {
+        "almostThere": "Almost there!",
+        "ensureInfoCorrect": "Please take a moment to ensure all of the information you provide is correct.",
+        "fullLegalName": "Full Legal Name",
+        "dateOfBirth": "Date of Birth",
+        "socialSecurityNumber": "Social Security Number",
+        "residentialAddress": "Residential Address",
+        "edit": "Edit",
+        "continueButton": "Continue"
+    },
+    "membershipModal": {
+        "congratulations": "Congratulations",
+        "youAreMemberNow": "You are member now!",
+        "getReadyToStart": "Get ready to start using Juto for your daily financial app.",
+        "imReadyToStart": "I'm ready to start"
+    },
+    "portfolioScreen": {
+        "portfolio": "Portfolio",
+        "portfolioValue": "Portfolio Value",
+        "spentMoreThanLastMonth": "You've spent {{amount}} more than last month",
+        "market": "Market",
+        "seeAll": "See All",
+        "transactionsHistory": "Transactions History",
+        "price": "Price",
+        "amount": "Amount",
+        "time": "Time",
+        "transaction": "Transaction",
+        "noTradesFound": "No trades found"
+    },
+    "tradingHistoryScreen": {
+        "tradingHistory": "Trading History",
+        "showAll": "Show All",
+        "buyOnly": "Buy Only",
+        "sellOnly": "Sell Only",
+        "time": "Time",
+        "price": "Price",
+        "quantity": "Quantity",
+        "selectDate": "Select Date",
+        "selectOption": "Select option",
+        "noTradesFound": "No trades found"
+    },
+
+
+
+
+
     "settings": {
         "change_language": "Change Language"
     }

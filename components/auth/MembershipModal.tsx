@@ -7,6 +7,7 @@ import { Button, ButtonText } from '../ui/button';
 import { IM_PARTY } from '@/utils/constants/Images';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import MyLinearGradient from '../gradient/MyLinearGradient';
+import { useTranslation } from 'react-i18next';
 
 interface MembershipModalProps {
     isOpen: boolean;
@@ -15,6 +16,8 @@ interface MembershipModalProps {
 }
 const MembershipModal = ({ isOpen, onClose, onSuccess }: MembershipModalProps) => {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
+
     return (
     <Modal isOpen={isOpen} onClose={onClose}>
         <ModalBackdrop />
@@ -31,25 +34,25 @@ const MembershipModal = ({ isOpen, onClose, onSuccess }: MembershipModalProps) =
                     <Text 
                         className="text-xl font-bold text-purple-600 mb-2"
                     >
-                        Congratulations
+                        {t('membershipModal.congratulations')}
                     </Text>
 
                     {/* Subtext */}
                     <Text 
                         className="text-center text-gray-600 mb-6"
                     >
-                        You are member now! 
-                        Get ready to start using Juto for your daily financial app.
+                        {t('membershipModal.youAreMemberNow')}
+                        {t('membershipModal.getReadyToStart')}
                     </Text>
 
                     {/* Submit Button */}
-                    <MyLinearGradient type='button' color='purple' className='w-fit'>
+                    <MyLinearGradient type='button' color='purple'>
                         <Button 
                             className="w-fit px-10 justify-center items-center"
                             onPress={() => {onClose(); onSuccess()}}
                         >
                             <ButtonText className={`text-white`}>
-                            I'm ready to start
+                            {t('membershipModal.imReadyToStart')}
                             </ButtonText>
                         </Button>
                     </MyLinearGradient>

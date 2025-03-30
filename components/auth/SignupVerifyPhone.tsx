@@ -2,21 +2,19 @@ import { Box } from '@/components/ui/box'
 import React, { useEffect, useRef, useState } from 'react'
 import { Text } from '../ui/text';
 import { SignUpScreensProps } from '@/types/NavigationTypes';
-import { Button, ButtonSpinner, ButtonText } from '../ui/button';
+import { ButtonSpinner } from '../ui/button';
 import { useToast } from '../ui/toast';
 import { showNewToast } from '@/utils/constants/Toasts';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
-import InputAuth from './InputAuth';
-import { useFormInput } from '@/hooks/useFormInput';
 import { Input, InputField } from '../ui/input';
-import { FormControl } from '../ui/form-control';
-import { Clipboard, Keyboard, KeyboardAvoidingView, Pressable, TextInput } from 'react-native';
+import { Clipboard , KeyboardAvoidingView, Pressable } from 'react-native';
 import { IM_PhoneHandConfirm } from '@/utils/constants/Images';
 import OverlayLoading from '../OverlayLoading';
-
+import { useTranslation } from 'react-i18next';
 
 function SignupVerifyPhone({ handleScreenChange, formHook } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const toast = useToast();
     const [isLoadingResend, setIsLoadingResend] = useState(false);
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
@@ -64,7 +62,12 @@ function SignupVerifyPhone({ handleScreenChange, formHook } : SignUpScreensProps
     const handleToast = () => {
         const toastId = "unique-toast-phone-verification";
         if (!toast.isActive(toastId)) {
-            showNewToast(toast, toastId, "Success", "Code has been sent to your phone number");
+            showNewToast(
+                toast, 
+                toastId, 
+                t('signupVerifyPhone.successToastTitle'),
+                t('signupVerifyPhone.successToastMessage')
+            );
         }
     };
 
@@ -143,9 +146,9 @@ function SignupVerifyPhone({ handleScreenChange, formHook } : SignUpScreensProps
             <Box>
                 {/* Titles */}
                 <Box className='mb-7 gap-2'>
-                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Confirm</Text>
+                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>{t('signupVerifyPhone.confirm')}</Text>
                     <Text className={`text-subText-${appliedTheme} text-lg`}>
-                        {`Please enter the 4-digit code just sent \nto ${[formHook.values.phonePrefix,formHook.values.phoneNumber].join(" - ") || "your phone"}`}
+                        {t('signupVerifyPhone.enterCodeSentTo', { phoneNumber: [formHook.values.phonePrefix,formHook.values.phoneNumber].join(" - ") || "your phone" })}
                     </Text>
                 </Box>
                 {/* Code Input */}
@@ -194,7 +197,7 @@ function SignupVerifyPhone({ handleScreenChange, formHook } : SignUpScreensProps
                 >
                     <Text className={`font-semibold ${appliedTheme === "dark" ? "text-white": "text-cyan-600"}`}>
                         {isLoadingResend ? <ButtonSpinner color={"#0093B9"} className='h-6'/> : 
-                        isResendDisabled ? `Resend code in 00:${timer}` : "Resend code"}
+                        isResendDisabled ? t('signupVerifyPhone.resendCodeIn', { timer }) : t('signupVerifyPhone.resendCode')} {/* Translate "Resend code in 00:{{timer}}" and "Resend code" */}
                     </Text>
             </Pressable>
         </Box>
