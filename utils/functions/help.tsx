@@ -12,8 +12,6 @@ export function debounce<T extends (...args: any[]) => void>(
     };
 }
 
-
-
 export const convertBirthday = (birthday: string) => {
     const parts = birthday.split(" / ");
     const [month, day, year] = parts.map(Number);
