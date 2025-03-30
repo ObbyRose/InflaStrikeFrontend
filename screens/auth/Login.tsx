@@ -8,9 +8,11 @@ import { useFormInput } from '@/hooks/useFormInput'
 import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Login: React.FC<Props> = ({ navigation }) => {
-    const { appliedTheme } = useTheme(); 
+    const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
     const { values, errors, handleInputChange, setErrorByFields } = useFormInput({
         email: '',
@@ -25,19 +27,19 @@ const Login: React.FC<Props> = ({ navigation }) => {
 
         // Validate email format
         if (!email.trim()) {
-            newErrors.email = "Email is required.";
+            newErrors.email = t('login.emailRequired');
             valid = false;
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            newErrors.email = "Invalid email format.";
+            newErrors.email = t('login.invalidEmailFormat');
             valid = false;
         }
 
         // Validate password
         if (!pass.trim()) {
-            newErrors.pass = "Password is required.";
+            newErrors.pass = t('login.passwordRequired');
             valid = false;
         } else if (pass.length < 6) {
-            newErrors.pass = "Password must be at least 6 characters.";
+            newErrors.pass = t('login.passwordMinLength');
             valid = false;
         }
 
@@ -59,22 +61,22 @@ const Login: React.FC<Props> = ({ navigation }) => {
         <Box>
             {/* Title */}
             <Box className='my-10 gap-2'>
-                <Text className={`text-4xl text-text-${appliedTheme} font-bold`}>Welcome</Text>
-                <Text className={`text-xl text-subText-${appliedTheme}`}>Sign in to your account</Text>
+                <Text className={`text-4xl text-text-${appliedTheme} font-bold`}>{t('login.welcome')}</Text>
+                <Text className={`text-xl text-subText-${appliedTheme}`}>{t('login.signInToAccount')}</Text>
             </Box>
             {/* Main Login */}
             <Box className='gap-2'>
                 {/* Inputs */}
                 <InputAuth 
                     icon="IC_Email" 
-                    placeholder='Email'
+                    placeholder={t('login.emailPlaceholder')}
                     value={email}
                     onChangeText={(val) => handleInputChange("email", val)}
                     error={errors.email}
                 />
                 <InputAuth 
                     icon="IC_Lock" 
-                    placeholder='Password' 
+                    placeholder={t('login.passwordPlaceholder')}
                     type='pass'
                     value={pass}
                     onChangeText={(val) => handleInputChange("pass", val)}
@@ -86,21 +88,21 @@ const Login: React.FC<Props> = ({ navigation }) => {
                 <MyLinearGradient type='button' color='purple'>
                     <Button onPress={handleSubmitLogin}>
                         <ButtonText className="text-white">
-                        {isLoading ? <ButtonSpinner color={"white"} className="h-6" /> : "Sign In"}
+                        {isLoading ? <ButtonSpinner color={"white"} className="h-6" /> : t('login.signInButton')}
                         </ButtonText>
                     </Button>
                 </MyLinearGradient>
-                <Text className={`text-link-${appliedTheme} my-3 mx-auto font-bold tracking-wide`}>Forgot password ?</Text>
+                <Text className={`text-link-${appliedTheme} my-3 mx-auto font-bold tracking-wide`}>{t('login.forgotPassword')}</Text>
             </Box>
         </Box>
 
         {/* Sign Up Link*/}
         <Box className='mx-auto flex-row'>
             <Text className={`text-gray-${appliedTheme}`}>
-                Don't have an account?
+                {t('login.dontHaveAccount')}
                 <Text className={`text-link-${appliedTheme} mx-auto font-bold tracking-wide`}
                 onPress={() => navigation.navigate("Signup")}
-                > Sign Up</Text>
+                > {t('login.signUpLink')}</Text>
             </Text>
             
         </Box>

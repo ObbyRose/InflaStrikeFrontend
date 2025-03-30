@@ -9,9 +9,11 @@ import { showNewToast } from '@/utils/constants/Toasts';
 import { Linking } from 'react-native';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import MyLinearGradient from '../gradient/MyLinearGradient';
+import { useTranslation } from 'react-i18next';
 
 function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const toast = useToast();
     const [isLoading, setIsLoading] = useState(false);
     const [timer, setTimer] = useState(60);
@@ -63,7 +65,12 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
     const handleToast = () => {
         const toastId = "unique-toast-email-verification";
         if (!toast.isActive(toastId)) {
-            showNewToast(toast, toastId, "Success", "Email has been sent to your inbox");
+            showNewToast(
+                toast, 
+                toastId, 
+                t('verifyEmail.successToastTitle'), 
+                t('verifyEmail.successToastMessage')
+            );
         }
     };
 
@@ -75,10 +82,9 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
         <Box className='flex-1 justify-between'>
             {/* Titles */}
             <Box className='gap-2'>
-                <Text className={`text-3xl text-text-${appliedTheme} font-bold text-center`}>Verify your email</Text>
+                <Text className={`text-3xl text-text-${appliedTheme} font-bold text-center`}>{t('verifyEmail.verifyYourEmail')}</Text>
                 <Text className={`text-subText-${appliedTheme} text-lg text-center`}>
-                    We sent a verification email to. Please tap
-                    the link inside that email to continue.
+                    {t('verifyEmail.emailSentInstructions')}
                 </Text>
             </Box>
             {/* Buttons */}
@@ -86,7 +92,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
                 <MyLinearGradient type='button' color="purple">
                     <Button onPress={handleCheckInbox} >
                         <ButtonText className="text-white">
-                            Check my inbox
+                            {t('verifyEmail.checkInboxButton')}
                         </ButtonText>
                     </Button>
                 </MyLinearGradient>
@@ -97,7 +103,7 @@ function VerifyEmail({ handleScreenChange } : SignUpScreensProps) {
                         >
                             <ButtonText className="text-[#828A99]">
                                 {isLoading ? <ButtonSpinner color={"black"} className='h-6'/> : 
-                                isResendDisabled ? `Resend in ${timer}s` : "Resend email"}
+                                isResendDisabled ? t('verifyEmail.resendInTimer', { timer }) : t('verifyEmail.resendEmailButton')} {/* Translate "Resend email" and "Resend in {{timer}}s" */}
                             </ButtonText>
                     </Button>
                 </MyLinearGradient>

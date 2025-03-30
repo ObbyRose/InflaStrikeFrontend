@@ -8,17 +8,19 @@ import CountryPhoneInput from '../profile/CountryPhoneInput';
 import { useTheme } from '@/utils/Themes/ThemeProvider';
 import MyLinearGradient from '../gradient/MyLinearGradient';
 import InputAuth from './InputAuth';
+import { useTranslation } from 'react-i18next';
 
 const SignupEmail = ({ handleScreenChange, formHook } : SignUpScreensProps) => {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const { values, errors, handleInputChange, setErrorByFields } =  formHook;
     const { email } = values
 
     const handlePhoneSubmit = () => {
         if (!email?.trim())
-            setErrorByFields({ email: "Email is required" });
+            setErrorByFields({ email: t('signupEmail.emailRequired') });
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-            setErrorByFields({ email: "Invalid email format" });
+            setErrorByFields({ email: t('signupEmail.invalidEmailFormat') });
         else
             handleScreenChange("next");
     }
@@ -33,9 +35,9 @@ const SignupEmail = ({ handleScreenChange, formHook } : SignUpScreensProps) => {
             <Box>
                 {/* Titles */}
                 <Box className='mb-7 gap-2'>
-                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Sign In</Text>
+                    <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>{t('signupEmail.signIn')}</Text>
                     <Text className={`text-subText-${appliedTheme} text-lg`}>
-                        {"Simply enter your email to login or\ncreate an account."}
+                    {   t('signupEmail.enterEmailToLoginOrCreate')}
                     </Text>
                 </Box>
             
@@ -43,29 +45,29 @@ const SignupEmail = ({ handleScreenChange, formHook } : SignUpScreensProps) => {
                 value={email}
                 onChangeText={(val) => handleInputChange("email", val)}
                 icon={"IC_Email"}
-                placeholder='Email'
+                placeholder={t('signupEmail.emailPlaceholder')}
                 error={errors.email}
             />
             </Box>
             {/* Buttons */}
             <Box className='gap-5'>
                 <Text className={`px-2 text-center text-sm text-subText-${appliedTheme}`}>
-                    By using our mobile app, you agree to our  
+                    {t('signupEmail.agreeToTerms')} 
                     <Text className={`font-bold underline text-sm text-subText-${appliedTheme}`}
                     onPress={() => console.log("Terms of Use Clicked")}>
-                        {" Terms of Use "}
+                        {t('signupEmail.termsOfUse')} 
                     </Text>
-                    and
+                    {t('signupEmail.and')}
                     <Text className={`font-bold underline text-sm text-subText-${appliedTheme}`}
                     onPress={() => console.log("Privacy Policy Clicked")}
                     >
-                        {" Privacy Policy "}
+                        {t('signupEmail.privacyPolicy')}
                     </Text>
                 </Text>
                 <MyLinearGradient type='button' color='purple'>
                     <Button onPress={() => handlePhoneSubmit()} >
                         <ButtonText className="text-white">
-                            Continue
+                            {t('signupEmail.continueButton')}
                         </ButtonText>
                     </Button>
                 </MyLinearGradient>

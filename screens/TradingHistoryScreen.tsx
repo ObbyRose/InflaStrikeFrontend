@@ -21,6 +21,7 @@ import { ChevronDownIcon } from '@/components/ui/icon';
 import { TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { dummyTrades } from '@/utils/constants/data';
+import { useTranslation } from 'react-i18next';
 
 
 export interface Trade {
@@ -35,6 +36,7 @@ export interface Trade {
 
 const TradingHistoryScreen = () => {
   const { appliedTheme } = useTheme();
+  const { t } = useTranslation();
 
   const [trades, setTrades] = useState<Trade[]>([]);
   const [currentCoin, setCurrentCoin] = useState<string>('btcusdt');
@@ -82,12 +84,12 @@ const TradingHistoryScreen = () => {
 
   return (
     <Box className={`h-full p-4 bg-background-${appliedTheme}`}>
-      <BackHeader title="Trading History" />
+      <BackHeader title={t('tradingHistoryScreen.tradingHistory')} />
 
       {/* FILTER BUTTONS */}
       <Box className="mb-2 flex-row justify-center space-x-2">
         {['All', 'Buy', 'Sell'].map((type, idx) => {
-          const message = type === 'All' ? 'Show All' : `${type} Only`;
+          const message = type === 'All' ? t('tradingHistoryScreen.showAll') : t(`tradingHistoryScreen.${type.toLowerCase()}Only`);
           return (
             <TouchableOpacity
               key={type}
@@ -111,7 +113,7 @@ const TradingHistoryScreen = () => {
                 setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
               }}>
               <Text className="text-white">
-                {`${field.toUpperCase()} ${sortField === field ? `(${arrow})` : ''}`}
+                {`${t(`tradingHistoryScreen.${field}`)} ${sortField === field ? `(${arrow})` : ''}`}
               </Text>
             </TouchableOpacity>
           );
@@ -125,7 +127,7 @@ const TradingHistoryScreen = () => {
             className="px-3 py-1 rounded bg-blue-500"
             onPress={() => setShowDatePicker(true)}
         >
-            <Text className="text-white">Select Date {selectedDate ? `(${selectedDate.toLocaleDateString()})` : ''}</Text>
+          <Text className="text-white">{t('tradingHistoryScreen.selectDate')} {selectedDate ? `(${selectedDate.toLocaleDateString()})` : ''}</Text>
         </TouchableOpacity>
 
         {showDatePicker && (
@@ -140,7 +142,7 @@ const TradingHistoryScreen = () => {
         <Select defaultValue="btcusdt" onValueChange={(value) => setCurrentCoin(value)}>
           <SelectTrigger className={`flex-row justify-between items-center border 
             border-divider-${appliedTheme} bg-input-${appliedTheme} rounded h-fit`}>
-            <SelectInput placeholder="Select option" className={`text-text-${appliedTheme}`}/>
+            <SelectInput placeholder={t('tradingHistoryScreen.selectOption')} className={`text-text-${appliedTheme}`}/>
             <SelectIcon className="mr-3" as={ChevronDownIcon} />
           </SelectTrigger>
           <SelectPortal>
@@ -168,11 +170,11 @@ const TradingHistoryScreen = () => {
       <Box className="p-y-4 flex-1 rounded-lg bg-gray-900">
         <Box className="flex-row p-2">
           <Text className="w-8 text-center text-white"> </Text>
-          <Text className="flex-1 self-center text-center text-white">Price</Text>
+          <Text className="flex-1 self-center text-center text-white">{t('tradingHistoryScreen.price')}</Text>
           <Box className="items-between flex-1">
-            <Text className="text-center text-white">Amount</Text>
+              <Text className="text-center text-white">{t('tradingHistoryScreen.quantity')}</Text>
           </Box>
-          <Text className="flex-1 self-center text-center text-white">time</Text>
+          <Text className="flex-1 self-center text-center text-white">{t('tradingHistoryScreen.time')}</Text>
         </Box>
 
         <FlatList
@@ -191,7 +193,7 @@ const TradingHistoryScreen = () => {
           )}
           ListEmptyComponent={() => (
             <Box className="py-10">
-              <Text className="text-center text-gray-400">No trades found</Text>
+              <Text className="text-center text-gray-400">{t('tradingHistoryScreen.noTradesFound')}</Text>
             </Box>
           )}
         />

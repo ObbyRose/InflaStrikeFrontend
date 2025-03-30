@@ -10,6 +10,7 @@ import InputAuth from './InputAuth'
 import { Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { Address } from '@/types/other'
 import { IC_CurrentLocation } from '@/utils/constants/Icons'
+import { useTranslation } from 'react-i18next'
 
 interface SignupPersonalInformationProps extends SignUpScreensProps {
     setHeaderStep: React.Dispatch<React.SetStateAction<number | null>>;
@@ -19,6 +20,7 @@ const dummyAddress = {"address": {"city": "Jerusalem", "coords": {"lat": 9.04097
 
 function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPersonalInformationProps) {
     const { appliedTheme } = useTheme();
+    const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
     const [ address, setAddress] = useState<Address | null>(null);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -43,10 +45,9 @@ function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPe
         {/* Title */}
         <Box className='mb-10 gap-7 flex-1'>
             <Box className='gap-2'>
-                <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>Home address</Text>
+                <Text className={`text-3xl text-text-${appliedTheme} font-bold`}>{t('signupAddress.homeAddress')}</Text>
                 <Text className={`text-subText-${appliedTheme} text-lg`}>
-                    Let us know where we should send your
-                    Juta Mastercard® Debit Card.
+                    {t('signupAddress.sendDebitCard')}
                 </Text>
             </Box>
             
@@ -55,7 +56,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPe
                 <InputAuth
                     value={address?.street || ""}
                     onChangeText={() => {}}
-                    placeholder="Street address"
+                    placeholder={t('signupAddress.streetAddressPlaceholder')} // Translate "Street address"
                     isReadOnly={true}
                 />
                 {!address && <Pressable onPress={() => setIsSheetOpen(true)}
@@ -66,19 +67,19 @@ function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPe
                     <InputAuth
                         value={address?.city || ""}
                         onChangeText={() => {}}
-                        placeholder="City"
+                        placeholder={t('signupAddress.cityPlaceholder')} // Translate "City"
                         isReadOnly={true}
                     />
                     <InputAuth
                         value={address?.country || ""}
                         onChangeText={() => {}}
-                        placeholder="State"
+                        placeholder={t('signupAddress.statePlaceholder')} // Translate "State"
                         isReadOnly={true}
                     />
                     <InputAuth
                         value={address?.postal || ""}
                         onChangeText={(val) => setAddress((prev) => ({ ...prev!, postal: val }))}
-                        placeholder="Zip Code"
+                        placeholder={t('signupAddress.zipCodePlaceholder')}
                         keyboardType='numeric'
                         maxLength={10}
                     />
@@ -91,7 +92,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPe
                         activeOpacity={0.6}
                     >
                         <IC_CurrentLocation className="w-5 h-5" />
-                        <Text className="text-lg font-semibold text-purple-500">Select Another Address</Text>
+                        <Text className="text-lg font-semibold text-purple-500">{t('signupAddress.selectAnotherAddress')}</Text> {/* Translate "Select Another Address" */}
                     </TouchableOpacity>
                 </Box>
                 }
@@ -108,7 +109,7 @@ function SignupAddress({ handleScreenChange, setHeaderStep, formHook }: SignupPe
         <MyLinearGradient type='button' color={ isActive ? 'purple' : "disabled-button"}>
             <Button onPress={() => isActive ? handleSubmit() : null}>
                 <ButtonText className={ isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
-                    {isLoading ? <ButtonSpinner color="white" className='h-6'/> : "Continue"}
+                    {isLoading ? <ButtonSpinner color="white" className='h-6'/> : t('signupAddress.continueButton')} {/* Translate "Continue" */}
                     </ButtonText>
             </Button>
         </MyLinearGradient>

@@ -1,4 +1,150 @@
 {
+    "login": {
+        "welcome": "Bienvenue",
+        "signInToAccount": "Connectez-vous à votre compte",
+        "emailPlaceholder": "Courriel",
+        "passwordPlaceholder": "Mot de passe",
+        "signInButton": "Se connecter",
+        "forgotPassword": "Mot de passe oublié ?",
+        "dontHaveAccount": "Vous n'avez pas de compte ?",
+        "signUpLink": "S'inscrire",
+        "emailRequired": "L'e-mail est requis.",
+        "invalidEmailFormat": "Format d'e-mail invalide.",
+        "passwordRequired": "Le mot de passe est requis.",
+        "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères."
+    },
+    "signupEmail": {
+        "signIn": "Se connecter",
+        "enterEmailToLoginOrCreate": "Entrez simplement votre e-mail pour vous connecter ou\ncréer un compte.",
+        "emailPlaceholder": "Courriel",
+        "agreeToTerms": "En utilisant notre application mobile, vous acceptez nos ",
+        "termsOfUse": "Conditions d'utilisation",
+        "and": " et notre ",
+        "privacyPolicy": "Politique de confidentialité ",
+        "continueButton": "Continuer",
+        "emailRequired": "L'e-mail est requis",
+        "invalidEmailFormat": "Format d'e-mail invalide"
+    },
+    "verifyEmail": {
+        "verifyYourEmail": "Vérifiez votre email",
+        "emailSentInstructions": "Nous avons envoyé un e-mail de vérification à. Veuillez cliquer sur le lien dans cet e-mail pour continuer.",
+        "checkInboxButton": "Vérifier ma boîte de réception",
+        "resendEmailButton": "Renvoyer l'e-mail",
+        "resendInTimer": "Renvoyer dans {{timer}}s",
+        "successToastTitle": "Succès",
+        "successToastMessage": "L'e-mail a été envoyé dans votre \nboîte de réception"
+    },
+    "signupPhoneNumber": {
+        "phoneNumber": "Numéro de téléphone",
+        "enterPhoneNumber": "Entrez simplement votre numéro de téléphone.",
+        "continueButton": "Continuer",
+        "phoneNumberRequired": "Le numéro de téléphone est requis",
+        "phoneNumberTooShort": "Le numéro de téléphone est trop court"
+    },
+    "signupVerifyPhone": {
+        "confirm": "Confirmer",
+        "enterCodeSentTo": "Veuillez entrer le code à 4 chiffres qui vient d'être envoyé au {{phoneNumber}}",
+        "resendCode": "Renvoyer le code",
+        "resendCodeIn": "Renvoyer le code dans 00:{{timer}}",
+        "successToastTitle": "Succès",
+        "successToastMessage": "Le code a été envoyé à votre \nnuméro de téléphone"
+    },
+    "signupCreatePassword": {
+        "createPassword": "Créer un mot de passe",
+        "chooseSecurePassword": "Choisissez un mot de passe sécurisé qui sera facile à retenir pour vous.",
+        "passwordPlaceholder": "Mot de passe",
+        "hasAtLeast8Chars": "A au moins 8 caractères",
+        "hasUppercaseOrSymbol": "A une lettre majuscule ou un symbole",
+        "hasNumber": "A un chiffre",
+        "continueButton": "Continuer"
+    },
+    "signupPersonalInformation": {
+        "personalInfo": "Informations personnelles",
+        "verifyApplicationDetails": "Nous vous demandons vos informations personnelles pour vérifier les détails de votre candidature.",
+        "firstNamePlaceholder": "Prénom",
+        "lastNamePlaceholder": "Nom de famille",
+        "dateOfBirthPlaceholder": "Date de naissance (MM / JJ / AAAA)",
+        "ssnPlaceholder": "Numéro de sécurité sociale (4 derniers chiffres)",
+        "encryptionInfo": "Nous utilisons un cryptage 128 bits pour la sécurité, et ceci est uniquement utilisé à des fins de vérification d'identité.",
+        "continueButton": "Continuer"
+    },
+    "backAuth": {
+        "step": "Étape {{step}} sur {{totalSteps}}"
+    },
+    "signupAddress": {
+        "homeAddress": "Adresse du domicile",
+        "sendDebitCard": "Indiquez-nous où nous devons envoyer votre\ncarte de débit Juta Mastercard®.",
+        "streetAddressPlaceholder": "Adresse de la rue",
+        "cityPlaceholder": "Ville",
+        "statePlaceholder": "État",
+        "zipCodePlaceholder": "Code Postal",
+        "selectAnotherAddress": "Sélectionner une autre adresse",
+        "continueButton": "Continuer"
+    },
+    "addressSearch": {
+        "searchAddress": "Rechercher une adresse",
+        "streetNameOnly": "Nom de la rue uniquement (sans ville ni pays)",
+        "currentLocation": "Localisation actuelle",
+        "address": "Adresse",
+        "loading": "Chargement...",
+        "startSearching": "Commencer la recherche...",
+        "noResultsFound": "Aucun résultat trouvé",
+        "addressDetail": "Détail de l'adresse",
+        "aptSuiteNumber": "Veuillez nous indiquer si vous avez un appartement ou un numéro d'unité.",
+        "streetAddress": "Adresse de la rue",
+        "aptSuiteNumberPlaceholder": "Appartement / Numéro de suite",
+        "continueButton": "Continuer"
+    },
+    "signupAlmostThere": {
+        "almostThere": "Presque là !",
+        "ensureInfoCorrect": "Veuillez prendre un instant pour vous assurer que toutes les informations fournies sont correctes.",
+        "fullLegalName": "Nom légal complet",
+        "dateOfBirth": "Date de naissance",
+        "socialSecurityNumber": "Numéro de sécurité sociale",
+        "residentialAddress": "Adresse résidentielle",
+        "edit": "Modifier",
+        "continueButton": "Continuer"
+    },
+    "membershipModal": {
+        "congratulations": "Félicitations",
+        "youAreMemberNow": "Vous êtes maintenant membre !",
+        "getReadyToStart": "Préparez-vous à utiliser Juto pour votre application financière quotidienne.",
+        "imReadyToStart": "Je suis prêt à commencer"
+    },
+    "portfolioScreen": {
+        "portfolio": "Portefeuille",
+        "portfolioValue": "Valeur du portefeuille",
+        "spentMoreThanLastMonth": "Vous avez dépensé {{amount}} de plus que le mois dernier",
+        "market": "Marché",
+        "seeAll": "Voir tout",
+        "transactionsHistory": "Historique des transactions",
+        "price": "Prix",
+        "amount": "Montant",
+        "time": "Heure",
+        "transaction": "Transaction",
+        "noTradesFound": "Aucune transaction trouvée"
+    },
+    "tradingHistoryScreen": {
+        "tradingHistory": "Historique des transactions",
+        "showAll": "Tout afficher",
+        "buyOnly": "Acheter seulement",
+        "sellOnly": "Vendre seulement",
+        "time": "Heure",
+        "price": "Prix",
+        "quantity": "Quantité",
+        "selectDate": "Sélectionner une date",
+        "selectOption": "Sélectionner une option",
+        "noTradesFound": "Aucune transaction trouvée"
+    },
+
+
+
+
+
+
+
+
+
     "settings": {
         "title": "Paramètres",
 		"toggle_theme": "Changer le thème",
