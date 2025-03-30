@@ -12,7 +12,6 @@ const resources = {
 };
 
 const getStoredLanguage = async () => {
-  return 'fr';
   const storedLang = await AsyncStorage.getItem('language');
   return storedLang || (Localization.locale.startsWith('fr') ? 'fr' : 'en');
 };
