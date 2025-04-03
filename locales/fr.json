@@ -14,8 +14,8 @@
         "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères."
     },
     "signupEmail": {
-        "signIn": "Se connecter",
-        "enterEmailToLoginOrCreate": "Entrez simplement votre e-mail pour vous connecter ou\ncréer un compte.",
+        "signIn": "S'inscrire",
+		"enterEmailToLoginOrCreate": "Il vous suffit de saisir votre e-mail pour créer un compte.",
         "emailPlaceholder": "Courriel",
         "agreeToTerms": "En utilisant notre application mobile, vous acceptez nos ",
         "termsOfUse": "Conditions d'utilisation",

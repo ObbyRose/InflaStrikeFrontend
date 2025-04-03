@@ -295,7 +295,7 @@ const AddressSearch = ({ isOpen, onClose, setAddress }: AddressSearchProps) => {
                                 mapRegion={mapRegion} 
                                 showMarker={!!selectedAddress}
                                 markerTitle={[selectedAddress.city,selectedAddress.street].join(" ") || ""}
-                            />``
+                            />
                         </Box>
                         <CardUpRounded className="gap-2">
                             <Box className="gap-2">
@@ -326,7 +326,7 @@ const AddressSearch = ({ isOpen, onClose, setAddress }: AddressSearchProps) => {
                                     style={{ backgroundColor: "initial" }}
                                 >
                                     <ButtonText className={isActive ? `text-buttonText-${appliedTheme}` : `text-buttonDisableText-${appliedTheme}`}>
-                                        {t('addressSearch.continueButton')} {/* Translate "Continue" */}
+                                        {t('addressSearch.continueButton')}
                                     </ButtonText>
                                 </Button>
                             </MyLinearGradient>

@@ -14,8 +14,8 @@
         "passwordMinLength": "Password must be at least 6 characters."
     },
     "signupEmail": {
-        "signIn": "Sign In",
-        "enterEmailToLoginOrCreate": "Simply enter your email to login or\ncreate an account.",
+        "signIn": "Sign Up",
+        "enterEmailToLoginOrCreate": "Simply enter your email create an account.",
         "emailPlaceholder": "Email",
         "agreeToTerms": "By using our mobile app, you agree to our ",
         "termsOfUse": "Terms of Use",
