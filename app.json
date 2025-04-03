@@ -36,7 +36,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.Client"
+      "bundleIdentifier": "com.lkyexchange.Tothor",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -52,7 +55,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.anonymous.Client"
+      "package": "com.lkyexchange.Tothor"
     },
     "extra": {
       "router": {

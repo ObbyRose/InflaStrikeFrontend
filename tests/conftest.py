@@ -13,13 +13,13 @@ def driver():
     options.set_capability("platformVersion", "16")  # or the one shown by `adb shell getprop ro.build.version.release`
     options.set_capability("deviceName", "Android Emulator")
     options.set_capability("automationName", "UiAutomator2")
-    options.set_capability("appPackage", "com.anonymous.Client")
+    options.set_capability("appPackage", "com.lkyexchange.Tothor")
     options.set_capability("appActivity", ".MainActivity")
     options.set_capability("noReset", True)
 
     driver = webdriver.Remote("http://localhost:4723", options=options)
     yield driver
-    # driver.terminate_app("com.anonymous.Client")
+    # driver.terminate_app("com.lkyexchange.Tothor")
     driver.quit()
 
 
