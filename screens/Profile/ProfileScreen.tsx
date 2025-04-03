@@ -61,7 +61,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
 				<MyLinearGradient
 					type="background"
 					color={appliedTheme === 'dark' ? 'blue' : 'purple'}
-					className="h-[40%]"
+					className="h-[48%]"
 				>
 					<BackHeader title={t('profile.header')} colorScheme="alwaysWhite" />
 					<Box className="justify-center items-center gap-2 p-2">
@@ -85,7 +85,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
 					className="h-full"
 				>
 					<Box className="gap-4 p-4 justify-center">
-						<Box className="p-5" />
+						<Box className="" />
 
 						<TothorCards>
 							<SettingItem

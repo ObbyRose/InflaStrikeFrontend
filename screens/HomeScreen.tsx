@@ -74,8 +74,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
 	return (
 		<ScrollView>
-			<MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-				<Box className="h-[40%] p-4">
+            <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
+				<Box className="h-[50%] p-4">
 					<Box className="flex flex-row items-center justify-between">
 						<IC_Tothor className="h-16 w-40" />
 						<Box className="flex-row gap-4">
@@ -97,40 +97,36 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 						<Text className="text-[14px] text-white">{t('home.lastUpdated')}</Text>
 					</Box>
 
-					<Box className="h-full items-center">
-						<Box className={`bg-card-${appliedTheme} z-10 w-full rounded-full p-2`}>
-							<Box className="flex flex-row justify-evenly">
-								<Box className="flex-col items-center text-center">
-									<IC_Top_Up className="h-12 w-12" />
-									<Text className={`text-text-${appliedTheme} font-bold`}>
-										{t('home.actions.topup')}
-									</Text>
-								</Box>
-								<Box className="p-2">
-									<Box className={`border-s-[1px] border-divider-${appliedTheme} mx-2 h-full`} />
-								</Box>
-								<Box className="flex-col items-center text-center">
-									<IC_Transaction className="h-12 w-12" />
-									<Text className={`text-text-${appliedTheme} font-bold`}>
-										{t('home.actions.transfer')}
-									</Text>
-								</Box>
-								<Box className="p-2">
-									<Box className={`border-s-[1px] border-divider-${appliedTheme} mx-2 h-full`} />
-								</Box>
-								<Box className="flex-col items-center text-center">
-									<IC_History className="h-12 w-12" />
-									<Text className={`text-text-${appliedTheme} font-bold`}>
-										{t('home.actions.history')}
-									</Text>
-								</Box>
-							</Box>
+					<Box className={`bg-card-${appliedTheme} z-50 w-full h-[80px] rounded-full p-2 flex flex-row justify-evenly`}>
+						<Box className="flex-col items-center ">
+							<IC_Top_Up className="h-12 w-12" />
+							<Text className={`text-text-${appliedTheme} font-bold`}>
+								{t('home.actions.topup')}
+							</Text>
+						</Box>
+						<Box className="p-2">
+							<Box className={`border-s-[1px] border-divider-${appliedTheme} mx-2 h-full`} />
+						</Box>
+						<Box className="flex-col items-center text-center">
+							<IC_Transaction className="h-12 w-12" />
+							<Text className={`text-text-${appliedTheme} font-bold`}>
+								{t('home.actions.transfer')}
+							</Text>
+						</Box>
+						<Box className="p-2">
+							<Box className={`border-s-[1px] border-divider-${appliedTheme} mx-2 h-full`} />
+						</Box>
+						<Box className="flex-col items-center text-center">
+							<IC_History className="h-12 w-12" />
+							<Text className={`text-text-${appliedTheme} font-bold`}>
+								{t('home.actions.history')}
+							</Text>
 						</Box>
 					</Box>
 				</Box>
 			</MyLinearGradient>
 
-			<MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'}>
+            <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className="">
 				<Box className={`p-4 bg-background-${appliedTheme} h-full`}>
 					<Box>
 						<Box className="mt-10 flex-row items-center justify-between">

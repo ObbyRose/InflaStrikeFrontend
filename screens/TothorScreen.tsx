@@ -24,6 +24,7 @@ const TothorScreen = () => {
 	return (
 		<Box className={`bg-background-${appliedTheme} h-full`}>
 			<MyLinearGradient
+				className='h-[30%]'
 				type="background"
 				color={appliedTheme === 'dark' ? 'blue' : 'purple'}
 			>
