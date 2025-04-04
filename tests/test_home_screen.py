@@ -2,8 +2,8 @@ import time
 from appium.webdriver.common.appiumby import AppiumBy
 
 def test_app_launches(driver):
-    assert driver.is_app_installed("com.lkyexchange.Tothor")
-    driver.activate_app("com.lkyexchange.Tothor")
+    assert driver.is_app_installed("com.lkyexchange.TothorV2")
+    driver.activate_app("com.lkyexchange.TothorV2")
     time.sleep(5)
 
 def test_user_info_exists(driver):
