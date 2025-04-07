@@ -95,7 +95,7 @@ def test_buy_now(driver):
     buy_now_button.click()
 
     time.sleep(1)
-    buy_now_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@resource-id="com.anonymous.Client:id/alertTitle"]')
+    buy_now_title = driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@resource-id="com.lkyexchange.TothorV2:id/alertTitle"]')
     assert buy_now_title.is_displayed()
 
     click_ok = driver.find_element(AppiumBy.XPATH, '//android.widget.Button[@resource-id="android:id/button1"]')

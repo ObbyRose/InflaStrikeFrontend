@@ -52,7 +52,7 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
 				<MyLinearGradient
 					type="background"
 					color={appliedTheme === 'dark' ? 'blue' : 'purple'}
-					className="h-[70%] p-4"
+					className="h-[50%] p-4"
 				>
 					<BackHeader title={t('investments.header')} colorScheme="alwaysWhite" />
 
@@ -66,17 +66,16 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
 							</Text>
 						</Box>
 
-						<Box>
-							<Text className="text-white text-[24px] font-bold self-start text-center">
+						
+					</Box>
+				</MyLinearGradient>
+				<Text className={`text-text-${appliedTheme} text-[24px] font-bold self-start text-center p-2`}>
 								{bundleData.bestBundleTitle}
 							</Text>
-						</Box>
-
-						<Box className="relative z-[50] bottom-0 py-2 w-full h-60 rounded-3xl">
+				<Box className="relative z-[50] bottom-0 py-2 w-full h-60">
 							<ImageBackground
 								source={require('@assets/images/America.png')}
-								className="h-full w-full rounded-3xl"
-								imageStyle={{ borderRadius: 20 }}
+								className="h-full w-full"
 							>
 								<Text className="text-white text-[24px] font-bold items-center text-center p-4">
 									{bundleData.bundleName}
@@ -115,8 +114,6 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
 								</Box>
 							</ImageBackground>
 						</Box>
-					</Box>
-				</MyLinearGradient>
 			</ScrollView>
 		</MyLinearGradient>
 	)
