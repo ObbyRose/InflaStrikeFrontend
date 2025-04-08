@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "lky",
-    "slug": "lky",
+    "slug": "Tothor",
     "version": "1.0.0",
     "newArchEnabled": true,
     "web": {
@@ -36,7 +36,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.lkyexchange.TothorV2",
+      "bundleIdentifier": "com.lkyexchange.newapp",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -44,7 +44,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon1.png",
+        "foregroundImage": "./assets/icon1_android.png",
         "backgroundColor": "#ffffff"
       },
       "config": {
@@ -56,7 +56,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.lkyexchange.TothorV2"
+      "package": "com.lkyexchange.newapp"
     },
     "extra": {
       "router": {
