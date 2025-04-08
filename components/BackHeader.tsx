@@ -34,7 +34,6 @@ function BackHeader({ title, icons, onPressIcons, bgColor = "transparent", color
     const textColor = isWhite ? "text-white" : `text-text-${appliedTheme}`;
 
     return (
-        <SafeAreaView>
             <Box className={`p-4 mb-[1rem] ${getBgClass()} flex-row items-center justify-between relative`}>
                 
                 {/* Left Chevron Button */}
@@ -59,7 +58,6 @@ function BackHeader({ title, icons, onPressIcons, bgColor = "transparent", color
                     ))}
                 </Box>
             </Box>
-        </SafeAreaView>
     );
 }
 
