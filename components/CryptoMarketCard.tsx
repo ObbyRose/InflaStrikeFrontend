@@ -6,6 +6,7 @@ import { CryptoData } from "@/utils/api/internal/sql/handleSQLite";
 import { getIconByString, IC_BTCUSDT } from "@/utils/constants/Icons";
 import { formatNumber, formatSymbol } from "@/utils/functions/help";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
+import { Divider } from "react-native-paper";
 
 interface CryptoMarketCardProps extends CryptoData {
     onPress?: () => any;
@@ -45,6 +46,7 @@ const CryptoMarketCard: React.FC<CryptoMarketCardProps> = ({ symbol, price, chan
                     </Text>
                     <Text className="text-[#969AA0]">{symbol}</Text>
                 </Box>
+                <Divider></Divider>
             </Box>
         </Pressable>
     );
