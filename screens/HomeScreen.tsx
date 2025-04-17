@@ -135,9 +135,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 								{t('home.recommended')}
 							</Text>
 						</Box>
-						<Text className={`mb-4 mt-2 font-medium text-subText-${appliedTheme}`}>
-							{t('home.bundleNote')}
-						</Text>
 						<Box className="flex-row gap-4 p-4 flex-wrap justify-between">
 							{getBundleData().map((item) => (
 								<Box
