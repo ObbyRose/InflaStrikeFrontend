@@ -2,7 +2,7 @@
   "expo": {
     "name": "lky",
     "slug": "Tothor",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "newArchEnabled": true,
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +36,7 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "buildNumber": "2",
       "bundleIdentifier": "com.lkyexchange.newapp",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
