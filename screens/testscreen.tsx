@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box } from "@/components/ui/box";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Text } from "@/components/ui/text";
+import ButtonsTrain from "@/components/ButtonsTrain";
+import ActionBox from "@/components/ActionBox";
 
 const TestScreen = () => {
     const { appliedTheme } = useTheme();
@@ -9,6 +11,7 @@ const TestScreen = () => {
 
     return (
         <Box className="flex-1 p-4 bg-gray-900">
+            <ActionBox />
             <Text className="text-lg font-bold text-white text-center mb-4">Live Trading Blotter</Text>
         </Box>
     );
