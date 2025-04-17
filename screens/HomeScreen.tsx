@@ -23,6 +23,7 @@ import MyLinearGradient from '@/components/gradient/MyLinearGradient'
 import OptionCard from '@/components/OptionCard'
 import { FlashList } from '@shopify/flash-list'
 import { useTranslation } from 'react-i18next'
+import { FlatList } from 'react-native-gesture-handler'
 
 type BundleItem = {
 	id: string
@@ -75,7 +76,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 	return (
 		<ScrollView>
             <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'blue' : 'purple'}>
-				<Box className="h-[50%] p-4">
+				<Box className="h-[40%] mb-4 p-4">
 					<Box className="flex flex-row items-center justify-between">
 						<IC_Tothor className="h-16 w-40" />
 						<Box className="flex-row gap-4">
@@ -127,9 +128,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 			</MyLinearGradient>
 
             <MyLinearGradient type="background" color={appliedTheme === 'dark' ? 'dark' : 'light-blue'} className="">
-				<Box className={`p-4 bg-background-${appliedTheme} h-full`}>
+				<Box className={`p-4 h-full bg-background-${appliedTheme}`}>
 					<Box>
-						<Box className="mt-10 flex-row items-center justify-between">
+						<Box className="flex-row items-center justify-between">
 							<Text className={`text-[22px] font-semibold text-text-${appliedTheme}`}>
 								{t('home.recommended')}
 							</Text>
@@ -137,31 +138,27 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 						<Text className={`mb-4 mt-2 font-medium text-subText-${appliedTheme}`}>
 							{t('home.bundleNote')}
 						</Text>
-
-						<FlashList
-							data={getBundleData()}
-							renderItem={({ item }) => (
-								<OptionCard>
-									<Box className="gap-1">
-										{item.icon}
-										<Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-											{item.name}
-										</Text>
-										<Text className={`text-subText-${appliedTheme} text-[14px] font-medium`}>
-											{item.timeframe}
-										</Text>
-										<Text className={`text-text-${appliedTheme} text-[17px] font-medium`}>
-											{item.performance}
-										</Text>
-									</Box>
-								</OptionCard>
-							)}
-							estimatedItemSize={150}
-							horizontal={true}
-							showsHorizontalScrollIndicator={false}
-							keyExtractor={(item) => item.id}
-							ItemSeparatorComponent={() => <Box className="w-4" />}
-						/>
+						<Box className="flex-row gap-4 p-4 flex-wrap justify-between">
+							{getBundleData().map((item) => (
+								<Box
+								key={item.id}
+								className={`bg-card-${appliedTheme} p-4 rounded-lg w-[47%]`}
+								>
+								<Box className="items-center">
+									{item.icon}
+								</Box>
+								<Text className={`text-text-${appliedTheme} mt-2 text-center font-semibold`}>
+									{item.name}
+								</Text>
+								<Text className={`text-subText-${appliedTheme} text-center`}>
+									{item.timeframe}
+								</Text>
+								<Text className={`text-green-500 text-center font-bold`}>
+									{item.performance}
+								</Text>
+								</Box>
+							))}
+							</Box>
 					</Box>
 					<Divider className={`bg-divider-${appliedTheme} mt-4`} />
 				</Box>
