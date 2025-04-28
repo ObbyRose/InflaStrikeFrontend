@@ -60,7 +60,7 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
         <MyLinearGradient
           type="background"
           color={appliedTheme === 'dark' ? 'blue' : 'purple'}
-          className="h-[38vh] p-4">
+          className="h-[30vh] p-4">
           <BackHeader title={t('investments.header')} colorScheme="alwaysWhite" />
 
           <Box className="relative z-[50] items-center ">
@@ -77,7 +77,7 @@ const InvestmentsScreen: React.FC<Props> = ({ navigation }) => {
             </Text>
           </Box>
         </MyLinearGradient>
-        <Box className="mt-[-60px] px-3">
+        <Box className=" mt-3 px-3">
           <InvestmentCard bundleData={bundleData} />
         </Box>
       </ScrollView>
