@@ -40,6 +40,7 @@ import testscreen from './testscreen';
 import SettingsScreen from './settings/SettingsScreen';
 import { useNavigation as useReactNavigation } from '@react-navigation/native';
 import { TNavigation } from '../types/NavigationTypes';
+import { useCheckInternet } from '@/utils/functions/CheckConnection';
 
 const MemoizedLayout = React.memo(Layout);
 
@@ -104,7 +105,7 @@ const InvestmentsScreenWrapper = () => {
 // ✅ Main Stack Navigator
 const StackNavigator = () => {
   const { loading, isDataLoaded } = useFetchMarketData();
-
+  useCheckInternet();
   return (
     <NavigationContainer>
       <Stack.Navigator
