@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@/utils/Themes/ThemeProvider";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
+import { Props } from "@/types/NavigationTypes";
 
 interface BackHeaderProps {
     title?: string;
@@ -15,10 +16,14 @@ interface BackHeaderProps {
     colorScheme?: "alwaysWhite" | "themeBased";
 }
 
-function BackHeader({ title, icons, onPressIcons, bgColor = "transparent", colorScheme = "themeBased" }: BackHeaderProps) {
-    const navigation = useNavigation();
-    const { appliedTheme } = useTheme();
 
+function BackHeader({ title, icons, onPressIcons, bgColor = "transparent", colorScheme = "themeBased" }: BackHeaderProps) {
+    const navigation = useNavigation<Props["navigation"]>();
+    const { appliedTheme } = useTheme();
+    function navigateToScreen(screen: string) {
+        navigation.navigate('MainApp', { screen })
+    }
+    
     // Determine the background class based on the bgColor prop
     const getBgClass = () => {
         switch(bgColor) {
@@ -39,7 +44,7 @@ function BackHeader({ title, icons, onPressIcons, bgColor = "transparent", color
                 {/* Left Chevron Button */}
                 <TouchableOpacity
                     className="absolute left-4"
-                    onPress={() => navigation.goBack()}
+                    onPress={() => navigateToScreen("Home")}
                     activeOpacity={0.7}
                 >
                     <ArrowIcon className="w-8 h-8" />

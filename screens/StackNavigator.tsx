@@ -105,12 +105,10 @@ const InvestmentsScreenWrapper = () => {
 const StackNavigator = () => {
   const { loading, isDataLoaded } = useFetchMarketData();
 
-  if (loading && !isDataLoaded) return <OverlayLoading />;
-
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MainApp"
+        initialRouteName={loading ? "Login" : "MainApp"}
         screenOptions={{
           detachPreviousScreen: true,
           headerShown: false,
@@ -126,7 +124,7 @@ const StackNavigator = () => {
           {({ navigation }) => (
             <MemoizedLayout navigation={navigation}>
               <Stack.Navigator
-                initialRouteName="test"
+                initialRouteName="Home"
                 screenOptions={{
                   headerShown: false,
                   detachPreviousScreen: true,
