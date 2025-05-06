@@ -3831,25 +3831,88 @@ export const IC_Drivers_License = ({ className }: IconsProps) => {
 export const IC_History = ({ className }: IconsProps) => {
   return (
     <Box className={cn(className)}>
-    <Svg
-      width={33}
-      height={32}
-      viewBox="0 0 33 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <G clipPath="url(#clip0_24_1817)">
+      <Svg viewBox="0 0 53 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Circle cx={24} cy={25} r={24} fill="#5200FF" />
+        <Mask
+          id="a"
+          style={{
+            maskType: 'luminance',
+          }}
+          maskUnits="userSpaceOnUse"
+          x={0}
+          y={1}
+          width={48}
+          height={48}>
+          <Circle cx={24} cy={25} r={24} fill="#fff" />
+        </Mask>
+        <G mask="url(#a)">
+          <Path opacity={0.48} fill="#005267" d="M26 25H48V49H26z" />
+          <Circle opacity={0.48} cx={7} cy={10} r={15} fill="#005267" />
+          <Rect
+            x={11.5}
+            y={21}
+            width={32}
+            height={39.5}
+            rx={2.5}
+            fill="url(#paint0_linear_0_7425)"
+          />
+          <Rect
+            x={6.5}
+            y={16}
+            width={32}
+            height={39.5}
+            rx={2.5}
+            fill="url(#paint1_linear_0_7425)"
+          />
+          <Rect x={11.5} y={23} width={11} height={10} rx={1} fill="#fff" />
+          <Path
+            d="M15 30.25h4"
+            stroke="#0BB8E4"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <Path
+            d="M12 38.5h18M12 42.5h11.5"
+            stroke="#330497"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </G>
+        <G opacity={0.8} filter="url(#filter0_d_0_7425)">
+          <Circle cx={35} cy={14} r={11} fill="#330497" />
+        </G>
         <Path
-          d="M26.022 3.018a1.139 1.139 0 00-1.595.259c-.33.454-.255 1.058.122 1.448 0 .014-.002.034.002.04 1.337 1.363-.416 3.731-2.185 2.672-3.197-1.982-7.35-2.036-10.583-.285-3.257 1.74-5.467 5.312-5.47 9.123-.48 8.547 8.64 14.317 16.523 11.957a13.61 13.61 0 01-6.17 1.482c-7.562 0-13.714-6.15-13.714-13.714 0-7.563 6.152-13.714 13.715-13.714a13.756 13.756 0 014.436.733 1.148 1.148 0 001.453-.71 1.144 1.144 0 00-.711-1.453c-.454-.155-.917-.29-1.386-.405A16.084 16.084 0 0016.667 0c-8.823 0-16 7.178-16 16s7.177 16 16 16c8.822 0 16-7.177 16-16 0-5.125-2.485-9.978-6.645-12.982zm-9.547 15.088a1.712 1.712 0 01-.951-1.535V12a1.715 1.715 0 013.428 0v3.509l5.3 2.635a1.715 1.715 0 01-1.527 3.07l-6.25-3.108z"
-          fill="#fff"
+          d="M33.538 12.362l-3.714-.112-.242-3.71M31.694 17.751a5 5 0 10-.853-6.528"
+          stroke="#E8F2FF"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
-      </G>
-      <Defs>
-        <ClipPath id="clip0_24_1817">
-          <Path fill="#fff" transform="translate(.5)" d="M0 0H32V32H0z" />
-        </ClipPath>
-      </Defs>
-    </Svg>
+        <Defs>
+          <LinearGradient
+            id="paint0_linear_0_7425"
+            x1={11.5818}
+            y1={21}
+            x2={11.5818}
+            y2={60.298}
+            gradientUnits="userSpaceOnUse">
+            <Stop stopColor="#8DD5E5" />
+            <Stop offset={1} stopColor="#5DA8BB" />
+          </LinearGradient>
+          <LinearGradient
+            id="paint1_linear_0_7425"
+            x1={6.5}
+            y1={16}
+            x2={6.5}
+            y2={55.5}
+            gradientUnits="userSpaceOnUse">
+            <Stop stopColor="#DDF5FA" />
+            <Stop offset={1} stopColor="#A1D5E2" />
+          </LinearGradient>
+        </Defs>
+      </Svg>
     </Box>
   );
 };
