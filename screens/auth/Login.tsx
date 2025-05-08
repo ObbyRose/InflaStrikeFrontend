@@ -9,6 +9,10 @@ import { Props } from '@/types/NavigationTypes'
 import { useTheme } from '@/utils/Themes/ThemeProvider'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import * as Network from "expo-network";
+import { useToast, Toast, ToastTitle, ToastDescription } from "@/components/ui/toast";
+import { VStack } from "@/components/ui/vstack";
+
 
 const Login: React.FC<Props> = ({ navigation }) => {
     const { appliedTheme } = useTheme();
@@ -21,11 +25,30 @@ const Login: React.FC<Props> = ({ navigation }) => {
     });
     const { email, pass } = values;
 
-    function handleSubmitLogin() {
+    async function handleSubmitLogin() {
+        const network = await Network.getNetworkStateAsync();
+        const toast = useToast();
+        if (!network.isConnected || !network.isInternetReachable) {
+            toast.show({
+                placement: "top",
+                duration: 3000,
+                render: ({ id }) => (
+                    <Toast action="error" variant="solid" nativeID={id}>
+                        <VStack space="xs">
+                            <ToastTitle>No Internet</ToastTitle>
+                            <ToastDescription>
+                                You're offline. Please connect to the internet to continue.
+                            </ToastDescription>
+                        </VStack>
+                    </Toast>
+                ),
+            });
+            return; // stop login flow
+        }
+    
         let valid = true;
         let newErrors = { email: "", pass: "" };
-
-        // Validate email format
+    
         if (!email.trim()) {
             newErrors.email = t('login.emailRequired');
             valid = false;
@@ -33,8 +56,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
             newErrors.email = t('login.invalidEmailFormat');
             valid = false;
         }
-
-        // Validate password
+    
         if (!pass.trim()) {
             newErrors.pass = t('login.passwordRequired');
             valid = false;
@@ -42,14 +64,14 @@ const Login: React.FC<Props> = ({ navigation }) => {
             newErrors.pass = t('login.passwordMinLength');
             valid = false;
         }
-
+    
         setErrorByFields(newErrors)
-
+    
         if (valid) {
             setIsLoading(true);
             console.log({ email, password: pass });
             setTimeout(() =>  {
-                setIsLoading(false)
+                setIsLoading(false);
                 navigation.navigate("MainApp", { screen: "Home" });
             }, 1000);
         }
